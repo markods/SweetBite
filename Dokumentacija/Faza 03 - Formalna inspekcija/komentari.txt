@@ -1,0 +1,53 @@
+1. U ssu dokumentima postoje funkcionalnosti koje nisu opisane prototipom, i obrnuto.
+
+2. Administrator sta radi i cemu sluzi?
+  -postavlja druge admine
+  -highlited deck
+  -ako admin jedini sme to, kako user to radi (Mare tvrdi da i user to moze po tekstu)
+  -u ruleset.doc, 3.3 administrator, pise da menja istaknutu igru, kakko ovo radi, nema na prototipu, sta je ISTAKNUTA igra??
+  -admin treba da moze da uklanja naloge, pa cak i privilegije.
+
+3.ruleset str 12.
+  9.2 ovo ne pripada ovde, vec u prosirenja, a takodje je i los naslov. Oyna;avanje cEGA???
+
+  10.0 sve je prioritet??? i zasto navoidte stvari koje ne postoje.
+
+
+4. Ruleset.doc na cirilici, a ostalo sve na latinici. Prilagoditi
+
+
+5. nemaju logout
+
+
+6. korisnik moze da pronadje spil, tj da ima pristup svojim spilovima, nema nacina da se ovde udje
+
+7. za menije nema ulaz ni izlaz
+
+8. imaju checkboxovi na prototipu sto se ne pojavljuju
+
+
+
+9. edit deck (svoje), gde mi je lista mojih deckova, gde je delete deck
+
+10. globalno moze bilo ko da pravi, a u ssu samo logovan.
+
+
+11. izgled lobija kod domacina i ostalih igraca nije prikazan
+
+pogrešno su numerisani koraci, uspešni koraci idu celim brojem, a neuspešni sa 2.1, 2.2 ...
+
+Usaglasiti se oko terminologije
+
+Nije dovoljno jasan princip igre i ko kontroliše pravila
+
+Prevelik broj funkcionalnosti za realizaciju, bolje smanjiti broj, a dobro razviti te što su ostale. Ostalo prebaciti u proširenja
+
+Posebni zahtevi == nefunkcionalni zahtevi
+
+Spojit 5 i 11, ne može ne registrovan korisnik da pravi špil
+
+Nigde nije navedeno kako se dolazi do drugih stranica
+
+Bolje cet prebaciti u lobi dok ljudi čekaju nego dok igraju
+Greška u dokumentaciji 9,8
+Šta su skice?
