@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script>
+            function iscrtaj(objekat) {
+               
+               var parametri=JSON.parse(objekat);
+               var proba = document.getElementById('proba');
+               var str = "";
+                
+                    str+= '<div class="row" style = "blue"><div class="col-sm-12"><h4 class="text-left">';
+                    str = str + parametri.naslov +  '</h4></div></div>';
+                    //str+= ' <div style="float: right;">' + parametri.ikonice[0] + '</div><div style="float: right;">' + parametri.ikonice[1] + '</div><br/><br/>';
+                    str += '<div class="row" ><div class="col-sm-6 text-left " style="font-weight:bold">' + parametri.korisnik + '</div>';
+                    str += '<div class="col-sm-6 text-right" style="font-weight:bold">' + parametri.broj_gostiju + ' osoba</div></div>' ;
+                    str += '<div class="row"><div class="col-sm-6 text-left" style="font-weight:bold">' + parametri.broj_telefona + '</div>';
+                    str += '<div class="col-sm-6 text-right" style="font-weight:bold"> ' + parametri.datum + '</div></div>' ;
+                    str+="<hr>";
+                    //str +='</div>';
+                   // str +=  '<div class="row" style = "skyblue"><div class="col-sm-12">';
+                    let ukupna_cena=0;
+                    for (let j = 0; j<parametri.stavke.length; j++) {//while ima izvadjenih iz baze, dakle neki post/get/session niz count
+                        str+='<div class="row">'
+                        str = str +"<div class='col-sm-3'>" +parametri.stavke[j].kolicina + 'x'+"</div><div class='col-sm-3'>" +parametri.stavke[j].naziv_jela+ "</div><div class='col-sm-3 text-right'>"+ parametri.stavke[j].gramaza +' g</div><div class="col-sm-3 text-right">'+ parametri.stavke[j].cena + ' din</div></div>';
+                        ukupna_cena+=parametri.stavke[j].cena;
+                    }
+                   if(parametri.popust!=null){
+                    str+="<div class='row'><div class='col-sm-4'> Popust 10% </div>"
+                  //  str += '<div style="float:left"> 10% </div>';
+
+                    str += '<div class="col-sm-8 text-right">' + ukupna_cena-(ukupna_cena/10) + '</div></div>' ;
+                   // str += '<br/>';
+
+                    }
+                   // str += '<br/>';
+                
+                    let ukupna_masa = 0;
+                    for (let j = 0; j<parametri.stavke.length; j++) 
+                        ukupna_masa+=parametri.stavke[j].gramaza;
+                    
+                      str+="<hr>";
+                      str+="<div class='row'><div class='col-sm-3'></div><div class='col-sm-3' style='font-weight:bold'>Ukupno:</div>"+"<div class='col-sm-3 text-right' style='font-weight:bold'>"+ ukupna_masa+ " g</div><div class='col-sm-3' style='font-weight:700'>"+ ukupna_cena+"din</div></div>"
+
+                   // str = str + '<p style = "float:right;"><hr style = " width:40%;"> <br/>  <h6 style = "display:inline">'+parametri.broj_gostiju+'</h6><h6 style = "display:inline">'+ukupna_masa+'</h6><h6 style = "display:inline">'+ukupna_cena+'</h6>'+'</p>';
+                   // str += '</div></div>';
+                   proba.innerHTML=str;
+        
+            }
+
+            function ucitaj() {
+                let obj = {
+                    naslov:'Jockin 22. rodjendan',
+                    korisnik: 'jocka99',
+                    broj_gostiju: 15,
+                    broj_telefona: '069 123456',
+                    datum: '19.1.2021.',
+                    stavke: [{naziv_jela:'pasulj', kolicina:5, cena:400, gramaza:150}, {naziv_jela:'pljeskavica', kolicina:30, cena:250, gramaza:200}, {naziv_jela:'pecenje', kolicina:3, cena:1400, gramaza:1000}],
+                    popust: '10%',
+                    ikonice: [{levo:0}, {desno:1}]
+                }
+               iscrtaj(JSON.stringify(obj)); 
+            }
+
+        </script>
+    </head>
+    <body onload='ucitaj()'>
+        
+                    <div class='container'>
+                        
+                                <div class='row'>
+                                <div class = 'col-sm-4' id='proba' style="background-color:rgb(231, 231, 48)"> 
+                                </div>
+                                <div class = 'col-sm-4' id='proba'> 
+                                </div>
+                                <div class = 'col-sm-4' id='proba'> 
+                                </div>
+                                <div class = 'col-sm-4' id='proba'> 
+                                </div>
+                                </div>  
+                             
+                    </div>
+</body>
+</html>

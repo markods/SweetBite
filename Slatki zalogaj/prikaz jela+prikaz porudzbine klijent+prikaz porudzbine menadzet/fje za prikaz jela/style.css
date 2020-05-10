@@ -1,0 +1,22 @@
+.tekst:hover{
+    color:black;
+    opacity:1;
+}
+
+.tekst{
+    opacity:0;
+}
+
+.prikazi{
+    color:black;
+    opacity: 1 !important;
+}
+
+.prikazi:hover{
+    color:black;
+    opacity:1 !important;
+}
+
+.s:hover{
+    background-image:  url("cevapi.jpg");
+}
