@@ -1,0 +1,149 @@
+
+/*body{
+background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
+  overflow: hidden;
+}*/
+
+
+.box:hover {
+    /*content: '';*/
+    background: url(jabuka.jpg);
+    filter: blur(4px);
+    /*position: absolute;*/
+    /*left:0; top:0; right:0; bottom:0;*/
+   /* z-index: -1;*/
+    pointer-events: none;
+    color:white;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .box{
+    background: url(jabuka.jpg);
+    background-position: center;
+    background-size: cover;
+      width:400px;
+      height:300px;
+    /*left:calc( 50% - 250px );
+    top:20%;*/
+      /*position:absolute;*/
+  /*	border-radius:5px;
+      box-shadow: 0 0 15px rgba(black, .4);
+      border:1px solid rgba(white,.1);*/
+    color: white;
+    font: 1.5vw Arial;
+    /*display:flex;*/
+   /* align-items: center;
+    justify-content: center;*/
+   /* text-shadow:0 2px 8px rgba(black, .5);*/
+  }
+  .ar-image {
+    position: relative;
+    height: 400px;
+    width: 500px;
+  }
+    .article-image {
+      /*Ako zelis da menjas univerzalan ispis opisa
+       *dopisuj ovde, a ako zelis pojedine tipove
+       *onda koristi npr. za p:
+       *article image > p  {} */
+      height: 500px;
+      width: 500px;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+    }
+      .article-image:before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-image: url(jabuka.jpg);
+        background-position: center;
+        background-size: cover;
+        /*-webkit-filter: grayscale(0) blur(0);
+        filter: grayscale(0) blur(0);*/
+        /*transition: .4s ease-in-out;*/
+      }
+      .article-image:hover:before {
+        filter:  blur(5px);
+      }
+        /*Dovoljno je ovo uraditi samo
+         *za div jer su svi ostali tipovi
+         *elemenata okruzeni divovima*/
+        .article-image > div {
+          display: none;
+        }  
+        .article-image:hover > div {
+          display: flex;
+          /*samo postaje vidljivo,
+           *svi ostali vidovi sredjivanja
+           *se rade bez:hover*/
+        }
+          /*Base je prvi red*/
+          .base {     
+            display: flex;
+            padding: 10px;
+            margin: 0px;
+            height: 350px;
+          }
+            /*About je prvih 10 kolona*/
+            .about {
+              padding: 0px;
+            }
+            /*Amount je ono sa +/-*/
+            .amount {
+              text-align: right;
+            }
+          /*Price je poslednji red*/  
+          .price {
+            padding: 10px;
+          }
+
+          .dish_temp {
+            width: 280px;
+            position: relative;
+            display: inline-grid;
+            padding: 5px;
+            /*text-align: left;*/
+            margin-right: 92px;
+          }
+            
+          
+  
+  
+  /*Struktuiran html koji sam koristila*/
+  /*Da mozes da vidis gde sam koji tag koristila*/
+  /*
+  <div class='ar-image'>\
+    <div class='article-image'>\
+      <div class='row base'>\
+        <div class='col-md-10 about'>\
+          <h3>"+naziv_jela+"</h3>\
+          <p style='font-weight:bold'>\
+            #"+tip_jela+"\
+            #"+ukus+"\
+            #"+dijeta+"\
+          </p>\
+          <p style='font-weight:bold; font-size:20px;' >"+opis_jela+"</p>\
+        </div>\
+        <div class='col-md-2 amount'>\
+          <div class='change'>\
+            <i class='fas fa-plus' onclick='povecaj()'></i>\
+            <p id='broj' style='font-weight:bold'></p>\
+            <i class='fas fa-minus' onclick='smanji()'></i>\
+          </div>\
+          <div id='srce'>\
+            <i class='far fa-heart' onclick='srce()'></i>\
+          </div>\
+        </div>\
+      </div>\
+      <div class='row price' style='font-weight:bold'>\
+        <div class='col-sm-8 text-right'>"+gramaza+"g "+"</div>\
+        <div class='col-sm-4 text-right'>" +cena +".00 din"+"</div>\
+      </div>\
+    </div>\
+  </div>\
+  */

@@ -74,7 +74,7 @@ p {
 /* colours */
 :root {
   --body-color: #fafafa;
-  --p-color: #999999;
+  --p-color: #999999;  
   
   --navbar-color: #7386d5;
   --navbar-accent-color: #6b80d3;
@@ -99,6 +99,8 @@ p {
   line-height: 1.7em;
   color: var(--p-color);
 }
+
+
 
 a,
 a:hover,
@@ -348,3 +350,119 @@ table.adm {
 .linija{
   border:0.5px solid #8598e7;
 }
+
+/*/////////////////////////////////////////////////////////////*/
+/*body{
+background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
+  overflow: hidden;
+}*/
+
+
+.box:hover {
+  /*content: '';*/
+  background: url(prikazjela/jabuka.jpg);
+  filter: blur(4px);
+  /*position: absolute;*/
+  /*left:0; top:0; right:0; bottom:0;*/
+ /* z-index: -1;*/
+  pointer-events: none;
+  color:black;
+  background-position: center;
+  background-size: cover;
+}
+
+.box{
+  background: url(prikazjela/jabuka.jpg);
+  background-position: center;
+  background-size: cover;
+    width:360px;
+    height:300px;
+  /*left:calc( 50% - 250px );
+  top:20%;*/
+    /*position:absolute;*/
+/*	border-radius:5px;
+    box-shadow: 0 0 15px rgba(black, .4);
+    border:1px solid rgba(white,.1);*/
+  color: black;
+  font: 1.5vw Arial;
+  /*display:flex;*/
+ /* align-items: center;
+  justify-content: center;*/
+ /* text-shadow:0 2px 8px rgba(black, .5);*/
+}
+.ar-image {
+  position: relative;
+  height: 300px;
+  width: 360px;
+}
+  .article-image {
+    /*Ako zelis da menjas univerzalan ispis opisa
+     *dopisuj ovde, a ako zelis pojedine tipove
+     *onda koristi npr. za p:
+     *article image > p  {} */
+    height: 300px;
+    width: 360px;
+    color: black !important;
+    font-size: 17px !important;
+    font-weight: bold;
+  }
+
+ .article-image p {
+    /*font-size: 1.1em;*/
+    font-size:15px;
+    line-height: 1.7em;
+    color: black;
+  }
+    .article-image:before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-position: center !important;
+      background-size: cover !important;
+      background-image: url(prikazjela/jabuka.jpg);
+      
+      /*-webkit-filter: grayscale(0) blur(0);
+      filter: grayscale(0) blur(0);*/
+      /*transition: .4s ease-in-out;*/
+    }
+
+    .article-image:hover:before {
+      filter:  blur(5px) !important;
+    }
+      /*Dovoljno je ovo uraditi samo
+       *za div jer su svi ostali tipovi
+       *elemenata okruzeni divovima*/
+      .article-image > div {
+        display: none;
+      }  
+      .article-image:hover > div {
+        display: flex;
+        /*samo postaje vidljivo,
+         *svi ostali vidovi sredjivanja
+         *se rade bez:hover*/
+      }
+        /*Base je prvi red*/
+        .base {     
+          display: flex;
+          padding: 10px;
+          margin: 0px;
+          height: 260px;
+        }
+          /*About je prvih 10 kolona*/
+          .about1 {
+            padding: 0px;
+          }
+          /*Amount je ono sa +/-*/
+          .amount {
+            text-align: right;
+          }
+        /*Price je poslednji red*/  
+        .price {
+          padding: 10px;
+        }
+
+  
+  
