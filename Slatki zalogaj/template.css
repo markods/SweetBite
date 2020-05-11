@@ -464,7 +464,27 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
           padding: 10px;
         }
 
+
+        .dish_customer {
+          /* width: 150px; */
+          /*relative*/
+          position: relative;
+          display: inline-block;
+          padding: 5px;
+          
+          /*text-align: left;*/
+
+        }
+
   
+.cont1 {
+  text-align: left;
+  color: white;
+  width: 1000px;
+}
+
+
+/*prikaz jela kod menadzera*/
   
 
 .dish_temp {
@@ -478,6 +498,25 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
 }
 
 
-.dish {
-
+.dish > elem{
+  width: 280px;
+  position: relative;
+  display: inline-grid;
+  padding: 5px;
+  /*text-align: left;*/
+  margin-right: 92px;
+  visibility: none;
+  
 }
+
+.elem {
+  opacity: 0;
+}
+
+.elem:hover {
+  opacity: 1;
+}
+
+
+
+/*prikaz jela kod menadzera*/

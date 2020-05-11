@@ -42,9 +42,9 @@ function prikaziJelo(object) {
     let dummy = $(".dummy");
     dummy.html(str);
    //dummy[0].id = id;
-    dummy.removeClass("dummy").addClass("dish_temp");
+    dummy.removeClass("dummy").addClass("dish_customer");
     //dodavanje dummy elementa
-    $(".cont").append("<div class='dummy'></div>");
+    $(".cont1").append("<div class='dummy'></div>");
     id++;
 }
 
