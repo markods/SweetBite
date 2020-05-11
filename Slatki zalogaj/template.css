@@ -359,12 +359,8 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
 
 
 .box:hover {
-  /*content: '';*/
   background: url(prikazjela/jabuka.jpg);
   filter: blur(4px);
-  /*position: absolute;*/
-  /*left:0; top:0; right:0; bottom:0;*/
- /* z-index: -1;*/
   pointer-events: none;
   color:black;
   background-position: center;
@@ -375,25 +371,15 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
   background: url(prikazjela/jabuka.jpg);
   background-position: center;
   background-size: cover;
-    width:360px;
-    height:300px;
-  /*left:calc( 50% - 250px );
-  top:20%;*/
-    /*position:absolute;*/
-/*	border-radius:5px;
-    box-shadow: 0 0 15px rgba(black, .4);
-    border:1px solid rgba(white,.1);*/
+  width:360px;
+  height:300px;
   color: black;
   font: 1.5vw Arial;
-  /*display:flex;*/
- /* align-items: center;
-  justify-content: center;*/
- /* text-shadow:0 2px 8px rgba(black, .5);*/
 }
 .ar-image {
   position: relative;
   height: 300px;
-  width: 360px;
+  width: 340px;
 }
   .article-image {
     /*Ako zelis da menjas univerzalan ispis opisa
@@ -401,14 +387,13 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
      *onda koristi npr. za p:
      *article image > p  {} */
     height: 300px;
-    width: 360px;
+    width: 340px;
     color: black !important;
     font-size: 17px !important;
     font-weight: bold;
   }
 
  .article-image p {
-    /*font-size: 1.1em;*/
     font-size:15px;
     line-height: 1.7em;
     color: black;
@@ -423,10 +408,6 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
       background-position: center !important;
       background-size: cover !important;
       background-image: url(prikazjela/jabuka.jpg);
-      
-      /*-webkit-filter: grayscale(0) blur(0);
-      filter: grayscale(0) blur(0);*/
-      /*transition: .4s ease-in-out;*/
     }
 
     .article-image:hover:before {
@@ -436,10 +417,10 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
        *za div jer su svi ostali tipovi
        *elemenata okruzeni divovima*/
       .article-image > div {
-        display: none;
+        opacity: 0;
       }  
       .article-image:hover > div {
-        display: flex;
+        opacity: 1;
         /*samo postaje vidljivo,
          *svi ostali vidovi sredjivanja
          *se rade bez:hover*/
@@ -466,22 +447,16 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
 
 
         .dish_customer {
-          /* width: 150px; */
-          /*relative*/
           position: relative;
           display: inline-block;
           padding: 5px;
-          
-          /*text-align: left;*/
-
         }
-
-  
+/*
 .cont1 {
   text-align: left;
   color: white;
   width: 1000px;
-}
+}*/
 
 
 /*prikaz jela kod menadzera*/
