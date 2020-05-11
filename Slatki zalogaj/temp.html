@@ -1,14 +1,36 @@
-<html>
-    <head>
-        <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <link rel='stylesheet' href='file:///C:/Users/Marina/Desktop/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css'></link>
-        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <script>
-            function order_Manager(objekat) {
+<!--Stranica za ne ulogovane korisnike-->
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- head -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slatki zalogaj</title>
+
+    <!-- Bootstrap, jQuery, Popper, Bootstrap js -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Font Awesome icons -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="template.css">
+    <!-- javascript -->
+    <script src="template.js"></script>
+    <script src="basket.js"></script>
+    <script>
+          function order_Manager(objekat) {
                 localStorage.setItem('inc',0);
                 localStorage.setItem('weight',0);
                 localStorage.setItem('price',0);
@@ -113,6 +135,7 @@
 
 
             function menjanje_temp() {
+             
                 var temp = document.getElementById('menjanje_temp');
                 var str ="";
                 //vidi za formu
@@ -120,19 +143,19 @@
                 str+='<form id = "menjanje_jela_temp" name = "menjanje_jela_temp" method = "POST" ><div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class = col-sm-11>';
                 str+='<input type = "text" name = "naziv_jela" placeholder = "Unesite naziv jela" style = "margin-top:4px; margin-bottom:4px;"></div>';
                 //stiklica
-                str+='<div class = "col-sm-1"" > <img src = "baseline_done_black_18dp.png" width = "20px" height = "20px" onclick="potvrdi_promenu()">   </div></div>';
+                str+='<div class = "col-sm-1"" > <img src = "assets/baseline_done_black_18dp.png" width = "20px" height = "20px" onclick="potvrdi_promenu()">   </div></div>';
                 str+='<div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class="col-sm-11">';
                 str+='<select name="vrsta_jela_temp" id="vrsta_jela_temp" class = "opcija" value = "Vrsta jela" style = "margin-bottom:4px"><option value="Predjelo">Predjelo</option><option value="Kuvano jelo">Kuvano jelo</option><option value="Rostilj">Rostilj</option><option value="Salata">Salata</option><option value="Supa">Supa</option><option value="Corba">Corba</option><option value="Riba">Riba</option><option value="Morski plodovi">Morski plodovi</option><option value="Pasta">Pasta</option><option value="Pica">Pica</option><option value="Pita">Pita</option><option value="Kolac">Kolac</option><option value="Pecivo">Pecivo</option><option value="Torta">Torta</option></select>';
                 str+='<select name="ukus_temp" id="ukus_temp" class = "opcija" value = "Ukus" style = "margin-bottom:4px"><option value="Slatko">Slatko</option><option value="Slano">Slano</option><option value="Ljuto">Ljuto</option></select>';
                 str+='<select name="dijeta_temp" id="dijeta_temp" class = "opcija" value = "Dijeta" style = "margin-bottom:4px"><option value="Posno">Posno</option><option value="Vegeterijansko">Vegeterijansko</option><option value="Bez glutena">Bez glutena</option></select>';
-                str+='</div><div class= "col-sm-1"><img src = "baseline_visibility_black_18dp.png" width = "20px" height = "20px"> </div></div>';
+                str+='</div><div class= "col-sm-1"><img src = "assets/baseline_visibility_black_18dp.png" width = "20px" height = "20px"> </div></div>';
                 //'<select name="vrsta_jela_temp" id="vrsta_jela_temp"><option value="Predjelo"></option><option value="Kuvano jelo"></option><option value="Rostilj"></option><option value="Salata"></option><option value="Supa"></option><option value="Corba"></option><option value="Riba"></option><option value="Morski plodovi"></option><option value="Pasta"></option><option value="Pica"></option><option value="Pita"></option><option value="Kolac"></option><option value="Pecivo"></option><option value="Torta"></option></select>';
                // '<select name="ukus_temp" id="ukus_temp"><option value="Slatko"></option><option value="Slano"></option><option value="Ljuto"></option></select>';
                 //'<select name="dijeta_temp" id="dijeta_temp"><option value="Posno"></option><option value="Vegeterijansko"></option><option value="Bez glutena"></option></select>';
-                str+='<div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class = "col-sm-12 text-right"> <img src = "baseline_delete_black_18dp.png" width = "20px" height = "20px"></div></div> ';
+                str+='<div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class = "col-sm-12 text-right"> <img src = "assets/baseline_delete_black_18dp.png" width = "20px" height = "20px"></div></div> ';
                 str+='<div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class = "col-sm-12 "> <textarea  draggable="false" style = "margin-bottom:4px;" name="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "10" cols="70" ></textarea></div></div> ';
                 str+='<div class = "row" style = "background-color:lightblue;" onclick = "add_picture()"><div class = "col-sm-12 text-right" style = "margin-bottom:4px"> <input type="text" name="gramaza_temp" id="gramaza_temp" placeholder="Gramaza"><input type="text" name="cena_temp" id="cena_temp" placeholder="Cena"> </div></div> ';
-                
+       
                 str+='</form>';
                 str+='</div>'
                
@@ -177,97 +200,74 @@
            
 
 
-
-        </script>
-    </head>
-    <body onload='ucitaj()'>
-      
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class = 'dummy' id='proba' style = 'margin-bottom: 20px;'>
-                       
-
-                    </div>
-    
-                </div>
-                <div class="col-sm-6">
-                    <div class = 'dummy' id = 'menjanje'>
-                      
+    </script>
+</head>
 
 
-                    </div>
+<!-- body -->
+<body class="d-flex flex-column" >
 
-                </div>
+    <!-- navbar -->
+    <div id="navbar" class="nav navbar-nav noselect">
+        <div id="navbar-content" class="col-12 offset-sm-2 col-sm-8 offset-lg-3 col-lg-6 d-inline-flex">
+
+            <!-- sidebar button -->
+            <div>
+                <button id="sidebar-collapse" class="btn btn-dark py-0 px-2">
+                    <i class="fas fa-align-justify"></i>
+                </button>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class = 'dummy' id = 'menjanje_temp'>
-                       
 
-                    </div>
-
-                </div>
-                <div class="col-sm-6">
-                    <div class = 'dummy'>
-                      
-                        
-
-                    </div>
-
-                </div>
+            <!-- text and logo -->
+            <div class="brand">
+                <a href="#">Slatki zalogaj<img id="logo" src="assets/logo.png" alt="logo"></a>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class = 'dummy'>
-                       
 
-                    </div>
+            <!-- buttons -->
+            <div class="btn button active"><a href="#">Jela</a></div>
 
-                </div>
-                <div class="col-sm-6">
-                    <div class = 'dummy'>
-                        
+            <!-- spacer -->
+            <div class="spacer">&nbsp;</div>
 
-                    </div>
-
-                </div>
+            <div>
+                <button class="btn btn-success p-1">Izloguj me</button>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class = 'dummy'>
-                        
 
-                    </div>
-
-                </div>
-                <div class="col-sm-6">
-                    <div class = 'dummy'>
-                        
-
-                    </div>
-
-                </div>
-            </div>
+            
 
         </div>
-     
+    </div>
+
+    <!-- sidebar  -->
+    <div id="sidebar">
+        <div id="sidebar-dismiss"><i class="fas fa-arrow-left"></i></div>
+
+        <div class="sidebar-header">
+            <h3>Slatki zalogaj</h3>
+        </div>
+
+        <!--Ovde dodati sortiranje/filtriranje-->
+
+        <div class="basket">
+            <table id="basket"></table>
+        </div>
+        
+    </div>
+
+    <!-- page content  -->
+    <div class="container-fluid">
+        <div id="content" class="col-12 offset-sm-2 col-sm-8 offset-lg-3 col-lg-6">
+            <h2 onclick="menjanje_temp()">Jelovnik</h2>
+            <div class="cont">
+                <div class = "dummy" id = 'menjanje_temp'>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
     
-    </body>
+</body>
+
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

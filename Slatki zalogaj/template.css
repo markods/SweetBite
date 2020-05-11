@@ -336,6 +336,7 @@ table.adm {
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
 .tabela td,th{
   text-align: left;
   padding-left: 25px;
@@ -466,3 +467,20 @@ background: url("jabuka.jpg") 0 0 / cover fixed no-repeat;
 
   
   
+=======
+
+.dish_temp {
+  width: 280px;
+  position: relative;
+  display: inline-grid;
+  padding: 5px;
+  /*text-align: left;*/
+  margin-right: 92px;
+  
+}
+
+
+.dish {
+
+}
+>>>>>>> template jela + jelo
