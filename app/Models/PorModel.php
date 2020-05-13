@@ -41,7 +41,7 @@ class UserModel extends Model
                 'por_br_osoba' => ['required' => 'Broj osoba je obavezan'],
                 'por_za_dat'   => ['required' => 'Za kada je obavezno']
             ];
-    protected $skipValidation     = false;
+    protected $skipValidation  = false;
 
     
     //-----------------------------------------------------------------------
