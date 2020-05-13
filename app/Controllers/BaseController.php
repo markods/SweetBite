@@ -26,21 +26,25 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['form', 'url'];
 
 	/**
 	 * Constructor.
 	 */
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
-		// Do Not Edit This Line
-		parent::initController($request, $response, $logger);
+            // Do Not Edit This Line
+            parent::initController($request, $response, $logger);
 
-		//--------------------------------------------------------------------
-		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
+            //--------------------------------------------------------------------
+            // Preload any models, libraries, etc, here.
+            //--------------------------------------------------------------------
+            // E.g.:
+            
+            // pokretanje sesije
+            $this->session = \Config\Services::session();
+            // alternativni nacin
+          //$this->session = session();
 	}
 
 }
