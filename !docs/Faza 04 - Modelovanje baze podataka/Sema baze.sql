@@ -52,7 +52,8 @@ DROP TABLE IF EXISTS `fav`;
 CREATE TABLE `fav` (
   `fav_kor_id` binary(16) NOT NULL,
   `fav_jelo_id` binary(16) NOT NULL,
-  PRIMARY KEY (`fav_kor_id`,`fav_jelo_id`)
+  PRIMARY KEY (`fav_id`),
+  UNIQUE KEY `fav_id_UNIQUE` (`fav_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,7 +206,8 @@ CREATE TABLE `stavka` (
   `stavka_cenakom` decimal(15,2) NOT NULL,
   `stavka_datkre` datetime NOT NULL,
   `stavka_datizrade` datetime DEFAULT NULL,
-  PRIMARY KEY (`stavka_por_id`,`stavka_jelo_id`)
+  PRIMARY KEY (`stavka_id`),
+  UNIQUE KEY `stavka_id_UNIQUE` (`stavka_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
