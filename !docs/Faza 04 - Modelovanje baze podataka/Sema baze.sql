@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `slatkizalogaj` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `slatkizalogaj`;
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: slatkizalogaj
 -- ------------------------------------------------------
@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS `fav`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fav` (
+  `fav_id` binary(16) NOT NULL,
   `fav_kor_id` binary(16) NOT NULL,
   `fav_jelo_id` binary(16) NOT NULL,
   PRIMARY KEY (`fav_id`),
@@ -200,6 +201,7 @@ DROP TABLE IF EXISTS `stavka`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `stavka` (
+  `stavka_id` binary(16) NOT NULL,
   `stavka_por_id` binary(16) NOT NULL,
   `stavka_jelo_id` binary(16) NOT NULL,
   `stavka_kol` int(11) NOT NULL,
@@ -304,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01 23:16:03
+-- Dump completed on 2020-05-13 14:22:47
