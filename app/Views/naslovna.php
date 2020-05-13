@@ -104,18 +104,18 @@
                 </button>
 
                 <!-- login dropdown menu -->
-                <form class="dropdown-menu dropdown-menu-right p-3">
+                <form name = "kor_prijava" class="dropdown-menu dropdown-menu-right p-3" method="POST" action="<?= site_url("../public/Korisnik/login") ?>">
                     <div class="form-group">
                         <label for="login-email">email</label>
-                        <input type="email" class="form-control" id="login-email" placeholder="email@example.com">
+                        <input name="kor_email" type="email" class="form-control" id="login-email" placeholder="email@example.com">
                     </div>
                     <div class="form-group">
                         <label for="login-password">lozinka</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="Password">
+                        <input name="kor_password" type="password" class="form-control" id="login-password" placeholder="Password">
                     </div>
                     <div>
                         <div class="spacer"></div>
-                        <button id="login-button" class="btn btn-success" style="float: right;">prijava</button>
+                        <button type="submit" id="login-button" class="btn btn-success" style="float: right;">prijava</button>
                     </div>
                 </form>
 

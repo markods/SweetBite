@@ -67,5 +67,67 @@ class Korisnik extends BaseController
        
     }
     
+    
+    public function login() {
+        $email = $this->request->getVar('kor_email');
+        $password = $this->request->getVar('kor_password');
+        
+        if(strlen($password)===0 ||strlen($email)===0) 
+        {//provera da li je uneta sifra u polje
+            return view("sifre");
+//        if($email=="")     //provera da li je unet mejl u polje
+//            return view ("greske");
+        
+        $model = new KorisnikModel(); //kreiram model kako bih dohvatao podatke iz baze
+        $korisnik = $model->daLiPostojiEmail($email); //dohvatam korisnika samo na osnovu mejla
+        if($korisnik == null)       //nije dohvacen korisnik
+            return view('nema_korisnika');
+        if($korisnik->kor_pwdhash!=$password)   //uneta je pogresna sifra
+            return view ('wrong_password');
+        
+        
+        $tip_korisnika = $korisnik->kor_tipkor_id;
+        
+        //Tip korisnika se dohvata iz baze, razlicit je za svaki tip,
+        // treba se dogovoriti koja vrednost predstalvja koji tip korisnika!!!
+        switch ($tip_korisnika) {
+            
+//            $_SESSION['email']=$email;
+//            $_SESSION['password'] =$password;
+            case '0':   
+                        $this->session->set('email',$email);
+                        $this->session->set('password', $password);
+                        $this->session->set('tip_korisnika', $tip_korisnika);
+                        return redirect()->to(site_url("../public/Korisnik/index"));
+                      
+            case '1': 
+                        $this->session->set('email',$email);
+                        $this->session->set('password', $password);
+                        $this->session->set('tip_korisnika', $tip_korisnika);
+                        return redirect()->to(site_url("../public/Korisnik/index"));
+                      
+                  
+            case '2': 
+                        $this->session->set('email',$email);
+                        $this->session->set('password', $password);
+                        $this->session->set('tip_korisnika', $tip_korisnika);
+                        return redirect()->to(site_url("../public/Korisnik/index"));
+                      
+            case '3': 
+                        $this->session->set('email',$email);
+                        $this->session->set('password', $password);
+                        $this->session->set('tip_korisnika', $tip_korisnika);
+                        return redirect()->to(site_url("../public/Korisnik/index"));
+                      
+                  
+        }
+        //dohvatiKorisnikaZaLogovanje
+        //kor_pwdhash i kor_email
+        
+        
+    }
+    
+
+}
 
 }
