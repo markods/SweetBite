@@ -1,3 +1,5 @@
+<style>
+
 /*-------Manager------*/
 .cont {
     text-align: center;
@@ -68,4 +70,7 @@
     text-align: left;
     padding-left: 5px;
   }
+
+    
+</style>
   

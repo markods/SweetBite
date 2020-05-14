@@ -1,21 +1,19 @@
+<script>
+
 /*
- * Prikaz porudzbine za menadzera - Jovana Pavic 0099/17
+ * Prikaz porudzbine za klijenta - Jovana Pavic 0099/17
  * verzija 02 - rowless verzija
+ * 
+ *      postoje samo grupisanja u vidu jedne porudzbine
  */
 
 var id = 0;
 
-//razlika u odnosu na Prikaz porudzbine za kupca (orderClient.js) je u prikazu opisa porudzbine
-//dodato je ime klijenta i njegov broj telefona u metodi showOrder()
-//drugacija metoda statusOptions()
-
-function showOrder(object) {
+function showClientOrder(object) {
     /*Od ulaza potrebno:
         id - id porudzbine,
         name - ime porudzbine,
-        stat - status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap), 
-        clientName - ime kupca,
-        clientNumber - broj telefona kupca,
+        stat - status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena),
         people - broj osoba, 
         date - datum proslave, 
         orderedName[] - imena narucenih jela, 
@@ -24,22 +22,20 @@ function showOrder(object) {
         orderedPrice[] - ukupna cena tog jela
         discount - da li je ostvaren popust
     */
+
     let name = "ime porudzbine"; let people = 3; let date = new Date(); let orderedName = ["cordon blau", "lasagna"]; 
     let orderedAmount = [2, 3]; let orderedWeight = [600, 400]; let orderedPrice = [1200, 1600]; let discount = true;
-    let stat = 3; let clientName = "Petar Petrovic"; let clientNumber = "061 23456789";
+    let stat = 1;
     //parsirati objekat u potrebne elemente
 
     //osnovni izgled bez detalja porudzbine
     var inner = "\
         <div class=about_order>\
             <text class=name>" + name+ "</text>\
-            <text class=stat>" + statusOptions(stat, id) + "</text>\
-            <p></p>\
-            <text class=about_client>" + clientName + "</text>\
-            <text class=about>" + people + " osoba </text>\
+            " + statusOptions(stat) + "\
             <br/>\
-            <text class=about_client>" + clientNumber + "</text>\
-            <text class=about>" + dateString(date) + "</text>\
+            <p class=aboutC>" + people + " osoba </p>\
+            <p class=aboutC>" + dateString(date) + "</p>\
         </div>\
         <div class=order_details>\
             <table class=order_amount>\
@@ -47,7 +43,7 @@ function showOrder(object) {
         </div>\
     "
     //dohvatiti sve dummy elemente
-    var dummy = $(".dummy");
+    let dummy = $(".dummy");
     dummy.html(inner);
     dummy[0].id = id;
     dummy.removeClass("dummy").addClass("order");
@@ -102,30 +98,20 @@ function showOrder(object) {
     id++;
 }
 
-//prikazuje opcije za rad nad porudzbinom u odnosu na njen status
-function statusOptions(stat, id) {
+//razliciti prikaz (ikonica), dodaje hover opciju i prosedjuje odgovarajuci parametar
+function statusOptions(stat) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";
     switch (stat) {
-        case 0: str = "<img src='assets/orderManager_reject.svg' alt='-' onclick=declineOrder(" + id + ")>\
-                       <img src='assets/orderManager_acept.svg' alt='+' onclick=acceptOrder(" + id + ")>\
-                    "; 
-                break;
-        case 1: str = "<img src='assets/orderManager_reject.svg' alt='-'/>\
-                       <img src='assets/orderManager_acepted.svg' alt='++'/>\
-                    "; 
-                break;
-        case 2: str = "<img src='assets/orderManager_rejected.svg' alt='--'/>\
-                       <img src='assets/orderManager_acept.svg' alt='+'/>\
-                    "; 
-                break;
-        case 3: str = "<img src='assets/orderManager_done.svg' alt='!' onclick=archive(" + id + ")>"; break;
-        case 4: str = "<img src='assets/orderManager_picked.svg' alt='.'/>"
+        case 0: str = "<img src='assets/orderClient_waiting.svg' alt='?' onhover=showStatus(0)/>"; break;
+        case 1: str = "<img src='assets/orderClient_acepted.svg' alt='+' onhover=showStatus(1)/>"; break;
+        case 2: str = "<img src='assets/orderClient_rejected.svg' alt='-' onhover=showStatus(2)/>"; break;
+        case 3: str = "<img src='assets/orderClient_done.svg' alt='!' onhover=showStatus(3)/>"; break;
+        case 4: str = "<img src='assets/orderClient_picked.svg' alt='.' onhover=showStatus(4)/>"; break;
     }
     return str;
 }
 
-//formatira datum
 function dateString(date) {
     let year = date.getFullYear();
     let month =  date.getMonth() + 1;
@@ -140,24 +126,4 @@ function dateString(date) {
     return str;
 }
 
-//hover
-function showStatus(){   
-}
-
-//prihvata porudzbinu, menja joj status
-function acceptOrder(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(1, order));
-}
-
-//odbija porudzbinu
-function declineOrder(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(2, order));
-}
-
-//oznacava porudzbinu kao pokupljenu/arhiviranu
-function archive(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(4, order));
-}
+</script>

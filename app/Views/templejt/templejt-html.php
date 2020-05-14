@@ -20,8 +20,8 @@
 
     <?php
         // template css and js
-        require_once('template-css.php');
-        require_once('template-js.php');
+        require_once('templejt-css.php');
+        require_once('templejt-js.php');
     ?>
 </head>
 

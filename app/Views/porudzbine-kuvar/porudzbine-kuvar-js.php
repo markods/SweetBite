@@ -1,3 +1,5 @@
+<script>
+
 /*
  * Prikaz porudzbine za menadzera - Jovana Pavic 0099/17
  * verzija 02 - rowless verzija
@@ -94,10 +96,13 @@ function dateString(date) {
     if (month < 10) month = "0" + month;
     let day = date.getDay();
     if (day < 10) day = "0" + day;
-    let hour = date.getHours()
+    let hour = date.getHours();
     if (hour < 10) hour = "0" + hour;
     let min = date.getMinutes();
     if (min < 10) min = "0" + min;
     let str = year + "-" + month + "-" + day + " " + hour + ":" + min;
     return str;
 }
+
+</script>
+

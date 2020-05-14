@@ -7,7 +7,7 @@ class Gost extends BaseController
     public function index()
     {
         // return view('welcome_message.php');
-        return view('template/template-html.php');
+        return view('templejt/templejt-html.php');
     }
 
 }

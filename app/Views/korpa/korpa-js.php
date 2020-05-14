@@ -1,3 +1,5 @@
+<script>
+
 /*
  * Virtuelna korpa - Jovana Pavic 0099/17
  * verzija 01 - rowless verzija
@@ -209,3 +211,5 @@ function setAmountInTextField(name, amount){
 }
 
 //dodati neko parsiranje podataka za slanje u bazu
+
+</script>
