@@ -26,7 +26,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form', 'url'];
+	protected $helpers = ['url'];
 
 	/**
 	 * Constructor.
@@ -44,7 +44,7 @@ class BaseController extends Controller
             // pokretanje sesije
             $this->session = \Config\Services::session();
             // alternativni nacin
-          //$this->session = session();
+          $this->session = session();
 	}
 
 }
