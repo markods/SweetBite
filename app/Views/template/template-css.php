@@ -1,22 +1,22 @@
 <?php /* 2020-05-15 v0.1 Marko Stanojevic 2017/0081 */ ?>
 <style>
 
-/* colours */
+/* ====== colours ====== */
 :root {
-  --body-color: #fafafa;
+  --content-color: #fafafa;
   --p-color:    #666666;
 
   --primary-color:   #53cf8f;
   --secondary-color: #8affb1;
   --tertiary-color:  #bdffd2;
-
-  --navbar-item-hover-color:        #6b80d3;
-  --navbar-item-hover-border-color: #455bb1;
+  
+  --navbar-item-hover-color:        #4aba80;
+  --navbar-item-hover-border-color: #2a704c;
 }
 
 
 
-/* structure */
+/* ====== structure ====== */
 html,
 body {
   height: 100%;
@@ -66,15 +66,6 @@ p {
   margin-left: 0px;
 }
 
-#sidebar-dismiss {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-}
-
 #sidebar a {
   display: block;
 }
@@ -95,10 +86,9 @@ p {
 
 
 
-/* style */
+/* ====== style ====== */
 body {
   font-family: sans-serif;
-  background: var(--body-color);
 }
 
 p {
@@ -149,42 +139,10 @@ a:focus {
   background: var(--primary-color);
 }
 
-#sidebar .sidebar-header {
+#sidebar .sidebar-content {
   padding: 20px;
   background: var(--tertiary-color);
 }
-
-#sidebar-dismiss {
-  line-height: 35px;
-  cursor: pointer;
-  background: var(--primary-color);
-}
-#sidebar-dismiss:hover {
-  color: var(--primary-color);
-}
-
-#sidebar ul p {
-  padding: 10px;
-}
-
-#sidebar ul.components {
-  padding: 20px 0px;
-}
-
-#sidebar ul li a {
-  padding: 10px;
-  font-size: 1.1em;
-}
-#sidebar ul li a:hover {
-  color: var(--primary-color);
-}
-
-#sidebar ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: var(--sidebar-accent-color);
-}
-
 
 #searchbar {
     padding-top:    15px;
@@ -194,9 +152,8 @@ a:focus {
 
 
 
-/* animations */
+/* ====== animations ====== */
 #sidebar,
-#sidebar-dismiss,
 #sidebar a,
 #sidebar a:hover,
 #sidebar a:focus {
@@ -207,7 +164,7 @@ a:focus {
 
 
 
-/* utilities */
+/* ====== utilities ====== */
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

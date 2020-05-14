@@ -2,9 +2,13 @@
 <script>
 
 $(document).ready(function () {
-    $("#sidebar").mCustomScrollbar({ theme: "minimal", });
+    $("#sidebar").mCustomScrollbar({
+        theme: "minimal-dark",
+        scrollEasing: "linear",
+        scrollInertia: 100
+    });
 
-    $("#sidebar-collapse, #sidebar-dismiss").on('click', function () {
+    $("#sidebar-toggle").on('click', function () {
         $("#sidebar").toggleClass("active");
     });
 
