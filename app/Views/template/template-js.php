@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $("#sidebar").mCustomScrollbar({
         theme: "minimal-dark",
-        scrollEasing: "linear",
+        scrollEasing: "easeInOut",
         scrollInertia: 100
     });
 

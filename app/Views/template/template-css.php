@@ -44,6 +44,9 @@ p {
 #navbar input {
   width: 200px;
 }
+#login, #register {
+    float: right;
+}
 #searchbar-container {
   margin-top: 50px;
 }

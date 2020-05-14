@@ -88,7 +88,7 @@
                     </div>
                     <div>
                         <div class="spacer"></div>
-                        <button id="register-button" class="btn btn-outline-dark" style="float: right;">prijava</button>
+                        <button id="register" class="btn btn-outline-dark">prijava</button>
                     </div>
                 </form>
 
@@ -114,7 +114,7 @@
                     </div>
                     <div>
                         <div class="spacer"></div>
-                        <button id="login-button" class="btn btn-outline-dark" style="float: right;">prijava</button>
+                        <button id="login" class="btn btn-outline-dark">prijava</button>
                     </div>
                 </form>
 
