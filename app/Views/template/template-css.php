@@ -1,3 +1,4 @@
+<?php /* 2020-05-15 v0.1 Marko Stanojevic 2017/0081 */ ?>
 <style>
 
 /* structure */
@@ -17,6 +18,7 @@ p {
   width: 100%;
   height: 50px;
   z-index: 1000;
+  margin: 0px;
 }
 
 #navbar img {
@@ -32,9 +34,9 @@ p {
 
 #sidebar {
   position: fixed;
-  margin-left: -250px;
+  margin-left: -350px;
   top: 50px;
-  width: 250px;
+  width: 350px;
   height: 100%;
   z-index: 1000;
 }
@@ -60,9 +62,13 @@ p {
 }
 
 
-#content {
+#searchbar {
   flex: 1 0 auto;
   margin-top: 5rem;
+}
+
+#content {
+  flex: 1 0 auto;
 }
 
 
@@ -78,14 +84,12 @@ p {
   --body-color: #fafafa;
   --p-color: #999999;
 
-  --navbar-color: #7386d5;
+  --primary-color: #7386d5;
   --navbar-accent-color: #6b80d3;
   --navbar-border-color: #455bb1;
 
-  --sidebar-color: #7386d5;
   --sidebar-header-color: #6d7fcc;
   --sidebar-accent-color: #5d6baa;
-  --sidebar-text-color: #ffffff;
 }
 
 
@@ -111,7 +115,7 @@ a:focus {
 
 
 #navbar {
-  background-color: var(--navbar-color);
+  background-color: var(--primary-color);
 }
 #navbar-content > * {
   white-space: nowrap;
@@ -138,8 +142,7 @@ a:focus {
 
 
 #sidebar {
-  background: var(--sidebar-color);
-  color: var(--sidebar-text-color);
+  background: var(--primary-color);
 }
 
 #sidebar .sidebar-header {
@@ -150,16 +153,14 @@ a:focus {
 #sidebar-dismiss {
   line-height: 35px;
   cursor: pointer;
-  background: var(--sidebar-color);
+  background: var(--primary-color);
 }
 #sidebar-dismiss:hover {
-  background: var(--sidebar-text-color);
-  color: var(--sidebar-color);
+  color: var(--primary-color);
 }
 
 #sidebar ul p {
   padding: 10px;
-  color: var(--sidebar-text-color);
 }
 
 #sidebar ul.components {
@@ -171,8 +172,7 @@ a:focus {
   font-size: 1.1em;
 }
 #sidebar ul li a:hover {
-  background: var(--sidebar-text-color);
-  color: var(--sidebar-color);
+  color: var(--primary-color);
 }
 
 #sidebar ul ul a {
