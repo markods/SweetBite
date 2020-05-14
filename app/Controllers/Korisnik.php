@@ -22,7 +22,7 @@ class Korisnik extends BaseController
         if($this->request->getVar('ime')=="" || $this->request->getVar('email')=="" || $this->request->getVar('telefon')==""||
           $this->request->getVar('password')=="" || $this->request->getVar('pon_password')==""){
             return view('greske');
-          }
+         }
           
         //provera da li su uneti passwordi jednaki
           if($this->request->getVar('password')!=$this->request->getVar('pon_password')){
@@ -32,10 +32,11 @@ class Korisnik extends BaseController
          //provera da li je email unet po ispravnom formatu
           //ne radi bas kako smo hteli, on ne izvrsi upit sto je dobro
           //ali mi ne pozove view
-          $proveraEmail=$this->request->getVar('email');
+          $proveraEmail=$_POST['email'];
           if(!filter_var($proveraEmail,FILTER_VALIDATE_EMAIL)){
-              return view('formati');
+              return view('greske');
           }
+          
        
         $email=$this->request->getVar('email');  
         $korisnikModel=new KorisnikModel();
@@ -45,7 +46,7 @@ class Korisnik extends BaseController
         if($dohvatiEmail!=null){
             //znaci da taj korisnik ima nalog
             //treba da se vratimo na pocetak
-            return redirect()->to(site_url("../public/Korisnik/index"));
+            return redirect()->to(site_url("../Korisnik/index"));
         }
         
        //znaci da korisnik ne postoji, i moze da se uloguje
@@ -63,21 +64,54 @@ class Korisnik extends BaseController
              'kor_datuklanj'=> null
         ]);
            
-         return redirect()->to(site_url("../public/Korisnik/index"));
+         return redirect()->to(site_url("../Korisnik/index"));
        
     }
     
     
     public function login() {
-        $email = $this->request->getVar('kor_email');
-        $password = $this->request->getVar('kor_password');
+       // $email = $this->request->getVar('kor_email');
+       // $password = $this->request->getVar('kor_password');
         
-        if(strlen($password)===0 ||strlen($email)===0) 
+     //   $email=$_POST['kor_email'];
+      //  $password=$_POST['kor_password'];
+     
+      $email=$_POST['email'];  
+        
+     //$email = $this->input->post('email');
+
+   // $this->form_validation->set_rules('email','EMAIL','trim|required|valid_email|is_unique[utilisateurs.email]');
+
+    if(empty($email))
+    {
+        echo "Niste uneli email";
+    }
+    
+        //$email=$_POST['email'];
+        //$password=$_POST['password'];
+        
+        /*if(empty($email))
+        
+         /*    return view("greske");
+        
+        if(empty($password)){
+            return view('sifre');
+        }*/
+        
+        /*if(empty($email)){
+           return "Niste uneli email";
+         
+        }*/
+        
+        
+            
+      /*  if(strlen($password)===0 ||strlen($email)===0) 
         {//provera da li je uneta sifra u polje
-            return view("sifre");
+            return view("sifre");*/
 //        if($email=="")     //provera da li je unet mejl u polje
 //            return view ("greske");
-        
+    
+else{    
         $model = new KorisnikModel(); //kreiram model kako bih dohvatao podatke iz baze
         $korisnik = $model->daLiPostojiEmail($email); //dohvatam korisnika samo na osnovu mejla
         if($korisnik == null)       //nije dohvacen korisnik
@@ -126,8 +160,8 @@ class Korisnik extends BaseController
         
         
     }
-    
+    }
 
 }
 
-}
+

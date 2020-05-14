@@ -29,6 +29,76 @@
     <!-- javascript -->
     <script src="template.js"></script>
     <script src="basket.js"></script>
+
+    <script>
+        
+      /*  $(document).ready(function(){
+           
+          /*  $("#login-button").click(function(){
+                 alert("Usao u dju");
+        //event.preventDefault();
+                var email=$("#login-email").val();
+                var password=$("#login-password").val();
+                $.ajax({
+                    url:"../Korisnik/login",
+                    method:"POST",
+                    data:{
+                        email:email,
+                        password:password
+                    },
+                    dataType:"JSON",
+                    success:function(data){
+                        alert("callback");
+                        $("#nema_email").html(data.email);
+                        $("#nema_pass").html(data.pass);
+                     }
+                    
+                }); 
+        });*/
+        
+      /*  $("#login-button").click(function(){
+            alert("usao u fju")
+             var email=$("#login-email").val();
+             alert(email);
+             var password=$("#login-password").val();
+             alert(password);
+             $.post("Korisnik/login", {
+             email:email,
+             password:password
+            }, function(data,status){
+                alert(status);
+                $("#nema_email").html(data);
+            }); 
+        });  
+    });*/
+    
+    /*$(document).ready(function(){
+        $("#login-button").click(function(event)
+        {   
+            alert("fja");
+            event.preventDefault();
+            var email= $("#login-email").val();
+            $.ajax(
+                {
+                    type:"POST",
+                    url: "<?php echo base_url(); ?>naslovna.php/Korisnik/login",
+                    data:{email:email},
+                    success:function(response)
+                    {
+                        
+                        $("#proba").html(response);
+                       // $('#cartmessage').show();
+                    }
+                    error: function() 
+                    {
+                        alert("Invalide!");
+                    }
+                }
+            );
+        });
+    });*/
+    
+    </script>
 </head>
 
 
@@ -66,7 +136,7 @@
                 </button>
 
                 <!-- register dropdown menu -->
-                <form name='registracija' method='POST' class="dropdown-menu dropdown-menu-right p-3" action="<?= site_url("../public/Korisnik/registracija") ?>">
+                <form name='registracija' method='POST' class="dropdown-menu dropdown-menu-right p-3" action="<?= site_url("../Korisnik/registracija") ?>">
                     <div class="form-group">
                         <label for="register-full-name">ime i prezime</label>
                         <input name='ime' type="text" class="form-control" id="register-full-name" placeholder="Pera Perić">
@@ -104,14 +174,17 @@
                 </button>
 
                 <!-- login dropdown menu -->
-                <form name = "kor_prijava" class="dropdown-menu dropdown-menu-right p-3" method="POST" action="<?= site_url("../public/Korisnik/login") ?>">
+                <!--action="<?= site_url("../Korisnik/login") ?>"-->
+                <form id="kor_prijava" name = "kor_prijava" class="dropdown-menu dropdown-menu-right p-3" method="POST" >
                     <div class="form-group">
                         <label for="login-email">email</label>
                         <input name="kor_email" type="email" class="form-control" id="login-email" placeholder="email@example.com">
+                        <span id='nema_email'>sadas</span>
                     </div>
                     <div class="form-group">
                         <label for="login-password">lozinka</label>
                         <input name="kor_password" type="password" class="form-control" id="login-password" placeholder="Password">
+                        <span id='nema_pass'>dsadsa</span>
                     </div>
                     <div>
                         <div class="spacer"></div>
@@ -261,6 +334,7 @@
     </div>
 
     <!-- page content  -->
+    <span id='proba'></span>
     <div class="container-fluid">
         <div id="content" class="col-12 offset-sm-2 col-sm-8 offset-lg-3 col-lg-6">
             <h2>Title Title Title Title</h2>
