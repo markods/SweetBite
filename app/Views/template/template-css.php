@@ -12,6 +12,7 @@
   
   --hover-color:  #4aba80;
   --border-color: #2a704c;
+  --input-color:  #e0fce9;
 }
 
 
@@ -127,8 +128,12 @@ a:focus {
 }
 #navbar input,
 #searchbar input {
-    background: var(--tertiary-color);
+    background: var(--input-color);
     border: 1px solid var(--border-color);
+}
+#search {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 

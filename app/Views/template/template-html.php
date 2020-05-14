@@ -17,9 +17,6 @@
     <!-- jQuery Custom Scroller -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- Font Awesome icons -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <?php
         // template css and js
@@ -38,8 +35,8 @@
 
             <!-- sidebar button -->
             <div class="pl-0">
-                <button id="sidebar-toggle" class="btn btn-outline-dark py-0 px-2">
-                    <i class="fas fa-align-justify"></i>
+                <button id="sidebar-toggle" class="btn btn-outline-dark px-1 py-0">
+                    <img src=<?php echo base_url("assets/icons/justified.svg"); ?> alt="sidebar">
                 </button>
             </div>
 
@@ -68,7 +65,7 @@
                 <form class="dropdown-menu dropdown-menu-right p-3">
                     <div class="form-group">
                         <label for="register-full-name">ime i prezime</label>
-                        <input type="text" class="form-control" id="register-full-name" placeholder="Pera Perić">
+                        <input type="text" class="form-control" id="register-full-name" placeholder="Petar Petrović">
                     </div>
                     <div class="form-group">
                         <label for="register-email">email</label>
@@ -80,11 +77,11 @@
                     </div>
                     <div class="form-group">
                         <label for="register-password-1">lozinka</label>
-                        <input type="password" class="form-control" id="register-password-1" placeholder="password">
+                        <input type="password" class="form-control" id="register-password-1" placeholder="lozinka">
                     </div>
                     <div class="form-group">
                         <label for="register-password-2">ponovite lozinku</label>
-                        <input type="password" class="form-control" id="register-password-2" placeholder="password">
+                        <input type="password" class="form-control" id="register-password-2" placeholder="lozinka">
                     </div>
                     <div>
                         <div class="spacer"></div>
@@ -110,7 +107,7 @@
                     </div>
                     <div class="form-group">
                         <label for="login-password">lozinka</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="Password">
+                        <input type="password" class="form-control" id="login-password" placeholder="lozinka">
                     </div>
                     <div>
                         <div class="spacer"></div>
@@ -148,15 +145,14 @@
                 </p>
 
                 <!-- search bar -->
-                <form>
-                  <div class="form-row align-items-center">
+                <form class="form-row align-items-center">
                     <div class="input-group mb-2">
-                      <div class="input-group-prepend">
-                          <button id="search" type="button" class="btn btn-outline-dark"><i class="fa fa-search"></i></button>
-                      </div>
-                      <input type="text" class="form-control" id="search-text" placeholder="pretraga">
+                        <button id="search" type="button" class="input-group-prepend btn btn-outline-dark px-2">
+                            <img src=<?php echo base_url("assets/icons/search.svg"); ?> alt="sidebar">
+                        </button>
+                        
+                        <input type="text" class="form-control" id="search-text" placeholder="pretraga">
                     </div>
-                  </div>
                 </form>
 
             </div>
