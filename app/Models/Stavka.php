@@ -17,8 +17,14 @@ class Stavka extends Model
     
     protected $returnType     = 'object';
  
-    protected $allowedFields = ['stavka_id', 'stavka_por_id', 'stavka_jelo_id', 
-                'stavka_kol', 'stavka_cenakom', 'stavka_datizrade'];
+    protected $allowedFields = [
+                                'stavka_id', 
+                                'stavka_por_id', 
+                                'stavka_jelo_id', 
+                                'stavka_kol', 
+                                'stavka_cenakom', 
+                                'stavka_datizrade'
+                            ];
  
     protected $useTimestamps = true;
     protected $createdField  = 'stavka_datkre';
@@ -44,30 +50,10 @@ class Stavka extends Model
     
     //override osnovnih metoda tako da prikazuju greske
     //dobro za razvojnu fazu
-    
-    //-----------------------------------------------
     //metoda save ne mora da se overrid-uje jer ona samo poziva
     //insert i update u zavisnosti od parametara
     //preporucljivo koristiti insert i update jer insert vraca id
-    
-    /*public function save($data):bool 
-    {
-        $id = \UUID::generateId();
-        if(!array_key_exists('povod_id', $data)){
-            $data['povod_id'] = $id;
-        }
-        return parent::save($data);
-        if(parent::save($data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $field => $error) {
-                echo "<p>->$error</p>";   
-            }
-            return false;
-        }
-        return true;    
-    }*/
-    
+        
     //-----------------------------------------------    
     //ako je neuspesno vraca false
     //ako je uspesno vraca id
@@ -144,7 +130,34 @@ class Stavka extends Model
     public function dohvati($stavka_id)
     {
         $stavka_id = \UUID::codeId($stavka_id);
-        return $this->find($stavka_id);
+        $row = $this->find($stavka_id);
+        
+        return $this->decodeRecord($row);
     }
+    
+    //------------------------------------------------
+    //Dekodovanje jednog rekorda
+    
+    public function decodeRecord($row)
+    {
+        //dekodujemo sve kljuceve
+        $row->stavka_id = \UUID::decodeId($row->stavka_id);
+        $row->stavka_por_id = \UUID::decodeId($row->stavka_por_id);
+        $row->stavka_jelo_id = \UUID::decodeId($row->stavka_jelo_id);
+        return $row;  
+    }
+    
+    //------------------------------------------------
+    //Dekodovanje nizova podataka
+    
+    public function decodeArray($finds)
+    {
+        //dekodujemo sve kljuceve
+        for ($i = 0; $i < count($finds); $i++) {
+            $finds[$i] = $this->decodeRecord($finds[$i]);
+        }
+        return $finds;  
+    }
+
     
 }
