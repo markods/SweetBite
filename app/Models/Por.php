@@ -1,8 +1,14 @@
 <?php namespace App\Models;
+// 2020-05-14 v0.2 Jovana Pavic 2017
+
+/*
+  !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
+  !!!           \UUID::codeId($id);                     !!!
+ */
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class Por extends Model
 {
     //Tu se upisuje korpa za ulogovanog korisnika, 
     //a datum porucivanja se naknadno popuni
@@ -21,12 +27,12 @@ class UserModel extends Model
     protected $allowedFields = ['por_id', 'por_kor_id', 'por_naziv', 
                                 'por_povod_id', 'por_br_osoba', 'por_za_dat', 
                                 'por_popust_proc', 'por_datporuc', 
-                                'por_datodluke', 'por_odluke',
+                                'por_datodluke', 'por_odluka',
                                 'por_datizrade', 'por_datpreuz'];
-        //koja polja smeju da se menjaju metodama modela
  
     protected $useTimestamps = true;
     protected $createdField  = 'por_datkre';
+    protected $updatedField = '';
     protected $dateFormat = 'datetime';
 
     protected $validationRules    = [
@@ -41,7 +47,7 @@ class UserModel extends Model
                 'por_br_osoba' => ['required' => 'Broj osoba je obavezan'],
                 'por_za_dat'   => ['required' => 'Za kada je obavezno']
             ];
-    protected $skipValidation  = false;
+    protected $skipValidation     = false;
 
     
     //-----------------------------------------------------------------------
@@ -50,12 +56,13 @@ class UserModel extends Model
     //dobro za razvojnu fazu
     
     //-----------------------------------------------
-    
     //metoda save ne mora da se overrid-uje jer ona samo poziva
     //insert i update u zavisnosti od parametara
+    //preporucljivo koristiti insert i update jer insert vraca id
+    
     /*public function save($data):bool 
     {
-        $id = \UUIDLib::generateID();
+        $id = \UUID::generateId();
         if(!array_key_exists('povod_id', $data)){
             $data['povod_id'] = $id;
         }
@@ -71,12 +78,20 @@ class UserModel extends Model
         return true;    
     }*/
     
-    //-----------------------------------------------
+    //-----------------------------------------------    
+    //ako je neuspesno vraca false
+    //ako je uspesno vraca id
     
-    public function insert($data=NULL, $returnID=true):bool 
+    public function insert($data=NULL, $returnID=true) 
     {
-        $id = \UUIDLib::generateID();        
+        $id = \UUID::generateId();        
         $data['por_id'] = $id;
+        if (array_key_exists('por_kor_id', $data)) {
+            $data['por_kor_id'] = \UUID::codeId($data['por_kor_id']);
+        }
+        if (array_key_exists('povod_id', $data)) {
+            $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
+        }
         if(parent::insert($data, $returnID) === false){
             echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
@@ -85,13 +100,23 @@ class UserModel extends Model
             }
             return false;
         }
-        return $id;
+        return \UUID::decodeId($id);
     }
     
     //-----------------------------------------------
+    //ako je uspesno vraca true, ako nije vraca false
         
-    public function update($id=NULL, $data=NULL):bool 
+    public function update($id=NULL, $data=NULL):bool
     {
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }
+        if (array_key_exists('por_kor_id', $data)) {
+            $data['por_kor_id'] = \UUID::codeId($data['por_kor_id']);
+        }
+        if (array_key_exists('povod_id', $data)) {
+            $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
+        }
         if(parent::update($id, $data) === false){
             echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
@@ -105,10 +130,12 @@ class UserModel extends Model
     
     //-----------------------------------------------
     
-    //ako je zabranjeno brisanje iz tabele
     public function delete($id=NULL, $purge=false) 
     {
-        throw new Exception('Not implemented');
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }
+        return parent::delete($id, $purge);
     }
     
     //-----------------------------------------------
@@ -117,6 +144,7 @@ class UserModel extends Model
     
     public function porudzbineKorisnika($kor_id)
     {
+        $kor_id = \UUID::codeID($kor_id);
         return $this->where('por_kor_id', $kor_id)->findAll();
     }
     
@@ -128,32 +156,55 @@ class UserModel extends Model
     
     public function filtriranePorudzbineKorisnika($kor_id, $status)
     {
+        $kor_id = \UUID::codeId($kor_id);
         if($status == 0) {
             //nije doneta odluka
             return $this->where('por_kor_id', $kor_id)
-                    ->andwhere('por_datodluke', null)->findAll();
+                    ->where('por_datodluke', null)->findAll();
         }
         else if($status == 1) {
             //prihvacena porudzbina
             return $this->where('por_kor_id', $kor_id)
-                    ->andlike('por_odluka', 'accepted')->findAll();
+                    ->like('por_odluka', 'accepted')->findAll();
         }
         else if($status == 2) {
             //odbijena porudzbina
             return $this->where('por_kor_id', $kor_id)
-                    ->andlike('por_odluka', 'declined')->findAll();
+                    ->like('por_odluka', 'declined')->findAll();
         }
         else if($status == 3) {
             //gotova
             return $this->where('por_kor_id', $kor_id)
-                    ->andwhere('por_datizrade', !null)->findAll();
+                    ->where('por_datizrade !=', null)->findAll();
         }
         else if($status == 4) {
             return $this->where('por_kor_id', $kor_id)
-                    ->andwhere('por_datpreuz', !null)->findAll();
+                    ->where('por_datpreuz !=', null)->findAll();
         }
-        else
-            return null;        
+        else {
+            return null; 
+        }
     }
     
+    //-----------------------------------------------
+    //Upisuje datum odluke i donesenu odluku
+    //u porudzbinu sa datim id-em
+    //odluka: 0-prihvacena, 1-odbijena
+    
+    public function donetaOdluka($por_id, $odluka)
+    {
+        //ne radi se codeId jer ga radi update
+        $this->update($por_id, ['por_odluka' => $odluka, 
+                                'por_datodluke' => date('Y-m-d H:i:s')
+            ]);
+    }    
+    
+    //------------------------------------------------
+    //Dohvata porudzbinu sa datim id-em
+    
+    public function dohvati($por_id)    
+    {
+        $por_id = \UUID::codeId($por_id);
+        return $this->find($por_id);
+    }
 }
