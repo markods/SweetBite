@@ -21,10 +21,11 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
-    <!-- css -->
-    <?php require_once('template-css.php'); ?>
-    <!-- javascript -->
-    <?php require_once('template-js.php'); ?>
+    <?php
+        // template css and js
+        require_once('template-css.php');
+        require_once('template-js.php');
+    ?>
 </head>
 
 
@@ -121,7 +122,7 @@
 
             <!-- logout -->
             <div class="pr-0">
-                <button id="logout" class="btn btn-outline-dark p-1">Izloguj me</button>
+                <button id="logout" class="btn btn-outline-dark py-1">Izloguj me</button>
             </div>
             
         </div>
@@ -141,10 +142,10 @@
 
     <!-- page content  -->
     <div class="container-fluid p-0 m-0">
-        <div class="row m-0">
+        <!-- search bar container  -->
+        <div id="searchbar">
             
-            <!-- search bar container  -->
-            <div id="searchbar" class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+            <div class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
 
                 <!-- text above search bar -->
                 <h3>Radiis cornua circumfuso cognati dei divino radiis.</h3>
@@ -171,7 +172,7 @@
 
         
         
-        <div class="row m-0">
+        <div id="content-wrapper" class="row m-0 mt-4">
             <!-- content -->
             <div id="content" class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
                 <h2>Title Title Title Title</h2>

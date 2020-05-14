@@ -1,6 +1,21 @@
 <?php /* 2020-05-15 v0.1 Marko Stanojevic 2017/0081 */ ?>
 <style>
 
+/* colours */
+:root {
+  --body-color: #fafafa;
+  --p-color:    #666666;
+
+  --primary-color:   #53cf8f;
+  --secondary-color: #8affb1;
+  --tertiary-color:  #bdffd2;
+
+  --navbar-item-hover-color:        #6b80d3;
+  --navbar-item-hover-border-color: #455bb1;
+}
+
+
+
 /* structure */
 html,
 body {
@@ -32,13 +47,19 @@ p {
 }
 
 
+#searchbar {
+  margin-top: 50px;
+}
+
+
+
 #sidebar {
   position: fixed;
   margin-left: -350px;
   top: 50px;
   width: 350px;
   height: 100%;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 #sidebar.active {
@@ -62,11 +83,6 @@ p {
 }
 
 
-#searchbar {
-  flex: 1 0 auto;
-  margin-top: 5rem;
-}
-
 #content {
   flex: 1 0 auto;
 }
@@ -75,21 +91,6 @@ p {
 #footer {
   flex-shrink: none;
   text-align: center;
-}
-
-
-
-/* colours */
-:root {
-  --body-color: #fafafa;
-  --p-color: #999999;
-
-  --primary-color: #7386d5;
-  --navbar-accent-color: #6b80d3;
-  --navbar-border-color: #455bb1;
-
-  --sidebar-header-color: #6d7fcc;
-  --sidebar-accent-color: #5d6baa;
 }
 
 
@@ -128,10 +129,13 @@ a:focus {
 #navbar .button {
   border-radius: unset;
 }
-#navbar .button .active,
+#navbar .button.active,
 #navbar .button:hover {
-  background-color: var(--navbar-accent-color);
-  border-bottom: 4px solid var(--navbar-border-color);
+  background-color: var(--navbar-item-hover-color);
+  border-bottom: 4px solid var(--navbar-item-hover-border-color);
+}
+#navbar .btn-link {
+  color: unset;
 }
 
 #login    .dropdown-menu .form-group label,
@@ -147,7 +151,7 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: var(--sidebar-header-color);
+  background: var(--tertiary-color);
 }
 
 #sidebar-dismiss {
@@ -179,6 +183,13 @@ a:focus {
   font-size: 0.9em !important;
   padding-left: 30px !important;
   background: var(--sidebar-accent-color);
+}
+
+
+#searchbar {
+    padding-top:    15px;
+    padding-bottom: 15px;
+    background: var(--secondary-color);
 }
 
 
