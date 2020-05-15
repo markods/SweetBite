@@ -44,7 +44,7 @@ class BaseController extends Controller
             // pokretanje sesije
             $this->session = \Config\Services::session();
             // alternativni nacin
-          $this->session = session();
+            $this->session = session();
 	}
 
 }

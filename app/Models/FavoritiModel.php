@@ -2,7 +2,7 @@
 
 use CodeIgniter\Model;
 
-//Autor: Jovana Jankovic 0586/17
+//Autor: Jovana Jankovic 0586/17, verzija 0.2
 
 class FavoritiModel extends Model
 {
@@ -21,26 +21,32 @@ class FavoritiModel extends Model
             ];
     
     protected $skipValidation = false;
+    protected $updatedField='';
        
     //proveri koja je povratna vrednost za insert
-    public function insert($data = null, boolean $returnID = true) {
-        $id = \UUIDLib::generateID();
+    public function insert($data=NULL, $returnID=true) 
+    {
+        $id = \UUID::generateId();        
         $data['fav_id'] = $id;
-        if(parent::insert($data)===false){
-             echo '<h3>Postoje greske u unosu podataka:</h3>';
-             $errors = $this->errors();
-            foreach ($errors as $field => $error) {
+        if(parent::insert($data, $returnID) === false){
+            echo '<h3>Greske u formi upisa:</h3>';
+            $errors = $this->errors();
+            foreach ($errors as $error) {
                 echo "<p>->$error</p>";   
             }
             return false;
-        } 
-       return $id;
+        }
+        return \UUID::decodeId($id);
     }
     
-    //update za tabelu favoriti model
-    public function update($id = null, $data = null): bool {
-        if(parent::update($id, $data)==false){
-             echo '<h3>Postoje greske u unosu podataka:</h3>';
+    //update favorita modela
+    public function update($id=NULL, $data=NULL):bool 
+    {
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }  
+        if(parent::update($id, $data) === false){
+            echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
             foreach ($errors as $error) {
                 echo "<p>->$error</p>";   
@@ -50,24 +56,18 @@ class FavoritiModel extends Model
         return true;
     }
     
-    //zabranili smo brisanje iz baze 
-    public function delete($id = null, boolean $purge = false) {
-       throw new Exception("Ne mozete obrisati red");
+    //brisanje iz tabela favoriti
+     public function delete($id=NULL, $purge=false) 
+    {
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }
+        return parent::delete($id, $purge);
     }
     
     //dohvata sve favorite odredjenog korisnika
     public function dohvatiFavoriteZaKorisnika($kor_id){
       return  $this->where('fav_kor_id',$kor_id)->findAll();
     }
-   
- // protected $useSoftDeletes = true;
 
-    /*protected $useTimestamps = false;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;*/
 }

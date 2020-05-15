@@ -11,123 +11,114 @@ class Korisnik extends BaseController
     }
     
     public function registracija(){
-        
-        /* if(!$this->validate([$this->request->getVar('ime')=>'required',
-          $this->request->getVar('email')=>'required', $this->request->getVar('telefon')=>'required',
-              $this->request->getVar('password')=>'required',$this->request->getVar('pon_password')=>'required'])){
-                    return view('greske');
-        }*/
-        
+         
         //provera da li su uneta sva polja iz forme za registraciju
-        if($this->request->getVar('ime')=="" || $this->request->getVar('email')=="" || $this->request->getVar('telefon')==""||
-          $this->request->getVar('password')=="" || $this->request->getVar('pon_password')==""){
-            return view('greske');
+        if($this->request->getVar('ime')==="" || $this->request->getVar('email')==="" || $this->request->getVar('telefon')===""||
+          $this->request->getVar('password')==="" || $this->request->getVar('pon_password')===""){
+           $_SESSION['nisu_uneta_sva_polja']="Nisu uneta sva polja!";
+            //return view('greske');
+             return redirect()->to(site_url("../Korisnik/index"));
          }
           
-        //provera da li su uneti passwordi jednaki
-          if($this->request->getVar('password')!=$this->request->getVar('pon_password')){
-            return view('sifre');
+        //provera da li je korektno potvrdjena sifra u formi za registraciju
+          if($this->request->getVar('password')!==$this->request->getVar('pon_password')){
+             $_SESSION['nisu_iste_sifre']="Lozinke nisu iste";
+          //  return view('sifre');
+              return redirect()->to(site_url("../Korisnik/index"));
           }
           
-         //provera da li je email unet po ispravnom formatu
-          //ne radi bas kako smo hteli, on ne izvrsi upit sto je dobro
-          //ali mi ne pozove view
-          $proveraEmail=$_POST['email'];
+         //Proverava format email adrese
+          $proveraEmail=$this->request->getVar('email');
           if(!filter_var($proveraEmail,FILTER_VALIDATE_EMAIL)){
-              return view('greske');
+             $_SESSION['neispravan_email']="Niste uneli ispravan mail po formatu";
+            return redirect()->to(site_url("../Korisnik/index"));
           }
           
-       
+          //provera da li su unete cifre za telefon, da neko ne unese slova npr
+          $telefon=$this->request->getVar('telefon');
+          if(is_numeric($telefon)===false){
+           $_SESSION['neispravan_telefon']="Niste uneli ispravan telefon";
+            return redirect()->to(site_url("../Korisnik/index"));
+          }
+          
         $email=$this->request->getVar('email');  
         $korisnikModel=new KorisnikModel();
+        
         $dohvatiEmail=$korisnikModel->daLiPostojiEmail($email);
         
-         //return redirect()->to(site_url("../public/Korisnik/index"));
+        //proveravamo da li je taj korisnik vec registrovan
         if($dohvatiEmail!=null){
-            //znaci da taj korisnik ima nalog
-            //treba da se vratimo na pocetak
+            $this->session->set('korisnik_postoji',"Ovaj korisnik je vec registrovan");
             return redirect()->to(site_url("../Korisnik/index"));
         }
         
-       //znaci da korisnik ne postoji, i moze da se uloguje
-      /*  $data=['kor_naziv'=>$this->request->getVar('ime'),'kor_email'=>$this->request->getVar('email'),
-            'kor_tel'=>$this->request->getVar('telefon'),'kor_pwdhash'=>$this->request->getVar('password'),
-            'kor_tipkor_id'=>1,'kor_datuklanj'=>null];*/
-       
-         $korisnikModel->insert([
-            'kor_naziv'=>$this->request->getVar('ime'),
-            'kor_email'=>$this->request->getVar('email'),
-            'kor_tel'=>$this->request->getVar('telefon'),
-             'kor_pwdhash'=> $this->request->getVar('password'),
-             'kor_tipkor_id'=> 1,
-             'kor_datkre'=> "date_crea",
-             'kor_datuklanj'=> null
+        //dohvatanje passworda koji treba da se hashira
+        $pass=$this->request->getVar('password');
+        $noviPassword=password_hash($pass,PASSWORD_DEFAULT);
+        
+        //ubacivanje novog korisnika u bazu
+        $id= $korisnikModel->insert(
+        [
+             'kor_naziv'=>$this->request->getVar('ime'),
+             'kor_email'=>$this->request->getVar('email'),
+             'kor_tel'=>$this->request->getVar('telefon'),
+             'kor_pwdhash'=>$noviPassword,
+             'kor_tipkor_id'=> \UUID::decodeId(\UUID::generateId()),
+             'kor_datkre'=> date('Y-m-d H:i:s'),
         ]);
-           
+         
+        //vracamo se na pocetak sajta
          return redirect()->to(site_url("../Korisnik/index"));
        
     }
     
-    
-    public function login() {
-       // $email = $this->request->getVar('kor_email');
-       // $password = $this->request->getVar('kor_password');
-        
-     //   $email=$_POST['kor_email'];
-      //  $password=$_POST['kor_password'];
-     
-      $email=$_POST['email'];  
-        
-     //$email = $this->input->post('email');
+    public function login() { 
+                
+        //dohvatamo unesena polja iz forme
+        $email=$_POST['kor_email'];
+        $password=$_POST['kor_password'];
 
-   // $this->form_validation->set_rules('email','EMAIL','trim|required|valid_email|is_unique[utilisateurs.email]');
-
-    if(empty($email))
-    {
-        echo "Niste uneli email";
-    }
+        if(empty($email))
+        {
+          $_SESSION['pogresan_email_login']="Niste uneli email";
+          return redirect()->to(site_url("../Korisnik/index"));
+        }
     
-        //$email=$_POST['email'];
-        //$password=$_POST['password'];
+        if(empty($password))
+        {
+          $_SESSION['pogresan_password_login']="Niste uneli password";
+          return redirect()->to(site_url("../Korisnik/index"));
+        }
         
-        /*if(empty($email))
-        
-         /*    return view("greske");
-        
-        if(empty($password)){
-            return view('sifre');
-        }*/
-        
-        /*if(empty($email)){
-           return "Niste uneli email";
-         
-        }*/
-        
-        
-            
-      /*  if(strlen($password)===0 ||strlen($email)===0) 
-        {//provera da li je uneta sifra u polje
-            return view("sifre");*/
-//        if($email=="")     //provera da li je unet mejl u polje
-//            return view ("greske");
-    
-else{    
         $model = new KorisnikModel(); //kreiram model kako bih dohvatao podatke iz baze
         $korisnik = $model->daLiPostojiEmail($email); //dohvatam korisnika samo na osnovu mejla
-        if($korisnik == null)       //nije dohvacen korisnik
-            return view('nema_korisnika');
-        if($korisnik->kor_pwdhash!=$password)   //uneta je pogresna sifra
-            return view ('wrong_password');
+        if($korisnik == null){   
+            //nije dohvacen korisnik
+              $_SESSION['pogresan_korisnik_login']="Ovaj korisnik ne postoji";
+             return redirect()->to(site_url("../Korisnik/index"));
+             
+        }
+         
+        if(password_verify($password, $korisnik[0]->kor_pwdhash)==false){
+            //uneta je pogresna sifra
+             $_SESSION['pogresan_password_login']="Niste uneli password";
+             return view('greske.php');            
+            // return redirect()->to(site_url("../Korisnik/index")); 
+        }
         
+        //ako smo do ovde stigli, korisnik se ulogovao
+        //dohvatamo id tipa korisnika
+        return view("uspesan_login");
         
-        $tip_korisnika = $korisnik->kor_tipkor_id;
+        //id tipa korsinika bi trebalo da bude vrednost od 0-3
+        $tip_korisnika =\UUID::decodeId($korisnik[0]->kor_tipkor_id);
+        
+       
         
         //Tip korisnika se dohvata iz baze, razlicit je za svaki tip,
         // treba se dogovoriti koja vrednost predstalvja koji tip korisnika!!!
         switch ($tip_korisnika) {
             
-//            $_SESSION['email']=$email;
-//            $_SESSION['password'] =$password;
             case '0':   
                         $this->session->set('email',$email);
                         $this->session->set('password', $password);
@@ -156,12 +147,9 @@ else{
                   
         }
         //dohvatiKorisnikaZaLogovanje
-        //kor_pwdhash i kor_email
-        
-        
+        //kor_pwdhash i kor_email        
     }
     }
 
-}
 
 

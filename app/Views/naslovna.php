@@ -143,11 +143,41 @@
                     </div>
                     <div class="form-group">
                         <label for="register-email">email</label>
-                        <input name='email' type="email" class="form-control" id="register-email" placeholder="email@example.com">
+                        <input name='email' type="text" class="form-control" id="register-email" placeholder="email@example.com">
+                    </div>
+                    <div style='color:red;'>
+                        <?php 
+                        if(empty($_SESSION['neispravan_email']))
+                           echo ""; 
+                        else {
+                        echo $_SESSION['neispravan_email'];
+                        session_destroy();
+                        }
+                        ?>
+                    </div>
+                    <div style='color:red;'>
+                        <?php 
+                        if(empty($_SESSION['korisnik_postoji']))
+                           echo ""; 
+                        else {
+                        echo $_SESSION['korisnik_postoji'];
+                        session_destroy();
+                        }
+                        ?>
                     </div>
                     <div class="form-group">
                         <label for="register-phone-num">broj telefona</label>
                         <input name='telefon' type="tel" class="form-control" id="register-phone-num" placeholder="+381 01 234 5678">
+                    </div>
+                      <div style='color:red;'>
+                        <?php 
+                        if(empty($_SESSION['neispravan_telefon']))
+                           echo ""; 
+                        else {
+                        echo $_SESSION['neispravan_telefon'];
+                        session_destroy();
+                        }
+                        ?>
                     </div>
                     <div class="form-group">
                         <label for="register-password-1">lozinka</label>
@@ -156,6 +186,26 @@
                     <div class="form-group">
                         <label for="register-password-2">ponovite lozinku</label>
                         <input name='pon_password' type="password" class="form-control" id="register-password-1" placeholder="password">
+                    </div>
+                      <div style='color:red;'>
+                        <?php 
+                        if(empty($_SESSION['nisu_iste_sifre']))
+                           echo ""; 
+                        else {
+                        echo $_SESSION['nisu_iste_sifre'];
+                        session_destroy();
+                        }
+                        ?>
+                    </div>
+                    <div style='color:red;'>
+                        <?php 
+                        if(empty($_SESSION['nisu_uneta_sva_polja']))
+                           echo ""; 
+                        else {
+                        echo $_SESSION['nisu_uneta_sva_polja'];
+                        session_destroy();
+                        }
+                        ?>
                     </div>
                     <div>
                         <div class="spacer"></div>
@@ -174,17 +224,44 @@
                 </button>
 
                 <!-- login dropdown menu -->
-                <!--action="<?= site_url("../Korisnik/login") ?>"-->
-                <form id="kor_prijava" name = "kor_prijava" class="dropdown-menu dropdown-menu-right p-3" method="POST" >
+                <form id="kor_prijava" name = "kor_prijava" class="dropdown-menu dropdown-menu-right p-3" method="POST" action="<?= site_url("../Korisnik/login") ?>">
                     <div class="form-group">
                         <label for="login-email">email</label>
                         <input name="kor_email" type="email" class="form-control" id="login-email" placeholder="email@example.com">
-                        <span id='nema_email'>sadas</span>
                     </div>
+                     <div style='color:red;'>
+                                <?php 
+                                if(empty($_SESSION['pogresan_mail_login']))
+                                   echo ""; 
+                                else {
+                                echo $_SESSION['pogresan_mail_login'];
+                                session_destroy();
+                                }
+                                ?>
+                        </div>
                     <div class="form-group">
                         <label for="login-password">lozinka</label>
                         <input name="kor_password" type="password" class="form-control" id="login-password" placeholder="Password">
-                        <span id='nema_pass'>dsadsa</span>
+                        <div style='color:red;'>
+                                <?php 
+                                if(empty($_SESSION['pogresan_password_login']))
+                                   echo ""; 
+                                else {
+                                echo $_SESSION['pogresan_password_login'];
+                                session_destroy();
+                                }
+                                ?>
+                        </div>
+                        <div style='color:red;'>
+                                <?php 
+                                if(empty($_SESSION['pogresan_korisnik_login']))
+                                   echo ""; 
+                                else {
+                                echo $_SESSION['pogresan_korisnik_login'];
+                                session_destroy();
+                                }
+                                ?>
+                        </div>
                     </div>
                     <div>
                         <div class="spacer"></div>

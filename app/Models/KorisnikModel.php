@@ -2,17 +2,17 @@
 
 use CodeIgniter\Model;
 
-//Autor: Jovana Jankovic 0586/17
+//Autor: Jovana Jankovic 0586/17, verzija 0.2
 
 class KorisnikModel extends Model
 {
+    //tabela korisnik
     protected $table      = 'kor';
     protected $primaryKey = 'kor_id';
     protected $returnType = 'object';
 
-    //nisam dozvolila da mogu da se menjaju kor_id, kor_pwdhash, kor_datkre, kor_dauklanj
     protected $allowedFields = ['kor_id','kor_naziv', 
-        'kor_email','kor_tel','kor_tipkor_id','kor_pwdhash','kor_datkre','kor_datuklanj'];
+        'kor_email','kor_tel','kor_tipkor_id','kor_pwdhash'];
   
     protected $validationRules    = [
                     'kor_naziv'   => 'trim|required',
@@ -30,53 +30,70 @@ class KorisnikModel extends Model
                 'kor_tipkor_id'=>['required'=>'Id tipa korisnika je obavezno polje']
             ];
     
-   // protected $useTimestamps = true;
-    //ovo mi nije bas najjasnije
-    //protected $createdField  = 'kor_datkre';
-   // protected $dateFormat = 'datetime';
+    protected $useTimestamps = true;
+    protected $createdField  = 'kor_datkre';
+    protected $dateFormat = 'datetime';
+    protected $deletedField='kor_datuklanj';
     protected $skipValidation     = false;
-    
-   //proveri koja je povratna vrednost za insert
-   /* public function insert($data=NULL, boolean $returnID=true) {
-        $id = \UUIDLib::generateID();
+    protected $updatedField='';
+   
+    //fja za insertovanje novog korisnika
+     public function insert($data=NULL, $returnID=true) 
+    {
+         //fja koja generise id, vraca binarnu vrednost koja se upisuje u bazu
+        $id = \UUID::generateId();        
         $data['kor_id'] = $id;
-        if(parent::insert($data)===false){
-             echo '<h3>Postoje greske u unosu podataka:</h3>';
-             $errors = $this->errors();
-            foreach ($errors as $field => $error) {
+        if (array_key_exists('kor_tipkor_id', $data)) {
+            $data['kor_tipkor_id'] = \UUID::codeId($data['kor_tipkor_id']);
+        }
+        if(parent::insert($data, $returnID) === false){
+            echo '<h3>Greske u formi upisa:</h3>';
+            $errors = $this->errors();
+            foreach ($errors as $error) {
                 echo "<p>->$error</p>";   
             }
             return false;
-        } 
-       return $id;
-    }*/
+        }
+        return \UUID::decodeId($id);
+    }
     
-    //update za tabelu korisnik
-   /* public function update($id = null, $data = null): bool {
-        if(parent::update($id, $data)==false){
-             echo '<h3>Postoje greske u unosu podataka:</h3>';
+    //fja za update postojeceg korisnika
+    public function update($id=NULL, $data=NULL):bool 
+    {
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }
+        if (array_key_exists('kor_tipkor_id', $data)) {
+            $data['kor_tipkor_id'] = \UUID::codeId($data['kor_tipkor_id']);
+        }
+        if(parent::update($id, $data) === false){
+            echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
-            foreach ($errors as $filed->$error) {
+            foreach ($errors as $error) {
                 echo "<p>->$error</p>";   
             }
             return false;
         }
         return true;
-    }*/
+    }
     
     
-    //zabranili smo brisanje iz baze
-    /*public function delete($id = null, boolean $purge = false) {
-       throw new Exception("Ne mozete obrisati red");
-    }*/
+    //fja za brisanje korisnika iz baze
+     public function delete($id=NULL, $purge=false) 
+    {
+        if ($id != null) {
+            $id = \UUID::codeId($id);
+        }
+        return parent::delete($id, $purge);
+    }
     
-   //fja za dohvatanje korisnika, mada mi to ovde i ne treba
+    
+   //fja za dohvatanje korisnika
     public function dohvatiKorisnika($id){
         return $this->find($id);   
     }
 
    //ova fja moze da koristi administratoru za dohvatanje korisnika 
-   //po prosledjenom id za tip koriznika
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
         return $this->where('kor_tipkor_id',$tipkor_id)->findAll();
    }
@@ -93,16 +110,4 @@ class KorisnikModel extends Model
    public function daLiPostojiEmail($email){
        return $this->where('kor_email',$email)->find();
    }
-   
-   
-   
-    // protected $useSoftDeletes = true;
-    /*protected $useTimestamps = false;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;*/
 }
