@@ -32,7 +32,7 @@ class TipKorisnikModel extends Model
             echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
             foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
+                echo "<p>$error</p>";   
             }
             return false;
         }
@@ -41,6 +41,7 @@ class TipKorisnikModel extends Model
     
     
     //fja za update tipa korisnika
+    //Ova fja mi za sada ne znaci nista, jer mi ne mozemo da menjamo naziv tipa korisnika ukoliko on ostane unique
     public function update($id=NULL, $data=NULL):bool 
     {
         if ($id != null) {
@@ -50,7 +51,7 @@ class TipKorisnikModel extends Model
             echo '<h3>Greske u formi upisa:</h3>';
             $errors = $this->errors();
             foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
+                echo "<p>$error</p>";   
             }
             return false;
         }
@@ -66,10 +67,18 @@ class TipKorisnikModel extends Model
         return parent::delete($id, $purge);
     }
     
-    //proveri da li moze
+    //dohvata naziv tipa korisnika po ID
     public function dohvatiNazivTipaKorisnika($id){
-       // $where="tipkor_id='$id'";
-       //vraca ceo objekat tipa korisnika, pa cu da izvucem naziv sa $objekat->tipkor_naziv
-        return $this->where('tipkor_id',$id);
+       $id= \UUID::codeId($id);
+       $tipKorisnika=$this->find($id);
+       return $tipKorisnika->tipkor_naziv;
+    }
+    
+    //dohvata id tipa korisnika po njegovom nazivu
+    //Nazivi su: 'Menadzer', 'Kuvar', 'Administrator', 'Musterija'
+    public function dohvatiIDTipaKorisnika($naziv){
+       $korisnik=$this->where('tipkor_naziv',$naziv)->find();
+       return \UUID::decodeId($korisnik[0]->tipkor_id);
     }
 }
+

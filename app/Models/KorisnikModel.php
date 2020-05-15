@@ -24,7 +24,7 @@ class KorisnikModel extends Model
     
     protected $validationMessages = [
                 'kor_naziv' => ['required' => 'Ime korisnika je obavezno'],
-                'kor_email' => ['required' => 'Id povoda je obavezan','is_unique'=>'Email korisnika mora biti jedinstven'],
+                'kor_email' => ['required' => 'Email adresa je obavezno polje','is_unique'=>'Email korisnika mora biti jedinstven'],
                 'kor_tel' => ['required' => 'Broj telefona je obavezno polje'],
                 'kor_pwdhash'   => ['required' => 'Za kada je obavezno','is_unique'=>'Password korisnika je jedinstven'],
                 'kor_tipkor_id'=>['required'=>'Id tipa korisnika je obavezno polje']
@@ -40,7 +40,6 @@ class KorisnikModel extends Model
     //fja za insertovanje novog korisnika
      public function insert($data=NULL, $returnID=true) 
     {
-         //fja koja generise id, vraca binarnu vrednost koja se upisuje u bazu
         $id = \UUID::generateId();        
         $data['kor_id'] = $id;
         if (array_key_exists('kor_tipkor_id', $data)) {
@@ -88,26 +87,44 @@ class KorisnikModel extends Model
     }
     
     
-   //fja za dohvatanje korisnika
+   //fja za dohvatanje korisnika na osnovu primarnog kljuca, podrazumevano prima dekodovanu vrednost
     public function dohvatiKorisnika($id){
+       $id=\UUID::codeId($id);
         return $this->find($id);   
     }
 
-   //ova fja moze da koristi administratoru za dohvatanje korisnika 
+   //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
-        return $this->where('kor_tipkor_id',$tipkor_id)->findAll();
+       $tipkor_id=\UUID::codeId($tipkor_id);
+        $korisnici= $this->where('kor_tipkor_id',$tipkor_id)->findAll();
+        $korisnici=$this->decodeArray($korisnici);
+        return $korisnici;
    }
-   
-   //ova fja sluzi za proveru da li korisnik
-   //sa unetim emailom i passwordom postoji u bazi
-   public function dohvatiKorisnikaZaLogovanje($email, $lozinka){
-   //proveri za password sta se s tim desava
-       return $postoji=$this->where('kor_email',$email)->andWhere('kor_pwdhash',$lozinka)->find();
-   }
-   
-   //fja potrebna za registraciju
-   //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao
+     
+   //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao RADI
    public function daLiPostojiEmail($email){
-       return $this->where('kor_email',$email)->find();
+       $korisnik= $this->where('kor_email',$email)->findAll();
+       $korisnik=$this->decodeArray($korisnik);
+       return $korisnik;
    }
+   
+    //sluzi za dekodovanje, jer imamo strane kljuceve
+      public function decodeRecord($row)
+    {
+        //dekodujemo sve kljuceve
+        $row->kor_id = \UUID::decodeId($row->kor_id);
+        $row->kor_tipkor_id = \UUID::decodeId($row->kor_tipkor_id);
+        return $row;  
+    }
+    
+    //dekodovanje celog niza objekata
+      public function decodeArray($finds)
+    {
+        //dekodujemo sve kljuceve
+        for ($i = 0; $i < count($finds); $i++) {
+            $finds[$i] = $this->decodeRecord($finds[$i]);
+        }
+        return $finds;  
+    }
+   
 }
