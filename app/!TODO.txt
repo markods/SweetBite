@@ -14,6 +14,9 @@ GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GU
 
 
 ====== PHP ======
++ u kontrolerima, svi pristupi bazi podataka bi trebalo da budu atomicni -- kroz transakcije
+   + transakcija se roll back-uje u finally ako nije uspela kompletno!
+
 + koristiti require("...") i require_once("...") umesto include("...") i include_once("...")
    + require ce da baci gresku ako fajl ne postoji! (sto i zelimo)
    + include ne baca gresku vec tiho nastavlja da radi
