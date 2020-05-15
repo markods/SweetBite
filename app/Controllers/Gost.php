@@ -12,16 +12,16 @@ class Gost extends BaseController
     
     public function login()
     {
-        $this->response->setContentType('application/json')
-                       ->setJSON(json_encode("a"))
-                       ->send();
     }
     
     public function register()
     {
-        $this->response->setContentType('application/json')
-                       ->setJSON(json_encode("a"))
-                       ->send();
+        $arr = $this->receiveAJAX();
+        
+        $arr['hey'] = 'yeh';
+        $arr['heyy'] = 'yyeh';
+
+        $this->sendAJAX($arr);
     }
 
 }

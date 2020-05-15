@@ -43,8 +43,17 @@ class BaseController extends Controller
             
             // pokretanje sesije
             $this->session = \Config\Services::session();
-            // alternativni nacin
-            $this->session = session();
 	}
 
+        // get an associative array from the client side AJAX request
+        protected function receiveAJAX()
+        {
+            return $this->request->getJSON(true);
+        }
+        
+        // send an AJAX response to the client
+        protected function sendAJAX($data)
+        {
+            $this->response->setJSON(json_encode($data))->send();
+        }
 }
