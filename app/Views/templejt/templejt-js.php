@@ -2,6 +2,21 @@
 <script>
 
 $(document).ready(function () {
+    
+    // ====== button events ======
+    $("#register").on('click', function() {
+        
+        let request = {
+            a: "1"
+        };
+        
+        $.post( <?php echo '"'.base_url('Gost/register').'"'; ?>, request, function( response ) {
+            alert(response);
+        }, "json");
+    });
+    
+    
+    // ====== template page customization ======
     $("#sidebar").mCustomScrollbar({
         theme: "minimal-dark",
         scrollEasing: "easeInOut",

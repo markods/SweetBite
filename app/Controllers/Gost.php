@@ -9,5 +9,19 @@ class Gost extends BaseController
         // return view('welcome_message.php');
         return view('templejt/templejt-html.php');
     }
+    
+    public function login()
+    {
+        $this->response->setContentType('application/json')
+                       ->setJSON(json_encode("a"))
+                       ->send();
+    }
+    
+    public function register()
+    {
+        $this->response->setContentType('application/json')
+                       ->setJSON(json_encode("a"))
+                       ->send();
+    }
 
 }
