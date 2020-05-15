@@ -45,15 +45,25 @@ class BaseController extends Controller
             $this->session = \Config\Services::session();
 	}
 
-        // get an associative array from the client side AJAX request
+        /**
+         * decode the JSON received data from the AJAX request
+         * return it as an associative array
+         * 
+         * @return associative array
+         */
         protected function receiveAJAX()
         {
             return $this->request->getJSON(true);
         }
         
-        // send an AJAX response to the client
+        /*
+         * encode the given data as a JSON object
+         * send an AJAX response to the client
+         * 
+         * @param data -- the data that will be sent as the response
+         */
         protected function sendAJAX($data)
         {
-            $this->response->setJSON(json_encode($data))->send();
+            $this->response->setJSON($data)->send();
         }
 }
