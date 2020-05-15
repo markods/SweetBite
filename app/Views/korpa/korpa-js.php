@@ -29,16 +29,16 @@ function addAmount(name, baseAmount, basePrice) {
         var inner = "\
             <tr id=" + newName + ">\
                 <td rowspan=2>\
-                    <img src='assets/basket_discard.svg' alt='.' onclick=removeFromBasket('" + name + "')>\
+                    <img src='../../../public/assets/icons/basket_discard.svg' alt='.' onclick=removeFromBasket('" + name + "')>\
                 </td>\
                 <td>" + name + "</td>\
                 <td></td>\
                 <td>\
-                    <img src='assets/basket_sub.svg' alt='-' onclick=subAmount('" + name + "'," + baseAmount + "," + basePrice + ")>\
+                    <img src='../../../public/assets/icons/basket_sub.svg' alt='-' onclick=subAmount('" + name + "'," + baseAmount + "," + basePrice + ")>\
                 </td>\
                 <td class=amount_ordered> 1 </td>\
                 <td>\
-                    <img src='assets/basket_add.svg' alt='+' onclick=addAmount('" + name + "'," + baseAmount + "," + basePrice + ")>\
+                    <img src='../../../public/assets/icons/basket_add.svg' alt='+' onclick=addAmount('" + name + "'," + baseAmount + "," + basePrice + ")>\
                 </td>\
             </tr>\
             <tr id=" + newNameAmount + ">\

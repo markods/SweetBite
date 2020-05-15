@@ -103,11 +103,11 @@ function statusOptions(stat) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";
     switch (stat) {
-        case 0: str = "<img src='assets/orderClient_waiting.svg' alt='?' onhover=showStatus(0)/>"; break;
-        case 1: str = "<img src='assets/orderClient_acepted.svg' alt='+' onhover=showStatus(1)/>"; break;
-        case 2: str = "<img src='assets/orderClient_rejected.svg' alt='-' onhover=showStatus(2)/>"; break;
-        case 3: str = "<img src='assets/orderClient_done.svg' alt='!' onhover=showStatus(3)/>"; break;
-        case 4: str = "<img src='assets/orderClient_picked.svg' alt='.' onhover=showStatus(4)/>"; break;
+        case 0: str = "<img src='../../../public/assets/icons/orderClient_waiting.svg' alt='?' onhover=showStatus(0)/>"; break;
+        case 1: str = "<img src='../../../public/assets/icons/orderClient_acepted.svg' alt='+' onhover=showStatus(1)/>"; break;
+        case 2: str = "<img src='../../../public/assets/icons/orderClient_rejected.svg' alt='-' onhover=showStatus(2)/>"; break;
+        case 3: str = "<img src='../../../public/assets/icons/orderClient_done.svg' alt='!' onhover=showStatus(3)/>"; break;
+        case 4: str = "<img src='../../../public/assets/icons/orderClient_picked.svg' alt='.' onhover=showStatus(4)/>"; break;
     }
     return str;
 }

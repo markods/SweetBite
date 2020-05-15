@@ -109,20 +109,20 @@ function statusOptions(stat, id) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";
     switch (stat) {
-        case 0: str = "<img src='assets/orderManager_reject.svg' alt='-' onclick=declineOrder(" + id + ")>\
-                       <img src='assets/orderManager_acept.svg' alt='+' onclick=acceptOrder(" + id + ")>\
+        case 0: str = "<img src='../../../public/assets/icons/orderManager_reject.svg' alt='-' onclick=declineOrder(" + id + ")>\
+                       <img src='../../../public/assets/icons/orderManager_acept.svg' alt='+' onclick=acceptOrder(" + id + ")>\
                     "; 
                 break;
-        case 1: str = "<img src='assets/orderManager_reject.svg' alt='-'/>\
-                       <img src='assets/orderManager_acepted.svg' alt='++'/>\
+        case 1: str = "<img src='../../../public/assets/icons/orderManager_reject.svg' alt='-'/>\
+                       <img src='../../../public/assets/icons/orderManager_acepted.svg' alt='++'/>\
                     "; 
                 break;
-        case 2: str = "<img src='assets/orderManager_rejected.svg' alt='--'/>\
-                       <img src='assets/orderManager_acept.svg' alt='+'/>\
+        case 2: str = "<img src='../../../public/assets/icons/orderManager_rejected.svg' alt='--'/>\
+                       <img src='../../../public/assets/icons/orderManager_acept.svg' alt='+'/>\
                     "; 
                 break;
-        case 3: str = "<img src='assets/orderManager_done.svg' alt='!' onclick=archive(" + id + ")>"; break;
-        case 4: str = "<img src='assets/orderManager_picked.svg' alt='.'/>"
+        case 3: str = "<img src='../../../public/assets/icons/orderManager_done.svg' alt='!' onclick=archive(" + id + ")>"; break;
+        case 4: str = "<img src='../../../public/assets/icons/orderManager_picked.svg' alt='.'/>"
     }
     return str;
 }

@@ -28,7 +28,7 @@ function addUser(priv, object){
                 <td class=mail>" + mail + "</td>\
                 <td class=date>" + dateString(date) + "</td>\
                 <td class=priv>" + showPrivilegy(id, priv) + "</td>\
-                <td class=remove><img src='assets/administration_discard.svg' alt='-' onclick='removeAccount(" + id + ")'/></td>\
+                <td class=remove><img src='../../../public/assets/icons/administration_discard.svg' alt='-' onclick='removeAccount(" + id + ")'/></td>\
             </tr>\
         </table>\
     "
@@ -58,18 +58,18 @@ function showPrivilegy(id, priv) {
     //proveriti kako funkcionise menjanje privilegija!
     var str = "";
     switch (priv) {
-        case 0: str = "<img src='assets/administration_admin.svg' alt='a' onclick=removePrivilegy(" + id + ")>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
-        case 1: str = "<img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
-                        <img src='assets/administration_manager.svg' alt='m' onclick=removePrivilegy(" + id + ")>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
-        case 2: str = "<img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
-                        <img src='assets/administration_cook.svg' alt='k' onclick=removePrivilegy(" + id + ")>"; break;
-        case 3: str = "<img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
-                        <img src='assets/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
+        case 0: str = "<img src='../../../public/assets/icons/administration_admin.svg' alt='a' onclick=removePrivilegy(" + id + ")>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
+        case 1: str = "<img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
+                        <img src='../../../public/assets/icons/administration_manager.svg' alt='m' onclick=removePrivilegy(" + id + ")>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
+        case 2: str = "<img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
+                        <img src='../../../public/assets/icons/administration_cook.svg' alt='k' onclick=removePrivilegy(" + id + ")>"; break;
+        case 3: str = "<img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",0)>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",1)>\
+                        <img src='../../../public/assets/icons/administration_nothing.svg' alt='o' onclick=setPrivilegy(" + id + ",2)>"; break;
     }
     return str;
 }
