@@ -1,0 +1,85 @@
+_____________________________________________________________________________________________________
+GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES
+_____________________________________________________________________________________________________
+GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES
+_____________________________________________________________________________________________________
+GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES...GUIDELINES
+
+
+====== GENERALNO =======
++ pisati na engleskom ili srpskom, svejedno je
+   + neke stvari su intuitivne na srpskom a neke na engleskom
+   + trenutno nije mnogo bitno, ali ubuduce bi trebalo da izaberemo jezik (verovatno srpski)
+
+
+
+====== PHP ======
++ koristiti require("...") i require_once("...") umesto include("...") i include_once("...")
+   + require ce da baci gresku ako fajl ne postoji! (sto i zelimo)
+   + include ne baca gresku vec tiho nastavlja da radi
+
++ pisati phpdoc komentare (/** ... */) iznad svojih funkcija i klasa
++ pisati obicne komentare (//...  i  /*...*/) unutar funkcija
+
+
+
+====== JAVASCRIPT ======
++ definisati promenljive sa let!
+   + var je mnogo neintuitivan i moze da dovede do bagova koji se tesko pronalaze
+   + var se vezuje za funkcije! (funkcije su kao objekti u js-u)
+   + let se vezuje sa blokove (viticaste zagrade {}) -- ima intuitivan blokovski scope
+
++ sav javascript kod staviti u $(document).ready(function() {...});
+   + jedino smo tako sigurni da se nece pozivati funkcije nad (DOM) objektima koji nisu jos inicijalizovani
+
++ koristiti $('...').append(...) umesto ....innerHTML
+   + innerHTML zezne layout i zbog toga trazi invalidaciju sve svoje dece (dosta sporo)
+   + append samo doda DOM cvor kao poslednje dete drugog cvora u DOM stablo (nema invalidacije dece)
+
+
+
+====== HTML ======
++ ne stavljati style="..." u html tagove -- stilizovati u odvojenom css fajlu
+
++ ne ugradjivati javascript i css unutar html-a
+   + to cemo raditi iz php-a sa require_once("...")
+   + primer na vrhu fajla 'templejt-html.css'
+
+
+
+====== CSS ======
++ ne treba hardkodirati boje -- koristiti css "promenljive": var(--moja-promenljiva)
+   + primer koriscenja u fajlu 'template-css.php'
+
+
+
+
+
+
+_____________________________________________________________________________________________________
+TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TOD
+_____________________________________________________________________________________________________
+TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TOD
+_____________________________________________________________________________________________________
+TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TOD
+
+
+====== GENERALNO ======
++ prebaciti svoj .js i .css kod iz foldera !migrate u odgovarajuci folder u App/Views/
+   + jedan folder za jednu funkcionalnost
+   + samo folderi 
+
++ modele imenovati isto kao u bazi, samo sa velikim pocetnim slovom
+   + primeri: Tipjela, Por, ...
+
++ ukloniti stvari koje su pod komentarom a sigurno ne rade (ili nisu radile)
+
+
+
+
+
+
+
+
+
+
