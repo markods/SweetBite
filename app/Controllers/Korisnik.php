@@ -7,7 +7,7 @@ class Korisnik extends BaseController
 {
     public function index()
     {
-        return view('naslovna');
+        return view('test');
     }
     
     public function registracija(){
@@ -113,32 +113,35 @@ class Korisnik extends BaseController
         //id tipa korsinika bi trebalo da bude vrednost od 0-3
         $tip_korisnika =\UUID::decodeId($korisnik[0]->kor_tipkor_id);
         
-       
+        //dohvatanje kljuca i naziva ukusa
+        $tipModel = new TipKorisnikModel();
+        
+        $tip_korisnika = $tipModel->dohvatiNazivTipaKorisnika($tip_korisnika);
         
         //Tip korisnika se dohvata iz baze, razlicit je za svaki tip,
         // treba se dogovoriti koja vrednost predstalvja koji tip korisnika!!!
         switch ($tip_korisnika) {
             
-            case '0':   
+            case 'musterija':   
                         $this->session->set('email',$email);
                         $this->session->set('password', $password);
                         $this->session->set('tip_korisnika', $tip_korisnika);
                         return redirect()->to(site_url("../public/Korisnik/index"));
                       
-            case '1': 
+            case 'kuvar': 
                         $this->session->set('email',$email);
                         $this->session->set('password', $password);
                         $this->session->set('tip_korisnika', $tip_korisnika);
                         return redirect()->to(site_url("../public/Korisnik/index"));
                       
                   
-            case '2': 
+            case 'menadzer': 
                         $this->session->set('email',$email);
                         $this->session->set('password', $password);
                         $this->session->set('tip_korisnika', $tip_korisnika);
                         return redirect()->to(site_url("../public/Korisnik/index"));
                       
-            case '3': 
+            case 'administrator': 
                         $this->session->set('email',$email);
                         $this->session->set('password', $password);
                         $this->session->set('tip_korisnika', $tip_korisnika);
@@ -149,7 +152,7 @@ class Korisnik extends BaseController
         //dohvatiKorisnikaZaLogovanje
         //kor_pwdhash i kor_email        
     }
-    }
+}
 
 
 
