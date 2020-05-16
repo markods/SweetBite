@@ -26,6 +26,10 @@ class TipJelaModel extends Model {
             $naziv = $this->find($id);
             return $naziv->tipjela_naziv;
         }
+        public function dohvIdPoNazivu($naziv) {
+            $tip_jela = $this->where('tipjela_naziv', $naziv);
+            return \UUID::decodeId($tip_jela[0]->tipjela_id);
+        }
          public function insert($data=NULL, $returnID=true) {
              $id = \UUID::generateId();        
              $data['tipjela_id'] = $id;

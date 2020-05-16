@@ -24,7 +24,7 @@ class JeloModel extends Model
         protected $validationRules    = [
                         'jelo_naziv' => 'trim|required',
                         'jelo_opis' => 'trim|required',
-                        'jelo_slika'   => 'required',
+                        //'jelo_slika'   => 'required',
                         'jelo_cena' => 'required',
                         'jelo_masa' => 'required',
                         'jelo_tipjela_id' => 'required',

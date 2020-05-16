@@ -9,19 +9,23 @@ class UkusModel extends Model {
         protected $returnType = 'object';
         protected $allowedFields = ['ukus_id', 'ukus_naziv'];
         
-       protected $validationRules    = [
+        protected $validationRules    = [
                         'ukus_naziv' => 'trim|required|is_unique[ukus.ukus_naziv]'
            ];
-       protected $validationMessages = ['ukus_naziv' => ['required' => 'Naziv ukusa je obavezan!']];
-       protected $skipValidation = false;
+        protected $validationMessages = ['ukus_naziv' => ['required' => 'Naziv ukusa je obavezan!']];
+        protected $skipValidation = false;
        
        //dohvata se tip, pa se u kontroleru dohvata naziv;
-       public function dohvUkus($id) {
+        public function dohvUkus($id) {
             $id = \UUID::codeId($id);
             return $this->find($id);
-       }
-       //direktno dohvata naziv
-
+        }
+       //dohvata id po nazivu
+        public function dohvIdPoNazivu($naziv) {
+            $ukus = $this->where('ukus_naziv', $naziv);
+            return \UUID::decodeId($ukus[0]->ukus_id);
+        }
+        
         public function insert($data=NULL, $returnID=true) {
             $id = \UUID::generateId();        
             $data['ukus_id'] = $id;

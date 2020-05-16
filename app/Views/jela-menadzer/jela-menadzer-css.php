@@ -30,4 +30,19 @@
   opacity: 1;
 }
 
+
+#content {
+  flex: 1 0 auto;
+}
+
+
+.dish_wrapper {
+    width:45%;
+    text-align:center;
+    display:inline-block;
+    margin-right:35px;
+    margin-bottom: 7px;
+}
+
+
 </style>

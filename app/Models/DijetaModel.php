@@ -10,20 +10,28 @@ class DijetaModel extends Model {
         protected $allowedFields = ['dijeta_id', 'dijeta_naziv']; 
         protected $validationRules    = [
                         'dijeta_naziv' => 'trim|required|is_unique[dijeta.dijeta_naziv]'];
-       protected $validationMessages = ['dijeta_naziv' => ['required' => 'Naziv dijete je obavezan!']];
-       protected $skipValidation = false;
+        protected $validationMessages = ['dijeta_naziv' => ['required' => 'Naziv dijete je obavezan!']];
+        protected $skipValidation = false;
        
        //dohvata se tip, pa se u kontroleru dohvata naziv;
-       public function dohvDijetu($id) {
+        public function dohvDijetu($id) {
             $id = \UUID::codeId($id);
             return $this->find($id);
-       }
+        }
        //direktno dohvata naziv
-       public function dohvNazivDijete($id) {
+        public function dohvNazivDijete($id) {
            $id = \UUID::codeId($id);
            $naziv = $this->find($id);
            return $naziv->dijeta_naziv;
-       }
+        }
+       
+       
+        public function dohvIdPoNazivu($naziv) {
+            $dijeta = $this->where('dijeta_naziv', $naziv);
+            return \UUID::decodeId($dijeta[0]->dijeta_id);
+        }
+                
+
         public function insert($data=NULL, $returnID=true) {
             $id = \UUID::generateId();        
             $data['dijeta_id'] = $id;

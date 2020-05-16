@@ -24,7 +24,7 @@
         require_once('templejt-js.php');
         
         // js insertion points for #sidebar and #content
-        
+
     ?>
 </head>
 
