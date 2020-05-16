@@ -27,7 +27,7 @@ class DijetaModel extends Model {
        
        
         public function dohvIdPoNazivu($naziv) {
-            $dijeta = $this->where('dijeta_naziv', $naziv);
+            $dijeta = $this->where('dijeta_naziv', $naziv)->findAll();
             return \UUID::decodeId($dijeta[0]->dijeta_id);
         }
                 

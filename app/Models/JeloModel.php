@@ -78,9 +78,7 @@ class JeloModel extends Model
         }
         return \UUID::decodeId($id);
         }
-        
-
-        
+       
         public function update($id=NULL, $data=NULL):bool {
             if ($id != null) {
             $id = \UUID::codeId($id);           

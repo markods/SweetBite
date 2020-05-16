@@ -22,7 +22,7 @@ class UkusModel extends Model {
         }
        //dohvata id po nazivu
         public function dohvIdPoNazivu($naziv) {
-            $ukus = $this->where('ukus_naziv', $naziv);
+            $ukus = $this->where('ukus_naziv', $naziv)->findAll();
             return \UUID::decodeId($ukus[0]->ukus_id);
         }
         

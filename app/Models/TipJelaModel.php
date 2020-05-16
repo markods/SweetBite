@@ -27,7 +27,7 @@ class TipJelaModel extends Model {
             return $naziv->tipjela_naziv;
         }
         public function dohvIdPoNazivu($naziv) {
-            $tip_jela = $this->where('tipjela_naziv', $naziv);
+            $tip_jela = $this->where('tipjela_naziv', $naziv)->findAll();
             return \UUID::decodeId($tip_jela[0]->tipjela_id);
         }
          public function insert($data=NULL, $returnID=true) {

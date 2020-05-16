@@ -24,13 +24,13 @@
         require_once('templejt-js.php');
         
         // js insertion points for #sidebar and #content
-
+        
     ?>
 </head>
 
 
 <!-- body -->
-<body class="d-flex flex-column">
+<body class="d-flex flex-column" onload="menjanje()">
 
     <!-- navbar -->
     <div id="navbar-container" class="nav navbar-nav noselect">
