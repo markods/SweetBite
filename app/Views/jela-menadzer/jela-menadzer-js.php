@@ -42,7 +42,7 @@ function menjanje(obj) {
         str+= '</div>';
                 
         str+='<div class = "col-sm-2 text-right" >';
-        str+='<img src = "assets/baseline_done_black_18dp.png" width = "20px" height = "20px" onclick="potvrdi_promenu()" style="margin-top: 10px; margin-right: 5px;">';   
+        str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" onclick="potvrdi_promenu()" style="margin-top: 10px; margin-right: 5px;">';   
         str+='</div>';
         str+='</div>';
         str+='<div class = "row" style = "background-color:lightblue;" >';
@@ -75,14 +75,14 @@ function menjanje(obj) {
         str+='</select>';
         str+='</div>';
         str+='<div class= "col-sm-2 text-right">';
-        str+='<img src = "assets/baseline_visibility_black_18dp.png" width = "20px" height = "20px" style="margin-right:5px;">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" width = "20px" height = "20px" style="margin-right:5px;">';
         str+='</div>';                     
         str+='</div>';
         str+='<div class = "row" style = "background-color:lightblue;" >';
         str+='<div class = "col-sm-10">';
         str+='</div>';
         str+='<div class = "col-sm-2 text-right">';
-        str+='<img src = "assets/baseline_delete_black_18dp.png" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
+        str+='<img src = "<?php echo base_url("assets/icons/trash.svg");?>" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
         str+='</div>';
         str+='</div>' ;
         str+='<div class = "row" style = "background-color:lightblue;" >';
@@ -139,7 +139,7 @@ function menjanje(obj) {
     str+='<input  type = "text" name = "naziv_jela" placeholder ="'+object.naziv_jela+'"style = margin-top:4px; margin-bottom:4px; height: 25px;">';
     str+= '</div>';              
     str+='<div class = "col-sm-2 text-right">';
-    str+='<img src = "assets/baseline_done_black_18dp.png" width = "20px" height = "20px" onclick="potvrdi_promenu()" style="margin-top: 10px; margin-right: 5px;">';   
+    str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" onclick="potvrdi_promenu()" style="margin-top: 10px; margin-right: 5px;">';   
     str+='</div>';
     str+='</div>';
     str+='<div class = "row" style = "background-color:lightblue;" >';
@@ -173,16 +173,16 @@ function menjanje(obj) {
     str+='</div>';
     str+='<div class= "col-sm-2 text-right">';
     if(object.status=="dostupno")
-        str+='<img src = "assets/baseline_visibility_black_18dp.png" width = "20px" height = "20px" style="margin-right:5px;" onclick = "hide_dish()">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" width = "20px" height = "20px" style="margin-right:5px;" onclick = "hide_dish()">';
     else
-        str+='<img src = "assets/baseline_visibility_off_black_18dp.png" width = "20px" height = "20px" style="margin-right:5px;" onclick = "show_dish()">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-closed.svg");?>.png" width = "20px" height = "20px" style="margin-right:5px;" onclick = "show_dish()">';
     str+='</div>';                     
     str+='</div>';
     str+='<div class = "row" style = "background-color:lightblue;" >';
     str+='<div class = "col-sm-10">';
     str+='</div>';
     str+='<div class = "col-sm-2 text-right">';
-    str+='<img src = "assets/baseline_delete_black_18dp.png" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
+    str+='<img src = "<?php echo base_url("assets/icons/trash.svg");?>" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
     str+='</div>';
     str+='</div>' ;
     str+='<div class = "row" style = "background-color:lightblue;" >';
