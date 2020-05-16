@@ -1,18 +1,20 @@
 <style>
-
-/*------Administration----*/
+/* 2020-05-15 v0.3 Jovana Pavic 2017 */
+/*--------------Nalozi---------------*/
 
 .contA {
   text-align: center;
   color: black;
 }
-
-.contA p {
-  color: black;
-}
+  .contA p {
+    color: black;
+  }
+  .contA img {
+    height: 15px;
+  }
 
 table.adm {
-  background-color: #8598e7;
+  background-color: var(--secondary-color);
   border: 1px solid black;
   width: inherit;
 }
@@ -20,21 +22,18 @@ table.adm {
 .admin {
   margin-bottom: 10px;
 }
-
-.menag {
+.manag {
   margin-bottom: 10px;
 }
-
 .cook {
   margin-bottom: 10px;
 }
-
 .buyer {
   margin-bottom: 10px;
 }
 
 .tabela td,
-th {
+.tabela th {
   text-align: left;
   padding-left: 25px;
 }
