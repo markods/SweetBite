@@ -1,6 +1,6 @@
 <style>
-/* 2020-05-15 v0.3 Jovana Pavic 2017 */
-/*--------------Nalozi---------------*/
+/* 2020-05-15 v0.3 Jovana Pavic 2017/0099 */
+/*----------------Nalozi------------------*/
 
 .contA {
   text-align: center;

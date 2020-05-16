@@ -1,15 +1,8 @@
 <script>
-// 2020-05-15 v0.3 Jovana Pavic 2017
+// 2020-05-15 v0.3 Jovana Pavic 2017/0099
 
 //odgovaralo bi kada bi se umesto tipkor_id slao
 //parsiran taj podatak u 0, 1, 2 ili 3 (parametar priv)
-
-/*
- * verzija 03 - povezana sa php-om
- * 
- * i dalje fali koriscenje JSON objekata
- * 
- */
 
 //----------------------------------------------- 
 /** .ready(function(){...})
@@ -82,7 +75,7 @@ $(document).ready(function(){
     .fail(function() {
         alert("Can't access data, server is down");
     });
-});   //kraj function()
+});
         
 //-----------------------------------------------  
 /** function showUser(object){...}
