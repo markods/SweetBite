@@ -34,19 +34,19 @@
         <div class='container'>
         <div class='row'>
             <div class='col-sm-2'>
-                 <img src=<?php echo '"'.base_url("assets/icons/sortiraj_rastuce.png").'"'; ?> alt="sortiraj_rasutce" width='25px'>
+                 <img src=<?php echo '"'.base_url("assets/icons/sort_ascending.svg").'"'; ?> alt="sortiraj_rasutce" width='25px'>
             </div>
             <div class='col-sm-2'>
-                 <img src=<?php echo '"'.base_url("assets/icons/sortiraj_opadajuce.png").'"'; ?> alt="sortiraj_opadajuce" width='25px'>
+                 <img src=<?php echo '"'.base_url("assets/icons/sort_descending.svg").'"'; ?> alt="sortiraj_opadajuce" width='25px'>
             </div>
                  <div class='col-sm-2'> 
-                      <img src=<?php echo '"'.base_url("assets/icons/sortiraj_alfabetski.png").'"'; ?> alt="sortiraj_alfabetski" width='25px'>
+                      <img src=<?php echo '"'.base_url("assets/icons/sort_alpha.svg").'"'; ?> alt="sortiraj_alfabetski" width='25px'>
                  </div>
             <div class='col-sm-2'>
-                 <img src=<?php echo '"'.base_url("assets/icons/sortiraj_cena.png").'"'; ?> alt="sortiraj_cena" width='25px'>
+                 <img src=<?php echo '"'.base_url("assets/icons/price.svg").'"'; ?> alt="sortiraj_cena" width='25px'>
                </div>
             <div class='col-sm-4'>
-               <img src=<?php echo '"'.base_url("assets/icons/sortiraj_favorite.png").'"'; ?> alt="sortiraj_favorite" width='25px'>  
+               <img src=<?php echo '"'.base_url("assets/icons/heart.svg").'"'; ?> alt="sortiraj_favorite" width='25px'>  
             </div>
         </div>
         </div> 
