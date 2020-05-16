@@ -30,7 +30,7 @@
 
 
 <!-- body -->
-<body class="d-flex flex-column" onload="menjanje()">
+<body class="d-flex flex-column">
 
     <!-- navbar -->
     <div id="navbar-container" class="nav navbar-nav noselect">

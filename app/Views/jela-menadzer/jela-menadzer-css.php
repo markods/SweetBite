@@ -24,6 +24,7 @@
 
 .elem {
   opacity: 0;
+  
 }
 
 .elem:hover {
@@ -37,11 +38,22 @@
 
 
 .dish_wrapper {
+    padding-left:5px;
     width:45%;
     text-align:center;
     display:inline-block;
     margin-right:35px;
     margin-bottom: 7px;
+/*    background-image: url(<?php echo base_url("assets/icons/cevapi.jpg");?>);*/
+    background-size: cover;
+    background-position:center;
+    background-color:#53cf8f;
+/*    background-repeat:no-repeat;*/
+}
+
+.cena_i_masa {
+    padding-right:5px;
+    
 }
 
 

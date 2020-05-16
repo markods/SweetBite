@@ -44,7 +44,9 @@ class JeloModel extends Model
         protected $skipValidation = false;
         
         public function dohvSve() {
-            return $this->findAll();
+            $jela = $this->findAll();
+            $jela = $this->decodeArray($jela);
+            return $jela;
         }
 
         public function dohvPoId($id) {
@@ -53,7 +55,9 @@ class JeloModel extends Model
         }
 
         public function dohvPoImenu($naziv_jela) {
-            return $this->where('jelo_naziv', $naziv_jela)->findAll();
+            $jela = $this->where('jelo_naziv', $naziv_jela)->findAll();
+            $jela = $this->decodeArray($jela);
+            return $jela;
         }
 
         public function insert($data=NULL, $returnID=true) {
@@ -111,6 +115,23 @@ class JeloModel extends Model
             return parent::delete($id, $purge);
         }
         
+        public function decodeArray($found) {
+            for ($i = 0; $i < count($found); $i++) {
+                $found[$i] = $this->decodeRecord($found[$i]);
+            }
+            return $found;  
+        }
+        
+        
+         public function decodeRecord($row) {
+           
+            $row->jelo_id = \UUID::decodeId($row->jelo_id);
+            $row->jelo_tipjela_id = \UUID::decodeId($row->jelo_tipjela_id);
+            $row->jelo_ukus_id = \UUID::decodeId($row->jelo_ukus_id);
+            $row->jelo_dijeta_id = \UUID::decodeId($row->jelo_dijeta_id);
+            return $row;  
+        }
+
         
         public function pretragaPoParametrima() {
             
