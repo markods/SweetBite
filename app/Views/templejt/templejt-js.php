@@ -51,15 +51,12 @@ $(document).ready(function() {
         $.post(<?php echo '"'.base_url('Gost/register').'"'; ?>, JSON.stringify(request), "json")
         // when the client receives the AJAX response, this function gets called
         .done(function( response ) {
-            
-            // TODO
-            alert(response.kor_pwd);
-            alert(response.heyy);
+            alert("Registered successfully.");
         })
         // if the response times out or fails (due to some error), this function gets called
         .fail(function() {
             // alert the user that the request has failed (there should be a better way, but this is okay for the time being)
-            alert("Failed to register");
+            alert("Failed to register.");
         });
     });
     

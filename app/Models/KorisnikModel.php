@@ -92,6 +92,12 @@ class KorisnikModel extends Model
        $id=\UUID::codeId($id);
         return $this->find($id);   
     }
+   
+   // proverava da li korisnik vec postoji, ako postoji vraca ga
+   public function dohvatiKorisnikaPrekoEmaila($email){
+       $korisnik = $this->where('kor_email', $email)->find();
+       return $korisnik;
+   }
 
    //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
@@ -103,12 +109,23 @@ class KorisnikModel extends Model
      
    //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao RADI
    public function daLiPostojiEmail($email){
-       $korisnik= $this->where('kor_email',$email)->findAll();
-       $korisnik=$this->decodeArray($korisnik);
-       return $korisnik;
+       $korisnik = $this->where('kor_email', $email)->find();
+       $korisnik = $this->decode($korisnik);
+       return isset($korisnik);
    }
    
-    //sluzi za dekodovanje, jer imamo strane kljuceve
+   // sluzi nam za funkciju registracija, za proveru da li postoji vec sifra u bazi
+   public function daLiPostojiPassword($password){
+       // password hash se kodira iz stringa u binarni oblik!
+       // (da bi mogao da se sacuva u bazi u koloni koja je tipa binary(16)!)
+       $pwdhash = \UUID::codeId($password);
+       
+       $korisnik = $this->where('kor_pwd', $pwdhash)->find();
+       $korisnik = $this->decode($korisnik);
+       return isset($korisnik);
+   }
+
+   //sluzi za dekodovanje, jer imamo strane kljuceve
       public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
