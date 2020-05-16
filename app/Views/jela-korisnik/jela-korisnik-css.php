@@ -1,6 +1,6 @@
-/**Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika*/ 
-
 <style>
+/* Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika */
+
 .box:hover {
   background: url(prikazjela/jabuka.jpg);
   filter: blur(4px);
