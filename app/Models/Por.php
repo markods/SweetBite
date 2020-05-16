@@ -69,8 +69,10 @@ class Por extends Model
     //dobro za razvojnu fazu
     
     //-----------------------------------------------    
+    /** public function insert($data=NULL,$returnID=true){...}
     //ako je neuspesno vraca false
     //ako je uspesno vraca id
+    */
     
     public function insert($data=NULL, $returnID=true) 
     {
@@ -94,8 +96,10 @@ class Por extends Model
     }
     
     //-----------------------------------------------
+    /**public function update($id=NULL,$data=NULL):bool{...}
     //ako je uspesno vraca true, ako nije vraca false
-        
+    */
+    
     public function update($id=NULL, $data=NULL):bool
     {
         if ($id != null) {
@@ -119,6 +123,10 @@ class Por extends Model
     }
     
     //-----------------------------------------------
+    /** public function delete($id=NULL,$purge=false){...} 
+    //dozvoljeno je brisanje, ali je potrebno prebaciti 
+    //kljuc u odgovarajuci format
+    */
     
     public function delete($id=NULL, $purge=false) 
     {
@@ -129,8 +137,10 @@ class Por extends Model
     }
     
     //-----------------------------------------------
+    /** public function porudzbineKorisnika($kor_id){..}
     //Dohvata sve porudzbine korisnika sa zadatim id-em
     //Potrebnoo za prikaz porudzbina korisnika
+    */
     
     public function porudzbineKorisnika($kor_id)
     {
@@ -141,10 +151,12 @@ class Por extends Model
     }
     
     //-----------------------------------------------
+    /** public function filtriranePorudzbineKorisnika($kor_id,$status){...}
     //Dohvata neke porudzbine korisnika sa zadatim id-em
     //Potrebno za prikaz filtriranih porudzbina korisnika 
     //status: 0-na cekanju, 1-prihvacene, 2-odbijena, 
     //3-gotova, 4-pokupljena    
+    */
     
     public function filtriranePorudzbineKorisnika($kor_id, $status)
     {
@@ -180,9 +192,11 @@ class Por extends Model
     }
     
     //-----------------------------------------------
+    /** public function donetaOdluka($por_id,$odluka){...}
     //Upisuje datum odluke i donesenu odluku
     //u porudzbinu sa datim id-em
     //odluka: 0-prihvacena, 1-odbijena
+    */
     
     public function donetaOdluka($por_id, $odluka)
     {
@@ -193,7 +207,9 @@ class Por extends Model
     }    
     
     //------------------------------------------------
+    /** public function dohvati($por_id){...}
     //Dohvata porudzbinu sa datim id-em
+    */
     
     public function dohvati($por_id)    
     {
@@ -204,7 +220,9 @@ class Por extends Model
     }
     
     //------------------------------------------------
+    /**public function decodeRecord($row){...}
     //Dekodovanje jednog rekorda
+    */
     
     public function decodeRecord($row)
     {
@@ -216,7 +234,9 @@ class Por extends Model
     }
     
     //------------------------------------------------
+    /** public function decodeArray($finds){...}
     //Dekodovanje nizova podataka
+    */
     
     public function decodeArray($finds)
     {

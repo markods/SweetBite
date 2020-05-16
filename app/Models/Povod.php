@@ -39,8 +39,10 @@ class Povod extends Model
     //preporucljivo koristiti insert i update jer insert vraca id
     
     //-----------------------------------------------    
+    /** public function insert($data=NULL,$returnID=true){...}
     //ako je neuspesno vraca false
     //ako je uspesno vraca id
+    */
     
     public function insert($data=NULL, $returnID=true) 
     {
@@ -58,7 +60,9 @@ class Povod extends Model
     }
     
     //-----------------------------------------------
+    /** public function update($id=NULL,$data=NULL):bool{...}
     //ako je uspesno vraca true, ako nije vraca false
+    */
     
     public function update($id=NULL, $data=NULL):bool
     {
@@ -77,8 +81,10 @@ class Povod extends Model
     }
     
     //-----------------------------------------------
+    /** public function delete($id=NULL,$purge=false){...}
     //ako je zabranjeno brisanje iz tabele    
     //u svakom slucaju baca gresku
+    */
     
     public function delete($id=NULL, $purge=false) 
     {
@@ -86,10 +92,12 @@ class Povod extends Model
     }
 
     //-----------------------------------------------
+    /** public function povodId($povod_opis){...}
     //dohvata id povoda na osnovu opisa    
     //ako se taj string nalazi u vise elemenata
     //vraca tacno onaj koji je trazen
     //ako ne postoji red sa tim opisom vraca null
+    */
     
     public function povodId($povod_opis)
     {
@@ -104,7 +112,9 @@ class Povod extends Model
     }
     
     //------------------------------------------------
+    /** public function dohvati($povod_id){...} 
     //Dohvata povod sa datim id-em
+    */
     
     public function dohvati($povod_id)    
     {
