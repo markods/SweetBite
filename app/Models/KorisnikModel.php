@@ -90,27 +90,28 @@ class KorisnikModel extends Model
    //fja za dohvatanje korisnika na osnovu primarnog kljuca, podrazumevano prima dekodovanu vrednost
     public function dohvatiKorisnika($id){
        $id=\UUID::codeId($id);
-        return $this->find($id);   
+       $korisnik = $this->find($id);   
+       return isset($korisnik) ? $korisnik[0] : null;
     }
    
    // proverava da li korisnik vec postoji, ako postoji vraca ga
    public function dohvatiKorisnikaPrekoEmaila($email){
        $korisnik = $this->where('kor_email', $email)->find();
-       return $korisnik;
+       return isset($korisnik) ? $korisnik[0] : null;
    }
 
    //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
-       $tipkor_id=\UUID::codeId($tipkor_id);
-        $korisnici= $this->where('kor_tipkor_id',$tipkor_id)->findAll();
-        $korisnici=$this->decodeArray($korisnici);
+        $tipkor_id = \UUID::codeId($tipkor_id);
+        $korisnici = $this->where('kor_tipkor_id',$tipkor_id)->findAll();
+        $korisnici = $this->decodeArray($korisnici);
         return $korisnici;
    }
      
    //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao RADI
    public function daLiPostojiEmail($email){
        $korisnik = $this->where('kor_email', $email)->find();
-       $korisnik = $this->decode($korisnik);
+       $korisnik = $this->decodeRecord($korisnik);
        return isset($korisnik);
    }
    
@@ -121,13 +122,15 @@ class KorisnikModel extends Model
        $pwdhash = \UUID::codeId($password);
        
        $korisnik = $this->where('kor_pwd', $pwdhash)->find();
-       $korisnik = $this->decode($korisnik);
+       $korisnik = $this->decodeRecord($korisnik[0]);
        return isset($korisnik);
    }
 
    //sluzi za dekodovanje, jer imamo strane kljuceve
       public function decodeRecord($row)
     {
+        if( !isset($row) ) return null;
+        
         //dekodujemo sve kljuceve
         $row->kor_id = \UUID::decodeId($row->kor_id);
         $row->kor_tipkor_id = \UUID::decodeId($row->kor_tipkor_id);
@@ -137,6 +140,8 @@ class KorisnikModel extends Model
     //dekodovanje celog niza objekata
       public function decodeArray($finds)
     {
+        if( !isset($finds) ) return null;
+        
         //dekodujemo sve kljuceve
         for ($i = 0; $i < count($finds); $i++) {
             $finds[$i] = $this->decodeRecord($finds[$i]);

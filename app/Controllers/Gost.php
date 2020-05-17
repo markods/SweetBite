@@ -124,7 +124,6 @@ class Gost extends BaseController
         // initialize the remaining variables needed for verifying that the user is who they say they are
         $kor         = $model_kor->dohvatiKorisnikaPrekoEmaila($kor_email);
         $kor_tipkor  = $model_tipkor->dohvatiNazivTipaKorisnika($kor->kor_tipkor_id);
-        $kor_pwdhash = password_hash($kor_pwd, PASSWORD_DEFAULT); unset($kor_pwd);
 
         // if the email doesnt' exist in the database, return an error code
         if( !isset($kor) )
@@ -134,7 +133,7 @@ class Gost extends BaseController
         }
 
         // if the password doesnt't match, return an error code
-        if( $kor_pwdhash != $kor->kor_pwd_hash )
+        if( !password_verify($kor_pwd, $kor->kor_pwd_hash) )
         {
             $this->sendAJAX(['err' => 'wrong-password']);
             return;
