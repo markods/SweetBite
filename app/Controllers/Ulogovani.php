@@ -12,7 +12,11 @@ class Ulogovani extends BaseController
      */
     public function logout()
     {
+        // completely kill the session (remove the old session_id, destroy all server data and the client side cookie that contained the session id)
+        $this->session->stop();
         
+        // redirect the user to the default page
+        return redirect()->to( base_url("Gost/index") );
     }
     
 }

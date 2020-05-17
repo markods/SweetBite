@@ -34,13 +34,13 @@ class Gost extends BaseController
         $kor_email = $req['kor_email'] ?? "";
         $kor_tel   = $req['kor_tel'  ] ?? "";
         $kor_pwd   = $req['kor_pwd'  ] ?? "";
-        
+
         // if the sent form data is invalid, return an ajax error code response
         if( !$this->validate([
-             $kor_naziv => 'required|alpha_space|min_length[1] |max_length[64] ',
-             $kor_email => 'required|valid_email|min_length[1] |max_length[128]',
-             $kor_tel   => 'required|numeric    |min_length[8] |max_length[16] ',
-             $kor_pwd   => 'required            |min_length[10]|max_length[64] ']) )
+            'kor_naziv' => 'required|alpha_space|min_length[1]|max_length[64]',
+            'kor_email' => 'required|valid_email|min_length[1]|max_length[128]',
+            'kor_tel'   => 'required|numeric' .'|min_length[8]|max_length[16]',
+            'kor_pwd'   => 'required'         .'|min_length[8]|max_length[64]']) )
         {
             $this->sendAJAX(['err' => 'form-invalid']);
             return;

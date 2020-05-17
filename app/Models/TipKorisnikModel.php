@@ -78,7 +78,7 @@ class TipKorisnikModel extends Model
     //Nazivi su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
     public function dohvatiIDTipaKorisnika($naziv){
        $korisnik=$this->where('tipkor_naziv',$naziv)->find();
-       return \UUID::decodeId($korisnik[0]->tipkor_id);
+       return \UUID::decodeId(isset($korisnik) ? $korisnik->tipkor_id : null);
     }
 }
 

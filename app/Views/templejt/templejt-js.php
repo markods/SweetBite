@@ -37,7 +37,11 @@ $(document).ready(function() {
         let kor_pwd_2 = $("#register-password-2");
         
         // if the passwords don't match, do nothing (don't send a request)
-        if( kor_pwd_1.val() != kor_pwd_2.val() ) return;
+        if( kor_pwd_1.val() != kor_pwd_2.val() )
+        {
+            alert('passwords-dont-match');
+            return;
+        }
         
         // create a request
         let request = {
@@ -51,12 +55,12 @@ $(document).ready(function() {
         $.post(<?php echo '"'.base_url('Gost/register').'"'; ?>, JSON.stringify(request), "json")
         // when the client receives the AJAX response, this function gets called
         .done(function( response ) {
-            alert("Registered successfully.");
+            console.log(response);   // TODO: popraviti
         })
         // if the response times out or fails (due to some error), this function gets called
         .fail(function() {
             // alert the user that the request has failed (there should be a better way, but this is okay for the time being)
-            alert("Failed to register.");
+            alert("ajax-error");   // TODO: popraviti
         });
     });
     
