@@ -89,15 +89,18 @@ class KorisnikModel extends Model
     
    //fja za dohvatanje korisnika na osnovu primarnog kljuca, podrazumevano prima dekodovanu vrednost
     public function dohvatiKorisnika($id){
-       $id=\UUID::codeId($id);
-       $korisnik = $this->find($id);   
-       return isset($korisnik) ? $korisnik[0] : null;
+       $korisnik = $this->find(\UUID::codeId($id));
+       if( count($korisnik) == 0 ) return null;
+       
+       return decodeRecord($korisnik[0]);
     }
    
    // proverava da li korisnik vec postoji, ako postoji vraca ga
    public function dohvatiKorisnikaPrekoEmaila($email){
        $korisnik = $this->where('kor_email', $email)->find();
-       return isset($korisnik) ? $korisnik[0] : null;
+       if( count($korisnik) == 0 ) return null;
+       
+       return decodeRecord($korisnik[0]);
    }
 
    //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
@@ -111,19 +114,7 @@ class KorisnikModel extends Model
    //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao RADI
    public function daLiPostojiEmail($email){
        $korisnik = $this->where('kor_email', $email)->find();
-       $korisnik = $this->decodeRecord($korisnik);
-       return isset($korisnik);
-   }
-   
-   // sluzi nam za funkciju registracija, za proveru da li postoji vec sifra u bazi
-   public function daLiPostojiPassword($password){
-       // password hash se kodira iz stringa u binarni oblik!
-       // (da bi mogao da se sacuva u bazi u koloni koja je tipa binary(16)!)
-       $pwdhash = \UUID::codeId($password);
-       
-       $korisnik = $this->where('kor_pwd', $pwdhash)->find();
-       $korisnik = $this->decodeRecord($korisnik[0]);
-       return isset($korisnik);
+       return ( count($korisnik) != 0 );
    }
 
    //sluzi za dekodovanje, jer imamo strane kljuceve

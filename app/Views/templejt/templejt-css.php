@@ -48,6 +48,9 @@ p {
 #login, #register {
     float: right;
 }
+#navbar .form-group {
+    margin-bottom: 0px;
+}
 #searchbar-container {
   margin-top: 50px;
 }
@@ -117,6 +120,10 @@ a:focus {
 #navbar label {
   margin-bottom: 2px;
   font-size: 12px;
+}
+#navbar small {
+    font-size: 10px;
+    color: red;
 }
 #searchbar-container {
   background: var(--secondary-color);

@@ -39,7 +39,7 @@ $(document).ready(function() {
         // if the passwords don't match, do nothing (don't send a request)
         if( kor_pwd_1.val() != kor_pwd_2.val() )
         {
-            alert('passwords-dont-match');
+            alert('lozinke se ne poklapaju');
             return;
         }
         

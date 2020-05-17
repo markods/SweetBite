@@ -69,16 +69,17 @@ class TipKorisnikModel extends Model
     
     //dohvata naziv tipa korisnika po ID
     public function dohvatiNazivTipaKorisnika($id){
-       $id= \UUID::codeId($id);
-       $tipKorisnika=$this->find($id);
-       return isset($tipKorisnika) ? $tipKorisnika[0]->tipkor_naziv : null;
+       $tipKorisnika=$this->find(\UUID::codeId($id));
+       if( count($tipKorisnika) == 0 ) return null;
+       return $tipKorisnika[0]->tipkor_naziv;
     }
     
     //dohvata id tipa korisnika po njegovom nazivu
     //Nazivi su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
     public function dohvatiIDTipaKorisnika($naziv){
-       $korisnik=$this->where('tipkor_naziv', $naziv)->find();
-       return isset($korisnik) ? \UUID::decodeId($korisnik[0]->tipkor_id) : null;
+        $korisnik=$this->where('tipkor_naziv', $naziv)->find();
+        if( count($korisnik) == 0 ) return null;
+        return \UUID::decodeId($korisnik[0]->tipkor_id);
     }
 }
 
