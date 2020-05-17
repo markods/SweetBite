@@ -18,6 +18,7 @@ class Menadzer extends Ulogovani
          echo view('templejt/templejt-html.php');
     }
     
+    /**Autor:Jovana Jankovic 0586/17 - pomocna fja za testiranje tabele Jela*/
     public function unesiTipove(){   
         $this->receiveAJAX();
 
@@ -94,11 +95,93 @@ class Menadzer extends Ulogovani
             'jelo_ukus_id'=>$ukus_id,
             'jelo_dijeta_id'=>$dijeta_id 
         ]);
-        
-        
-        
-                
+              
         $this->sendAJAX($jelo); 
+    }
+    
+    /** Autor: Jovana Jankovic 0586/17 - Fja koja radi update Jela koja menadzer promeni*/
+    public function updateJelo(){
+        
+        $jelo = $this->receiveAJAX();
+        $tip = new TipJelaModel();
+        $ukus =  new UkusModel();
+        $dijeta = new DijetaModel();
+        $jeloModel=new JeloModel();
+         
+        $tip_id = $tip->dohvIdPoNazivu($jelo['jelo_tipjela']);
+        $ukus_id = $ukus->dohvIdPoNazivu($jelo['jelo_ukus']);
+        $dijeta_id = $dijeta->dohvIdPoNazivu($jelo['jelo_dijeta']);
+                
+        if(!isset($jelo['jelo_cena']))
+         {   
+                if(!isset($jelo['jelo_masa'])){    
+                $jeloModel->update($jelo['jelo_id'],[
+                'jelo_naziv'=>$jelo['jelo_naziv'],
+                'jelo_opis'=>$jelo['jelo_opis'],
+                'jelo_tipjela_id'=>$tip_id,
+                'jelo_ukus_id'=>$ukus_id,
+                'jelo_dijeta_id'=>$dijeta_id 
+                    ]);
+                  $data=[
+                    'success'=>"SUCCESS"
+                ];
+                $this->sendAJAX($data); 
+                return;
+          }
+             else
+             {
+                $jeloModel->update($jelo['jelo_id'],[
+                'jelo_naziv'=>$jelo['jelo_naziv'],
+                'jelo_opis'=>$jelo['jelo_opis'],
+                'jelo_masa'=>$jelo['jelo_masa'],
+                'jelo_tipjela_id'=>$tip_id,
+                'jelo_ukus_id'=>$ukus_id,
+                'jelo_dijeta_id'=>$dijeta_id 
+            ]);
+
+                $data=[
+                    'success'=>"SUCCESS"
+                ];
+
+                $this->sendAJAX($data); 
+                return;
+             }
+            
+        }
+        elseif(!isset($jelo['jelo_masa'])){
+            $jeloModel->update($jelo['jelo_id'],[
+            'jelo_naziv'=>$jelo['jelo_naziv'],
+            'jelo_opis'=>$jelo['jelo_opis'],
+            'jelo_cena'=>$jelo['jelo_cena'],
+            'jelo_tipjela_id'=>$tip_id,
+            'jelo_ukus_id'=>$ukus_id,
+            'jelo_dijeta_id'=>$dijeta_id 
+        ]);
+            $data=[
+                'success'=>"SUCCESS"
+            ];
+            
+            $this->sendAJAX($data); 
+            return;
+        }
+        else{
+        
+        $jeloModel->update($jelo['jelo_id'],[
+            'jelo_naziv'=>$jelo['jelo_naziv'],
+            'jelo_opis'=>$jelo['jelo_opis'],
+            'jelo_cena'=>$jelo['jelo_cena'],
+            'jelo_masa'=>$jelo['jelo_masa'],
+            'jelo_tipjela_id'=>$tip_id,
+            'jelo_ukus_id'=>$ukus_id,
+            'jelo_dijeta_id'=>$dijeta_id 
+        ]);
+            
+            $data=[
+                'success'=>"SUCCESS"
+            ];
+            
+            $this->sendAJAX($data); 
+        }    
     }
     
     public function dohvatiSvaJela() {

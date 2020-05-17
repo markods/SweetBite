@@ -33,11 +33,6 @@ function insertuj(){
     });  
 }
 
-
-
-
-
-
 function potvrdi_unos() {
 
    let object = {
@@ -62,7 +57,40 @@ function potvrdi_unos() {
     });  
 }
 
+function potvrdi_promenu(input){
+    alert("usao u promenu");
+ //   let id=input.id;
+//    alert(id);
 
+     let object = {
+       'jelo_id': input.id, 
+       'jelo_naziv':document.getElementById("naziv_jela"+input.id).value,
+       'jelo_tipjela':document.getElementById("vrsta_jela"+input.id).value,
+       'jelo_ukus':document.getElementById("ukus"+input.id).value,
+       'jelo_dijeta':document.getElementById("dijeta"+input.id).value,
+       'jelo_opis':document.getElementById("opis_jela"+input.id).value,
+       'jelo_cena':parseFloat(document.getElementById("cena"+input.id).value),
+       'jelo_masa':parseInt(document.getElementById("gramaza"+input.id).value)
+   };
+    
+//    alert(object['jelo_opis']);
+//    alert(object['jelo_cena']);
+//    alert(object['jelo_dijeta']);
+//    return;
+    $.post("<?php echo base_url('Menadzer/updateJelo'); ?>", 
+            JSON.stringify(object), "json")
+    .done(function(data) {
+            alert(data['success']);
+           //menjanje(data);
+           $('#'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+    })
+    .fail(function() {
+            alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+    });  
+
+
+
+}
 function ucitajJela() {
     menjanje();
     //izbirsan JSON jer ne prosledjujem nista
@@ -182,20 +210,20 @@ function menjanje(obj) {
     else {
     var str ="";
     
-    str+='<div id="'+ obj["jelo_id"]+'"class="dish_wrapper" >';
+    str+='<div class="dish_wrapper" >';
     str+='<div class="elem"';
     str+='<form name = "menjanje_jela" method = "POST" >';
     str+='<div class = "row">';
     str+='<div class = "col-sm-10 text-left">';
-    str+='<input  type = "text" id="naziv_jela" name = "naziv_jela" placeholder ="'+obj["jelo_naziv"]+'"style = margin-top:4px; margin-bottom:4px; height: 25px;">';
+    str+='<input  type = "text" id="naziv_jela'+obj["jelo_id"]+'" name = "naziv_jela" placeholder ="'+obj["jelo_naziv"]+'"style = margin-top:4px; margin-bottom:4px; height: 25px;">';
     str+= '</div>';              
     str+='<div class = "col-sm-2 text-right">';
-    str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" onclick="potvrdi_promenu()" style="margin-top: 10px; margin-right: 5px;">';   
+    str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" id="'+ obj["jelo_id"]+'" onclick="potvrdi_promenu(this)" style="margin-top: 10px; margin-right: 5px;">';   
     str+='</div>';
     str+='</div>';
     str+='<div class = "row">';
     str+='<div class="col-sm-10 text-left">';
-    str+='<select name="vrsta_jela_temp" id="vrsta_jela" class = "opcija text-left" style = "margin-bottom:4px; font-size: 12px;">';
+    str+='<select name="vrsta_jela_temp" id="vrsta_jela'+obj["jelo_id"]+'" class = "opcija text-left" style = "margin-bottom:4px; font-size: 12px;">';
     str+='<option value="Predjelo">Predjelo</option>';
     str+='<option value="Kuvano jelo">Kuvano jelo</option>';
     str+='<option value="Rostilj">Rostilj</option>';
@@ -211,14 +239,14 @@ function menjanje(obj) {
     str+='<option value="Pecivo">Pecivo</option>';
     str+='<option value="Torta">Torta</option>';
     str+='</select>';
-    str+='<select name="ukus" id="ukus" class = "opcija"  style = "margin-bottom:4px;font-size: 12px;">';
+    str+='<select name="ukus" id="ukus'+obj["jelo_id"]+'" class = "opcija"  style = "margin-bottom:4px;font-size: 12px;">';
     str+='<option value="Slatko">Slatko</option>';
     str+='<option value="Slano">Slano</option>';
     str+='<option value="Ljuto">Ljuto</option>';
     str+='<option value="Gorko">Gorko</option>';
     str+='<option value="Kiselo">Kiselo</option>';
     str+='</select>';
-    str+='<select name="dijeta" id="dijeta" class = "opcija" style = "margin-bottom:4px;font-size: 12px;">';
+    str+='<select name="dijeta" id="dijeta'+obj["jelo_id"]+'" class = "opcija" style = "margin-bottom:4px;font-size: 12px;">';
     str+='<option value="Nije dijetalno">Nije dijetalno</option>';
     str+='<option value="Posno">Posno</option>';
     str+='<option value="Vegeterijansko">Vegeterijansko</option>';
@@ -243,13 +271,13 @@ function menjanje(obj) {
     str+='</div>' ;
     str+='<div class = "row">';
     str+='<div class = "col-sm-12 text-left" style="overflow: hidden;">';
-    str+='<textarea draggable="false" id="opis_jela" style = "margin-bottom:4px; resize: none; " name="opis_jela" form="menjanje_jela" placeholder = "'+obj["jelo_opis"]+'" rows = "8" cols="35" ></textarea>';
+    str+='<textarea draggable="false" id="opis_jela'+obj["jelo_id"]+'" style = "margin-bottom:4px; resize: none; " name="opis_jela" form="menjanje_jela" placeholder = "'+obj["jelo_opis"]+'" rows = "8" cols="35" ></textarea>';
     str+='</div>';
     str+='</div>' ;
     str+='<div class = "row cena_i_masa">';
     str+='<div class = "col-sm-12 text-right" style = "margin-bottom:4px">';
-    str+='<input class = "text-right" type="text" name="gramaza" id="gramaza" placeholder="'+obj["jelo_masa"]+'">';
-    str+='<input class = "text-right"  type="text" name="cena" id="cena" placeholder="'+obj["jelo_cena"]+'">';
+    str+='<input class = "text-right" type="text" name="gramaza" id="gramaza'+obj["jelo_id"]+'" placeholder="'+obj["jelo_masa"]+'">';
+    str+='<input class = "text-right"  type="text" name="cena" id="cena'+obj["jelo_id"]+'" placeholder="'+obj["jelo_cena"]+'">';
     str+='</div>';
     str+='</div>';
    

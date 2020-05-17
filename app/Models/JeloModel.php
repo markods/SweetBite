@@ -107,6 +107,11 @@ class JeloModel extends Model
             return true;
         }
         
+        public function dohvatiId($naziv){
+            $jelo=$this->where('jelo_naziv',$naziv)->findAll();
+            $jelo=$this->decodeArray($jelo);
+            return $jelo[0]->jelo_id;
+        }
         
         public function delete($id=NULL, $purge=false) {
             if ($id != null) {
