@@ -26,53 +26,51 @@ class Gost extends BaseController
      */
     public function register()
     {
-        // 
+        // receive the ajax data for registering
         $req = $this->receiveAJAX();
 
-        // 
+        // unpack the variables from the ajax request
         $kor_naziv = $req['kor_naziv'] ?? "";
         $kor_email = $req['kor_email'] ?? "";
         $kor_tel   = $req['kor_tel'  ] ?? "";
         $kor_pwd   = $req['kor_pwd'  ] ?? "";
         
-        // 
+        // if the sent form data is invalid, return an ajax error code response
         if( !$this->validate([
              $kor_naziv => 'required|alpha_space|min_length[1] |max_length[64] ',
              $kor_email => 'required|valid_email|min_length[1] |max_length[128]',
              $kor_tel   => 'required|numeric    |min_length[8] |max_length[16] ',
              $kor_pwd   => 'required            |min_length[10]|max_length[64] ']) )
         {
-            $this->sendAJAX(['err' => 'neispravno popunjena forma']);
+            $this->sendAJAX(['err' => 'form-invalid']);
             return;
         }
         
-        // 
-        $kor_pwdhash = password_hash($kor_pwd, PASSWORD_DEFAULT);
-        unset($kor_pwd);
+        // create models for the user and usertype
+        $model_kor    = new KorisnikModel();
+        $model_tipkor = new TipKorisnikModel();
+
+        // initialize the remaining variables needed for the database record in table 'user'
+        $kor_pwdhash   = password_hash($kor_pwd, PASSWORD_DEFAULT);  unset($kor_pwd);
+        $kor_tipkor    = 'Korisnik';
+        $kor_tipkor_id = $model_tipkor->dohvatiIDTipaKorisnika($kor_tipkor);
+        $kor_datkre    = date('Y-m-d H:i:s');
         
-        
-        // 
-        $model_kor = new KorisnikModel();
-        
-        // 
+        // if the email already exists in the database, return an error code
         if( $model_kor->daLiPostojiEmail($kor_email) )
         {
-            $this->sendAJAX(['err' => 'vec postoji email']);
+            $this->sendAJAX(['err' => 'email-exists']);
             return;
         }
 
-        //
+        // if the password already exists in the database, return an error code
         if( $model_kor->daLiPostojiPassword($kor_pwdhash) )
         {
-            $this->sendAJAX(['err' => 'vec postoji password']);
+            $this->sendAJAX(['err' => 'password-exists']);
             return;
         }
         
-        // 
-        $kor_tipkor_id = \UUID::decodeId(\UUID::generateId());   // TODO: popraviti
-        $kor_datkre    =  date('Y-m-d H:i:s');
-        
-        // 
+        // try to insert a new user account record into the 'user' table
         $kor_id = $model_kor->insert( compact(
             $kor_naziv,
             $kor_email,
@@ -82,19 +80,19 @@ class Gost extends BaseController
             $kor_datkre
         ));
         
-        // 
+        // if the insertion failed, return an error code
         if( !isset($kor_id) )
         {
-            $this->sendAJAX(['err' => 'greska prilikom ubacivanja korisnika u bazu']);
+            $this->sendAJAX(['err' => 'insert-failed']);
             return;
         }
         
-        // 
-        $this->session->set( compact( $kor_naziv, $kor_tipkor_id ) );
-        
-        // 
-        $this->sendAJAX(['msg' => 'uspesna registracija']);
-        return redirect()->to(base_url("Korisnik/index"));   // TODO: popraviti
+        // set the session variables -- user id and the user type (in string form)
+        $this->session->set( compact( $kor_id, $kor_tipkor ) );
+        // return an ajax success code response to the user
+        $this->sendAJAX(['suc' => 'register-success']);
+        // redirect the user to their controller type
+        return redirect()->to(base_url("{$kor_tipkor}/index"));
     }
     
     
@@ -103,102 +101,51 @@ class Gost extends BaseController
      */
     public function login()
     {
-        // 
+        // receive the ajax data for logging in
         $req = $this->receiveAJAX();
 
-        // 
+        // unpack the variables from the ajax request
         $kor_email = $req['kor_email'] ?? "";
         $kor_pwd   = $req['kor_pwd'  ] ?? "";
         
-        // 
+        // if the sent form data is invalid, return an ajax error code response
         if( !$this->validate([
              $kor_email => 'required|valid_email|min_length[1] |max_length[128]',
              $kor_pwd   => 'required            |min_length[10]|max_length[64] ']) )
         {
-            $this->sendAJAX(['err' => 'neispravno popunjena forma']);
+            $this->sendAJAX(['err' => 'form-invalid']);
             return;
         }
         
-        // 
-        $kor_pwdhash = password_hash($kor_pwd, PASSWORD_DEFAULT);
-        unset($kor_pwd);
+        // create models for the user and usertype
+        $model_kor    = new KorisnikModel();
+        $model_tipkor = new TipKorisnikModel();
         
-        
-        // 
-        $model_kor = new KorisnikModel();
-        $kor = $model_kor->dohvatiKorisnikaPrekoEmaila($kor_email);
-        
-        // 
+        // initialize the remaining variables needed for verifying that the user is who they say they are
+        $kor         = $model_kor->dohvatiKorisnikaPrekoEmaila($kor_email);
+        $kor_tipkor  = $model_tipkor->dohvatiNazivTipaKorisnika($kor->kor_tipkor_id);
+        $kor_pwdhash = password_hash($kor_pwd, PASSWORD_DEFAULT); unset($kor_pwd);
+
+        // if the email doesnt' exist in the database, return an error code
         if( !isset($kor) )
         {
-            $this->sendAJAX(['err' => 'ne postoji email']);
+            $this->sendAJAX(['err' => 'wrong-email']);
             return;
         }
 
-        //
+        // if the password doesnt't match, return an error code
         if( $kor_pwdhash != $kor->kor_pwd_hash )
         {
-            $this->sendAJAX(['err' => 'pogresan password']);
+            $this->sendAJAX(['err' => 'wrong-password']);
             return;
         }
         
-        // 
-        $this->session->set( compact( $kor->kor_id, $kor->kor_tipkor_id ) );
-        
-        
-        $this->sendAJAX(['msg' => 'success']);
-        return redirect()->to(base_url("Korisnik/index"));
-
-
-        
-        
-        
-        // TODO: dovrsiti
-        //id tipa korsinika bi trebalo da bude vrednost od 0-3
-        $tip_korisnika =\UUID::decodeId($korisnik[0]->kor_tipkor_id);
-        
-        //dohvatanje kljuca i naziva ukusa
-        $tipModel = new TipKorisnikModel();
-        
-        $tip_korisnika = $tipModel->dohvatiNazivTipaKorisnika($tip_korisnika);
-        
-        //Tip korisnika se dohvata iz baze, razlicit je za svaki tip,
-        // treba se dogovoriti koja vrednost predstalvja koji tip korisnika!!!
-        switch ($tip_korisnika) {
-            
-            case 'musterija':   
-                        $this->session->set('email',$email);
-                        $this->session->set('password', $password);
-                        $this->session->set('tip_korisnika', $tip_korisnika);
-                        return redirect()->to(site_url("../public/Korisnik/index"));
-                      
-            case 'kuvar': 
-                        $this->session->set('email',$email);
-                        $this->session->set('password', $password);
-                        $this->session->set('tip_korisnika', $tip_korisnika);
-                        return redirect()->to(site_url("../public/Korisnik/index"));
-                      
-                  
-            case 'menadzer': 
-                        $this->session->set('email',$email);
-                        $this->session->set('password', $password);
-                        $this->session->set('tip_korisnika', $tip_korisnika);
-                        return redirect()->to(site_url("../public/Korisnik/index"));
-                      
-            case 'administrator': 
-                        $this->session->set('email',$email);
-                        $this->session->set('password', $password);
-                        $this->session->set('tip_korisnika', $tip_korisnika);
-                        return redirect()->to(site_url("../public/Korisnik/index"));
-                      
-                  
-        }
-        //dohvatiKorisnikaZaLogovanje
-        //kor_pwdhash i kor_email        
-        
-        
-        
-        
-    }    
+        // set the session variables -- user id and the user type (in string form)
+        $this->session->set( compact( $kor->kor_id, $kor->kor_tipkor ) );
+        // return an ajax success code response to the user
+        $this->sendAJAX(['suc' => 'login-success']);
+        // redirect the user to their controller type
+        return redirect()->to( base_url("{$kor_tipkor}/index") );
+    }
 
 }

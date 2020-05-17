@@ -68,14 +68,6 @@ TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TOD
 
 
 ====== GENERALNO ======
-+ prebaciti svoj .js i .css kod iz foldera !migrate u odgovarajuci folder u App/Views/
-   + jedan folder za jednu funkcionalnost
-   + u svakom folderu treba da se nadje max dva fajla -- funkcionalnost-js.php i funkcionalnost-css.php
-   
-+ sve ikonice koje se koriste u projektu se od sada nalaze u public/icons folderu
-   + treba popraviti putanje ikonica unutar svojih .js i .css fajlova
-   + primer kako se ukljucuje ikonica je u fajlu 'templejt-index.php'
-
 + modele imenovati isto kao u bazi, samo sa velikim pocetnim slovom
    + primeri: Tipjela, Por, ...
 
