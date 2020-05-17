@@ -33,6 +33,7 @@ function insertuj(){
     });  
 }
 
+/* Autor: Filip Lucic 17/0188 - omogucava menadzeru da doda novo jelo u bazu podataka */
 function potvrdi_unos() {
 
    let object = {
@@ -50,7 +51,7 @@ function potvrdi_unos() {
             JSON.stringify(object), "json")
     .done(function(data) {
            menjanje(data);
-           $('#'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+           $('#div'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
     })
     .fail(function() {
             alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
@@ -58,39 +59,70 @@ function potvrdi_unos() {
 }
 
 function potvrdi_promenu(input){
-    alert("usao u promenu");
- //   let id=input.id;
-//    alert(id);
 
+       let jelo_id= input.id;
+       let jelo_naziv = document.getElementById("naziv_jela"+input.id).value;
+       let jelo_tipjela = document.getElementById("vrsta_jela"+input.id).value;
+       let jelo_ukus = document.getElementById("ukus"+input.id).value;
+       let jelo_dijeta = document.getElementById("dijeta"+input.id).value;
+       let jelo_opis = document.getElementById("opis_jela"+input.id).value;
+       let jelo_cena = parseFloat(document.getElementById("cena"+input.id).value);
+       let jelo_masa = parseInt(document.getElementById("gramaza"+input.id).value);
+       
+       
+       
+       if(jelo_naziv=="")
+           jelo_naziv = document.getElementById("naziv_jela"+input.id).getAttribute("placeholder");
+       if(jelo_tipjela=="")
+           jelo_tipjela = document.getElementById("vrsta_jela"+input.id).getAttribute("placeholder");
+       if(jelo_ukus=="")
+           jelo_ukus = document.getElementById("ukus"+input.id).getAttribute("placeholder");
+       if(jelo_dijeta=="")
+           jelo_dijeta = document.getElementById("dijeta"+input.id).getAttribute("placeholder");
+       if(jelo_opis=="")
+           jelo_opis = document.getElementById("opis_jela"+input.id).getAttribute("placeholder");
+       if(isNaN(jelo_cena))
+           jelo_cena = parseFloat(document.getElementById("cena"+input.id).getAttribute("placeholder"));    
+        if(isNaN(jelo_masa))
+           jelo_masa = parseFloat(document.getElementById("gramaza"+input.id).getAttribute("placeholder"));
+       
      let object = {
        'jelo_id': input.id, 
-       'jelo_naziv':document.getElementById("naziv_jela"+input.id).value,
-       'jelo_tipjela':document.getElementById("vrsta_jela"+input.id).value,
-       'jelo_ukus':document.getElementById("ukus"+input.id).value,
-       'jelo_dijeta':document.getElementById("dijeta"+input.id).value,
-       'jelo_opis':document.getElementById("opis_jela"+input.id).value,
-       'jelo_cena':parseFloat(document.getElementById("cena"+input.id).value),
-       'jelo_masa':parseInt(document.getElementById("gramaza"+input.id).value)
+       'jelo_naziv':jelo_naziv,
+       'jelo_tipjela':jelo_tipjela,
+       'jelo_ukus':jelo_ukus,
+       'jelo_dijeta':jelo_dijeta,
+       'jelo_opis':jelo_opis,
+       'jelo_cena':jelo_cena,
+       'jelo_masa':jelo_masa
    };
-    
-//    alert(object['jelo_opis']);
-//    alert(object['jelo_cena']);
-//    alert(object['jelo_dijeta']);
-//    return;
     $.post("<?php echo base_url('Menadzer/updateJelo'); ?>", 
             JSON.stringify(object), "json")
     .done(function(data) {
-            alert(data['success']);
-           //menjanje(data);
-           $('#'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+           alert('dosao');
+           update_polja(data);
+//           $('#div'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
     })
     .fail(function() {
             alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
     });  
-
-
-
 }
+
+
+/*Autor: Filip Lucic 17/0188 funkcija koja dinamicki menja tacno ono jelo koje smo promenili, bez menjanja ostatka stranice*/
+function update_polja(obj) {
+    $('#naziv_jela'+obj['jelo_id']).attr("placeholder", obj['jelo_naziv']);
+    $('#naziv_jela'+obj['jelo_id']).val("");
+    $('#opis_jela'+obj['jelo_id']).attr("placeholder", obj['jelo_opis']);
+    $('#opis_jela'+obj['jelo_id']).val("");
+    $('#cena'+obj['jelo_id']).attr("placeholder", obj['jelo_cena']);
+    $('#cena'+obj['jelo_id']).val("");
+    $('#gramaza'+obj['jelo_id']).attr("placeholder", obj['jelo_masa']);
+    $('#gramaza'+obj['jelo_id']).val("");
+    $('#div'+obj["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+    
+}
+/**/
 function ucitajJela() {
     menjanje();
     //izbirsan JSON jer ne prosledjujem nista
@@ -98,7 +130,7 @@ function ucitajJela() {
     .done(function(data) {
            for(let i = 0; i<data.length; i++) {            
            menjanje(data[i]);
-           $('#'+data[i]["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+           $('#div'+data[i]["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
            }  
     })
     .fail(function() {
@@ -107,10 +139,8 @@ function ucitajJela() {
     
 }
 
-
-function menjanje(obj) {
-   
-   
+ /* Autor: Filip Lucic 17/0188 - omogucava ispis sablona za dodavanje novog jela, kao i ispis svih jela */
+function menjanje(obj) { 
     //TODO implement image upload amd background image
     //TODO see dish availability through database and hiding date, where does date get converted to string, here or somewhere else
 
@@ -158,14 +188,14 @@ function menjanje(obj) {
         str+='<select name="dijeta_temp" id="dijeta_temp" class = "opcija"  style = "margin-bottom:4px;font-size: 12px;">';
         str+='<option value="Nije dijetalno">Nije dijetalno</option>';
         str+='<option value="Posno">Posno</option>';
-        str+='<option value="Vegeterijansko">Vegeterijansko</option>';
+        str+='<option value="Vegetarijansko">Vegetarijansko</option>';
         str+='<option value="Bez glutena">Bez glutena</option>';
         str+='<option value="Mrsno">Mrsno</option>';
         str+='<option value="Bez laktoze">Bez laktoze</option>';
         str+='</select>';
         str+='</div>';
         str+='<div class= "col-sm-2 text-right">';
-        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" onclick="insertuj()"width = "20px" height = "20px" style="margin-right:5px;">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" width = "20px" height = "20px" style="margin-right:5px;">';
         str+='</div>';                     
         str+='</div>';
         str+='<div class = "row">';
@@ -196,21 +226,14 @@ function menjanje(obj) {
         $('#content').append(str);
         
         
-       
-        //vidi za formu
-//        var dummy = $(".dummy");
-//        dummy.html(str);
-//        dummy[0].id = id;
-//        dummy.removeClass("dummy").addClass("dish_temp");
-//        $(".cont").append("<div class='dummy'></div>");
-//
-//        id++;
-
+        $('#vrsta_jela_temp').val("");
+        $('#ukus_temp').val("");
+        $('#dijeta_temp').val("");
     } 
     else {
     var str ="";
     
-    str+='<div class="dish_wrapper" >';
+    str+='<div id="div'+obj["jelo_id"]+'" class="dish_wrapper" >';
     str+='<div class="elem"';
     str+='<form name = "menjanje_jela" method = "POST" >';
     str+='<div class = "row">';
@@ -249,7 +272,7 @@ function menjanje(obj) {
     str+='<select name="dijeta" id="dijeta'+obj["jelo_id"]+'" class = "opcija" style = "margin-bottom:4px;font-size: 12px;">';
     str+='<option value="Nije dijetalno">Nije dijetalno</option>';
     str+='<option value="Posno">Posno</option>';
-    str+='<option value="Vegeterijansko">Vegeterijansko</option>';
+    str+='<option value="Vegetarijansko">Vegetarijansko</option>';
     str+='<option value="Bez glutena">Bez glutena</option>';
     str+='<option value="Mrsno">Mrsno</option>';
     str+='<option value="Bez laktoze">Bez laktoze</option>';
@@ -285,18 +308,7 @@ function menjanje(obj) {
     str+='</div>';
     str+='</div>';
 
-
     $('#content').append(str);
-
-    //vidi za formu
-//    var dummy = $(".dummy");
-//    dummy.html(str);
-//    dummy[0].id = id;
-//    dummy.removeClass("dummy").addClass("dish_temp");
-//    $(".cont").append("<div class='dummy'></div>");
-//
-//    id++;
-
     }
 
 }

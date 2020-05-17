@@ -73,7 +73,7 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);
     }
     
-    /** Omogucava menadzeru da doda novo jelo u bazu podataka */
+    /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da doda novo jelo u bazu podataka */
     public function dodajJelo () {     
         $jelo = $this->receiveAJAX();
       
@@ -106,7 +106,7 @@ class Menadzer extends Ulogovani
         $tip = new TipJelaModel();
         $ukus =  new UkusModel();
         $dijeta = new DijetaModel();
-        $jeloModel=new JeloModel();
+        $jeloModel = new JeloModel();
          
         $tip_id = $tip->dohvIdPoNazivu($jelo['jelo_tipjela']);
         $ukus_id = $ukus->dohvIdPoNazivu($jelo['jelo_ukus']);
@@ -122,10 +122,7 @@ class Menadzer extends Ulogovani
                 'jelo_ukus_id'=>$ukus_id,
                 'jelo_dijeta_id'=>$dijeta_id 
                     ]);
-                  $data=[
-                    'success'=>"SUCCESS"
-                ];
-                $this->sendAJAX($data); 
+                $this->sendAJAX($jelo); 
                 return;
           }
              else
@@ -139,11 +136,7 @@ class Menadzer extends Ulogovani
                 'jelo_dijeta_id'=>$dijeta_id 
             ]);
 
-                $data=[
-                    'success'=>"SUCCESS"
-                ];
-
-                $this->sendAJAX($data); 
+                $this->sendAJAX($jelo); 
                 return;
              }
             
@@ -157,11 +150,7 @@ class Menadzer extends Ulogovani
             'jelo_ukus_id'=>$ukus_id,
             'jelo_dijeta_id'=>$dijeta_id 
         ]);
-            $data=[
-                'success'=>"SUCCESS"
-            ];
-            
-            $this->sendAJAX($data); 
+            $this->sendAJAX($jelo); 
             return;
         }
         else{
@@ -175,15 +164,11 @@ class Menadzer extends Ulogovani
             'jelo_ukus_id'=>$ukus_id,
             'jelo_dijeta_id'=>$dijeta_id 
         ]);
-            
-            $data=[
-                'success'=>"SUCCESS"
-            ];
-            
-            $this->sendAJAX($data); 
+ 
+            $this->sendAJAX($jelo); 
         }    
     }
-    
+     /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da dohvati sva jela, i ispise ih putem Ajaxa pri ucitavanju stranice */
     public function dohvatiSvaJela() {
         $jeloModel = new JeloModel();
         $jela = $jeloModel->dohvSve();
