@@ -4,16 +4,12 @@ use App\Models\TipJelaModel;
 use App\Models\UkusModel;
 use App\Models\JeloModel;
 
-
 /** Jovana Jankovic - 0586/17   */
 /** Filip Lucic - 0188/17   */
 /** Funkcionalnosti za menadzera - dodavanje novih jela u bazu - v.0.1   */
 
-
 class Menadzer extends Ulogovani
-{
-    
-    
+{    
     public function index () {
          echo view('templejt/templejt-html.php');
     }
@@ -120,7 +116,7 @@ class Menadzer extends Ulogovani
                 'jelo_opis'=>$jelo['jelo_opis'],
                 'jelo_tipjela_id'=>$tip_id,
                 'jelo_ukus_id'=>$ukus_id,
-                'jelo_dijeta_id'=>$dijeta_id 
+                'jelo_dijeta_id'=>$dijeta_id
                     ]);
                 $this->sendAJAX($jelo); 
                 return;
@@ -174,4 +170,30 @@ class Menadzer extends Ulogovani
         $jela = $jeloModel->dohvSve();
         $this->sendAJAX($jela);       
     }
+    
+    /** Autor: Jovana Jankovic 17/0586 - omogucava brisanje jela iz ponude ketering servisa*/
+    public function obrisiJelo(){
+        $jelo = $this->receiveAJAX();
+        $jeloModel = new JeloModel();
+        $jeloModel->delete($jelo['jelo_id']);
+        $data=[
+            'success'=>"Uspesno ste izbrisali jelo iz ponude!",
+            'jelo_id'=> $jelo['jelo_id']
+        ];
+        $this->sendAJAX($data);       
+    }
+    
+    /** Autor: Jovana Jankovic 0586/17 - fja za sakrivanje jela iz ponude */
+    public function sakrijJelo(){
+        $jelo = $this->receiveAJAX();
+        $jeloModel = new JeloModel();
+        $jeloModel->update($jelo['jelo_id'],
+                ['jelo_datsakriv'=> date('Y-m-d H:i:s')]);
+        $data=[
+            'success'=>"Uspesno ste izbrisali jelo iz ponude!",
+            'jelo_id'=> $jelo['jelo_id']
+        ];
+        $this->sendAJAX($data);   
+    }
 }
+

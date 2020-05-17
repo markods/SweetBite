@@ -2,22 +2,20 @@
 
 use CodeIgniter\Model;
 
-//Autor:Filip Lučić 2017/0188
+/** Autor: Filip Lučić 2017/0188 */
 
 class JeloModel extends Model
 {       
-    
         protected $table      = 'jelo';
         protected $primaryKey = 'jelo_id';
         protected $returnType = 'object';
-        protected $allowedFields = ['jelo_id','jelo_naziv', 'jelo_opis', 'jelo_slika', 'jelo_cena', 'jelo_masa', 'jelo_tipjela_id', 'jelo_ukus_id', 'jelo_dijeta_id', 'jelo_datkre', 'jelo_datsakriv', 'jelo_datuklanj'];
+        protected $allowedFields = ['jelo_id','jelo_naziv', 'jelo_opis', 'jelo_slika', 'jelo_cena', 'jelo_masa', 'jelo_tipjela_id', 'jelo_ukus_id', 'jelo_dijeta_id', 'jelo_datsakriv'];
         
-        
-        
+        protected $useSoftDeletes = true;
         protected $useTimestamps = true;
         protected $createdField  = 'jelo_datkre';
         protected $updatedField  = '';
-        protected $deletedField  = '';
+        protected $deletedField  = 'jelo_datuklanj';
         protected $dateFormat = 'datetime';
         
         //videti trim za format slike i int/float/binary
