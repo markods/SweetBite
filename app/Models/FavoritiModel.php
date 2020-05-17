@@ -114,4 +114,30 @@ class FavoritiModel extends Model
         return $finds;  
     }
 
+    //-----------------------------------------------------------------------
+    
+    //proverava da li je favorit tog korisnika
+    public function jeFavorit($id_jela, $id_kor)
+    {
+        $jelo_id = \UUID::codeId($id_jela);
+        $kor_id = \UUID::codeId($id_kor);
+        $ima = $this->where('fav_jelo_id', $jelo_id)->where('fav_kor_id', $kor_id)->findAll();
+    
+        if (count($ima) > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    //dohvata id odredjenog favorite
+    public function idFavorita($id_jela, $id_kor)
+    {
+        $jelo_id = \UUID::codeId($id_jela);
+        $kor_id = \UUID::codeId($id_kor);
+        $ima = $this->where('fav_jelo_id', $jelo_id)->where('fav_kor_id', $kor_id)->findAll();
+        
+        return \UUID::decodeId($ima[0]->fav_id);
+    }
 }

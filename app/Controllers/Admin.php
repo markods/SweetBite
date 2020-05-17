@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 // 2020-05-16 v0.1 Jovana Pavic 2017/0099
 
-//bilo bi super kada bi neki delovi funkcija:
+//bilo bi super kada bi neki delovi funkcija realizovali u modelima:
 //  loadAllUsers()
 //  changePrivilages()
 //  loadAccount()

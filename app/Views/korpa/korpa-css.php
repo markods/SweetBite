@@ -1,6 +1,7 @@
 <style>
+/*2020-05-17 v0.1 Jovana Pavic 2017/0099*/
 
-/*--------Basket----------*/
+/*--------Korpa----------*/
 .basket {
     padding-left: 5px;
   }
@@ -12,6 +13,9 @@
   }
   .amount_ordered {
     text-align: center;
+  }
+  #basket .amount_ordered {
+      font-weight: bold;
   }
 
 </style>

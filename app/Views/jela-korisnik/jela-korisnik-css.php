@@ -2,7 +2,6 @@
 /* Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika */
 
 .box:hover {
-  background: url(prikazjela/jabuka.jpg);
   filter: blur(4px);
   pointer-events: none;
   color:black;
@@ -11,7 +10,6 @@
 }
 
 .box{
-  background: url(prikazjela/jabuka.jpg);
   background-position: center;
   background-size: cover;
   width:360px;
@@ -28,7 +26,7 @@
     height: 300px;
     width: 340px;
     color: black !important;
-    font-size: 17px !important;
+    font-size: 15px !important;
     font-weight: bold;
   }
 
@@ -46,7 +44,7 @@
       left: 0;
       background-position: center !important;
       background-size: cover !important;
-      background-image: url(prikazjela/jabuka.jpg);
+      /*background-image: url(prikazjela/jabuka.jpg);*/
     }
 
     .article-image:hover:before {
@@ -75,6 +73,15 @@
           .about1 {
             padding: 0px;
           }
+          .about1 > h3 {
+              font-size: 25px;
+          }
+          .about1 > p {
+              font-weight: bold;
+          }    
+          .about1 .opis {
+              font-size: 15px;
+          }
           /*Amount je ono sa +/-*/
           .amount {
             text-align: right;
@@ -82,6 +89,7 @@
         /*Price je poslednji red*/  
         .price {
           padding: 10px;
+          font-weight: bold;
         }
 
 
@@ -90,12 +98,20 @@
           display: inline-block;
           padding: 5px;
         }
-/*
-.cont1 {
-  text-align: left;
-  color: white;
-  width: 1000px;
-}*/
+        
+        .change > p {
+            font-weight: bold;
+            margin-top: 17px;
+            margin-left: 12px;
+        }
+        .change > input {
+            width: 25px;
+            background: transparent;
+            border: none;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
 
 .dish_temp {
   width: 280px;

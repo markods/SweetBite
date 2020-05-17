@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-14 v0.2 Jovana Pavic 2017
+// 2020-05-17 v0.3 Jovana Pavic 2017
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -46,27 +46,23 @@ class Por extends Model
     protected $dateFormat = 'datetime';
 
     protected $validationRules    = [
-                    'por_kor_id'   => 'trim|required',
-                    'por_povod_id' => 'trim|required',
-                    'por_br_osoba' => 'trim|required',
-                    'por_za_dat'   => 'trim|required',
+                    'por_kor_id'   => 'trim|required'
             ];
     protected $validationMessages = [
-                'por_kor_id' => ['required' => 'Id korisnika je obavezan'],
-                'por_povod_id' => ['required' => 'Id povoda je obavezan'],
-                'por_br_osoba' => ['required' => 'Broj osoba je obavezan'],
-                'por_za_dat'   => ['required' => 'Za kada je obavezno']
+                'por_kor_id' => ['required' => 'Id korisnika je obavezan']
             ];
     protected $skipValidation     = false;
 
     
     //-----------------------------------------------------------------------
     
+    /*
     //override osnovnih metoda tako da prikazuju greske
     //metoda save ne mora da se overrid-uje jer ona samo poziva
     //insert i update u zavisnosti od parametara
     //preporucljivo koristiti insert i update jer insert vraca id
     //dobro za razvojnu fazu
+    */
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
@@ -149,7 +145,32 @@ class Por extends Model
            
         return $this->decodeArray($finds);
     }
+        
+    //-----------------------------------------------
+    /** public function korpaKorisnika($kor_id){...}
+    //Dohvata porudzbinu korisnika sa zadatim id-em
+    //Koja nije jos porucena
+    //Potrebno za prikaz korpe korisnika
+    // Ako korpa postoji vraca njen id,
+    // Ako korpa ne postoji vraca null
+    */
     
+    public function korpaKorisnika($kor_id)
+    {
+        $kor_id = \UUID::codeId($kor_id);
+        $finds = $this->where('por_kor_id', $kor_id)->
+                where('por_datporuc', null)->findAll();
+        
+        //ako nema korpu
+        if(count($finds) == 0){
+            return null;
+        }
+        
+        $por_id = $finds[0]->por_id;
+        $por_id = \UUID::decodeId($por_id);
+        return $por_id;
+    }    
+
     //-----------------------------------------------
     /** public function filtriranePorudzbineKorisnika($kor_id,$status){...}
     //Dohvata neke porudzbine korisnika sa zadatim id-em
@@ -219,6 +240,20 @@ class Por extends Model
         return $this->decodeRecord($row);
     }
     
+    //------------------------------------------------
+    /** public function imaPopust($por_id){...}
+    // Proverava da li data porudzbina ima popust
+    */
+    
+    public function imaPopust($por_id)
+    {
+        $por = $this->find($por_id);
+        if ($por > 0) {
+            return true;
+        }
+        return false;
+    }
+
     //------------------------------------------------
     /**public function decodeRecord($row){...}
     //Dekodovanje jednog rekorda

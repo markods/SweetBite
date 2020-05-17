@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-14 v0.2 Jovana Pavic 2017
+// 2020-05-17 v0.3 Jovana Pavic 2017
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -48,12 +48,14 @@ class Stavka extends Model
 
     //-----------------------------------------------------------------------
     
+    /*
     //override osnovnih metoda tako da prikazuju greske
     //dobro za razvojnu fazu
     //metoda save ne mora da se overrid-uje jer ona samo poziva
     //insert i update u zavisnosti od parametara
     //preporucljivo koristiti insert i update jer insert vraca id
-        
+    */
+    
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
     //ako je neuspesno vraca false
@@ -147,6 +149,40 @@ class Stavka extends Model
         return $this->decodeRecord($row);
     }
     
+    //-----------------------------------------------
+    /** public function stavkaJelaIzPor($id_jela,$idPor){...}
+    //Dohvata stavku datog jela iz date porudzbine
+    */
+    
+    public function stavkaJelaIzPor($id_jela, $id_por)
+    {
+        $id_jela = \UUID::codeId($id_jela);
+        $id_por = \UUID::codeId($id_por);
+        
+        $finds = $this->where('stavka_por_id', $id_por)->
+                where('stavka_jelo_id', $id_jela)->findAll();
+        
+        if (count($finds) > 0){
+            return \UUID::decodeId($finds[0]->stavka_id);
+        }
+        else{
+            return null;
+        }
+    }
+    
+    //------------------------------------------------
+    /** public function kolicinaJela($stavka_id){...}
+    // Dohvata kolicinu jela iz date stavke
+    */
+    
+    public function kolicinaJela($stavka_id)
+    {
+        $stavka_id =\UUID::codeId($stavka_id); 
+        $finds = $this->find($stavka_id);
+        
+        return $finds->stavka_kol;            
+    }
+     
     //------------------------------------------------
     /** public function decodeRecord($row)
     //Dekodovanje jednog rekorda
