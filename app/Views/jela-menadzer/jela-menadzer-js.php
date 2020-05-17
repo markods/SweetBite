@@ -24,7 +24,7 @@ function sakrijJelo(input) {
             alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
     });  
 }
-
+/** Autor: Filip Lucic 0188/17 - funkcija za vracanje jela u ponudu */
 function otkrijJelo(input) {
 
      let niz= input.id.split("_");
@@ -231,17 +231,21 @@ function menjanje(obj) {
         str+='<option value="Bez laktoze">Bez laktoze</option>';
         str+='</select>';
         str+='</div>';
+        //prazan red
         str+='<div class= "col-sm-2 text-right">';
-      //  str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" width = "20px" height = "20px" style="margin-right:5px;">';
-        str+='</div>';                     
+        str+='</div>'; 
+        //prazan red end
         str+='</div>';
+        //prazan red
         str+='<div class = "row">';
         str+='<div class = "col-sm-10">';
+        str+='<br>';
         str+='</div>';
         str+='<div class = "col-sm-2 text-right">';
-     //   str+='<img src = "<?php echo base_url("assets/icons/trash.svg");?>" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
+        str+='<br>';
         str+='</div>';
         str+='</div>' ;
+        //prazan red end
         str+='<div class = "row">';
         str+='<div class = "col-sm-12 text-left" style="overflow: hidden;">';
         str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; " name="opis_jela_temp" id="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8" cols="32" ></textarea>';
@@ -428,11 +432,5 @@ function menjanje_temp() {
     id++;
 
 }
-
-
-function add_picture() {
-    alert("usao u dodavanje");
-}
-
 </script>
 

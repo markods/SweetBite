@@ -57,4 +57,9 @@
 }
 
 
+.saturator {
+    visibility: hidden;   
+}
+
+
 </style>
