@@ -183,7 +183,7 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);       
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - fja za sakrivanje jela iz ponude */
+    /** Autor: Jovana Jankovic 0586/17 - fja za sakrivanje jela iz ponude. */
     public function sakrijJelo(){
         $jelo = $this->receiveAJAX();
         $jeloModel = new JeloModel();
@@ -194,6 +194,21 @@ class Menadzer extends Ulogovani
             'jelo_id'=> $jelo['jelo_id']
         ];
         $this->sendAJAX($data);   
+    }
+    /** Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. */
+    
+    public function otkrijJelo() {
+        $jelo = $this->receiveAJAX();
+        $jeloModel = new JeloModel();
+        $jeloModel->update($jelo['jelo_id'],[
+                'jelo_datsakriv'=>null                    
+        ]);
+        $data=[
+            'success'=>"Uspesno ste izbrisali jelo iz ponude!",
+            'jelo_id'=> $jelo['jelo_id']
+        ];
+        $this->sendAJAX($data);
+      
     }
 }
 

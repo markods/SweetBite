@@ -12,7 +12,7 @@ function sakrijJelo(input) {
      let niz= input.id.split("_");
      let jelo_id=niz[1];
      let object = {
-       'jelo_id': jelo_id, 
+       'jelo_id': jelo_id 
       };
     $.post("<?php echo base_url('Menadzer/sakrijJelo'); ?>", 
             JSON.stringify(object), "json")
@@ -27,7 +27,21 @@ function sakrijJelo(input) {
 
 function otkrijJelo(input) {
 
-alert("Usao u otkrij");
+     let niz= input.id.split("_");
+     let jelo_id=niz[1];
+     let object = {
+       'jelo_id': jelo_id 
+      };
+     $.post("<?php echo base_url('Menadzer/otkrijJelo'); ?>", 
+            JSON.stringify(object), "json")
+     .done(function(data) {
+         $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-open.svg");?>").attr('onclick','sakrijJelo(this)'); 
+         alert("Uspesno ste vratili jelo iz ponudu!");
+     })
+     .fail(function() {
+            alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+     });  
+
 }
 
 /** Autor: Jovana Jankovic 17/0586 - pomocna fja za dodavanje tipova jela*/
