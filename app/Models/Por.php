@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-17 v0.3 Jovana Pavic 2017
+// 2020-05-17 v0.3 Jovana Pavic 2017/0099
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -77,7 +77,7 @@ class Por extends Model
         if (array_key_exists('por_kor_id', $data)) {
             $data['por_kor_id'] = \UUID::codeId($data['por_kor_id']);
         }
-        if (array_key_exists('povod_id', $data)) {
+        if (array_key_exists('por_povod_id', $data)) {
             $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
         }
         if(parent::insert($data, $returnID) === false){
@@ -104,7 +104,7 @@ class Por extends Model
         if (array_key_exists('por_kor_id', $data)) {
             $data['por_kor_id'] = \UUID::codeId($data['por_kor_id']);
         }
-        if (array_key_exists('povod_id', $data)) {
+        if (array_key_exists('por_povod_id', $data)) {
             $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
         }
         if(parent::update($id, $data) === false){
@@ -254,6 +254,28 @@ class Por extends Model
         return false;
     }
 
+    //------------------------------------------------
+    /**public function zaPravljenje(){...}
+    // Dohvata sve porudzbine koje nisu napravljene
+    */
+    
+    public function zaPravljenje()
+    {
+        $svePor = $this->where('por_odluka', 'accepted')->where('por_datizrade', null)->
+                findAll();
+        return $this->decodeArray($svePor);
+    }    
+    
+    //------------------------------------------------
+    /**public function napravljena(){...}
+    // Prosledjenoj poruzbini stavlja trenutni datum kao datum izrade
+    */
+    
+    public function napravljena($por_id)
+    {
+        $this->update($por_id, ['por_datizrade' => date('Y-m-d H:i:s')]);
+    }    
+    
     //------------------------------------------------
     /**public function decodeRecord($row){...}
     //Dekodovanje jednog rekorda

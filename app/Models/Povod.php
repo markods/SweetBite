@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-14 v0.2 Jovana Pavic 2017
+// 2020-05-14 v0.3 Jovana Pavic 2017/0099
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -32,11 +32,13 @@ class Povod extends Model
     
     //----------------------------------------------------------------------
     
+    /*
     //override osnovnih metoda tako da prikazuju greske
     //dobro za razvojnu fazu
     //metoda save ne mora da se overrid-uje jer ona samo poziva
     //insert i update u zavisnosti od parametara
     //preporucljivo koristiti insert i update jer insert vraca id
+    */
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
@@ -109,6 +111,20 @@ class Povod extends Model
             }
         }
         return null;
+    }
+    
+    //-----------------------------------------------
+    /** public function povodOpis($povod_id){...}
+    //dohvata opis povoda na osnovu id-a 
+    //ako ne postoji red sa tim id-em vraca null
+    */
+    
+    public function povodOpis($povod_id)
+    {
+        $povod_id = \UUID::codeId($povod_id);
+        $find = $this->find($povod_id);
+        if ($find == null) return null;
+        return $find->povod_opis;
     }
     
     //------------------------------------------------

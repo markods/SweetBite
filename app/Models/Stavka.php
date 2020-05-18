@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-17 v0.3 Jovana Pavic 2017
+// 2020-05-17 v0.4 Jovana Pavic 2017/0099
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -137,6 +137,17 @@ class Stavka extends Model
     }        
     
     //-----------------------------------------------
+    /** public function nijeNapravljenaStavka($stavka_id){...}
+    // Stavki sa datim id-em se uklanja datum izrade 
+    */
+    
+    public function nijeNapravljenaStavka($stavka_id)
+    {
+        //ne radi se codeId jer ga radi update
+        $this->update($stavka_id, ['stavka_datizrade' => null]);
+    }        
+    
+    //-----------------------------------------------
     /** public function dohvati($stavka_id){...}
     //Dohvata stavku sa datim id-em
     */
@@ -181,6 +192,18 @@ class Stavka extends Model
         $finds = $this->find($stavka_id);
         
         return $finds->stavka_kol;            
+    }
+    
+    //------------------------------------------------
+    /** public function sveIzPor($por_id){...}
+    //dohvata sve stavke iz odredjene porudzbine
+    */
+    
+    public function sveIzPor($por_id)
+    {
+        $por_id = \UUID::codeId($por_id);
+        $stavke = $this->where('stavka_por_id', $por_id)->findAll();
+        return $this->decodeArray($stavke);        
     }
      
     //------------------------------------------------

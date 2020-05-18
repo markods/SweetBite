@@ -1,73 +1,125 @@
 <script>
+// 2020-05-18 v0.3 Jovana Pavic 2017/0099
 
-/*
- * Prikaz porudzbine za menadzera - Jovana Pavic 0099/17
- * verzija 02 - rowless verzija
- */
+//-----------------------------------------------
+/** .ready
+// od baze dobija sve potrebne informacije
+// postavlja pocetni izgled stranice
+*/
 
-var id = 0;
+$(document).ready(function(){
+    $("#content").append('<div class="content-dummy" id=0></div>');
+   
+    $.post("<?php echo base_url('Kuvar/loadNotFinishedOrders')?>")
+    .done(function(orders){
+        for(let i=0; i<orders.por_id.length; i++){
+            let order = {
+                id:            orders.por_id[i],
+                name:          orders.por_povod[i],
+                date:          orders.por_za_dat[i],
+                orderedId:     orders.stavke_id[i],
+                orderedName:   orders.stavke_naziv[i],
+                orderedAmount: orders.stavke_kol[i],
+                orderedWeight: orders.stavke_masa[i],
+                orderedStatus: orders.stavke_status[i],
+            };
+            showOrder(order);
+        }
+    })
+    .fail(function(){
+        alert("Can't access data, server is down");
+    });  
+});
 
-//razlika u odnosu na Prikaz porudzbine za kupca (orderClient.js) je u prikazu opisa porudzbine
-//dodato je ime klijenta i njegov broj telefona u metodi showOrder()
-//drugacija metoda statusOptions()
+//-----------------------------------------------
+/** function showOrder(object){...}
+// prikazuje jednu porudzbinu
+*/
 
 function showOrder(object) {
-    /*Od ulaza potrebno:
-        id - id porudzbine,
-        name - ime porudzbine,
-        date - datum proslave, 
-        orderedName[] - imena narucenih jela, 
-        orderedAmount[] - broj porcija,
-        orderedWeight[] - ukupna kolicina narucenog jela ili velicina porcije?
-        orderedStatus[] - statusi jela (0-nije napravljeno, 1-napravljeno)
-    */
+    let id = object.id;
+    let name = object.name;
+    let date = object.date;
+    let orderedId = object.orderedId;   //id stavke
+    let orderedName = object.orderedName;
+    let orderedAmount = object.orderedAmount;
+    let orderedWeight = object.orderedWeight;
+    let orderedStatus = object.orderedStatus;
 
-    let name = "ime porudzbine";  let date = new Date(); let orderStatus = 1; let orderedName = ["cordon blau", "lasagna"]; 
-    let orderedAmount = [2, 3]; let orderedWeight = [600, 400]; let orderedStatus = [1,0];
-    //parsirati objekat u potrebne elemente
-
-    //osnovni izgled bez detalja porudzbine
-    var inner = "\
-        <div class=about_order>\
-            <text class=name>" + name+ "</text>\
-            <text class=stat><input type=checkbox class='check_done order_complited' onclick=orderDone(" + id + ")></text>\
+    let inner = 
+       '<div class=about_order>\
+            <text class=name>' + name + '</text>\
+            <text class=stat>\
+                <input type=checkbox class="check_done order_complited"\
+                    onclick=orderDone("' + id + '")></text>\
             <p></p>\
-            <text class=about>" + dateString(date) + "</text>\
+            <text class=about>' + date + '</text>\
         </div>\
         <div class=order_details>\
             <table class=order_amount>\
             </table>\
-        </div>\
-    "
+        </div>';
+                
     //dohvatiti sve dummy elemente
-    var dummy = $(".dummy");
+    let dummy = $(".content-dummy");
     dummy.html(inner);
     dummy[0].id = id;
-    dummy.removeClass("dummy").addClass("order");
+    dummy.removeClass("content-dummy").addClass("order");
 
     //dodavanje detalja porudzbine
-    var order_details = $(".order_amount", $("#"+id));
+    let order_details = $(".order_amount", $("#"+id));
     for(let i=0; i<orderedName.length; i++) {
-        var statusTemp = orderedStatus[i] == 1? "checked=on" : "";
-        var inner2 = "\
-            <tr class=" + i + ">\
-                <td>" + orderedAmount[i] + "x </td>\
-                <td class=name>" + orderedName[i] + "</td>\                <td></td>\
-                <td>" + orderedWeight[i] + "g</td>\
-                <td><input type=checkbox class='check_done order_part' onclick=dishDone(" + id + "," + i + ") " + statusTemp + "></td>\
-            </tr>\
-        "
+        let statusTemp = orderedStatus[i] === true? "checked=on" : "";
+        let inner2 =
+           '<tr class="d_' + orderedId[i] + '">\
+                <td>' + orderedAmount[i] + 'x </td>\
+                <td class=name>' + orderedName[i] + '</td>\
+                <td></td>\
+                <td>' + orderedWeight[i]*orderedAmount[i] + 'g</td>\
+                <td>\
+                    <input type=checkbox class="check_done order_part"\
+                        onclick=dishDone("' + orderedId[i] + '") ' + statusTemp + '>\
+                </td>\
+            </tr>';
         order_details.append(inner2);
     }
 
     //dodavanje dummy elementa
-    $(".cont").append("<div class='dummy'></div>");
+    $(".cont").append("<div class='content-dummy'></div>");
     id++;
 }
 
-function dishDone(id, pos) {
-    //menja se status u bazi
+//-----------------------------------------------
+/** function dishDone(id_stavke, check){...}
+// Poziva promene u bazi u odnosu na to da li je
+// jelo napravljeno ili ne
+*/
+
+function dishDone(id_stavke) {
+    let check = $('.check_done', $(".d_"+id_stavke)); 
+    if(check[0].checked === true){
+        $.post("<?php echo base_url('Kuvar/dishDone');?>", 
+                JSON.stringify({stavka_id: id_stavke}), 'json')
+        .fail(function(){
+            check.checked = false;
+        });
+    }
+    else{
+        $.post("<?php echo base_url('Kuvar/dishNotDone');?>", 
+                JSON.stringify({stavka_id: id_stavke}), 'json')
+        .fail(function(){
+            check.checked = true;
+        });    
+    }
 }
+
+//-----------------------------------------------
+/** public function orderDone(id){...}
+// proverava da li su sve stavke napravljene
+// ako jesu u bazi oznacava porudzbinu kao napravljenu
+// i uklanja je iz pogleda
+// a ako nisu odcekira dugme
+*/
 
 function orderDone(id) {
     let parts = $(".order_part", $("#"+id));
@@ -84,24 +136,15 @@ function orderDone(id) {
     else {
         //menja status u bazi na gotovo
         //uklanja se porudzbina iz prikaza
-
-        $("#"+id).remove(); //obrisemo nas order        
+        $.post("<?php echo base_url('Kuvar/orderDone');?>", 
+                JSON.stringify({"por_id": id}), 'json')
+        .done(function(){
+            $("#"+id).remove(); //uklonjeno iz pregleda
+        })
+        .fail(function(){
+            $(".order_complited", $("#"+id))[0].checked = false;
+        });
     }
-}
-
-//formatira datum
-function dateString(date) {
-    let year = date.getFullYear();
-    let month =  date.getMonth() + 1;
-    if (month < 10) month = "0" + month;
-    let day = date.getDay();
-    if (day < 10) day = "0" + day;
-    let hour = date.getHours();
-    if (hour < 10) hour = "0" + hour;
-    let min = date.getMinutes();
-    if (min < 10) min = "0" + min;
-    let str = year + "-" + month + "-" + day + " " + hour + ":" + min;
-    return str;
 }
 
 </script>

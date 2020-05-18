@@ -1,6 +1,7 @@
 <style>
+/* 2020-05-18 v0.3 Jovana Pavic 2017/0099 */
 
-/*-------OrderCook------*/
+/*-------Porudzbine Kuvar------*/
 .cont {
     text-align: center;
     color: white;
@@ -15,7 +16,7 @@
   }
   
   .about_order {
-    background-color: #6b80d3;
+    background-color: var(--primary-color);
   }
   
   text.name {
@@ -41,7 +42,6 @@
     padding-bottom: 0px;
     margin-bottom: 0px;
     font-size: small;
-    color: white;
   }
   
   .about {
@@ -49,12 +49,12 @@
     padding-bottom: 0px;
     margin-bottom: 0px;
     font-size: small;
-    color: white;
     float: right;
+    width:70px;
   }
   
   .order_details {
-    background-color: #8598e7;
+    background-color: var(--secondary-color);
     padding-top: 8px;
   }
   
