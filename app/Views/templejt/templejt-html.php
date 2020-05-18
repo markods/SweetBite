@@ -69,26 +69,26 @@
                     <small id="register-help"></small>
                     <div class="form-group">
                         <label for="register-full-name">ime i prezime</label>
-                        <input type="text" class="form-control" id="register-full-name" placeholder="Petar Petrović" pattern="[a-zA-Z ]+" minlength="1" maxlength="64">
+                        <input type="text" class="form-control" id="register-full-name" placeholder="Petar Petrović">
                         <small id="register-full-name-help">&nbsp;</small>
                     </div>
                     <div class="form-group">
                         <label for="register-email">email</label>
-                        <input type="email" class="form-control" id="register-email" placeholder="email@example.com"                      minlength="1" maxlength="128">
+                        <input type="email" class="form-control" id="register-email" placeholder="email@example.com">
                         <small id="register-email-help">&nbsp;</small>
                     </div>
                     <div class="form-group">
                         <label for="register-phone-num">broj telefona</label>
-                        <input type="tel" class="form-control" id="register-phone-num" placeholder="+381012345678"  pattern="\+[0-9]+"    minlength="8" maxlength="16">
+                        <input type="tel" class="form-control" id="register-phone-num" placeholder="+381012345678">
                         <small id="register-phone-num-help">&nbsp;</small>
                     </div>
                     <div class="form-group">
                         <label for="register-password-1">lozinka</label>
-                        <input type="password" class="form-control" id="register-password-1" placeholder="lozinka"                        minlength="8" maxlength="64">
+                        <input type="password" class="form-control" id="register-password-1" placeholder="lozinka">
                     </div>
                     <div class="form-group">
                         <label for="register-password-2">ponovite lozinku</label>
-                        <input type="password" class="form-control" id="register-password-2" placeholder="lozinka"                        minlength="8" maxlength="64">
+                        <input type="password" class="form-control" id="register-password-2" placeholder="lozinka">
                         <small id="register-password-help">&nbsp;</small>
                     </div>
                     <div>
@@ -109,7 +109,7 @@
 
                 <!-- login dropdown menu -->
                 <form class="dropdown-menu dropdown-menu-right p-3">
-                    <small id="form-help"></small>
+                    <small id="login-help"></small>
                     <div class="form-group">
                         <label for="login-email">email</label>
                         <input type="email" class="form-control" id="login-email" placeholder="email@example.com">

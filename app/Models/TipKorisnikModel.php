@@ -70,8 +70,8 @@ class TipKorisnikModel extends Model
     //dohvata naziv tipa korisnika po ID
     public function dohvatiNazivTipaKorisnika($id){
        $tipKorisnika=$this->find(\UUID::codeId($id));
-       if( count($tipKorisnika) == 0 ) return null;
-       return $tipKorisnika[0]->tipkor_naziv;
+       if( !isset($tipKorisnika) ) return null;
+       return $tipKorisnika->tipkor_naziv;
     }
     
     //dohvata id tipa korisnika po njegovom nazivu

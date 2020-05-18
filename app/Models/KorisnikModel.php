@@ -92,7 +92,7 @@ class KorisnikModel extends Model
        $korisnik = $this->find(\UUID::codeId($id));
        if( count($korisnik) == 0 ) return null;
        
-       return decodeRecord($korisnik[0]);
+       return $this->decodeRecord($korisnik[0]);
     }
    
    // proverava da li korisnik vec postoji, ako postoji vraca ga
@@ -100,7 +100,7 @@ class KorisnikModel extends Model
        $korisnik = $this->where('kor_email', $email)->find();
        if( count($korisnik) == 0 ) return null;
        
-       return decodeRecord($korisnik[0]);
+       return $this->decodeRecord($korisnik[0]);
    }
 
    //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
