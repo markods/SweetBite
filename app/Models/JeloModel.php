@@ -41,17 +41,21 @@ class JeloModel extends Model
                ];
         protected $skipValidation = false;
         
+        
+        /** Dohvata sve podatke iz tabele Jelo */
         public function dohvSve() {
             $jela = $this->findAll();
             $jela = $this->decodeArray($jela);
             return $jela;
         }
 
+        /** Dohvata sve podatke na osnovu id iz tabele Jelo */
         public function dohvPoId($id) {
             $id = \UUID::codeId($id);
             return $this->find($id);
         }
 
+        /** Dohvata jelo na osnovu njegovog naziva */
         public function dohvPoImenu($naziv_jela) {
             $jela = $this->where('jelo_naziv', $naziv_jela)->findAll();
             $jela = $this->decodeArray($jela);
@@ -105,6 +109,7 @@ class JeloModel extends Model
             return true;
         }
         
+        /** Dohvata id jela na osnovu naziva jela */
         public function dohvatiId($naziv){
             $jelo=$this->where('jelo_naziv',$naziv)->findAll();
             $jelo=$this->decodeArray($jelo);
@@ -125,17 +130,30 @@ class JeloModel extends Model
             return $found;  
         }
         
-        
          public function decodeRecord($row) {
-           
             $row->jelo_id = \UUID::decodeId($row->jelo_id);
             $row->jelo_tipjela_id = \UUID::decodeId($row->jelo_tipjela_id);
             $row->jelo_ukus_id = \UUID::decodeId($row->jelo_ukus_id);
             $row->jelo_dijeta_id = \UUID::decodeId($row->jelo_dijeta_id);
             return $row;  
         }
-
         
+        /** Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela */
+        public function dohvatiNazivJela($id){
+            $id=\UUID::codeId($id);
+           $jelo=$this->where('jelo_id',$id)->findAll();
+           $jelo=$this->decodeArray($jelo);
+           return $jelo[0]->jelo_naziv;
+        }
+        
+        /** Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela */
+        public function dohvatiMasu($id){
+            $id=\UUID::codeId($id);
+            $jelo=$this->where('jelo_id',$id)->findAll();
+            $jelo=$this->decodeArray($jelo);
+           return $jelo[0]->jelo_masa;
+        }
+         
         public function pretragaPoParametrima() {
             
         }

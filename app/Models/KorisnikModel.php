@@ -102,7 +102,28 @@ class KorisnikModel extends Model
        
        return $this->decodeRecord($korisnik[0]);
    }
-
+   
+   //pomocna fja 
+   public function dohvatiIdNaOsnovuImena($ime){
+       $korisnik=$this->where('kor_naziv',$ime)->find();
+       $korisnik=$this->decodeArray($korisnik);
+       return $korisnik[0]->kor_id;
+   }
+   
+   //fja za dohvatanje imena korisnika na osnovu id, sluzi kod funkcionalnosti za prikaz porudzbine
+   public function dohvatiImeNaOsnovuId($id){
+       $id=\UUID::codeId($id);
+       $korisnik=$this->find($id);
+       return $korisnik->kor_naziv;
+   }
+  
+   /** Dohvatanje broja telefona na osnovu id korisnika */
+   public function dohvatiBrojTelefona($id){
+        $id=\UUID::codeId($id);
+       $korisnik=$this->find($id);
+       return $korisnik->kor_tel;
+   }
+   
    //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
         $tipkor_id = \UUID::codeId($tipkor_id);

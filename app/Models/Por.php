@@ -253,6 +253,14 @@ class Por extends Model
         }
         return false;
     }
+    
+    //--------------------------------------------------
+    /** Autor: Jovana Jankovic 0586/17 - dohvatanje svih porudzbina */
+    public function dohvatiSvePorudzbine(){
+        $porudzbine=$this->findAll();
+        $porudzbine=$this->decodeArray($porudzbine);
+        return $porudzbine;
+    }
 
     //------------------------------------------------
     /**public function zaPravljenje(){...}
@@ -303,5 +311,7 @@ class Por extends Model
         }
         return $finds;  
     }
+    
+   
          
 }

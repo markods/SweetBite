@@ -3,10 +3,15 @@ use App\Models\DijetaModel;
 use App\Models\TipJelaModel;
 use App\Models\UkusModel;
 use App\Models\JeloModel;
+use App\Models\Por;
+use App\Models\Povod;
+use App\Models\KorisnikModel;
+use App\Models\Stavka;
 
 /** Jovana Jankovic - 0586/17   */
 /** Filip Lucic - 0188/17   */
 /** Funkcionalnosti za menadzera - dodavanje novih jela u bazu - v.0.1   */
+/** Funkcionalnosti za menadzera - prikaz porudzbina koje vidi menadzer - v.0.1 */
 
 class Menadzer extends Ulogovani
 {    
@@ -14,7 +19,7 @@ class Menadzer extends Ulogovani
          echo view('templejt/templejt-html.php');
     }
     
-    /**Autor:Jovana Jankovic 0586/17 - pomocna fja za testiranje tabele Jela*/
+    /** Autor:Jovana Jankovic 0586/17 - pomocna fja za testiranje tabele Jela */
     public function unesiTipove(){   
         $this->receiveAJAX();
 
@@ -95,7 +100,7 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($jelo); 
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - Fja koja radi update Jela koja menadzer promeni*/
+    /** Autor: Jovana Jankovic 0586/17 - Fja koja radi update Jela koja menadzer promeni */
     public function updateJelo(){
         
         $jelo = $this->receiveAJAX();
@@ -171,7 +176,7 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($jela);       
     }
     
-    /** Autor: Jovana Jankovic 17/0586 - omogucava brisanje jela iz ponude ketering servisa*/
+    /** Autor: Jovana Jankovic 17/0586 - omogucava brisanje (soft delete) jela iz ponude ketering servisa */
     public function obrisiJelo(){
         $jelo = $this->receiveAJAX();
         $jeloModel = new JeloModel();
@@ -183,7 +188,7 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);       
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - fja za sakrivanje jela iz ponude. */
+    /** Autor: Jovana Jankovic 0586/17 - omogucava sakrivanje jela iz ponude. */
     public function sakrijJelo(){
         $jelo = $this->receiveAJAX();
         $jeloModel = new JeloModel();
@@ -195,8 +200,8 @@ class Menadzer extends Ulogovani
         ];
         $this->sendAJAX($data);   
     }
-    /** Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. */
     
+    /** Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. */
     public function otkrijJelo() {
         $jelo = $this->receiveAJAX();
         $jeloModel = new JeloModel();
@@ -210,5 +215,72 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);
       
     }
+    
+    /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje porudzbine u bazu */
+   public function dodajPorudzbinu(){
+       $porudzbina=new Por();
+       $povod=new Povod();
+       $korisnik=new KorisnikModel();
+       $por_povod_id = $povod->povodId("proslava");
+       $kor_id=$korisnik->dohvatiIdNaOsnovuImena("korisnik");
+       $por['por_id']=$porudzbina->insert([
+            'por_kor_id'=>$kor_id,
+            'por_naziv'=>"70 godina braka",
+            'por_povod_id'=>$por_povod_id,
+            'por_br_osoba'=>10000,
+            'por_za_dat'=>date("Y-m-d H:i:s"),
+            'por_popust_proc'=>10
+        ]);         
+        $this->sendAJAX($por); 
+   }
+   
+   /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje stavki u bazu */
+   public function dodajStavku(){
+       $porudzbinaModel=new Por();
+       $jeloModel=new JeloModel();
+       $stavkaModel=new Stavka();
+       $porudzbine=$porudzbinaModel->dohvatiSvePorudzbine();
+       $jela=$jeloModel->dohvSve();  
+       for ($i = 0; $i < count($porudzbine); $i++) {
+            $stavkaModel->insert([
+                'stavka_por_id'=>$porudzbine[1]->por_id,
+                'stavka_jelo_id'=>$jela[$i]->jelo_id,
+                'stavka_kol'=>$i+3,
+                'stavka_cenakom'=>$jela[$i]->jelo_cena
+            ]);
+       }        
+    $this->sendAJAX($jela); 
+   }
+   
+   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */
+   public function dohvatiPorudzbine(){
+         $porudzbina=new Por();
+         $por=$porudzbina->dohvatiSvePorudzbine();
+         $korisnikModel=new KorisnikModel();
+         $stavkaModel=new Stavka();
+         $jeloModel=new JeloModel();
+         
+          for ($i = 0; $i < count($por); $i++) {
+           $ime=$korisnikModel->dohvatiImeNaOsnovuId($por[$i]->por_kor_id);
+           $telefon=$korisnikModel->dohvatiBrojTelefona($por[$i]->por_kor_id); 
+           $stavke=$stavkaModel->dohvatiStavke($por[$i]->por_id);
+            
+                for($j=0; $j<count($stavke); $j++){
+                    $naziv_jela[$j]=$jeloModel->dohvatiNazivJela($stavke[$j]->stavka_jelo_id);      
+                    $masa_jela[$j]=$jeloModel->dohvatiMasu($stavke[$j]->stavka_jelo_id);
+                    $kol_jela[$j]=$stavke[$j]->stavka_kol;
+                    $cena_jela[$j]=$stavke[$j]->stavka_cenakom;
+                }
+                 
+            //dodavanje atributa objektu
+            $por[$i]->ime_korisnika=$ime;
+            $por[$i]->telefon_korisnika=$telefon;
+            $por[$i]->naziv_jela=$naziv_jela;
+            $por[$i]->masa_jela=$masa_jela;
+            $por[$i]->kol_jela=$kol_jela;
+            $por[$i]->cena_jela=$cena_jela;
+          }  
+         $this->sendAJAX($por); 
+   }
 }
 

@@ -11,6 +11,46 @@ var id = 0;
 //dodato je ime klijenta i njegov broj telefona u metodi showOrder()
 //drugacija metoda statusOptions()
 
+/** Autor: Jovana Jankovic 0586/17 - Pomocna funkcija koja zove funkciju kontrolera Menadzer za dodavanje nove porudzbine */
+function dodajPorudzbinu(){
+    alert("Usao u dodaj porudzbinu");
+     $.post("<?php echo base_url('Menadzer/dodajPorudzbinu'); ?>")
+    .done(function(data) {
+            alert("Uspesno ste dodali porudzbinu u bazu!");
+    })
+    .fail(function() {
+            alert("Niste dodali porudzbinu u bazu!");
+    });          
+}
+
+/** Autor: Jovana Jankovic 0586/17 - Pomocna funkcija koja zove funkciju kontrolera Menadzer za dodavanje nove stavke */
+function dodajStavku(){
+    alert("Usao u stavku");
+    $.post("<?php echo base_url('Menadzer/dodajStavku'); ?>")
+    .done(function(data) {
+            alert("Uspesno ste dodali stavku u bazu!");
+    })
+    .fail(function() {
+            alert("Niste dodali stavku u bazu!");
+    });      
+}
+
+/** Autor: Jovana Jankovic 0586/17 - Funkcija koja komunicira sa kontrolerom Menadzer i poziva njegovu funkciju dohvatiPorudzbine()  */
+/** Nakon toga, dohvacene podatke prosledjuje funkciji showOrder(data) */
+function prikaziPorudzbinu(){ 
+   alert("Usao u porudzbinu");
+   $.post("<?php echo base_url('Menadzer/dohvatiPorudzbine'); ?>")
+    .done(function(data) {
+   for(let i=0;i<data.length;i++){
+        showOrder(data[i]);
+        }
+    })
+    .fail(function() {
+            alert("Prikaz porudzbine nije uspelo, molimo Vas, pokusajte ponovo!");
+    });  
+}
+
+/** Dopune funkcije: Jovana Jankovic 0586/17 - dopunjena funkcija za prikaz porudzbina koristeci stvarne podatke iz baze*/
 function showOrder(object) {
     /*Od ulaza potrebno:
         id - id porudzbine,
@@ -26,11 +66,40 @@ function showOrder(object) {
         orderedPrice[] - ukupna cena tog jela
         discount - da li je ostvaren popust
     */
-    let name = "ime porudzbine"; let people = 3; let date = new Date(); let orderedName = ["cordon blau", "lasagna"]; 
-    let orderedAmount = [2, 3]; let orderedWeight = [600, 400]; let orderedPrice = [1200, 1600]; let discount = true;
-    let stat = 3; let clientName = "Petar Petrovic"; let clientNumber = "061 23456789";
+//    let name = "ime porudzbine"; let people = 3; let date = new Date(); let orderedName = ["cordon blau", "lasagna"]; 
+//    let orderedAmount = [2, 3]; let orderedWeight = [600, 400]; let orderedPrice = [1200, 1600]; let discount = true;
+//    let stat = 3; let clientName = "Petar Petrovic"; let clientNumber = "061 23456789";
     //parsirati objekat u potrebne elemente
-
+    
+      let name = object['por_naziv'];
+      let people = object['por_br_osoba'];
+      let date = object['por_za_dat'];
+      
+      let orderedName=[];
+      for(let i=0;i<object['naziv_jela'].length;i++){
+            orderedName[i]=object['naziv_jela'][i];
+      }
+      
+      let orderedAmount = [];
+         for(let i=0;i<object['kol_jela'].length;i++){
+            orderedAmount[i]=object['kol_jela'][i];
+      }
+      
+      let orderedWeight = [];  
+      for(let i=0;i<object['masa_jela'].length;i++){
+            orderedWeight[i]=object['masa_jela'][i];
+      }
+      
+      let orderedPrice = [];
+      for(let i=0;i<object['cena_jela'].length;i++){
+            orderedPrice[i]=object['cena_jela'][i];
+      }
+      
+      let discount = true;
+      let stat = 3;
+      let clientName = object['ime_korisnika'];
+      let clientNumber = object['telefon_korisnika'];
+   
     //osnovni izgled bez detalja porudzbine
     var inner = "\
         <div class=about_order>\
@@ -41,13 +110,13 @@ function showOrder(object) {
             <text class=about>" + people + " osoba </text>\
             <br/>\
             <text class=about_client>" + clientNumber + "</text>\
-            <text class=about>" + dateString(date) + "</text>\
+            <text class=about>" + date + "</text>\
         </div>\
         <div class=order_details>\
             <table class=order_amount>\
             </table>\
         </div>\
-    "
+    ";
     //dohvatiti sve dummy elemente
     var dummy = $(".dummy");
     dummy.html(inner);
@@ -64,13 +133,13 @@ function showOrder(object) {
                 <td>" + orderedAmount[i] + "x </td>\
                 <td class=name>" + orderedName[i] + "</td>\
                 <td></td>\
-                <td>" + orderedWeight[i] + "g</td>\
-                <td>" + orderedPrice[i] + "din</td>\
+                <td>" + orderedWeight[i]*orderedAmount[i] + "g</td>\
+                <td>" + orderedPrice[i]*orderedAmount[i] + "din</td>\
             </tr>\
         "
         order_details.append(inner2);
-        price += orderedPrice[i];
-        weight += orderedWeight[i];
+        price += orderedPrice[i]*orderedAmount[i];
+        weight += orderedWeight[i]*orderedAmount[i];
     }
     //dodavanje popusta
     if (discount == true) {
@@ -103,6 +172,7 @@ function showOrder(object) {
     $(".cont").append("<div class='dummy'></div>");
     id++;
 }
+
 
 //prikazuje opcije za rad nad porudzbinom u odnosu na njen status
 function statusOptions(stat, id) {
