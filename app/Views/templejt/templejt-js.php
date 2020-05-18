@@ -213,15 +213,14 @@ $(document).ready(function() {
     // ====== logout ======
     // log the client out of the system
     $('#logout').on('click', function() {
-        $.post(<?php echo '"'.base_url("$kor_tipkor/logout").'"'; ?>)
-        .done(function( response ) {
-            // if the operation was successful, redirect to the appropriate page
-            if( response['redirect'] ) window.location.replace(response['redirect']);
-        });
-    });
-    
-    
-    
+          $.post(<?php echo '"'.base_url("$kor_tipkor/logout").'"'; ?>)
+          .done(function( response ) {
+              // if the operation was successful, redirect to the appropriate page
+              if( response['redirect'] ) window.location.replace(response['redirect']);
+          });
+      });
+
+
     // ====== page customization ======
     // setting custom sidebar settings
     $("#sidebar").mCustomScrollbar({

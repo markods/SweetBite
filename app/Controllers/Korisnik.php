@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 //2020-05-17 v0.1 Jovana Pavic 2017/0099
-
+//2020-05-18 v.0.1 Jovana Jankovic 2017/0586
 use App\Models\JeloModel;
 use App\Models\TipJelaModel;
 use App\Models\DijetaModel;
@@ -8,6 +8,8 @@ use App\Models\UkusModel;
 use App\Models\FavoritiModel;
 use App\Models\Por;
 use App\Models\Stavka;
+use App\Models\KorisnikModel;
+use App\Models\Povod;
 
 class Korisnik extends Ulogovani
 {
@@ -290,6 +292,45 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
 
+    /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 
+    public function dohvatiPorudzbineKorisnik(){ 
+         $korisnikModel=new KorisnikModel();
+         $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
+        
+         $porudzbina=new Por();
+         $por=$porudzbina->porudzbineKorisnika($kor_id);
+        
+         $stavkaModel=new Stavka();
+         $jeloModel=new JeloModel();
+         
+          for ($i = 0; $i < count($por); $i++) {
+           $stavke=$stavkaModel->dohvatiStavke($por[$i]->por_id);
+            
+                for($j=0; $j<count($stavke); $j++){
+                    $naziv_jela[$j]=$jeloModel->dohvatiNazivJela($stavke[$j]->stavka_jelo_id);      
+                    $masa_jela[$j]=$jeloModel->dohvatiMasu($stavke[$j]->stavka_jelo_id);
+                    $kol_jela[$j]=$stavke[$j]->stavka_kol;
+                    $cena_jela[$j]=$stavke[$j]->stavka_cenakom;
+                }
+                 
+            //dodavanje atributa objektu
+            $por[$i]->naziv_jela=$naziv_jela;
+            $por[$i]->masa_jela=$masa_jela;
+            $por[$i]->kol_jela=$kol_jela;
+            $por[$i]->cena_jela=$cena_jela;
+            if($por[$i]->por_datodluke==null)
+                $por[$i]->status = 0;
+            if($por[$i]->por_odluka==='prihvacena')
+                $por[$i]->status = 1;
+            if($por[$i]->por_odluka==='odbijena')
+                $por[$i]->status = 2;    
+            if($por[$i]->por_datizrade!=null)
+                $por[$i]->status = 3;
+            if($por[$i]->por_datpreuz!=null)
+                $por[$i]->status = 4;
+          }  
+         $this->sendAJAX($por); 
+    }
     
 }
 

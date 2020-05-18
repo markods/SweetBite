@@ -2,6 +2,7 @@
 
 /*
  * Prikaz porudzbine za menadzera - Jovana Pavic 0099/17
+ * Prikaz porudzbina menadzera i komunikacija sa kontrolerom Menadzer radi dohvatanja podataka iz baze - Jovana Jankovic 0586/17
  * verzija 02 - rowless verzija
  */
 

@@ -95,8 +95,7 @@ class Menadzer extends Ulogovani
             'jelo_tipjela_id'=>$tip_id,
             'jelo_ukus_id'=>$ukus_id,
             'jelo_dijeta_id'=>$dijeta_id 
-        ]);
-              
+        ]);      
         $this->sendAJAX($jelo); 
     }
     
@@ -212,8 +211,7 @@ class Menadzer extends Ulogovani
             'success'=>"Uspesno ste izbrisali jelo iz ponude!",
             'jelo_id'=> $jelo['jelo_id']
         ];
-        $this->sendAJAX($data);
-      
+        $this->sendAJAX($data);   
     }
     
     /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje porudzbine u bazu */
@@ -327,4 +325,3 @@ class Menadzer extends Ulogovani
        $this->sendAJAX($arh);  
    }
 }
-
