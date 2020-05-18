@@ -285,9 +285,10 @@ class Menadzer extends Ulogovani
                 $por[$i]->status = 1;
             if($por[$i]->por_odluka==='odbijena')
                 $por[$i]->status = 2;    
-            if($por[$i]->por_datpreuz!=null)
+            if($por[$i]->por_datizrade!=null)
                 $por[$i]->status = 3;
-
+            if($por[$i]->por_datpreuz!=null)
+                $por[$i]->status = 4;
           }  
          $this->sendAJAX($por); 
    }
@@ -312,6 +313,18 @@ class Menadzer extends Ulogovani
        ]);
        $odb['status']=2;
        $this->sendAJAX($odb);  
+   }
+   
+    /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za arhiviranje porudzbine*/
+   public function arhivirajPorudzbinu() {
+       $arh = $this->receiveAJAX();
+       $por = new Por();
+       $por->update($arh['por_id'], [
+           'por_datodluke'=>date("Y-m-d H:i:s"),
+           'por_odluka'=>'arhivirana'
+       ]);
+       $arh['status']=4;
+       $this->sendAJAX($arh);  
    }
 }
 

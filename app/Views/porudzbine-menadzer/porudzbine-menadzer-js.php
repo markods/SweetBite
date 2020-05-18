@@ -191,8 +191,8 @@ function statusOptions(stat, id) {
                        <img src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+'/>\
                     "; 
                 break;
-        case 3: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='!' onclick=archive(this)>"; break;
-        case 4: str = "<img src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='.'/>"
+        case 3: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-double-check.svg");?>' alt='!' onclick=archive(this)>"; break;
+        case 4: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='.'/>"
     }
     return str;
     //   
@@ -226,7 +226,7 @@ function acceptOrder(input) {
             JSON.stringify(object), "json")
     .done(function(data) {
           alert("Uspesno ste prihvatili porudzbinu");
-          $(".stat", $("#"+input.id)).html(statusOptions(1, input.id))
+          $(".stat", $("#"+input.id)).html(statusOptions(1, input.id));
     })
     .fail(function() {
             alert("Prihvatanje porudzbine nije uselo, molimo Vas, pokusajte opet!");
@@ -242,19 +242,27 @@ function declineOrder(input) {
             JSON.stringify(object), "json")
     .done(function(data) {
           alert("Uspesno ste odbili porudzbinu");
-          $(".stat", $("#"+input.id)).html(statusOptions(2, input.id))
+          $(".stat", $("#"+input.id)).html(statusOptions(2, input.id));
     })
     .fail(function() {
             alert("Odbijanje porudzbine nije uselo, molimo Vas, pokusajte opet!");
-    }); 
-    
-   // $(".stat", $("#"+order)).html(statusOptions(2, order));
+    });   
 }
 
-//oznacava porudzbinu kao pokupljenu/arhiviranu
-function archive(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(4, order));
+/**Autor: Filip Lucic 0188/17 - funkcija za arhiviranje porudzbine*/
+function archive(input) {
+      object = {
+        'por_id':input.id
+        };
+     $.post("<?php echo base_url('Menadzer/arhivirajPorudzbinu'); ?>", 
+            JSON.stringify(object), "json")
+    .done(function(data) {
+          alert("Uspesno ste arhivirali porudzbinu");
+          $(".stat", $("#"+input.id)).html(statusOptions(data['status'], data['por_id']));
+    })
+    .fail(function() {
+            alert("Arhiviranje porudzbine nije uselo, molimo Vas, pokusajte opet!");
+    }); 
 }
 
 </script>
