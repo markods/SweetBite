@@ -5,7 +5,7 @@
  * verzija 02 - rowless verzija
  */
 
-var id = 0;
+//var id = 0;
 
 //razlika u odnosu na Prikaz porudzbine za kupca (orderClient.js) je u prikazu opisa porudzbine
 //dodato je ime klijenta i njegov broj telefona u metodi showOrder()
@@ -53,24 +53,24 @@ function prikaziPorudzbinu(){
 /** Dopune funkcije: Jovana Jankovic 0586/17 - dopunjena funkcija za prikaz porudzbina koristeci stvarne podatke iz baze*/
 function showOrder(object) {
     /*Od ulaza potrebno:
-        id - id porudzbine,
-        name - ime porudzbine,
+        id - id porudzbine, 
+        name - ime porudzbine, x
         stat - status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap), 
-        clientName - ime kupca,
-        clientNumber - broj telefona kupca,
-        people - broj osoba, 
-        date - datum proslave, 
-        orderedName[] - imena narucenih jela, 
-        orderedAmount[] - broj porcija,
-        orderedWeight[] - ukupna kolicina narucenog jela ili velicina porcije?,
-        orderedPrice[] - ukupna cena tog jela
-        discount - da li je ostvaren popust
+        clientName - ime kupca, x
+        clientNumber - broj telefona kupca, x
+        people - broj osoba, x
+        date - datum proslave, x
+        orderedName[] - imena narucenih jela, x
+        orderedAmount[] - broj porcija, x
+        orderedWeight[] - ukupna kolicina narucenog jela ili velicina porcije?, x
+        orderedPrice[] - ukupna cena tog jela x
+        discount - da li je ostvaren popust 
     */
 //    let name = "ime porudzbine"; let people = 3; let date = new Date(); let orderedName = ["cordon blau", "lasagna"]; 
 //    let orderedAmount = [2, 3]; let orderedWeight = [600, 400]; let orderedPrice = [1200, 1600]; let discount = true;
 //    let stat = 3; let clientName = "Petar Petrovic"; let clientNumber = "061 23456789";
     //parsirati objekat u potrebne elemente
-    
+      let id = object['por_id'];
       let name = object['por_naziv'];
       let people = object['por_br_osoba'];
       let date = object['por_za_dat'];
@@ -96,7 +96,7 @@ function showOrder(object) {
       }
       
       let discount = true;
-      let stat = 3;
+      let stat = object['status'];
       let clientName = object['ime_korisnika'];
       let clientNumber = object['telefon_korisnika'];
    
@@ -169,8 +169,8 @@ function showOrder(object) {
     order_details.append(inner3);
 
     //dodavanje dummy elementa
-    $(".cont").append("<div class='dummy'></div>");
-    id++;
+    $("#content").append("<div class='dummy'></div>");
+    
 }
 
 
@@ -179,22 +179,23 @@ function statusOptions(stat, id) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";
     switch (stat) {
-        case 0: str = "<img src='../../../public/assets/icons/orderManager_reject.svg' alt='-' onclick=declineOrder(" + id + ")>\
-                       <img src='../../../public/assets/icons/orderManager_acept.svg' alt='+' onclick=acceptOrder(" + id + ")>\
+        case 0: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-' onclick=declineOrder(" + "this" + ")>\
+                       <img id='"+id+"' src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+' onclick=acceptOrder(this)>\
                     "; 
                 break;
-        case 1: str = "<img src='../../../public/assets/icons/orderManager_reject.svg' alt='-'/>\
-                       <img src='../../../public/assets/icons/orderManager_acepted.svg' alt='++'/>\
+        case 1: str = "<img src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-'/>\
+                       <img src='<?php echo base_url("assets/icons/circle-check.svg");?>' alt='++'/>\
                     "; 
                 break;
-        case 2: str = "<img src='../../../public/assets/icons/orderManager_rejected.svg' alt='--'/>\
-                       <img src='../../../public/assets/icons/orderManager_acept.svg' alt='+'/>\
+        case 2: str = "<img src='<?php echo base_url("assets/icons/circle-cross.svg");?>' alt='--'/>\
+                       <img src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+'/>\
                     "; 
                 break;
-        case 3: str = "<img src='../../../public/assets/icons/orderManager_done.svg' alt='!' onclick=archive(" + id + ")>"; break;
-        case 4: str = "<img src='../../../public/assets/icons/orderManager_picked.svg' alt='.'/>"
+        case 3: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='!' onclick=archive(this)>"; break;
+        case 4: str = "<img src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='.'/>"
     }
     return str;
+    //   
 }
 
 //formatira datum
@@ -216,16 +217,38 @@ function dateString(date) {
 function showStatus(){   
 }
 
-//prihvata porudzbinu, menja joj status
-function acceptOrder(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(1, order));
+/**Autor: Filip Lucic 0188/17 - funkcija za prihvatanje porudzbine*/
+function acceptOrder(input) {
+    object = {
+        'por_id':input.id
+    };
+     $.post("<?php echo base_url('Menadzer/prihvatiPorudzbinu'); ?>", 
+            JSON.stringify(object), "json")
+    .done(function(data) {
+          alert("Uspesno ste prihvatili porudzbinu");
+          $(".stat", $("#"+input.id)).html(statusOptions(1, input.id))
+    })
+    .fail(function() {
+            alert("Prihvatanje porudzbine nije uselo, molimo Vas, pokusajte opet!");
+    }); 
 }
 
-//odbija porudzbinu
-function declineOrder(order) {
-    //dodati upis promene statusa u bazu
-    $(".stat", $("#"+order)).html(statusOptions(2, order));
+/**Autor: Filip Lucic 0188/17 - funkcija za odbijanje porudzbine*/
+function declineOrder(input) {
+     object = {
+        'por_id':input.id
+    };
+     $.post("<?php echo base_url('Menadzer/odbijPorudzbinu'); ?>", 
+            JSON.stringify(object), "json")
+    .done(function(data) {
+          alert("Uspesno ste odbili porudzbinu");
+          $(".stat", $("#"+input.id)).html(statusOptions(2, input.id))
+    })
+    .fail(function() {
+            alert("Odbijanje porudzbine nije uselo, molimo Vas, pokusajte opet!");
+    }); 
+    
+   // $(".stat", $("#"+order)).html(statusOptions(2, order));
 }
 
 //oznacava porudzbinu kao pokupljenu/arhiviranu

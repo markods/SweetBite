@@ -221,13 +221,13 @@ class Menadzer extends Ulogovani
        $porudzbina=new Por();
        $povod=new Povod();
        $korisnik=new KorisnikModel();
-       $por_povod_id = $povod->povodId("proslava");
-       $kor_id=$korisnik->dohvatiIdNaOsnovuImena("korisnik");
+       $por_povod_id = $povod->povodId("ostalo");
+       $kor_id=$korisnik->dohvatiIdNaOsnovuImena("menadzer");
        $por['por_id']=$porudzbina->insert([
             'por_kor_id'=>$kor_id,
-            'por_naziv'=>"70 godina braka",
+            'por_naziv'=>"Pobeda na sajmu kretena",
             'por_povod_id'=>$por_povod_id,
-            'por_br_osoba'=>10000,
+            'por_br_osoba'=>1200,
             'por_za_dat'=>date("Y-m-d H:i:s"),
             'por_popust_proc'=>10
         ]);         
@@ -252,7 +252,7 @@ class Menadzer extends Ulogovani
     $this->sendAJAX($jela); 
    }
    
-   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */
+   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */ 
    public function dohvatiPorudzbine(){
          $porudzbina=new Por();
          $por=$porudzbina->dohvatiSvePorudzbine();
@@ -279,8 +279,39 @@ class Menadzer extends Ulogovani
             $por[$i]->masa_jela=$masa_jela;
             $por[$i]->kol_jela=$kol_jela;
             $por[$i]->cena_jela=$cena_jela;
+            if($por[$i]->por_datodluke==null)
+                $por[$i]->status = 0;
+            if($por[$i]->por_odluka==='prihvacena')
+                $por[$i]->status = 1;
+            if($por[$i]->por_odluka==='odbijena')
+                $por[$i]->status = 2;    
+            if($por[$i]->por_datpreuz!=null)
+                $por[$i]->status = 3;
+
           }  
          $this->sendAJAX($por); 
+   }
+   /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za prihvatanje porudzbine*/
+   public function prihvatiPorudzbinu() {
+       $prihv = $this->receiveAJAX();
+       $por = new Por();
+       $por->update($prihv['por_id'], [
+           'por_datodluke'=>date("Y-m-d H:i:s"),
+           'por_odluka'=>'prihvacena'
+       ]);
+       $prihv['status']=1;
+       $this->sendAJAX($prihv);    
+   }
+    /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za odbijanje porudzbine*/
+   public function odbijPorudzbinu() {
+       $odb = $this->receiveAJAX();
+       $por = new Por();
+       $por->update($odb['por_id'], [
+           'por_datodluke'=>date("Y-m-d H:i:s"),
+           'por_odluka'=>'odbijena'
+       ]);
+       $odb['status']=2;
+       $this->sendAJAX($odb);  
    }
 }
 
