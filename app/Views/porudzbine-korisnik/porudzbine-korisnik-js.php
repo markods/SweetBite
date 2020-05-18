@@ -3,6 +3,7 @@
 /*
  * Prikaz porudzbine za klijenta - Jovana Pavic 0099/17
  * Prikaz porudzbina klijenta i komunikacija sa kontrolerom Korisnik radi dohvatanja podataka iz baze- Jovana Jankovic 0586/17
+ * Prikaz porudzbina klijenta - sredjen prikaz statusa porudzbine
  * verzija 02 - rowless verzija
  * 
  *      postoje samo grupisanja u vidu jedne porudzbine
@@ -64,7 +65,7 @@ function showClientOrder(object) {
       }
 
     let discount = true;
-    let stat = 1;
+    let stat = object['status'];
     //parsirati objekat u potrebne elemente
 
     //osnovni izgled bez detalja porudzbine
@@ -138,15 +139,17 @@ function showClientOrder(object) {
 }
 
 //razliciti prikaz (ikonica), dodaje hover opciju i prosedjuje odgovarajuci parametar
+//Pogledati za novu ikonicu, da se razlikuje kada je porudzbina spremna/pokupljena!!!
+//Promena putanja ka slikama - Filip Lucic
 function statusOptions(stat) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";
     switch (stat) {
-        case 0: str = "<img src='../../../public/assets/icons/orderClient_waiting.svg' alt='?' onhover=showStatus(0)/>"; break;
-        case 1: str = "<img src='../../../public/assets/icons/orderClient_acepted.svg' alt='+' onhover=showStatus(1)/>"; break;
-        case 2: str = "<img src='../../../public/assets/icons/orderClient_rejected.svg' alt='-' onhover=showStatus(2)/>"; break;
-        case 3: str = "<img src='../../../public/assets/icons/orderClient_done.svg' alt='!' onhover=showStatus(3)/>"; break;
-        case 4: str = "<img src='../../../public/assets/icons/orderClient_picked.svg' alt='.' onhover=showStatus(4)/>"; break;
+        case 0: str = "<img src='<?php echo base_url("assets/icons/plain-question-mark.svg");?>' alt='?' onhover=showStatus(0)/>"; break;
+        case 1: str = "<img src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+' onhover=showStatus(1)/>"; break;
+        case 2: str = "<img src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-' onhover=showStatus(2)/>"; break;
+        case 3: str = "<img src='<?php echo base_url("assets/icons/plain-double-check.svg");?>' alt='!' onhover=showStatus(3)/>"; break;
+        case 4: str = "<img src='<?php echo base_url("assets/icons/plain-double-check.svg");?>' alt='.' onhover=showStatus(4)/>"; break;
     }
     return str;
 }

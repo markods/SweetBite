@@ -175,7 +175,7 @@ function showOrder(object) {
 }
 
 
-//prikazuje opcije za rad nad porudzbinom u odnosu na njen status
+/**Filip Lucic 0188/17 - sredio putanje u skladu sa back-endom*/
 function statusOptions(stat, id) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     var str="";

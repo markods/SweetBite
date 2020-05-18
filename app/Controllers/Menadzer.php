@@ -250,7 +250,8 @@ class Menadzer extends Ulogovani
     $this->sendAJAX($jela); 
    }
    
-   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */ 
+   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */
+   /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
    public function dohvatiPorudzbine(){
          $porudzbina=new Por();
          $por=$porudzbina->dohvatiSvePorudzbine();
@@ -318,7 +319,7 @@ class Menadzer extends Ulogovani
        $arh = $this->receiveAJAX();
        $por = new Por();
        $por->update($arh['por_id'], [
-           'por_datodluke'=>date("Y-m-d H:i:s"),
+           'por_datpreuz'=>date("Y-m-d H:i:s"),
            'por_odluka'=>'arhivirana'
        ]);
        $arh['status']=4;

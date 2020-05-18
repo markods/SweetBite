@@ -293,10 +293,10 @@ class Korisnik extends Ulogovani
     //-----------------------------------------------
 
     /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 
+    /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
     public function dohvatiPorudzbineKorisnik(){ 
          $korisnikModel=new KorisnikModel();
-         $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
-        
+         $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");       
          $porudzbina=new Por();
          $por=$porudzbina->porudzbineKorisnika($kor_id);
         
@@ -318,6 +318,7 @@ class Korisnik extends Ulogovani
             $por[$i]->masa_jela=$masa_jela;
             $por[$i]->kol_jela=$kol_jela;
             $por[$i]->cena_jela=$cena_jela;
+            
             if($por[$i]->por_datodluke==null)
                 $por[$i]->status = 0;
             if($por[$i]->por_odluka==='prihvacena')
@@ -329,6 +330,7 @@ class Korisnik extends Ulogovani
             if($por[$i]->por_datpreuz!=null)
                 $por[$i]->status = 4;
           }  
+      
          $this->sendAJAX($por); 
     }
     
