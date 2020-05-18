@@ -8,6 +8,7 @@ $(document).ready(function() {
     const nbsp = '&nbsp;';
     
     
+    
     // ====== login ======
     // reset the email field help text and background color
     $("#login-email").on('input', function() {
@@ -45,19 +46,18 @@ $(document).ready(function() {
             kor_pwd:   $("#login-password").val()
         };
         
-        // TODO: odkomentarisati
-//        // if any of the form fields is empty, don't send the request
-//        if( request.kor_email === ""
-//         || request.kor_pwd   === ""
-//        )
-//        return;
+        // if any of the form fields is empty, don't send the request
+        if( request.kor_email === ""
+         || request.kor_pwd   === ""
+        )
+        return;
 
         // send an AJAX request to the given url, with the given JSON object
         $.post(<?php echo '"'.base_url('Gost/login').'"'; ?>, JSON.stringify(request), "json")
         // when the client receives the AJAX response, this function gets called
         .done(function( response ) {
-            // if the operation was successful, return
-            if( response['success'] ) return;
+            // if the operation was successful, redirect to the appropriate page
+            if( response['redirect'] ) window.location.replace(response['redirect']);
             // otherwise, take the error codes and embed them in the matching form help fields
             for( let [key, val] of Object.entries(response) )
                 $(key).html(val);
@@ -167,14 +167,13 @@ $(document).ready(function() {
         // reset the general form tip
         $("#register-help").html('');
         
-        // TODO: odkomentarisati
-//        // if any of the form fields is invalid, don't send the request
-//        if( $("#register-full-name-help").html() != nbsp
-//         || $("#register-email-help"    ).html() != nbsp
-//         || $("#register-phone-num-help").html() != nbsp
-//         || $("#register-password-help" ).html() != nbsp
-//        )
-//        return;
+        // if any of the form fields is invalid, don't send the request
+        if( $("#register-full-name-help").html() != nbsp
+         || $("#register-email-help"    ).html() != nbsp
+         || $("#register-phone-num-help").html() != nbsp
+         || $("#register-password-help" ).html() != nbsp
+        )
+        return;
     
         // create a request
         let request = {
@@ -184,21 +183,20 @@ $(document).ready(function() {
             kor_pwd:   $("#register-password-1").val()
         };
         
-        // TODO: odkomentarisati
-//        // if any of the form fields is empty, don't send the request
-//        if( request.kor_naziv === ""
-//         || request.kor_email === ""
-//         || request.kor_tel   === ""
-//         || request.kor_pwd   === ""
-//        )
-//        return;
+        // if any of the form fields is empty, don't send the request
+        if( request.kor_naziv === ""
+         || request.kor_email === ""
+         || request.kor_tel   === ""
+         || request.kor_pwd   === ""
+        )
+        return;
 
         // send an AJAX request to the given url, with the given JSON object
         $.post(<?php echo '"'.base_url('Gost/register').'"'; ?>, JSON.stringify(request), "json")
         // when the client receives the AJAX response, this function gets called
         .done(function( response ) {
-            // if the operation was successful, return
-            if( response['success'] ) return;
+            // if the operation was successful, redirect to the appropriate page
+            if( response['redirect'] ) window.location.replace(response['redirect']);
             // otherwise, take the error codes and embed them in the matching form help fields
             for( let [key, val] of Object.entries(response) )
                 $(key).html(val);
@@ -209,6 +207,19 @@ $(document).ready(function() {
             $("#register-help").html("neuspesna konekcija ka serveru");
         });
     });
+    
+    
+    
+    // ====== logout ======
+    // log the client out of the system
+    $('#logout').on('click', function() {
+        $.post(<?php echo '"'.base_url("$kor_tipkor/logout").'"'; ?>)
+        .done(function( response ) {
+            // if the operation was successful, redirect to the appropriate page
+            if( response['redirect'] ) window.location.replace(response['redirect']);
+        });
+    });
+    
     
     
     // ====== page customization ======

@@ -59,11 +59,8 @@ class Gost extends BaseController
         
         // set the session variables -- user id and the user type (in string form)
         $this->session->set( compact( 'kor_id', 'kor_tipkor' ) );
-        // return an ajax success code response to the user
-        $this->sendAJAX(['success' => 'uspesan login']);
-        
         // redirect the user to their controller type
-        return redirect()->to(base_url("{$kor_tipkor}/index"));
+        $this->sendAJAX(['redirect' => base_url("{$kor_tipkor}/index")]);
     }
 
     
@@ -156,9 +153,8 @@ class Gost extends BaseController
         $this->session->set( compact( 'kor_id', 'kor_tipkor' ) );
         // return an ajax success code response to the user
         $this->sendAJAX(['success' => 'uspesna registracija']);
-        
         // redirect the user to their controller type
-        return redirect()->to(base_url("{$kor_tipkor}/index"));
+        $this->sendAJAX(['redirect' => base_url("{$kor_tipkor}/index")]);
     }
 
 }
