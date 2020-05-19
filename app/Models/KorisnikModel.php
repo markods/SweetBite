@@ -46,11 +46,6 @@ class KorisnikModel extends Model
             $data['kor_tipkor_id'] = \UUID::codeId($data['kor_tipkor_id']);
         }
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -66,11 +61,6 @@ class KorisnikModel extends Model
             $data['kor_tipkor_id'] = \UUID::codeId($data['kor_tipkor_id']);
         }
         if(parent::update($id, $data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return true;

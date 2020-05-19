@@ -35,11 +35,6 @@ class FavoritiModel extends Model
             $data['fav_jelo_id'] = \UUID::codeId($data['fav_jelo_id']);
         }
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -59,11 +54,6 @@ class FavoritiModel extends Model
             $data['fav_jelo_id'] = \UUID::codeId($data['fav_jelo_id']);
         }
         if(parent::update($id, $data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return true;
