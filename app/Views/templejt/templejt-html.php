@@ -120,9 +120,6 @@
             <!-- content -->
             <div id="content" class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
                 <!-- html insertion point -->
-                <div class='dummy'>
-                    
-                </div>
             </div>
         </div>
         

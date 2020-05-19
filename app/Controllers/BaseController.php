@@ -27,6 +27,11 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = [];
+        
+        /**
+         * the user's session
+         */
+        protected $session;
 
 	/**
 	 * Constructor.
