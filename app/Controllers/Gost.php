@@ -3,6 +3,7 @@ use \App\Models\KorisnikModel;
 use \App\Models\TipKorisnikModel;
 // 2020-05-10 v0.0 Jovana Jankovic 2017/0586, Filip Lucic 2017/0188
 // 2020-05-14 v0.1 Marko Stanojevic 2017/0081
+// 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
 
 /**
@@ -11,18 +12,28 @@ use \App\Models\TipKorisnikModel;
  */
 class Gost extends BaseController
 {
+    // data used for displaying the controller pages
+    protected $viewdata = [
+        'tipkor' => 'Gost',
+        'tabs'   => [
+            'jela' => ['jela-korisnik', /*'filter-rezultata',*/ 'korpa'],
+        ],
+    ];
+    
     /**
-     * draw the client index page
+     * display the food tab to the client
      */
-    public function index()
+    public function jela()
     {
-        // set the client html to the template page, with the given parameters
-        echo view('templejt/templejt-html.php');
+        // draw the template page with the food tab open
+        $this->drawTemplate($this->viewdata, 'jela');
     }
     
     
     /**
      * log the client into the system
+     * 
+     * @return none
      */
     public function login()
     {
@@ -59,13 +70,15 @@ class Gost extends BaseController
         
         // set the session variables -- user id and the user type (in string form)
         $this->session->set( compact( 'kor_id', 'kor_tipkor' ) );
-        // redirect the user to their controller type
-        $this->sendAJAX(['redirect' => base_url("{$kor_tipkor}/index")]);
+        // redirect the user to their default controller and method
+        $this->sendAJAX(['redirect' => base_url(nightbird_def_path[$kor_tipkor])]);
     }
 
     
     /**
      * create an account for the client
+     * 
+     * @return none
      */
     public function register()
     {
@@ -151,10 +164,8 @@ class Gost extends BaseController
         
         // set the session variables -- user id and the user type (in string form)
         $this->session->set( compact( 'kor_id', 'kor_tipkor' ) );
-        // return an ajax success code response to the user
-        $this->sendAJAX(['success' => 'uspesna registracija']);
-        // redirect the user to their controller type
-        $this->sendAJAX(['redirect' => base_url("{$kor_tipkor}/index")]);
+        // redirect the user to their default controller and method
+        $this->sendAJAX(['redirect' => base_url(nightbird_def_path[$kor_tipkor])]);
     }
 
 }

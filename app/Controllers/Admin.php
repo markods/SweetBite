@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 // 2020-05-16 v0.1 Jovana Pavic 2017/0099
+// 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
 //bilo bi super kada bi neki delovi funkcija realizovali u modelima:
 //  loadAllUsers()
@@ -11,10 +12,23 @@ use App\Models\TipKorisnikModel;
 
 class Admin extends Ulogovani
 {
-    public function index()
-    {    
-        echo view('templejt/templejt-html.php');
+    // data used for displaying the controller index page
+    protected $viewdata = [
+        'tipkor'  => 'Admin',
+        'tabs'   => [
+            'nalozi' => ['nalozi'],
+        ],
+    ];
+    
+    /**
+     * display the accounts tab to the client
+     */
+    public function nalozi()
+    {
+        // draw the template page with the accounts tab open
+        $this->drawTemplate($this->viewdata, 'nalozi');
     }
+    
     
     //-----------------------------------------------
     //dohvata sve korisnike i salje AJAX-om

@@ -12,12 +12,37 @@ use App\Models\Stavka;
 /** Filip Lucic - 0188/17   */
 /** Funkcionalnosti za menadzera - dodavanje novih jela u bazu - v.0.1   */
 /** Funkcionalnosti za menadzera - prikaz porudzbina koje vidi menadzer - v.0.1 */
+// 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
 class Menadzer extends Ulogovani
 {    
-    public function index () {
-         echo view('templejt/templejt-html.php');
+    // data used for displaying the controller index page
+    protected $viewdata = [
+        'tipkor'  => 'Menadzer',
+        'tabs'   => [
+            'jela'       => ['jela-menadzer', /*'filter-rezultata'*/],
+            'porudzbine' => ['porudzbine-menadzer'],
+        ],
+    ];
+    
+    /**
+     * display the food tab to the client
+     */
+    public function jela()
+    {
+        // draw the template page with the food tab open
+        $this->drawTemplate($this->viewdata, 'jela');
     }
+    
+    /**
+     * display the orders tab to the client
+     */
+    public function porudzbine()
+    {
+        // draw the template page with the orders tab open
+        $this->drawTemplate($this->viewdata, 'porudzbine');
+    }
+
     
     /** Autor:Jovana Jankovic 0586/17 - pomocna fja za testiranje tabele Jela */
     public function unesiTipove(){   

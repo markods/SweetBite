@@ -2,13 +2,21 @@
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
+// 2020-05-18 v0.1 Marko Stanojevic 2017/0081
 
-
+/**
+ * Filter for all client requests that checks if the client is calling their respective controller
+ */
 class Filter implements FilterInterface
 {
+    /**
+     * pre-filter that gets called on the request before the controller receives it
+     * 
+     * @return none
+     */
     public function before(RequestInterface $request)
     {
-        // initialize or continue the session
+        // initialize or continue the user session
         $session = session();
         // get the user type from the session
         $kor_tipkor = $session->get('kor_tipkor');
@@ -26,9 +34,19 @@ class Filter implements FilterInterface
         $controller = $request->uri->getSegment(1);
         // if the user asked for a different controller than their type, redirect them to their default controller
         if( $controller !== $kor_tipkor )
-            return redirect()->to( base_url("{$kor_tipkor}/index") );
+        {
+            // change the default controller to the user type
+            $controller = $kor_tipkor;
+            // redirect the user to their default method
+            return redirect()->to( base_url(nightbird_def_path[$controller]) );
+        }
     }
 
+    /**
+     * post-filter that gets called on the request and response after the controller creates a response
+     * 
+     * @return none
+     */
     public function after(RequestInterface $request, ResponseInterface $response)
     {}
 }

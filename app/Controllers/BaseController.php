@@ -1,5 +1,8 @@
 <?php
 namespace App\Controllers;
+use CodeIgniter\Controller;
+// 2020-05-18 v0.1 Marko Stanojevic 2017/0081
+
 
 /**
  * Class BaseController
@@ -13,9 +16,6 @@ namespace App\Controllers;
  *
  * @package CodeIgniter
  */
-
-use CodeIgniter\Controller;
-
 class BaseController extends Controller
 {
 
@@ -26,7 +26,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['url'];
+	protected $helpers = [];
 
 	/**
 	 * Constructor.
@@ -44,6 +44,20 @@ class BaseController extends Controller
             // pokretanje sesije
             $this->session = \Config\Services::session();
 	}
+
+        /**
+         * draw the template for the client page
+         * 
+         * @param the current tab to be shown
+         * @return none
+         */
+        protected function drawTemplate($viewdata, $opentab)
+        {
+            // add the currently open tab to the view data keys
+            $viewdata['opentab'] = $opentab;
+            // set the client html to the template page, with the given parameters
+            echo view('templejt/templejt-html.php', $viewdata);
+        }
 
         /**
          * decode the received JSON message body from the AJAX request and return it as an PHP associative array
@@ -70,7 +84,8 @@ class BaseController extends Controller
          * encode the given data as a JSON object and send an AJAX response to the client
          * this method doesn't check if the $data is convertible to JSON
          * 
-         * @param data -- the data that will be sent as the response
+         * @param data that will be sent as the response
+         * @return none
          */
         protected function sendAJAX($data)
         {

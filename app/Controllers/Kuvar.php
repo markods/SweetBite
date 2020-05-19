@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 // 2020-05-18 v0.1 Jovana Pavic 2017/0099
+// 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
 use App\Models\Por;
 use App\Models\Povod;
@@ -8,10 +9,22 @@ use App\Models\JeloModel;
 
 class Kuvar extends Ulogovani
 {
-    public function index()
-    {    
-        echo view('templejt/templejt-html.php');
+    protected $viewdata = [
+        'tipkor' => 'Kuvar',
+        'tabs'   => [
+            'porudzbine' => ['porudzbine-kuvar'],
+        ],
+    ];
+    
+    /**
+     * display the orders tab to the client
+     */
+    public function porudzbine()
+    {
+        // draw the template page with the orders tab open
+        $this->drawTemplate($this->viewdata, 'porudzbine');
     }
+    
     
     //-----------------------------------------------
     /** public function loadNotFinishedOrders(){...}

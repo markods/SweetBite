@@ -9,13 +9,15 @@ class Ulogovani extends BaseController
 {
     /**
      * log the client out of the system
+     * 
+     * @return none
      */
     public function logout()
     {
-        // completely kill the session (remove the old session_id, destroy all server data and the client side cookie that contained the session id)
-        $this->session->stop();
+        // destroy the session
+        $this->session->destroy();
         // redirect the user to the default controller
-        $this->sendAJAX(['redirect' => base_url("Gost/index")]);
+        $this->sendAJAX(['redirect' => base_url("Gost/jela")]);
     }
     
 }

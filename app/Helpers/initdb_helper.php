@@ -6,6 +6,8 @@ if( !function_exists('initdb'))
 {
     /**
      * initialize the database with generic data
+     * 
+     * @return none
      */
     function initdb()
     {

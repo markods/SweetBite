@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slatki zalogaj</title>
+    <meta name="description" content="Ketering servis sa ljubavlju prema hrani">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
 
     <!-- Bootstrap, jQuery, Popper, Bootstrap js -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -24,7 +26,9 @@
         require_once('templejt-js.php');
         
         // js insertion points for #sidebar and #content
-     
+        helper('require');
+        foreach( $tabs[$opentab] as &$path )
+            require_path(APPPATH.'views/'.$path);
     ?>
     
 </head>
@@ -45,93 +49,36 @@
 
             <!-- text and logo -->
             <div class="brand">
-                <a href="#">Slatki zalogaj<img class="logo" src=<?php echo '"'.base_url("assets/logo.png").'"'; ?> alt="logo"></a>
+                Slatki zalogaj<img class="logo" src=<?php echo '"'.base_url("assets/logo.png").'"'; ?> alt="logo">
             </div>
 
             <!-- buttons -->
-            <div class="btn button active"><a href="#">Jela</a></div>
-            <div class="btn button"><a href="#">Porudžbine</a></div>
-            <div class="btn button"><a href="#">Nalozi</a></div>
+            <?php
+                // draw the appropriate tabs for the client type
+                foreach( array_keys($tabs) as &$tab )
+                {
+                    $tabname = nightbird_tab_name[$tab];
+                    $path    = base_url($tipkor.'/'.$tab);
+                    $status  = ( $tab == $opentab ) ? " active" : "";
+                    printf('<div class="btn button%s"><a href="%s">%s</a></div>', $status, $path, $tabname);
+                }
+            ?>
 
             <!-- spacer -->
             <div class="spacer">&nbsp;</div>
 
-            <!-- dropdown -- register -->
-            <div class="btn-group">
-
-                <!-- register button -->
-                <button class="btn btn-link p-0" data-toggle="dropdown">
-                    Registracija
-                </button>
-
-                <!-- register dropdown menu -->
-                <form class="dropdown-menu dropdown-menu-right p-3">
-                    <small id="register-help"></small>
-                    <div class="form-group">
-                        <label for="register-full-name">ime i prezime</label>
-                        <input type="text" class="form-control" id="register-full-name" placeholder="Petar Petrović">
-                        <small id="register-full-name-help">&nbsp;</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-email">email</label>
-                        <input type="email" class="form-control" id="register-email" placeholder="email@example.com">
-                        <small id="register-email-help">&nbsp;</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-phone-num">broj telefona</label>
-                        <input type="tel" class="form-control" id="register-phone-num" placeholder="+381012345678">
-                        <small id="register-phone-num-help">&nbsp;</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-password-1">lozinka</label>
-                        <input type="password" class="form-control" id="register-password-1" placeholder="lozinka">
-                    </div>
-                    <div class="form-group">
-                        <label for="register-password-2">ponovite lozinku</label>
-                        <input type="password" class="form-control" id="register-password-2" placeholder="lozinka">
-                        <small id="register-password-help">&nbsp;</small>
-                    </div>
-                    <div>
-                        <div class="spacer"></div>
-                        <div id="register" class="btn btn-outline-dark">registruj</div>
-                    </div>
-                </form>
-
-            </div>
-
-            <!-- dropdown -- login -->
-            <div class="btn-group pr-0">
-
-                <!-- login button -->
-                <button class="btn btn-link p-0" data-toggle="dropdown">
-                    Prijava
-                </button>
-
-                <!-- login dropdown menu -->
-                <form class="dropdown-menu dropdown-menu-right p-3">
-                    <small id="login-help"></small>
-                    <div class="form-group">
-                        <label for="login-email">email</label>
-                        <input type="email" class="form-control" id="login-email" placeholder="email@example.com">
-                        <small id="login-email-help">&nbsp;</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">lozinka</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="lozinka">
-                        <small id="login-password-help">&nbsp;</small>
-                    </div>
-                    <div>
-                        <div class="spacer"></div>
-                        <div id="login" class="btn btn-outline-dark">prijava</div>
-                    </div>
-                </form>
-
-            </div>
-
-            <!-- logout -->
-            <div class="pr-0">
-                <button id="logout" class="btn btn-outline-dark py-1">Izloguj me</button>
-            </div>
+            <?php
+                if( $tipkor == 'Gost' )
+                {
+                    // register and login dropdowns
+                    require_once('navbar-gost-html.php');
+                }
+                else
+                {
+                    // logout button
+                    require_once('navbar-ulogovani-html.php');
+                }
+            ?>
             
         </div>
     </div>
@@ -149,11 +96,8 @@
             <div id="searchbar" class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
 
                 <!-- text above search bar -->
-                <h3>Radiis cornua circumfuso cognati dei divino radiis.</h3>
-                <p class="mb-4"> Austro nebulas congeriem eurus pontus erant effigiem.<br>
-                    Nitidis deus, fixo aere ita circumfluus securae obsistitur.<br>
-                    Ignea coeperunt praecipites, alto sed his triones.<br>
-                </p>
+                <h3>Dobrodošli na sajt Slatkog zalogaja</h3>
+                <p class="mb-4">Bavimo se profesionalno keteringom još od 2020. Ovde možete naći sve što Vas zanima, od finih poslastica do hrane za posebne događaje.</p>
 
                 <!-- search bar -->
                 <form class="form-row align-items-center">

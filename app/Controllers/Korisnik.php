@@ -1,6 +1,8 @@
 <?php namespace App\Controllers;
-//2020-05-17 v0.1 Jovana Pavic 2017/0099
-//2020-05-18 v.0.1 Jovana Jankovic 2017/0586
+// 2020-05-17 v0.1 Jovana Pavic 2017/0099
+// 2020-05-18 v0.2 Jovana Jankovic 2017/0586
+// 2020-05-19 v0.3 Marko Stanojevic 2017/0081
+
 use App\Models\JeloModel;
 use App\Models\TipJelaModel;
 use App\Models\DijetaModel;
@@ -13,12 +15,33 @@ use App\Models\Povod;
 
 class Korisnik extends Ulogovani
 {
-    // draw the client index page
-    public function index()
+    // data used for displaying the controller pages
+    protected $viewdata = [
+        'tipkor' => 'Korisnik',
+        'tabs'   => [
+            'jela'       => ['jela-korisnik', /*'filter-rezultata',*/ 'korpa'],
+            'porudzbine' => ['porudzbine-korisnik'],
+        ],
+    ];
+    
+    /**
+     * display the food tab to the client
+     */
+    public function jela()
     {
-        // set the client html to the template page, with the given parameters
-        return view('templejt/templejt-html.php');
+        // draw the template page with the food tab open
+        $this->drawTemplate($this->viewdata, 'jela');
     }
+    
+    /**
+     * display the orders tab to the client
+     */
+    public function porudzbine()
+    {
+        // draw the template page with the orders tab open
+        $this->drawTemplate($this->viewdata, 'porudzbine');
+    }
+    
     
     //-----------------------------------------------
     /** public function loadAllFood(){...}

@@ -46,10 +46,10 @@ p {
   width: 200px;
 }
 #login, #register {
-    float: right;
+  float: right;
 }
 #navbar .form-group {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 #searchbar-container {
   margin-top: 50px;
@@ -122,8 +122,8 @@ a:focus {
   font-size: 12px;
 }
 #navbar small {
-    font-size: 10px;
-    color: red;
+  font-size: 10px;
+  color: red;
 }
 #searchbar-container {
   background: var(--secondary-color);
@@ -135,8 +135,8 @@ a:focus {
 }
 #navbar input,
 #searchbar input {
-    background: var(--input-color);
-    border: 1px solid var(--border-color);
+  background: var(--input-color);
+  border: 1px solid var(--border-color);
 }
 #search {
   border-top-right-radius: 0px;
@@ -150,8 +150,8 @@ a:focus {
 }
 
 #content {
-    padding-top: 15px;
-    background-color: var(--content-color);
+  padding-top: 15px;
+  background-color: var(--content-color);
 }
 
 
@@ -160,7 +160,7 @@ a:focus {
 
 
 /* ====== animations ====== */
-#sidebar {
+#sidebar.animation {
   -webkit-transition: all 0.3s; /* Safari */
   -o-transition: all 0.3s; /* Opera */
   transition: all 0.3s; /* Firefox, Chrome, ... */
