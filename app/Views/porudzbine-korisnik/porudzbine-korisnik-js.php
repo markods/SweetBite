@@ -14,6 +14,7 @@
   $(document).ready(function(){ 
    $.post("<?php echo base_url('Korisnik/dohvatiPorudzbineKorisnik'); ?>")
     .done(function(data) {
+        $('#content').append("<div class='dummy'></div>");
         for(let i=0;i<data.length;i++){
            showClientOrder(data[i]);
         }

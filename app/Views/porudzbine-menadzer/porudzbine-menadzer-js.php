@@ -41,6 +41,7 @@ function dodajStavku(){
 $(document).ready(function() { 
    $.post("<?php echo base_url('Menadzer/dohvatiPorudzbine'); ?>")
     .done(function(data) {
+        $('#content').append("<div class='dummy'></div>");
    for(let i=0;i<data.length;i++){
         showOrder(data[i]);
         }
