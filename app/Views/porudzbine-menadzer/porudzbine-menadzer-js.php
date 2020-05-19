@@ -38,8 +38,7 @@ function dodajStavku(){
 
 /** Autor: Jovana Jankovic 0586/17 - Funkcija koja komunicira sa kontrolerom Menadzer i poziva njegovu funkciju dohvatiPorudzbine()  */
 /** Nakon toga, dohvacene podatke prosledjuje funkciji showOrder(data) */
-function prikaziPorudzbinu(){ 
-   alert("Usao u porudzbinu");
+$(document).ready(function() { 
    $.post("<?php echo base_url('Menadzer/dohvatiPorudzbine'); ?>")
     .done(function(data) {
    for(let i=0;i<data.length;i++){
@@ -48,8 +47,9 @@ function prikaziPorudzbinu(){
     })
     .fail(function() {
             alert("Prikaz porudzbine nije uspelo, molimo Vas, pokusajte ponovo!");
-    });  
+    });    
 }
+ );
 
 /** Dopune funkcije: Jovana Jankovic 0586/17 - dopunjena funkcija za prikaz porudzbina koristeci stvarne podatke iz baze*/
 function showOrder(object) {

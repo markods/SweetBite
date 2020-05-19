@@ -145,20 +145,21 @@ function update_polja(obj) {
 }
 
 /** Autor: Jovana Jankovic 17/0586 - Funkcija za ucitavanje svih jela na menadzerovu stranicu*/
-function ucitajJela() {
-    menjanje();
-    //izbirsan JSON jer ne prosledjujem nista
-    $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  
-    .done(function(data) {
+$(document).ready(function() {
+   $('.dummy').css('opacity','0');
+   menjanje();
+   //izbirsan JSON jer ne prosledjujem nista
+   $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  
+   .done(function(data) {
            for(let i = 0; i<data.length; i++) {            
            menjanje(data[i]);
            $('#div'+data[i]["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
            }  
-    })
+   })
     .fail(function() {
             alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
-    });  
-}
+   });  
+});
 
 /** Autor: Jovana Jankovic 0586/17 - fja za soft delete jela iz ponude */
 function obrisiJelo(input){ 

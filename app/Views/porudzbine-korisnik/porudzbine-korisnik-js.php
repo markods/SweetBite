@@ -11,8 +11,7 @@
 
 /** Autor: Jovana Jankovic 0586/17 - Funkcija koja komunicira sa kontrolerom Korisnik i poziva njegovu funkciju dohvatiPorudzbineKorisnik()  */
 /** Nakon toga, dohvacene podatke prosledjuje funkciji showClientOrder(data) */
-function prikaziPorudzbinuKorisnika(){ 
-   alert("Usao u prikaz porudzbine korisnik");
+  $(document).ready(function(){ 
    $.post("<?php echo base_url('Korisnik/dohvatiPorudzbineKorisnik'); ?>")
     .done(function(data) {
         for(let i=0;i<data.length;i++){
@@ -22,7 +21,7 @@ function prikaziPorudzbinuKorisnika(){
     .fail(function() {
             alert("Neuspesan prikaz porudzbina!");
     });  
-}
+});
 
 /** Dopune funkcije: Jovana Jankovic 0586/17 - dopunjena funkcija za prikaz porudzbina koristeci stvarne podatke iz baze*/
 function showClientOrder(object) {
