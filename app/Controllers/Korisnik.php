@@ -319,7 +319,8 @@ class Korisnik extends Ulogovani
     /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
     public function dohvatiPorudzbineKorisnik(){ 
          $korisnikModel=new KorisnikModel();
-         $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");       
+        // $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
+         $kor_id=$this->session->get('kor_id');
          $porudzbina=new Por();
          $por=$porudzbina->porudzbineKorisnika($kor_id);
         

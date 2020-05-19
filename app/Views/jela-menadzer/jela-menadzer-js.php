@@ -146,7 +146,6 @@ function update_polja(obj) {
 
 /** Autor: Jovana Jankovic 17/0586 - Funkcija za ucitavanje svih jela na menadzerovu stranicu*/
 $(document).ready(function() {
-   $('.dummy').css('opacity','0');
    menjanje();
    //izbirsan JSON jer ne prosledjujem nista
    $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  

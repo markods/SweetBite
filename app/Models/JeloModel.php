@@ -48,6 +48,12 @@ class JeloModel extends Model
             $jela = $this->decodeArray($jela);
             return $jela;
         }
+        
+        public function dohvSveWithDel() {
+            $jela = $this->withDeleted()->findAll();
+            $jela = $this->decodeArray($jela);
+            return $jela;
+        }
 
         /** Dohvata sve podatke na osnovu id iz tabele Jelo */
         public function dohvPoId($id) {
@@ -75,11 +81,6 @@ class JeloModel extends Model
             $data['jelo_dijeta_id'] = \UUID::codeId($data['jelo_dijeta_id']);
         }
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi unosa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -99,11 +100,6 @@ class JeloModel extends Model
                 $data['jelo_dijeta_id'] = \UUID::codeId($data['jelo_dijeta_id']);
             }
             if(parent::update($id, $data) === false){
-                echo '<h3>Greske u formi upisa:</h3>';
-                $errors = $this->errors();
-                foreach ($errors as $error) {
-                    echo "<p>->$error</p>";   
-                }
                 return false;
             }
             return true;
@@ -141,7 +137,7 @@ class JeloModel extends Model
         /** Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela */
         public function dohvatiNazivJela($id){
             $id=\UUID::codeId($id);
-           $jelo=$this->where('jelo_id',$id)->findAll();
+           $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();
            $jelo=$this->decodeArray($jelo);
            return $jelo[0]->jelo_naziv;
         }
@@ -149,7 +145,7 @@ class JeloModel extends Model
         /** Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela */
         public function dohvatiMasu($id){
             $id=\UUID::codeId($id);
-            $jelo=$this->where('jelo_id',$id)->findAll();
+            $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();
             $jelo=$this->decodeArray($jelo);
            return $jelo[0]->jelo_masa;
         }

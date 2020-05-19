@@ -30,11 +30,6 @@ class UkusModel extends Model {
             $id = \UUID::generateId();        
             $data['ukus_id'] = $id;
             if(parent::insert($data, $returnID) === false){
-                echo '<h3>Greske u formi unosa:</h3>';
-                $errors = $this->errors();
-                foreach ($errors as $error) {
-                    echo "<p>->$error</p>";   
-                }
                 return false;
             }
             return \UUID::decodeId($id);
