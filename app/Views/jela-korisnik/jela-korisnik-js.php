@@ -1,17 +1,23 @@
 <script>
 /**Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika*/ 
-//2020-05-18 v0.2 Jovana Pavic 2017/0099 - prilagodjeno ostatku sistema 
+// 2020-05-20 v0.2 Jovana Pavic 2017/0099 - prilagodjeno ostatku sistema 
 
+/** .ready()
+// Prikazuje sva jela iz baze, ucitava favorite i korpu, ako postoji
+*/
 $(document).ready(function(){
-    $("#content").append('<div class=content-dummy id=0></div>');
-   
+    // struktura za korpu
+    // mora u #mCSB_1_container da bi se prikazalo, ne moze samo #sidebar
+    $("#mCSB_1_container").append('<table id="basket"></table>\n\
+                          <div class="poruci"></div>');
+    
     $.post("<?php echo base_url('Korisnik/loadAllFood');?>")
     .done(function(meals){
         if (meals.disc == true)
             activateDiscount();
         else
             deactivateDiscount();
-        
+        debugger;
         for(let i=0; i<meals.jelo_id.length; i++){
             let food = {
                 'id':       meals.jelo_id[i],
@@ -35,26 +41,28 @@ $(document).ready(function(){
 });
 
 //-----------------------------------------------
-//prikazuje jelo u odgovarajucem formatu
+/** function prikaziJelo(object){...}
+// Prikazuje jelo u odgovarajucem formatu
+*/
 
 function prikaziJelo(object) { 
-    let id = object.id;
+    let id         = object.id;
     let naziv_jela = object.naziv;
-    let tip_jela = object.tip_jela;
-    let dijeta = object.dijeta;
-    let ukus = object.ukus;
-    let tagovi = [dijeta, tip_jela, ukus];
-    let opis_jela = object.opis;
-    let gramaza = object.masa;
-    let cena = object.cena;
-    let slika = object.slika;
-    let favor = object.fav;
-    let kol = object.kol;
-    let kol_ispi = '';
+    let tip_jela   = object.tip_jela;
+    let dijeta     = object.dijeta;
+    let ukus       = object.ukus;
+    let tagovi     = [dijeta, tip_jela, ukus];
+    let opis_jela  = object.opis;
+    let gramaza    = object.masa;
+    let cena       = object.cena;
+    let slika      = object.slika;
+    let favor      = object.fav;
+    let kol        = object.kol;
+    let kol_ispi   = '';
     if (kol != null) kol_ispi=kol;
     
     let str = 
-       '<div class="ar-image" style="background: url("data:' + slika + ';base64");">\
+       '<div class="ar-image" style="background: url("data:' + slika + ';base64");" id="' + id + '">\
             <div class="article-image">\
                 <div class="row base">\
                     <div class="col-md-10 about1">\
@@ -83,27 +91,23 @@ function prikaziJelo(object) {
             </div>\
         </div>';
     
-    //dohvatiti sve dummy elemente
-    let dummy = $(".content-dummy");
-    dummy.append(str);
-    dummy[0].id = id;
-    dummy.removeClass("content-dummy").addClass("dish_customer");
-    //dodavanje dummy elementa
-    $("#content").append("<div class='content-dummy' id='0'></div>");
+    $("#content").append(str);
     if (kol>0){
         jelo = {
-            jelo_id: id,
+            jelo_id:    id,
             jelo_naziv: naziv_jela,
-            jelo_cena: cena,
-            jelo_masa: gramaza,
-            kol: kol
+            jelo_cena:  cena,
+            jelo_masa:  gramaza,
+            kol:        kol
         };
         takeAmount(jelo);
     }
 }
 
 //-----------------------------------------------
-//postavlja jelo u favorite toga korisnika
+/** function srce(id){...}
+// Postavlja jelo u favorite toga korisnika
+*/
 
 function srce(id){
     $.post("<?php echo base_url('Korisnik/addFavorit'); ?>", 
@@ -116,7 +120,9 @@ function srce(id){
 }
 
 //-----------------------------------------------
-//uklanja jelo iz favorita toga korisnika
+/** function neSrce(id){...}
+// Uklanja jelo iz favorita toga korisnika
+*/
 
 function neSrce(id){
     $.post("<?php echo base_url('Korisnik/removeFavorit'); ?>", 
@@ -129,7 +135,9 @@ function neSrce(id){
 }
 
 //-----------------------------------------------
-//prikazuje srce u odnosu na to da li je to jelo favorit
+/** function prikazFavorita(id, fav){...}
+// prikazuje srce u odnosu na to da li je to jelo favorit
+*/
 
 function prikazFavorita(id, fav){
     let str='';
@@ -143,14 +151,19 @@ function prikazFavorita(id, fav){
 }
 
 //-----------------------------------------------
-//kada se klikne na + zavrsava posao sa bazom 
-//poziva promenu izgleda korpe
+/** function povecaj(id_jela){...}
+// Kada se klikne na + zavrsava posao sa bazom 
+// Poziva promenu izgleda korpe
+*/
 
 function povecaj(id_jela){
     $.post("<?php echo base_url('Korisnik/changeAmount');?>",
             JSON.stringify({jelo_id: id_jela, kol:"p1"}), 'json')
-    .done(function(kol){
+    .done(function(resp){
         //izmeniti vednost u inputu
+        if (resp.disc == true) activateDiscount();
+        else deactivateDiscount();
+        let kol = resp.kol;
         let am = '';
         if (kol > 0) am += kol;
         $("#broj_" + id_jela + "").val(am);
@@ -159,11 +172,11 @@ function povecaj(id_jela){
                 JSON.stringify({jelo_id: id_jela}))
         .done(function(food) {
             jelo = {
-                jelo_id: food.jelo_id,
+                jelo_id:    food.jelo_id,
                 jelo_naziv: food.jelo_naziv,
-                jelo_cena: food.jelo_cena,
-                jelo_masa: food.jelo_masa,
-                kol: kol
+                jelo_cena:  food.jelo_cena,
+                jelo_masa:  food.jelo_masa,
+                kol:        kol
             };
             takeAmount(jelo, kol);            
         });
@@ -172,8 +185,10 @@ function povecaj(id_jela){
 }
 
 //-----------------------------------------------
-//kada se klikne na - zavrsava posao sa bazom 
-//poziva promenu izgleda korpe
+/** function smanji(id_jela){...}
+// Kada se klikne na - zavrsava posao sa bazom 
+// Poziva promenu izgleda korpe
+*/
 
 function smanji(id_jela){
     $.post("<?php echo base_url('Korisnik/changeAmount');?>",
@@ -188,10 +203,10 @@ function smanji(id_jela){
                 JSON.stringify({jelo_id: id_jela}))
         .done(function(food) {
             jelo = {
-                jelo_id: food.jelo_id,
+                jelo_id:    food.jelo_id,
                 jelo_naziv: food.jelo_naziv,
-                jelo_cena: food.jelo_cena,
-                jelo_masa: food.jelo_masa
+                jelo_cena:  food.jelo_cena,
+                jelo_masa:  food.jelo_masa
             };
             takeAmount(jelo, kol);            
         });
@@ -199,8 +214,10 @@ function smanji(id_jela){
 }
 
 //-----------------------------------------------
-//kada se unese tacna vrednost zavrsava posao sa bazom 
-//poziva promenu izgleda korpe
+/** function tacnaKolicina (id_jela, input){...}
+// Kada se unese tacna vrednost zavrsava posao sa bazom 
+// Poziva promenu izgleda korpe
+*/
 
 function tacnaKolicina(id_jela, input){
     let exactAmount = parseInt(input.value); 
@@ -222,10 +239,10 @@ function tacnaKolicina(id_jela, input){
                     JSON.stringify({jelo_id: id_jela}))
             .done(function(food) {
                 jelo = {
-                    jelo_id: food.jelo_id,
+                    jelo_id:    food.jelo_id,
                     jelo_naziv: food.jelo_naziv,
-                    jelo_cena: food.jelo_cena,
-                    jelo_masa: food.jelo_masa
+                    jelo_cena:  food.jelo_cena,
+                    jelo_masa:  food.jelo_masa
                 };
                 takeAmount(jelo, kol);            
             });

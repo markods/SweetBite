@@ -1,5 +1,5 @@
 <?php namespace App\Controllers;
-// 2020-05-17 v0.1 Jovana Pavic 2017/0099
+// 2020-05-20 v0.4 Jovana Pavic 2017/0099
 // 2020-05-18 v0.2 Jovana Jankovic 2017/0586
 // 2020-05-19 v0.3 Marko Stanojevic 2017/0081
 
@@ -45,22 +45,23 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function loadAllFood(){...}
-    //dohvata iz baze sva jela i salje ih nazad
+    // Dohvata iz baze sva jela i salje ih nazad
+    // Ako korisnik ima sacuvanu korpu prikazace i nju
+    // Ucitava korisnikove favorite
     */
     
     public function loadAllFood()
     {
         $tipJelaModel = new TipJelaModel();
         $dijetaModel = new DijetaModel();
-        $ukusModel = new UkusModel();
         $favModel = new FavoritiModel();
+        $ukusModel = new UkusModel();
         $stavka = new Stavka();
         
         $por = new Por();
-        $por_id = null;
-        if(array_key_exists('kor_id', $_SESSION)){
-            $por_id = $por->korpaKorisnika($_SESSION['kor_id']);
-        }
+        $por_id = $por->korpaKorisnika($_SESSION['kor_id']);
+        //ako nema korpu vratice null
+        
         $disc = false;
         if ($por_id != null){
             $disc = $por->imaPopust($por_id);
@@ -82,25 +83,18 @@ class Korisnik extends Ulogovani
         $kol = [];
         
         for($i = 0; $i < count($jela); $i++) {
-            $jelo_id[$i] = \UUID::decodeId($jela[$i]->jelo_id);
+            $jelo_id[$i] = $jela[$i]->jelo_id;
             $jelo_naziv[$i] = $jela[$i]->jelo_naziv;
             $jelo_opis[$i] = $jela[$i]->jelo_opis;
             $jelo_slika[$i] = $jela[$i]->jelo_slika;
             $jelo_cena[$i] = $jela[$i]->jelo_cena;
             $jelo_masa[$i] = $jela[$i]->jelo_masa;
             //potreban je opis, a ne id!
-            $jelo_ukus[$i] = $ukusModel->find($jela[$i]->jelo_ukus_id)->ukus_naziv;
-            $jelo_dijeta[$i] = 
-                $dijetaModel->dohvNazivDijete(\UUID::decodeId($jela[$i]->jelo_dijeta_id));
-            $jelo_tipjela[$i] = 
-                    $tipJelaModel->dohvNazivTipa(\UUID::decodeId($jela[$i]->jelo_tipjela_id));
+            $jelo_ukus[$i] = $ukusModel->dohvUkus($jela[$i]->jelo_ukus_id)->ukus_naziv;
+            $jelo_dijeta[$i] = $dijetaModel->dohvNazivDijete($jela[$i]->jelo_dijeta_id);
+            $jelo_tipjela[$i] = $tipJelaModel->dohvNazivTipa($jela[$i]->jelo_tipjela_id);
             //proverava da li je to jelo njegov favorit
-            if(array_key_exists('kor_id', $_SESSION)){
-                $favor[$i] = $favModel->jeFavorit($jelo_id[$i], $_SESSION['kor_id']);
-            }
-            else {
-                $favor[$i] = null;
-            }
+            $favor[$i] = $favModel->jeFavorit($jelo_id[$i], $_SESSION['kor_id']);
             //da li postoji u porudzbini
             if($por_id == null) {
                 //korisnik nema porudzbinu
@@ -119,7 +113,7 @@ class Korisnik extends Ulogovani
         }
         
         $meals = [
-            'jelo_id' => $jelo_id,
+            'jelo_id'      => $jelo_id,
             'jelo_naziv'   => $jelo_naziv,
             'jelo_opis'    => $jelo_opis,
             'jelo_slika'   => $jelo_slika,
@@ -137,8 +131,8 @@ class Korisnik extends Ulogovani
  
     //-----------------------------------------------
     /** public function addFavorit(){...}
-    //jelo ciji id dobije AJAX-om stavlja u favorite 
-    //za korisnika cija je sesija u toku
+    // Jelo ciji id dobije AJAX-om stavlja u favorite 
+    //  za prijavljenog korisnika
     */
     
     public function addFavorit()
@@ -155,8 +149,8 @@ class Korisnik extends Ulogovani
 
     //-----------------------------------------------
     /** public function removeFavorit(){...}
-    //jelo ciji id dobije AJAX-om uklanja iz favorita
-    //korisnika cija je sesija u toku
+    // Jelo ciji id dobije AJAX-om uklanja iz favorita
+    //  prijavljenog korisnika
     */
     
     public function removeFavorit()
@@ -167,8 +161,6 @@ class Korisnik extends Ulogovani
         $favModel = new FavoritiModel();
         $id = $favModel->idFavorita($jelo_id, $_SESSION['kor_id']);
         $favModel->delete($id);
-        
-        
     }
     
     //-----------------------------------------------
@@ -176,7 +168,7 @@ class Korisnik extends Ulogovani
     // Manje kolicinu u jela dobijenog AJAX-om
     // Ako prijavljeni korisnik nema svoju korpu pravi je
     // Ako u korpi nema tu stavku pravi se stavka
-    // A ako ima stavku onda joj se promeni kolicina
+    //  a ako ima stavku onda joj se promeni kolicina
     // AJAX-om vraca trenutnu kolicinu tog jela u korpi
     */
     
@@ -205,6 +197,7 @@ class Korisnik extends Ulogovani
                                        ]);
             }
         }
+        $disc = $por->imaPopust($por_id);
              
         //provera da li postoji ta stavka u korpi
         $stavkaModel = new Stavka();
@@ -222,7 +215,7 @@ class Korisnik extends Ulogovani
             
             if($kol == 'p1'){
                 $stavkaModel->insert([
-                    'stavka_por_id' => $por_id,
+                    'stavka_por_id'  => $por_id,
                     'stavka_jelo_id' => $jelo_id,
                     'stavka_kol'     => 1,
                     'stavka_cenakom' => $cenakom
@@ -231,7 +224,7 @@ class Korisnik extends Ulogovani
             }
             else if($kol > 0){
                 $stavkaModel->insert([
-                    'stavka_por_id' => $por_id,
+                    'stavka_por_id'  => $por_id,
                     'stavka_jelo_id' => $jelo_id,
                     'stavka_kol'     => $kol,
                     'stavka_cenakom' => $cenakom
@@ -253,13 +246,18 @@ class Korisnik extends Ulogovani
                 $amo = $kol;
             }
             $stavkaModel->update($stavka_id, ['stavka_kol' => $amo]);
-        }       
-        $this->sendAJAX($amo);    
+        } 
+        
+        $response = [
+            'kol'  => $amo,
+            'disc' => $disc
+        ];
+        $this->sendAJAX($response);    
     }
     
     //-----------------------------------------------
     /** public function getFood(){...}
-    //Dohvata opis jela ciji id je stigao AJAX-om
+    // Dohvata opis jela ciji id je stigao AJAX-om
     */
     
     public function getFood()
@@ -271,7 +269,7 @@ class Korisnik extends Ulogovani
         $find = $jeloModel->dohvPoId($jelo_id);
         
         $food = [
-            'jelo_id' => $jelo_id,
+            'jelo_id'    => $jelo_id,
             'jelo_naziv' => $find->jelo_naziv,
             'jelo_cena'  => $find->jelo_cena,
             'jelo_masa'  => $find->jelo_masa
@@ -282,8 +280,8 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function removeFromOrder(){...}
-    // uklanja iz baze stavku ulogovanog korisnika
-    // za jelo ciji id je stigao AJAX zahtevom
+    // Uklanja iz baze stavku ulogovanog korisnika
+    //  za jelo ciji id je stigao AJAX zahtevom
     */
     
     public function removeFromOrder()
@@ -300,19 +298,53 @@ class Korisnik extends Ulogovani
         
         $stavka->delete($stavka_id);
     }
+
+    //-----------------------------------------------
+    /** public function sviPovodi(){...}
+    // Salje AJAX-om sve povode iz baze
+    */
+    
+    public function sviPovodi()
+    {
+        $povod = new Povod();
+        $povodi = $povod->sviPovodi();   
+        $id = [];
+        $opis = [];
+        for($i=0; $i<count($povodi); $i++){
+            $id[$i]   = $povodi[$i]->povod_id;
+            $opis[$i] = $povodi[$i]->povod_opis;
+        }    
+        $povodii = [
+            'id'   => $id,
+            'opis' => $opis
+        ];
+        $this->sendAJAX($povodii);
+    }
     
     //-----------------------------------------------
     /** public function poruci(){...}
-    // validira zahtev za porucivanjem
+    // Validira zahtev za porucivanjem
     // Ako je neuspesno vraca greske
     // Ako je uspesno cuva u bazi
     */
     
     public function poruci()
     {
+        $pod = $this->receiveAJAX();
+        $por = new Por();
+        $kor_id = $_SESSION['kor_id'];
+        $por_id = $por->korpaKorisnika($kor_id);
+        //validacija primljenih podataka
         
+        
+        $por->update($por_id, ['por_naziv'    => $pod['por_naziv'], 
+                               'por_za_dat'   => $pod['por_za_dat'],
+                               'por_br_osoba' => $pod['por_br_osoba'],
+                               'por_datporuc' => date('Y-m-d H:i:s'),
+                               'por_povod_id' => $pod['povod_id']
+                              ]);
     }
-    
+        
     //-----------------------------------------------
 
     /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 

@@ -1,5 +1,5 @@
 <?php namespace App\Models;
-// 2020-05-14 v0.3 Jovana Pavic 2017/0099
+// 2020-05-20 v0.4 Jovana Pavic 2017/0099
 
 /*
   !!!   Pre pristupanja bazi svaki id treba kodirati sa |||
@@ -139,4 +139,43 @@ class Povod extends Model
         $row->povod_id = \UUID::decodeId($row->povod_id);
         return $row;
     }
+    
+    //------------------------------------------------
+    /** public function dohvati($povod_id){...} 
+    // Dohvata povod sa datim id-em
+    */
+    
+    public function sviPovodi()
+    {
+        $povodi = $this->findAll();
+        if (count($povodi) == 0) return null;
+        
+        return $this->decodeArray($povodi);
+    }
+        
+    //------------------------------------------------
+    /**public function decodeRecord($row){...}
+    // Dekodovanje jednog rekorda
+    */
+    
+    public function decodeRecord($row)
+    {
+        //dekodujemo sve kljuceve
+        $row->povod_id = \UUID::decodeId($row->povod_id);
+        return $row;  
+    }
+    
+    //------------------------------------------------
+    /** public function decodeArray($finds){...}
+    // Dekodovanje nizova podataka
+    */
+    
+    public function decodeArray($finds)
+    {
+        //dekodujemo sve kljuceve
+        for ($i = 0; $i < count($finds); $i++) {
+            $finds[$i] = $this->decodeRecord($finds[$i]);
+        }
+        return $finds;  
+    }   
 }

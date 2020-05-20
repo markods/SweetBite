@@ -247,8 +247,8 @@ class Por extends Model
     
     public function imaPopust($por_id)
     {
-        $por = $this->find($por_id);
-        if ($por > 0) {
+        $por = $this->find(\UUID::codeId($por_id));
+        if ($por->por_popust_proc > 0) {
             return true;
         }
         return false;

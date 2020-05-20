@@ -1,25 +1,27 @@
 <script>
-// 2020-05-15 v0.3 Jovana Pavic 2017/0099
+// 2020-05-20 v0.4 Jovana Pavic 2017/0099
 //      dinamicko ucitavanje korpe
 // 2020-05-10 v0.1 Jovana Jankovic 2017/0586
 //      staticki prikaz forme za porucivanje
 
+/*
 // iz html-a se pozivaju samo funkcije:
 //  takeAmount(object) - add, sub i takeExactAmount spojene
 //  removeFromBasket(id)
 // ostale su pomocne funkcije
 // svaki put kada se promeni nesto u korpi njen pregled se uklanja
 // i iscrtava se nova
+*/
 
-var discount = false; 
+let discount = false; 
 
 //-----------------------------------------------
 /** function takeAmount(object){...}
-// dodaje proizvod u korpu
-// ako jelo postoji u korpi promenice njegovu kolicinu
-// ako jelo ne postoji u korpi dodace ga               
+// Dodaje proizvod u korpu
+// Ako jelo postoji u korpi promenice njegovu kolicinu
+//  ako jelo ne postoji u korpi dodace ga               
 // Kao parametar prima kolicinu i objekat sa sledecim atributima:
-// jelo_naziv, jelo_cena, jelo_masa, jelo_id 
+//  jelo_naziv, jelo_cena, jelo_masa, jelo_id 
 */   
   
 function takeAmount(object) {
@@ -43,7 +45,7 @@ function takeAmount(object) {
     else {
         //struktura koja se ubacuje (uopstena)
         let inner = 
-           '<tr id=' + newId + '>\
+           '<tr class=par id=' + newId + '>\
                 <td rowspan=2>\
                     <img src="<?php echo base_url("assets/icons/square-minus.svg");?>"\
                         alt="." onclick=removeFromBasket("' + id + '")>\
@@ -177,8 +179,8 @@ function changeBasket() {
             <td colspan=3 class=b_price>" + price + "din</td>\
         </tr>\
     ";
-                
     if (orders_amount.length > 0) $("#basket").append(inner);
+    
     //ako ima popust prikazi ga
     if (discount == true) {
         discount_price = Math.round(price * (-0.1));
@@ -207,52 +209,204 @@ function changeBasket() {
        '<form id="forma_poruci" method="post" action="<?php base_url("Korisnik/order");?>">\
             <table class="text-center" cellpadding="5">\
                 <tr >\
+                    <td class="text-left vece" colspan=2>\
+                        <div class="form-group por">\
+                            <input type="text" class="form-control" name="naziv_porudzbine" \
+                                id="imePor" placeholder="Naziv porudzbine(opciono)"/>\
+                            <small id="imePor_help">&nbsp;</small>\
+                        </div>\
+                    </td>\
+                </tr>\
+                <tr style="display:block;">\
                     <td class="text-left">\
-                        <input type="text" size=24 name="naziv_porudzbine" placeholder="Naziv porudzbine(opciono)"/>\
+                        <div class="form-group por">\
+                            <input type="text" class="form-control" name="brOsoba" \
+                                id="kolikoOsoba" placeholder="Broj osoba">\
+                            <small id="kolikoOsoba_help">&nbsp;</small>\
+                        </div>\
+                    </td>\
+                    <td>\
+                        <div class="form-group por">\
+                            <select name="povod" class="form-control" id="kojiPovod">\
+                                ' + listaPovoda() + '\
+                            </select>\
+                            <small id="kojiPovod_help">&nbsp;</small>\
+                        </div>\
                     </td>\
                 </tr>\
                 <tr>\
-                    <td class="text-left">\
-                        <input type="text" size="10" name="brOsoba" placeholder="Broj osoba">\
-                        <select name="povod">\
-                            <option value="0">Povod</option>\
-                            <option value="1">Rodjendan</option>\
-                            <option value="2">Krstenje</option>\
-                            <option value="3">Svadba</option>\
-                            <option value="4">Zurka</option>\
-                            <option value="5">Diplomski</option>\
-                        </select>\
+                    <td class="text-left vece">\
+                        <div class="form-group por">\
+                            <input type="datetime-local" class="form-control" \
+                                name="doKada" id="doKada"/>\
+                            <small id="doKada_help">&nbsp;</small>\
+                        </div>\
                     </td>\
                 </tr>\
                 <tr>\
-                    <td class="text-left">\
-                        <input type="date" name="doKadaD">\
-                        <input type="time" name="doKadaV">\
-                    </td>\
-                </tr>\
-                <tr>\
-                    <td class="text-center">\
-                        <button type="submit" name="potvrdi" class="btn btn-success" >Potvrdi</button>\
+                    <td class="text-center" colspan=2>\
+                        <button type="button" name="potvrdi" \
+                            class="btn btn-success" onclick=sendOrder()>Potvrdi\
+                        </button>\
                         <button type="reset" name="odustani" class="btn btn-light">Odustani</button>\
                     </td>\
                 </tr>\
             </table>\
         </form>\
         ';
-    $(".poruci").append(forma);
+    if (orders_amount.length > 0) 
+        $(".poruci").append(forma);
 }
 
 //-----------------------------------------------
-//aktivira popust od 10%
+/** function activateDiscount(){...}
+// Aktivira popust od 10%
+*/
+
 function activateDiscount() {
     discount = 1;
     changeBasket();
 }
 
-//uklanja popust 
+//-----------------------------------------------
+/** function deactivateDiscount(){...}
+// Uklanja popust 
+*/
+
 function deactivateDiscount() {
     discount = 0;
     changeBasket();
+}
+
+//-----------------------------------------------
+/** function sendOrder(){...}
+// Proverava unete podatke iz forme
+// Ako je sve uredu salje zahtev za upis u bazu
+//  i uklanja korpu i formu
+// Ako nije obavestava korisnika sta nije uredu
+*/
+
+function sendOrder() {
+    let error = false;
+    
+    //provera broja osoba
+    let naziv = $("#imePor")[0].value;
+    let br_osoba = $("#kolikoOsoba");
+    let br_osoba_num = parseInt(br_osoba[0].value);
+    if (isNaN(br_osoba_num) || br_osoba_num < 0){
+        br_osoba[0].value = '';
+        br_osoba[0].style.backgroundColor = "red"; 
+        $("#kolikoOsoba_help").html("Unesite broj osoba!");
+        $("#kolikoOsoba_help")[0].style.color="red";
+        error=true;
+    }
+    else {
+        br_osoba[0].style.backgroundColor = "white";   
+        $("#kolikoOsoba_help").html("&nbsp;");
+    }
+    
+    //provera povoda
+    let povod = $("#kojiPovod");
+    let povod_id = povod[0].value;
+    if (povod_id == 0){
+        povod[0].style.backgroundColor = "red"; 
+        $("#kojiPovod_help").html("Izaberite povod!");
+        error = true;
+    }
+    else{
+        povod[0].style.backgroundColor = "white";
+        $("#kojiPovod_help").html("&nbsp;");
+    }
+    
+    //provera datuma
+    let datum = $("#doKada");
+    let datum_date = datum[0].value;
+    let datum1 = datum[0].value;
+    datum_date = datum_date.replace("T", " ");
+    datum_date = new Date(datum_date);
+    let danasnjiDatum = new Date();
+    if (datum_date <= danasnjiDatum || datum1 == "") {
+        datum[0].style.backgroundColor = "red";
+        $("#doKada_help").html("Odaberite datum!");
+        error = true;
+    }
+    else{
+        datum[0].style.backgroundColor = "white";
+        $("#doKada_help").html("&nbsp;");
+    }
+    
+    //ako nesto nije dobro popunjeno vrati korisniku
+    if(error != false) return;
+    
+    datum_date = dateString(datum_date);
+    
+    //php provera da li je ulogovan
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1") {
+        $.post("<?php echo base_url('Korisnik/poruci');?>",
+                JSON.stringify({"por_naziv": naziv, 
+                                "por_br_osoba": br_osoba_num,
+                                "por_za_dat": datum_date,
+                                "povod_id": povod_id}), 'json')
+        .done(function(){
+            //u opisu jela uklanja narucenu kolicinu
+            let stavke = $(".par");
+            for(let i=0; i<stavke.length; i++){
+                let id = stavke[0].id;
+                id = id.substring(2);
+                $("#broj_" + id + "").val('');
+            }
+            //uklanja korpu i formu za porucivanje
+            $("#basket").empty();
+            $(".poruci").empty();
+        });
+    }
+    else {
+        $(".poruci").append('<p style="color:red;">Niste ulogovani</p>');
+    }
+}
+
+//-----------------------------------------------
+/** function listaPovoda(){...}
+// Ucitava sve povode iz baze
+*/
+
+function listaPovoda() {
+    //ugradjuje se u #kojiPovod
+    $.post("<?php echo base_url('Korisnik/sviPovodi')?>")
+    .done(function(povodi){
+        let str='<option value=0>Povod:</option>';
+        for(let i=0; i<povodi.id.length; i++){
+            str += '<option value="' + povodi.id[i] + '">' + povodi.opis[i] + '</option>';
+        }
+        $("#kojiPovod").html(str);
+    });
+}
+
+//-----------------------------------------------
+/** function dateString(){...}
+// Parsira objekat tipa datum u odgovarajuci string
+*/
+
+function dateString(date) {
+    let year = date.getFullYear();
+    let month =  date.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    let day = date.getDay();
+    if (day < 10) day = "0" + day;
+    let hour = date.getHours()
+    if (hour < 10) hour = "0" + hour;
+    let min = date.getMinutes();
+    if (min < 10) min = "0" + min;
+    let str = year + "-" + month + "-" + day + " " + hour + ":" + min + ":00";
+    return str;
 }
 
 </script>
