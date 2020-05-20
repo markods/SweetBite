@@ -1,11 +1,6 @@
 <?php namespace App\Controllers;
-// 2020-05-16 v0.1 Jovana Pavic 2017/0099
+// 2020-05-20 v0.3 Jovana Pavic 2017/0099
 // 2020-05-19 v0.2 Marko Stanojevic 2017/0081
-
-//bilo bi super kada bi neki delovi funkcija realizovali u modelima:
-//  loadAllUsers()
-//  changePrivilages()
-//  loadAccount()
 
 use App\Models\KorisnikModel;
 use App\Models\TipKorisnikModel;
@@ -31,32 +26,34 @@ class Admin extends Ulogovani
     
     
     //-----------------------------------------------
-    //dohvata sve korisnike i salje AJAX-om
+    /** public function loadAllUsers(){...}
+    // Dohvata sve korisnike iz baze i salje ih AJAX-om
+    */
     
     public function loadAllUsers()
     {        
         $korModel = new KorisnikModel();
         $tipModel = new TipKorisnikModel();
-        $korisnici = $korModel->findAll();
+        
+        $korisnici = $korModel->sviKorisnici();
+        
+        //podaci koji se salju
         $kor_id = [];
         $kor_naziv = [];
         $kor_mail = [];
         $kor_datkre = [];
         $kor_tipkor = [];
+        
+        //rasporedjivanje dohvacenih podataka
         for ($i = 0; $i < count($korisnici); $i++) {
-            $kor_id[$i] = \UUID::decodeId($korisnici[$i]->kor_id);
+            $kor_id[$i] = $korisnici[$i]->kor_id;
             $kor_naziv[$i] = $korisnici[$i]->kor_naziv;
             $kor_mail[$i] = $korisnici[$i]->kor_email;
             $kor_datkre[$i] = $korisnici[$i]->kor_datkre;
-            
-            $u = $tipModel->dohvatiNazivTipaKorisnika(\UUID::decodeId($korisnici[$i]->kor_tipkor_id));
-            switch ($u){
-                case "admin": $kor_tipkor[$i]= 0; break;
-                case "manager":$kor_tipkor[$i] = 1; break;
-                case "chef": $kor_tipkor[$i] = 2; break;
-                case "user": $kor_tipkor[$i] = 3; break;
-            }
+            $kor_tipkor[$i] = $tipModel->dohvatiNazivTipaKorisnika($korisnici[$i]->kor_tipkor_id);
         }
+        
+        //pravljenje odgovarajuce strukture za slanjem AJAX-om
         $user = [
             'kor_id' => $kor_id,
             'kor_ime' => $kor_naziv,
@@ -64,13 +61,17 @@ class Admin extends Ulogovani
             'kor_datkre' => $kor_datkre,
             'kor_tipkor' => $kor_tipkor
         ];
+        
+        //slanje podataka AJAX-om
         $this->sendAJAX($user);           
     }
     
     //-----------------------------------------------
-    //uklanja nalog iz baze na zahtev AJAX-a
+    /** public function removeUser(){...}
+    // Uklanja nalog iz baze na zahtev AJAX-a
+    */
     
-    public function removeAccount() 
+    public function removeUser() 
     {
         $korModel = new KorisnikModel();
         $elemDelete = $this->receiveAJAX();
@@ -78,8 +79,10 @@ class Admin extends Ulogovani
     }
     
     //-----------------------------------------------
-    //menja privilegiju korisnika u bazi na onu koju je 
-    //poslao AJAX
+    /** public function changePrivileges(){...}
+    // Menja privilegiju korisnika u bazi  
+    //  na onu koju je poslao AJAX
+    */
     
     public function changePrivileges() 
     {
@@ -90,13 +93,13 @@ class Admin extends Ulogovani
         
         $tipkor_opis = '';
         switch ($elemChange['nova_priv']){
-            case 0: $tipkor_opis = 'admin';
+            case 0: $tipkor_opis = 'Admin';
                 break;
-            case 1: $tipkor_opis = 'manager';
+            case 1: $tipkor_opis = 'Menadzer';
                 break;
-            case 2: $tipkor_opis = 'chef';
+            case 2: $tipkor_opis = 'Kuvar';
                 break;
-            case 3: $tipkor_opis = 'user';
+            case 3: $tipkor_opis = 'Korisnik';
         }
         $kor_tipkor_id = $tipMod->dohvatiIDTipaKorisnika($tipkor_opis);
         
@@ -104,30 +107,26 @@ class Admin extends Ulogovani
     }
     
     //-----------------------------------------------
-    //dohvata korisnika po id-u koji dobije iz AJAX-a
-    //i vraca js-u preko AJAX-a
+    /** public function loadUser(){...}
+    // Dohvata korisnika iz baze po id-u koji dobije iz AJAX-a
+    // Vraca js-u informacije preko AJAX-a
+    */
     
-    public function loadAccount() 
+    public function loadUser() 
     {
         $korModel = new KorisnikModel();
         $tipModel = new TipKorisnikModel();
         
         $elemLoad = $this->receiveAJAX();
         
-        $korisnik = $korModel->find(\UUID::codeId($elemLoad['kor_id']));
-        $kor_tipkor = null;
-        $kor_id = \UUID::decodeId($korisnik->kor_id);
+        $korisnik = $korModel->dohvatiKorisnika($elemLoad['kor_id']);
+        
+        $kor_id = $korisnik->kor_id;
         $kor_naziv = $korisnik->kor_naziv;
         $kor_mail = $korisnik->kor_email;
         $kor_datkre = $korisnik->kor_datkre;
-            
-        $u = $tipModel->dohvatiNazivTipaKorisnika(\UUID::decodeId($korisnik->kor_tipkor_id));
-        switch ($u){
-            case "admin": $kor_tipkor = 0; break;
-            case "manager":$kor_tipkor = 1; break;
-            case "chef": $kor_tipkor = 2; break;
-            case "user": $kor_tipkor = 3; break;
-        }
+        $kor_tipkor = $tipModel->dohvatiNazivTipaKorisnika($korisnik->kor_tipkor_id);
+        
         $user = [
             'kor_id' => $kor_id,
             'kor_ime' => $kor_naziv,

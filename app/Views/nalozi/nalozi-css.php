@@ -8,44 +8,52 @@
 }
   .contA p {
     color: black;
+    margin-bottom: 15px;
   }
   .contA img {
     height: 15px;
   }
-
-table.adm {
-  background-color: var(--secondary-color);
-  border: 1px solid black;
-  width: inherit;
-}
-
-.admin {
-  margin-bottom: 10px;
-}
-.manag {
-  margin-bottom: 10px;
-}
-.cook {
-  margin-bottom: 10px;
-}
+  
+.admin,
+.manag,
+.cook,
 .buyer {
   margin-bottom: 10px;
 }
-
-.tabela td,
-.tabela th {
-  text-align: left;
-  padding-left: 25px;
-}
-
-.naslov {
-  font-size: 20px;
-  color:black;
-  font-weight: 400;
-}
-
-.linija {
-  border:0.5px solid #8598e7;
-}
+ 
+.t_adm,
+.t_mng,
+.t_chef,
+.t_user {
+  width: 100%;
+  margin-bottom: 15px;
+}  
   
+tr.adm {
+  background-color: var(--secondary-color);
+  border: 1px solid black;
+  width: 100%;
+}
+
+td.name {
+    width: 100px;
+    padding-left: 10px;
+    text-align: left;
+}
+td.mail {
+    width: 220px;
+    text-align: left;
+}
+td.date {
+    width: 150px;
+}
+td.priv {
+    padding-left: 10px;
+}
+td.remove {
+    width: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 </style>

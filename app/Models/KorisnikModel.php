@@ -80,9 +80,17 @@ class KorisnikModel extends Model
    //fja za dohvatanje korisnika na osnovu primarnog kljuca, podrazumevano prima dekodovanu vrednost
     public function dohvatiKorisnika($id){
        $korisnik = $this->find(\UUID::codeId($id));
-       if( count($korisnik) == 0 ) return null;
+       if($korisnik == null) return null;
        
-       return $this->decodeRecord($korisnik[0]);
+       return $this->decodeRecord($korisnik);
+       
+       /*Izmenjen deo:
+            if( count($korisnik) == 0 ) return null
+            return $this->decodeRecord($korisnik[0]);
+        jer je metoda tu pucala i zamenjen je sa:
+            if($korisnik == null) return null;
+            return $this->decodeRecord($korisnik);
+        */
     }
    
    // proverava da li korisnik vec postoji, ako postoji vraca ga
@@ -128,6 +136,15 @@ class KorisnikModel extends Model
        return ( count($korisnik) != 0 );
    }
 
+    /** Autor: Jovana Pavic 0099/17 - dohvata sve korisnike */
+    public function sviKorisnici()
+    {
+       $finds = $this->findAll();
+       if (count($finds) == 0) return null;
+       
+       return $this->decodeArray($finds);
+    }
+   
    //sluzi za dekodovanje, jer imamo strane kljuceve
       public function decodeRecord($row)
     {
