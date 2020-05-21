@@ -269,7 +269,7 @@ class Por extends Model
     
     public function zaPravljenje()
     {
-        $svePor = $this->where('por_odluka', 'accepted')->where('por_datizrade', null)->
+        $svePor = $this->where('por_odluka', 'prihvacena')->where('por_datizrade', null)->
                 findAll();
         return $this->decodeArray($svePor);
     }    

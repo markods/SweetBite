@@ -1,5 +1,6 @@
 <script>
 // 2020-05-18 v0.3 Jovana Pavic 2017/0099
+// 2020-05-21 v0.4 Jovana Pavic 2017/0099
 
 //-----------------------------------------------
 /** .ready
@@ -7,9 +8,8 @@
 // postavlja pocetni izgled stranice
 */
 
-$(document).ready(function(){
-    $("#content").append('<div class="content-dummy" id=0></div>');
-   
+$(document).ready(function(){   
+    debugger;
     $.post("<?php echo base_url('Kuvar/loadNotFinishedOrders')?>")
     .done(function(orders){
         for(let i=0; i<orders.por_id.length; i++){
@@ -47,24 +47,22 @@ function showOrder(object) {
     let orderedStatus = object.orderedStatus;
 
     let inner = 
-       '<div class=about_order>\
-            <text class=name>' + name + '</text>\
-            <text class=stat>\
-                <input type=checkbox class="check_done order_complited"\
-                    onclick=orderDone("' + id + '")></text>\
-            <p></p>\
-            <text class=about>' + date + '</text>\
-        </div>\
-        <div class=order_details>\
-            <table class=order_amount>\
-            </table>\
+       '<div class="order" id="' + id + '">\
+            <div class=about_order>\
+                <text class=name>' + name + '</text>\
+                <text class=stat>\
+                    <input type=checkbox class="check_done order_complited"\
+                        onclick=orderDone("' + id + '")></text>\
+                <p></p>\
+                <text class=about>' + date + '</text>\
+            </div>\
+            <div class=order_details>\
+                <table class=order_amount>\
+                </table>\
+            </div>\
         </div>';
                 
-    //dohvatiti sve dummy elemente
-    let dummy = $(".content-dummy");
-    dummy.html(inner);
-    dummy[0].id = id;
-    dummy.removeClass("content-dummy").addClass("order");
+    $("#content").append(inner);
 
     //dodavanje detalja porudzbine
     let order_details = $(".order_amount", $("#"+id));
@@ -83,10 +81,6 @@ function showOrder(object) {
             </tr>';
         order_details.append(inner2);
     }
-
-    //dodavanje dummy elementa
-    $(".cont").append("<div class='content-dummy'></div>");
-    id++;
 }
 
 //-----------------------------------------------

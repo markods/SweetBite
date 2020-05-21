@@ -58,7 +58,7 @@ class Jelo extends Model
         /** Dohvata sve podatke na osnovu id iz tabele Jelo */
         public function dohvPoId($id) {
             $id = \UUID::codeId($id);
-            return $this->find($id);
+            return $this->decodeRecord($this->find($id));
         }
 
         /** Dohvata jelo na osnovu njegovog naziva */
