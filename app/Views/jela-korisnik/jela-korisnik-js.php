@@ -1,6 +1,6 @@
 <script>
 /**Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika*/ 
-// 2020-05-20 v0.2 Jovana Pavic 2017/0099 - prilagodjeno ostatku sistema 
+// 2020-05-21 v0.3 Jovana Pavic 2017/0099 - prilagodjeno ostatku sistema 
 
 /** .ready()
 // Prikazuje sva jela iz baze, ucitava favorite i korpu, ako postoji
@@ -10,6 +10,56 @@ $(document).ready(function(){
     // mora u #mCSB_1_container da bi se prikazalo, ne moze samo #sidebar
     $("#mCSB_1_container").append('<table id="basket"></table>\n\
                           <div class="poruci"></div>');
+    
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1") {
+        let arr = localStorage.getItem("korpa");
+
+        $.post("<?php echo base_url('Korisnik/hasBasket')?>")
+        .done(function(has){
+            if(has){
+                if (arr!=null){
+                    arr = JSON.parse(arr);
+                    if(confirm("Da li zelite da zadrzite trenutnu korpu?\n\
+                                Ako zelite pritisnite 'ok'\n\
+                                Ako zelite korpu iz prethodne posete pritisnite 'cancel'")){
+                        //Zadrzi ovu korpu
+                        $.post("<?php echo base_url('Korisnik/emptyBasket')?>")
+                        .done(function(){
+                            for(let i=0; i<arr.jelo_id.length; i++){
+                                if (arr.kol[i]>0){
+                                    $.post("<?php echo base_url('Korisnik/changeAmount');?>",
+                                        JSON.stringify({jelo_id: arr.jelo_id[i], kol: arr.kol[i]}), 'json');
+                                }
+                            }
+                            localStorage.removeItem("korpa");
+                        });
+                    }
+                    else{
+                        //uzmi iz baze
+                        localStorage.removeItem("korpa");
+                    }
+                }
+            }
+            else {
+                //sacuva trenutnu korpu
+                for(let i=0; i<arr.jelo_id.length; i++){
+                    if (arr.kol[i]>0){
+                        $.post("<?php echo base_url('Korisnik/changeAmount');?>",
+                            JSON.stringify({jelo_id: arr.jelo_id[i], kol: arr.kol[i]}), 'json');
+                    }
+                }
+                localStorage.removeItem("korpa");
+            }
+        });
+    }   
     
     $.post("<?php if(array_key_exists('kor_id', $_SESSION)){
                     echo base_url('Korisnik/loadAllFood');
@@ -22,7 +72,7 @@ $(document).ready(function(){
             activateDiscount();
         else
             deactivateDiscount();
-        
+        debugger;
         for(let i=0; i<meals.jelo_id.length; i++){
             let food = {
                 'id':       meals.jelo_id[i],
@@ -157,7 +207,7 @@ function prikazFavorita(id, fav){
 
 //-----------------------------------------------
 /** function povecaj(id_jela){...}
-// Kada se klikne na + zavrsava posao sa bazom 
+// Kada se klikne na + zavrsava posao sa bazom / locaStorage
 // Poziva promenu izgleda korpe
 */
 
@@ -200,64 +250,61 @@ function povecaj(id_jela){
     }
     else {
         //gost
-        //nema slanja ka serveru, informacije se cuvaju
-        //u localStorage-u
+        let kol = 1;
+        let newId = "b_" + id_jela;
+        if ($("#"+newId).length>0) {
+            kol = parseInt($(".amount_ordered", $("#"+newId))[0].innerHTML) + 1;
+        }
         
-        //naci moje stare funkcije za + i - (na kompu)
-    }
-}
-
-//-----------------------------------------------
-/** function smanji(id_jela){...}
-// Kada se klikne na - zavrsava posao sa bazom 
-// Poziva promenu izgleda korpe
-*/
-
-function smanji(id_jela){
-    $.post("<?php echo base_url('Korisnik/changeAmount');?>",
-            JSON.stringify({jelo_id: id_jela, kol:'-1'}), 'json')
-    .done(function(kol){
-        //izmeniti vednost u inputu
+        //prikazuje kolicinu u korpi na jelu
         let am = '';
         if (kol > 0) am += kol;
         $("#broj_" + id_jela + "").val(am);
-        
-        $.post("<?php echo base_url('Korisnik/getFood');?>",
-                JSON.stringify({jelo_id: id_jela}))
+            
+        //dohvata info o jelu
+        $.post("<?php echo base_url('Gost/getFood');?>",
+                    JSON.stringify({jelo_id: id_jela}))
         .done(function(food) {
             jelo = {
                 jelo_id:    food.jelo_id,
                 jelo_naziv: food.jelo_naziv,
                 jelo_cena:  food.jelo_cena,
-                jelo_masa:  food.jelo_masa
+                jelo_masa:  food.jelo_masa,
+                kol:        kol
             };
-            takeAmount(jelo, kol);            
+            takeAmount(jelo, kol);        
+            
+            saveBasket();
         });
-    }); 
+    };
 }
 
 //-----------------------------------------------
-/** function tacnaKolicina (id_jela, input){...}
-// Kada se unese tacna vrednost zavrsava posao sa bazom 
+/** function smanji(id_jela){...}
+// Kada se klikne na - zavrsava posao sa bazom / localStorage
 // Poziva promenu izgleda korpe
 */
 
-function tacnaKolicina(id_jela, input){
-    let exactAmount = parseInt(input.value); 
-    //ako nije uneta ispravna vrednost nece imati efekte
-    if (isNaN(exactAmount) || exactAmount < 0) {
-        exactAmount = 0;
-        input.value = '';
-    }
-    else {
+function smanji(id_jela){
+    //odredjuje da li je gost ili korisnik
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1") {
+        //ulogovani korisnik
         $.post("<?php echo base_url('Korisnik/changeAmount');?>",
-                JSON.stringify({jelo_id: id_jela, kol: exactAmount}), 'json')
+                JSON.stringify({jelo_id: id_jela, kol:'-1'}), 'json')
         .done(function(kol){
             //izmeniti vednost u inputu
             let am = '';
             if (kol > 0) am += kol;
             $("#broj_" + id_jela + "").val(am);
-        
+
             $.post("<?php echo base_url('Korisnik/getFood');?>",
                     JSON.stringify({jelo_id: id_jela}))
             .done(function(food) {
@@ -269,8 +316,144 @@ function tacnaKolicina(id_jela, input){
                 };
                 takeAmount(jelo, kol);            
             });
+        }); 
+    }
+    else {
+        //gost
+        let kol = 0;
+        let newId = "b_" + id_jela;
+        if ($("#"+newId).length>0) {
+            kol = parseInt($(".amount_ordered", $("#"+newId))[0].innerHTML) - 1;
+        }
+        
+        //prikazuje kolicinu u korpi na jelu
+        let am = '';
+        if (kol > 0) am += kol;
+        $("#broj_" + id_jela + "").val(am);
+            
+        //dohvata info o jelu
+        $.post("<?php echo base_url('Gost/getFood');?>",
+                    JSON.stringify({jelo_id: id_jela}))
+        .done(function(food) {
+            jelo = {
+                jelo_id:    food.jelo_id,
+                jelo_naziv: food.jelo_naziv,
+                jelo_cena:  food.jelo_cena,
+                jelo_masa:  food.jelo_masa,
+                kol:        kol
+            };
+            takeAmount(jelo, kol);    
+            
+            saveBasket();
         });
+    }
+}
+
+//-----------------------------------------------
+/** function tacnaKolicina (id_jela, input){...}
+// Kada se unese tacna vrednost zavrsava posao sa bazom / localStorage
+// Poziva promenu izgleda korpe
+*/
+
+function tacnaKolicina(id_jela, input){
+    //odredjuje da li je gost ili korisnik
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1"){
+        //ulogovani korisnik
+        let exactAmount = parseInt(input.value); 
+        //ako nije uneta ispravna vrednost nece imati efekte
+        if (isNaN(exactAmount) || exactAmount < 0) {
+            exactAmount = 0;
+            input.value = '';
+        }
+        else {
+            $.post("<?php echo base_url('Korisnik/changeAmount');?>",
+                    JSON.stringify({jelo_id: id_jela, kol: exactAmount}), 'json')
+            .done(function(kol){
+                //izmeniti vednost u inputu
+                let am = '';
+                if (kol > 0) am += kol;
+                $("#broj_" + id_jela + "").val(am);
+
+                $.post("<?php echo base_url('Korisnik/getFood');?>",
+                        JSON.stringify({jelo_id: id_jela}))
+                .done(function(food) {
+                    jelo = {
+                        jelo_id:    food.jelo_id,
+                        jelo_naziv: food.jelo_naziv,
+                        jelo_cena:  food.jelo_cena,
+                        jelo_masa:  food.jelo_masa
+                    };
+                    takeAmount(jelo, kol);            
+                });
+            });
+        };
+    }
+    else {
+        //gost
+        
+        //da li je unet br veci od 0
+        let exactAmount = parseInt(input.value); 
+        //ako nije uneta ispravna vrednost nece imati efekte
+        if (isNaN(exactAmount) || exactAmount < 0) {
+            exactAmount = 0;
+            input.value = '';
+        }
+        else {
+            let kol = exactAmount;
+
+            //prikazuje kolicinu u korpi na jelu
+            let am = '';
+            if (kol > 0) am += kol;
+            $("#broj_" + id_jela + "").val(am);
+
+            //dohvata info o jelu
+            $.post("<?php echo base_url('Gost/getFood');?>",
+                        JSON.stringify({jelo_id: id_jela}))
+            .done(function(food) {
+                jelo = {
+                    jelo_id:    food.jelo_id,
+                    jelo_naziv: food.jelo_naziv,
+                    jelo_cena:  food.jelo_cena,
+                    jelo_masa:  food.jelo_masa,
+                    kol:        kol
+                };
+                takeAmount(jelo, kol);    
+                       
+                saveBasket();
+            });
+        };
     };
 };
    
+//-----------------------------------------------
+/** function saveBasket(){...}
+// Cuva trenutnu korpu gosta u localStorage
+*/
+
+function saveBasket() {
+    //novu korpu cuva u local storage
+    localStorage.removeItem("korpa");
+    let jela_id = [];
+    let kolicine = [];
+    let uKorpi = $(".par");
+    let koli = $(".amount_ordered");
+    for(let i=0; i<uKorpi.length; i++){
+        jela_id[i] = (uKorpi[i].id).substring(2);
+        kolicine[i] = parseInt(koli[i].innerHTML);
+    }
+    let korpa = {
+        'jelo_id': jela_id,
+        'kol': kolicine
+    };
+    localStorage.setItem("korpa", JSON.stringify(korpa)); 
+}
+
 </script>

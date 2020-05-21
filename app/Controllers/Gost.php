@@ -4,6 +4,7 @@ use \App\Models\Tipkor;
 // 2020-05-10 v0.0 Jovana Jankovic 2017/0586, Filip Lucic 2017/0188
 // 2020-05-14 v0.1 Marko Stanojevic 2017/0081
 // 2020-05-19 v0.2 Marko Stanojevic 2017/0081
+// 2020-05-21 v0.3 Jovana Pavic 2017//0099
 
 use App\Models\Jelo;
 use App\Models\Tipjela;
@@ -210,16 +211,16 @@ class Gost extends BaseController
         $kol = [];
         
         for($i = 0; $i < count($jela); $i++) {
-            $jelo_id[$i] = $jela[$i]->jelo_id;
+            $jelo_id[$i]    = $jela[$i]->jelo_id;
             $jelo_naziv[$i] = $jela[$i]->jelo_naziv;
-            $jelo_opis[$i] = $jela[$i]->jelo_opis;
+            $jelo_opis[$i]  = $jela[$i]->jelo_opis;
             $jelo_slika[$i] = $jela[$i]->jelo_slika;
-            $jelo_cena[$i] = $jela[$i]->jelo_cena;
-            $jelo_masa[$i] = $jela[$i]->jelo_masa;
+            $jelo_cena[$i]  = $jela[$i]->jelo_cena;
+            $jelo_masa[$i]  = $jela[$i]->jelo_masa;
             
             //potreban je opis, a ne id!
-            $jelo_ukus[$i] = $ukusModel->dohvUkus($jela[$i]->jelo_ukus_id)->ukus_naziv;
-            $jelo_dijeta[$i] = $dijetaModel->dohvNazivDijete($jela[$i]->jelo_dijeta_id);
+            $jelo_ukus[$i]    = $ukusModel->dohvUkus($jela[$i]->jelo_ukus_id)->ukus_naziv;
+            $jelo_dijeta[$i]  = $dijetaModel->dohvNazivDijete($jela[$i]->jelo_dijeta_id);
             $jelo_tipjela[$i] = $tipJelaModel->dohvNazivTipa($jela[$i]->jelo_tipjela_id);
             
             //nema favorite jer nije ulogovan
@@ -270,111 +271,25 @@ class Gost extends BaseController
     }
     
     //-----------------------------------------------
-    //---------ne treba jer nije ulogovan----------//
-    /** public function changeAmount(){...}
-    // Menja kolicinu u jela dobijenog AJAX-om
-    // Ako prijavljeni korisnik nema svoju korpu pravi je
-    // Ako u korpi nema tu stavku pravi se stavka
-    // A ako ima stavku onda joj se promeni kolicina
-    // AJAX-om vraca trenutnu kolicinu tog jela u korpi
+    /** public function sviPovodi(){...}
+    // Salje AJAX-om sve povode iz baze
     */
     
-    public function changeAmount()
+    public function sviPovodi()
     {
-        $json = $this->receiveAJAX();
-        $jelo_id = $json['jelo_id'];
-        $kol = $json['kol'];
-        
-        $kor_id = $_SESSION['kor_id'];
-        
-        $por = new Por();
-        $por_id = $por->korpaKorisnika($kor_id);
-        
-        //ako korisnik nema korpu napravimo novu
-        if ($por_id == null) {
-            $porudz = $por->porudzbineKorisnika($kor_id);
-            if (count($porudz) % 3 == 0){
-                $por_id = $por->insert(['por_kor_id'      => $kor_id,
-                                        'por_popust_proc' => 10
-                                        ]);
-            }
-            else {
-                $por_id = $por->insert(['por_kor_id'      => $kor_id,
-                                        'por_popust_proc' => 0
-                                       ]);
-            }
-        }
-             
-        //provera da li postoji ta stavka u korpi
-        $stavkaModel = new Stavka();
-        $stavka_id = $stavkaModel->stavkaJelaIzPor($jelo_id, $por_id);
-        
-        $amo = 0;
-        //ako stavka ne postoji
-        if($stavka_id == null){
-            //napravi stavku sa datom kolicinom
-            
-            //potrebna cena po komadu
-            $jeloModel = new Jelo();
-            $jelo = $jeloModel->dohvPoId($jelo_id);
-            $cenakom = $jelo->jelo_cena;
-            
-            if($kol == 'p1'){
-                $stavkaModel->insert([
-                    'stavka_por_id' => $por_id,
-                    'stavka_jelo_id' => $jelo_id,
-                    'stavka_kol'     => 1,
-                    'stavka_cenakom' => $cenakom
-                ]);
-                $amo = 1;
-            }
-            else if($kol > 0){
-                $stavkaModel->insert([
-                    'stavka_por_id' => $por_id,
-                    'stavka_jelo_id' => $jelo_id,
-                    'stavka_kol'     => $kol,
-                    'stavka_cenakom' => $cenakom
-                ]);
-                $amo = $kol;
-            }
-            //ako je '-1' ne pravi se porudzbina
+        $povod = new Povod();
+        $povodi = $povod->sviPovodi();   
+        $id = [];
+        $opis = [];
+        for($i=0; $i<count($povodi); $i++){
+            $id[$i]   = $povodi[$i]->povod_id;
+            $opis[$i] = $povodi[$i]->povod_opis;
         }    
-        //ako stavka postoji
-        else {
-            $amo = $stavkaModel->kolicinaJela($stavka_id);
-            if($kol == 'p1'){
-                $amo += 1;
-            }
-            else if ($kol === '-1'){
-                $amo -= 1;
-            }
-            else{
-                $amo = $kol;
-            }
-            $stavkaModel->update($stavka_id, ['stavka_kol' => $amo]);
-        }       
-        $this->sendAJAX($amo);    
+        $povodii = [
+            'id'   => $id,
+            'opis' => $opis
+        ];
+        $this->sendAJAX($povodii);
     }
 
-    
-    //-----------------------------------------------
-    /** public function removeFromOrder(){...}
-    // Uklanja iz baze stavku ulogovanog korisnika
-    // za jelo ciji id je stigao AJAX zahtevom
-    */
-    
-    public function removeFromOrder()
-    {
-        $jelo = $this->receiveAJAX();
-        $jelo_id = $jelo['jelo_id'];
-        
-        $kor_id = $_SESSION['kor_id'];
-        $por = new Por();
-        $por_id = $por->korpaKorisnika($kor_id);
-        
-        $stavka = new Stavka();
-        $stavka_id = $stavka->stavkaJelaIzPor($jelo_id, $por_id);
-        
-        $stavka->delete($stavka_id);
-    }    
 }

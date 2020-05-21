@@ -1,5 +1,5 @@
 <?php namespace App\Controllers;
-// 2020-05-20 v0.4 Jovana Pavic 2017/0099
+// 2020-05-21 v0.5 Jovana Pavic 2017/0099
 // 2020-05-18 v0.2 Jovana Jankovic 2017/0586
 // 2020-05-19 v0.3 Marko Stanojevic 2017/0081
 
@@ -345,6 +345,42 @@ class Korisnik extends Ulogovani
                               ]);
     }
         
+    //-----------------------------------------------
+    /** public function hasBasket(){...}
+    // Proverava da li korisnik ima popunjenu korpu
+    */
+    
+    public function hasBasket()
+    {
+        $por = new Por();
+        $stavka = new Stavka();
+        $korpa = $por->korpaKorisnika($_SESSION['kor_id']);
+        $has = false;
+        if ($korpa != null){
+            $stavke = $stavka->sveIzPor($korpa);
+            if (count($stavke) > null) $has = true;
+        }
+        $this->sendAJAX($has);
+    }
+    
+    //-----------------------------------------------
+    /** public function emptyBasket(){...}
+    // Brise sve stavke iz korisnikove korpe
+    */
+    
+    public function emptyBasket()
+    {
+        $por = new Por();
+        $stavka = new Stavka();
+        $korpa = $por->korpaKorisnika($_SESSION['kor_id']);
+        if ($korpa != null) {
+            $stavke = $stavka->sveIzPor($korpa);
+            for($i=0; $i<count($stavke); $i++){
+                $stavka->delete($stavke[$i]->stavka_id);                
+            };
+        };
+    }
+    
     //-----------------------------------------------
 
     /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 

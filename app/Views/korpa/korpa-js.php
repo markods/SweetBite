@@ -68,9 +68,10 @@ function takeAmount(object) {
                 <td colspan=3 class=b_price>' + basePrice + 'din</td>\
             </tr>\
         ';
-        
-        $("#basket").append(inner);
-        changeAmount(object, kol);
+        if (kol > 0) {
+            $("#basket").append(inner);
+            changeAmount(object, kol);
+        }
     }
     
     changeBasket();         //ponovo racuna vrednost korpe
@@ -83,10 +84,38 @@ function takeAmount(object) {
 */
 
 function removeFromBasket(id){
-    //uklanjamo stavku iz baze
-    $.post("<?php echo base_url('Korisnik/removeFromOrder');?>",
-            JSON.stringify({jelo_id: id}), 'json')
-    .done(function(){
+    //odredjuje da li je gost ili korisnik
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1") {
+        //ulogovani korisnik
+        //uklanjamo stavku iz baze
+        $.post("<?php echo base_url('Korisnik/removeFromOrder');?>",
+                JSON.stringify({jelo_id: id}), 'json')
+        .done(function(){
+            //uklanja se iz pregleda korpe
+            let newId = "b_" + id;  //pravimo novo ime
+            let newIdAmount = newId + "_a"; 
+
+            if ($("#"+newId).length > 0) $("#"+newId).remove();    
+            if ($("#"+newIdAmount).length > 0) $("#"+newIdAmount).remove();
+
+            //menjemo broj na opisu jela
+            $("#broj_" + id + "").val('');
+
+            //ponovo se racuna korpa
+            deleteBasket();
+            changeBasket();
+        });
+    }
+    else {
+        //gost
         //uklanja se iz pregleda korpe
         let newId = "b_" + id;  //pravimo novo ime
         let newIdAmount = newId + "_a"; 
@@ -100,7 +129,8 @@ function removeFromBasket(id){
         //ponovo se racuna korpa
         deleteBasket();
         changeBasket();
-    });
+        saveBasket();
+    };
 }
 
 //-----------------------------------------------
@@ -335,11 +365,6 @@ function sendOrder() {
         $("#doKada_help").html("&nbsp;");
     }
     
-    //ako nesto nije dobro popunjeno vrati korisniku
-    if(error != false) return;
-    
-    datum_date = dateString(datum_date);
-    
     //php provera da li je ulogovan
     let uslov = "<?php 
             if(!array_key_exists('kor_id', $_SESSION)){
@@ -350,6 +375,12 @@ function sendOrder() {
             }
         ?>";
     if (uslov == "true1") {
+        
+        //ako nesto nije dobro popunjeno vrati korisniku
+        if(error != false) return;
+    
+        datum_date = dateString(datum_date);
+    
         $.post("<?php echo base_url('Korisnik/poruci');?>",
                 JSON.stringify({"por_naziv": naziv, 
                                 "por_br_osoba": br_osoba_num,
@@ -369,7 +400,7 @@ function sendOrder() {
         });
     }
     else {
-        $(".poruci").append('<p style="color:red;">Niste ulogovani</p>');
+        $(".poruci").append('<p style="color:red; text-align:center;">Niste prijavljeni</p>');
     }
 }
 
@@ -380,7 +411,12 @@ function sendOrder() {
 
 function listaPovoda() {
     //ugradjuje se u #kojiPovod
-    $.post("<?php echo base_url('Korisnik/sviPovodi')?>")
+    $.post("<?php if(array_key_exists('kor_id', $_SESSION)){
+                    echo base_url('Korisnik/sviPovodi');
+                  }else{
+                    echo base_url('Gost/sviPovodi');  
+                  }
+            ?>")
     .done(function(povodi){
         let str='<option value=0>Povod:</option>';
         for(let i=0; i<povodi.id.length; i++){
