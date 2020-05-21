@@ -74,7 +74,7 @@ function showClientOrder(object) {
             <text class=name>" + name+ "</text>\
             " + statusOptions(stat) + "\
             <br/>\
-            <p class=aboutC>" + people + " osoba </p>\
+            <p class='aboutC oso'>" + people + " osoba </p>\
             <p class=aboutC>" + date + "</p>\
         </div>\
         <div class=order_details>\
