@@ -11,13 +11,18 @@ $(document).ready(function(){
     $("#mCSB_1_container").append('<table id="basket"></table>\n\
                           <div class="poruci"></div>');
     
-    $.post("<?php echo base_url('Korisnik/loadAllFood');?>")
+    $.post("<?php if(array_key_exists('kor_id', $_SESSION)){
+                    echo base_url('Korisnik/loadAllFood');
+                  }else{
+                    echo base_url('Gost/loadAllFood');  
+                  }
+            ?>")
     .done(function(meals){
         if (meals.disc == true)
             activateDiscount();
         else
             deactivateDiscount();
-            
+        
         for(let i=0; i<meals.jelo_id.length; i++){
             let food = {
                 'id':       meals.jelo_id[i],
@@ -157,31 +162,49 @@ function prikazFavorita(id, fav){
 */
 
 function povecaj(id_jela){
-    $.post("<?php echo base_url('Korisnik/changeAmount');?>",
-            JSON.stringify({jelo_id: id_jela, kol:"p1"}), 'json')
-    .done(function(resp){
-        //izmeniti vednost u inputu
-        if (resp.disc == true) activateDiscount();
-        else deactivateDiscount();
-        let kol = resp.kol;
-        let am = '';
-        if (kol > 0) am += kol;
-        $("#broj_" + id_jela + "").val(am);
+    //odredjuje da li je gost ili korisnik
+    let uslov = "<?php 
+            if(!array_key_exists('kor_id', $_SESSION)){
+                echo print_r('false');
+            }
+            else{
+                echo print_r('true');
+            }
+        ?>";
+    if (uslov == "true1") {
+        //ulogovani korisnik
+        $.post("<?php echo base_url('Korisnik/changeAmount');?>",
+                JSON.stringify({jelo_id: id_jela, kol:"p1"}), 'json')
+        .done(function(resp){
+            //izmeniti vednost u inputu
+            if (resp.disc == true) activateDiscount();
+            else deactivateDiscount();
+            let kol = resp.kol;
+            let am = '';
+            if (kol > 0) am += kol;
+            $("#broj_" + id_jela + "").val(am);
+
+            $.post("<?php echo base_url('Korisnik/getFood');?>",
+                    JSON.stringify({jelo_id: id_jela}))
+            .done(function(food) {
+                jelo = {
+                    jelo_id:    food.jelo_id,
+                    jelo_naziv: food.jelo_naziv,
+                    jelo_cena:  food.jelo_cena,
+                    jelo_masa:  food.jelo_masa,
+                    kol:        kol
+                };
+                takeAmount(jelo, kol);            
+            });        
+        });  
+    }
+    else {
+        //gost
+        //nema slanja ka serveru, informacije se cuvaju
+        //u localStorage-u
         
-        $.post("<?php echo base_url('Korisnik/getFood');?>",
-                JSON.stringify({jelo_id: id_jela}))
-        .done(function(food) {
-            jelo = {
-                jelo_id:    food.jelo_id,
-                jelo_naziv: food.jelo_naziv,
-                jelo_cena:  food.jelo_cena,
-                jelo_masa:  food.jelo_masa,
-                kol:        kol
-            };
-            takeAmount(jelo, kol);            
-        });
-        
-    });  
+        //naci moje stare funkcije za + i - (na kompu)
+    }
 }
 
 //-----------------------------------------------
