@@ -69,7 +69,7 @@ function showClientOrder(object) {
     //parsirati objekat u potrebne elemente
 
     //osnovni izgled bez detalja porudzbine
-    var inner = "\
+    let inner = "\
         <div class=about_order>\
             <text class=name>" + name+ "</text>\
             " + statusOptions(stat) + "\
@@ -89,11 +89,11 @@ function showClientOrder(object) {
     dummy.removeClass("dummy").addClass("order");
 
     //dodavanje detalja porudzbine
-    var order_details = $(".order_amount", $("#"+id));
-    var price = 0;
-    var weight = 0;
+    let order_details = $(".order_amount", $("#"+id));
+    let price = 0;
+    let weight = 0;
     for(let i=0; i<orderedName.length; i++) {
-        var inner2 = "\
+        let inner2 = "\
             <tr>\
                 <td>" + orderedAmount[i] + "x </td>\
                 <td class=name>" + orderedName[i] + "</td>\
@@ -108,7 +108,7 @@ function showClientOrder(object) {
     }
     //dodavanje popusta
     if (discount == true) {
-        var inner2 = "\
+        let inner2 = "\
             <tr>\
                 <td> ! </td>\
                 <td colspan=2 class=name> Popust 10 % </td>\
@@ -119,7 +119,7 @@ function showClientOrder(object) {
         price += Math.round(price * (-0.1));
     }
     //dodavanje konacne cene
-    var inner3 = "\
+    let inner3 = "\
         <tr>\
             <td colspan=2></td>\
             <td colspan=3><hr/></td>\
@@ -143,7 +143,7 @@ function showClientOrder(object) {
 //Promena putanja ka slikama - Filip Lucic
 function statusOptions(stat) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
-    var str="";
+    let str="";
     switch (stat) {
         case 0: str = "<img src='<?php echo base_url("assets/icons/plain-question-mark.svg");?>' alt='?' onhover=showStatus(0)/>"; break;
         case 1: str = "<img src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+' onhover=showStatus(1)/>"; break;

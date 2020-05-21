@@ -1,7 +1,7 @@
 <script>         
 /**Autori: Filip Lucic 0188/17, Jovana Jankovic 0586/17 */
 
-var id=0;
+var id=0;   // TODO: ukloniti
 
 $('#openImgUpload').click(function() {
 $('#upload_img').trigger('click');
@@ -171,7 +171,7 @@ function obrisiJelo(input){
             JSON.stringify(object), "json")
     .done(function(data) {
            alert("Uspesno ste obrisali jelo iz ponude");
-           var content=document.getElementById("content");
+           let content=document.getElementById("content");
            content.removeChild(document.getElementById('div'+data["jelo_id"]));
     })
     .fail(function() {
@@ -185,7 +185,7 @@ function menjanje(obj) {
     //TODO see dish availability through database and hiding date, where does date get converted to string, here or somewhere else
 
     if(obj == null)  {
-        var str =""; 
+        let str =""; 
         str+='<div class="dish_wrapper">'
         str+='<form name = "menjanje_jela_temp" method = "POST" >';
         str+='<div class = "row" >';
@@ -272,7 +272,7 @@ function menjanje(obj) {
         $('#dijeta_temp').val("");
     } 
     else {
-    var str ="";
+    let str ="";
     
     str+='<div id="div'+obj["jelo_id"]+'" class="dish_wrapper" >';
     str+='<div class="elem"';
@@ -354,8 +354,8 @@ function menjanje(obj) {
 
 function menjanje_temp() {
  
-    //var temp = document.getElementById('menjanje_temp');
-    var str ="";
+    //let temp = document.getElementById('menjanje_temp');
+    let str ="";
     str+='<form name = "menjanje_jela_temp" method = "POST" >';
     str+='<div class = "row" style = "background-color:lightblue;">';
     str+='<div class = "col-sm-10 text-left">';
@@ -423,13 +423,13 @@ function menjanje_temp() {
 
 
     //vidi za formu
-    var dummy = $(".dummy");
+    let dummy = $(".dummy");   // TODO: popraviti
     dummy.html(str);
-    dummy[0].id = id;
+    dummy[0].id = id;   // TODO: ukloniti
     dummy.removeClass("dummy").addClass("dish_temp");
     $(".cont").append("<div class='dummy'></div>");
 
-    id++;
+    id++;   // TODO: ukloniti
 
 }
 </script>

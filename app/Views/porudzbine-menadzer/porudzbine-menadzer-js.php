@@ -6,8 +6,6 @@
  * verzija 02 - rowless verzija
  */
 
-//var id = 0;
-
 //razlika u odnosu na Prikaz porudzbine za kupca (orderClient.js) je u prikazu opisa porudzbine
 //dodato je ime klijenta i njegov broj telefona u metodi showOrder()
 //drugacija metoda statusOptions()
@@ -103,7 +101,7 @@ function showOrder(object) {
       let clientNumber = object['telefon_korisnika'];
    
     //osnovni izgled bez detalja porudzbine
-    var inner = "\
+    let inner = "\
         <div class=about_order>\
             <text class=name>" + name+ "</text>\
             <text class=stat>" + statusOptions(stat, id) + "</text>\
@@ -120,17 +118,17 @@ function showOrder(object) {
         </div>\
     ";
     //dohvatiti sve dummy elemente
-    var dummy = $(".dummy");
+    let dummy = $(".dummy");
     dummy.html(inner);
     dummy[0].id = id;
     dummy.removeClass("dummy").addClass("order");
 
     //dodavanje detalja porudzbine
-    var order_details = $(".order_amount", $("#"+id));
-    var price = 0;
-    var weight = 0;
+    let order_details = $(".order_amount", $("#"+id));
+    let price = 0;
+    let weight = 0;
     for(let i=0; i<orderedName.length; i++) {
-        var inner2 = "\
+        let inner2 = "\
             <tr>\
                 <td>" + orderedAmount[i] + "x </td>\
                 <td class=name>" + orderedName[i] + "</td>\
@@ -145,7 +143,7 @@ function showOrder(object) {
     }
     //dodavanje popusta
     if (discount == true) {
-        var inner2 = "\
+        let inner2 = "\
             <tr>\
                 <td> ! </td>\
                 <td colspan=2 class=name> Popust 10 % </td>\
@@ -156,7 +154,7 @@ function showOrder(object) {
         price += Math.round(price * (-0.1));
     }
     //dodavanje konacne cene
-    var inner3 = "\
+    let inner3 = "\
         <tr>\
             <td colspan=2></td>\
             <td colspan=3><hr/></td>\
@@ -179,7 +177,7 @@ function showOrder(object) {
 /**Filip Lucic 0188/17 - sredio putanje u skladu sa back-endom*/
 function statusOptions(stat, id) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
-    var str="";
+    let str="";
     switch (stat) {
         case 0: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-' onclick=declineOrder(" + "this" + ")>\
                        <img id='"+id+"' src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+' onclick=acceptOrder(this)>\

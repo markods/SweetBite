@@ -145,7 +145,7 @@ function removeUser(id){
 */
 
 function showPrivileges(id, priv){
-    var str = "";
+    let str = "";
     switch (priv) {
         case "Admin": str = 
            '<img src="<?php echo base_url("assets/icons/role-admin.svg");?>"\
