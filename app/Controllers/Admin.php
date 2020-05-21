@@ -2,8 +2,8 @@
 // 2020-05-20 v0.3 Jovana Pavic 2017/0099
 // 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
-use App\Models\KorisnikModel;
-use App\Models\TipKorisnikModel;
+use App\Models\Kor;
+use App\Models\Tipkor;
 
 class Admin extends Ulogovani
 {
@@ -32,8 +32,8 @@ class Admin extends Ulogovani
     
     public function loadAllUsers()
     {        
-        $korModel = new KorisnikModel();
-        $tipModel = new TipKorisnikModel();
+        $korModel = new Kor();
+        $tipModel = new Tipkor();
         
         $korisnici = $korModel->sviKorisnici();
         
@@ -73,7 +73,7 @@ class Admin extends Ulogovani
     
     public function removeUser() 
     {
-        $korModel = new KorisnikModel();
+        $korModel = new Kor();
         $elemDelete = $this->receiveAJAX();
         $korModel->delete($elemDelete['kor_id']);
     }
@@ -86,8 +86,8 @@ class Admin extends Ulogovani
     
     public function changePrivileges() 
     {
-        $tipMod = new TipKorisnikModel();
-        $korMod = new KorisnikModel();
+        $tipMod = new Tipkor();
+        $korMod = new Kor();
         
         $elemChange = $this->receiveAJAX();
         
@@ -114,8 +114,8 @@ class Admin extends Ulogovani
     
     public function loadUser() 
     {
-        $korModel = new KorisnikModel();
-        $tipModel = new TipKorisnikModel();
+        $korModel = new Kor();
+        $tipModel = new Tipkor();
         
         $elemLoad = $this->receiveAJAX();
         

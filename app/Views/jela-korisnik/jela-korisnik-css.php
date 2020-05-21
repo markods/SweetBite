@@ -143,9 +143,4 @@
   opacity: 1;
 }
 
-#content {
-  flex: 1 0 auto;
-  margin-top: 5rem;
-}
-
 </style>

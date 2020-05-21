@@ -12,14 +12,14 @@ if( !function_exists('initdb'))
     function initdb()
     {
         // create user types
-        $tipkor = new \App\Models\TipKorisnikModel();
+        $tipkor = new \App\Models\Tipkor();
         $tipkor->insert(['tipkor_naziv' => 'Admin'   ]);
         $tipkor->insert(['tipkor_naziv' => 'Menadzer']);
         $tipkor->insert(['tipkor_naziv' => 'Kuvar'   ]);
         $tipkor->insert(['tipkor_naziv' => 'Korisnik']);
 
         // create generic users of all types
-        $kor = new \App\Models\KorisnikModel();
+        $kor = new \App\Models\Kor();
         $kor_naziv  = ['admin',               'menadzer',               'kuvar',               'korisnik'              ];
         $kor_email  = ['admin@nightbird.com', 'menadzer@nightbird.com', 'kuvar@nightbird.com', 'korisnik@nightbird.com'];
         $kor_tel    = ['+381000000000',       '+381111111111',          '+381222222222',       '+381333333333'         ];
@@ -39,7 +39,7 @@ if( !function_exists('initdb'))
         }
 
         // create dish types
-        $tipjela = new \App\Models\TipJelaModel();
+        $tipjela = new \App\Models\Tipjela();
         $tipjela->insert(['tipjela_naziv' => 'Predjelo']);
         $tipjela->insert(['tipjela_naziv' => 'Kuvano jelo']);
         $tipjela->insert(['tipjela_naziv' => 'Roštilj' ]);
@@ -56,13 +56,13 @@ if( !function_exists('initdb'))
         $tipjela->insert(['tipjela_naziv' => 'Torta'   ]);
 
         // create taste types
-        $ukus = new \App\Models\UkusModel();
+        $ukus = new \App\Models\Ukus();
         $ukus->insert(['ukus_naziv' => 'slatko']);
         $ukus->insert(['ukus_naziv' => 'slano' ]);
         $ukus->insert(['ukus_naziv' => 'ljuto' ]);
 
         // create diet types
-        $dijeta = new \App\Models\DijetaModel();
+        $dijeta = new \App\Models\Dijeta();
         $dijeta->insert(['dijeta_naziv' => 'posno'         ]);
         $dijeta->insert(['dijeta_naziv' => 'vegetarijansko']);
         $dijeta->insert(['dijeta_naziv' => 'bez glutena'   ]);

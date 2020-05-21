@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
-use \App\Models\KorisnikModel;
-use \App\Models\TipKorisnikModel;
+use \App\Models\Kor;
+use \App\Models\Tipkor;
 // 2020-05-10 v0.0 Jovana Jankovic 2017/0586, Filip Lucic 2017/0188
 // 2020-05-14 v0.1 Marko Stanojevic 2017/0081
 // 2020-05-19 v0.2 Marko Stanojevic 2017/0081
@@ -45,8 +45,8 @@ class Gost extends BaseController
         $kor_pwd   = $req['kor_pwd'  ] ?? "";
         
         // create models for the user and usertype
-        $model_kor    = new KorisnikModel();
-        $model_tipkor = new TipKorisnikModel();
+        $model_kor    = new Kor();
+        $model_tipkor = new Tipkor();
         
         // get the user with the given email
         $kor = $model_kor->dohvatiKorisnikaPrekoEmaila($kor_email);
@@ -131,8 +131,8 @@ class Gost extends BaseController
         }
         
         // create models for the user and usertype
-        $model_kor    = new KorisnikModel();
-        $model_tipkor = new TipKorisnikModel();
+        $model_kor    = new Kor();
+        $model_tipkor = new Tipkor();
 
         // initialize the remaining variables needed for the database record in table 'user'
         $kor_pwdhash   = password_hash($kor_pwd, PASSWORD_DEFAULT);

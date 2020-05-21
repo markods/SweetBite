@@ -3,14 +3,14 @@
 // 2020-05-18 v0.2 Jovana Jankovic 2017/0586
 // 2020-05-19 v0.3 Marko Stanojevic 2017/0081
 
-use App\Models\JeloModel;
-use App\Models\TipJelaModel;
-use App\Models\DijetaModel;
-use App\Models\UkusModel;
-use App\Models\FavoritiModel;
+use App\Models\Jelo;
+use App\Models\Tipjela;
+use App\Models\Dijeta;
+use App\Models\Ukus;
+use App\Models\Fav;
 use App\Models\Por;
 use App\Models\Stavka;
-use App\Models\KorisnikModel;
+use App\Models\Kor;
 use App\Models\Povod;
 
 class Korisnik extends Ulogovani
@@ -52,10 +52,10 @@ class Korisnik extends Ulogovani
     
     public function loadAllFood()
     {
-        $tipJelaModel = new TipJelaModel();
-        $dijetaModel = new DijetaModel();
-        $favModel = new FavoritiModel();
-        $ukusModel = new UkusModel();
+        $tipJelaModel = new Tipjela();
+        $dijetaModel = new Dijeta();
+        $favModel = new Fav();
+        $ukusModel = new Ukus();
         $stavka = new Stavka();
         
         $por = new Por();
@@ -67,7 +67,7 @@ class Korisnik extends Ulogovani
             $disc = $por->imaPopust($por_id);
         }
         
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $jela = $jeloModel->dohvSve();
         
         $jelo_id = [];
@@ -140,7 +140,7 @@ class Korisnik extends Ulogovani
         $jelo = $this->receiveAJAX();
         $jelo_id = $jelo['jelo_id'];
         
-        $favModel = new FavoritiModel();
+        $favModel = new Fav();
         $favModel->insert([
             'fav_kor_id'  => $_SESSION['kor_id'],
             'fav_jelo_id' => $jelo_id
@@ -158,7 +158,7 @@ class Korisnik extends Ulogovani
         $jelo = $this->receiveAJAX();
         $jelo_id = $jelo['jelo_id'];
         
-        $favModel = new FavoritiModel();
+        $favModel = new Fav();
         $id = $favModel->idFavorita($jelo_id, $_SESSION['kor_id']);
         $favModel->delete($id);
     }
@@ -209,7 +209,7 @@ class Korisnik extends Ulogovani
             //napravi stavku sa datom kolicinom
             
             //potrebna cena po komadu
-            $jeloModel = new JeloModel();
+            $jeloModel = new Jelo();
             $jelo = $jeloModel->dohvPoId($jelo_id);
             $cenakom = $jelo->jelo_cena;
             
@@ -265,7 +265,7 @@ class Korisnik extends Ulogovani
         $jelo = $this->receiveAJAX();
         $jelo_id = $jelo['jelo_id'];
         
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $find = $jeloModel->dohvPoId($jelo_id);
         
         $food = [
@@ -350,14 +350,14 @@ class Korisnik extends Ulogovani
     /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 
     /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
     public function dohvatiPorudzbineKorisnik(){ 
-         $korisnikModel=new KorisnikModel();
+         $korisnikModel=new Kor();
         // $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
          $kor_id=$this->session->get('kor_id');
          $porudzbina=new Por();
          $por=$porudzbina->porudzbineKorisnika($kor_id);
         
          $stavkaModel=new Stavka();
-         $jeloModel=new JeloModel();
+         $jeloModel=new Jelo();
          
           for ($i = 0; $i < count($por); $i++) {
            $stavke=$stavkaModel->dohvatiStavke($por[$i]->por_id);

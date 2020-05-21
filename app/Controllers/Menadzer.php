@@ -1,11 +1,11 @@
 <?php namespace App\Controllers;
-use App\Models\DijetaModel;
-use App\Models\TipJelaModel;
-use App\Models\UkusModel;
-use App\Models\JeloModel;
+use App\Models\Dijeta;
+use App\Models\Tipjela;
+use App\Models\Ukus;
+use App\Models\Jelo;
 use App\Models\Por;
 use App\Models\Povod;
-use App\Models\KorisnikModel;
+use App\Models\Kor;
 use App\Models\Stavka;
 
 /** Jovana Jankovic - 0586/17   */
@@ -48,9 +48,9 @@ class Menadzer extends Ulogovani
     public function unesiTipove(){   
         $this->receiveAJAX();
 
-        $tip = new TipJelaModel();        
-        $ukus =  new UkusModel();
-        $dijeta = new DijetaModel();
+        $tip = new Tipjela();        
+        $ukus =  new Ukus();
+        $dijeta = new Dijeta();
         
         $tip->insert([
             'tipjela_naziv'=>"Pita"
@@ -103,10 +103,10 @@ class Menadzer extends Ulogovani
     public function dodajJelo () {     
         $jelo = $this->receiveAJAX();
       
-        $tip = new TipJelaModel();
-        $ukus =  new UkusModel();
-        $dijeta = new DijetaModel();
-        $jeloModel=new JeloModel();
+        $tip = new Tipjela();
+        $ukus =  new Ukus();
+        $dijeta = new Dijeta();
+        $jeloModel=new Jelo();
        
         $tip_id = $tip->dohvIdPoNazivu($jelo['jelo_tipjela']);
         $ukus_id = $ukus->dohvIdPoNazivu($jelo['jelo_ukus']);
@@ -128,10 +128,10 @@ class Menadzer extends Ulogovani
     public function updateJelo(){
         
         $jelo = $this->receiveAJAX();
-        $tip = new TipJelaModel();
-        $ukus =  new UkusModel();
-        $dijeta = new DijetaModel();
-        $jeloModel = new JeloModel();
+        $tip = new Tipjela();
+        $ukus =  new Ukus();
+        $dijeta = new Dijeta();
+        $jeloModel = new Jelo();
          
         $tip_id = $tip->dohvIdPoNazivu($jelo['jelo_tipjela']);
         $ukus_id = $ukus->dohvIdPoNazivu($jelo['jelo_ukus']);
@@ -195,7 +195,7 @@ class Menadzer extends Ulogovani
     }
      /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da dohvati sva jela, i ispise ih putem Ajaxa pri ucitavanju stranice */
     public function dohvatiSvaJela() {
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $jela = $jeloModel->dohvSve();
         $this->sendAJAX($jela);       
     }
@@ -203,7 +203,7 @@ class Menadzer extends Ulogovani
     /** Autor: Jovana Jankovic 17/0586 - omogucava brisanje (soft delete) jela iz ponude ketering servisa */
     public function obrisiJelo(){
         $jelo = $this->receiveAJAX();
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $jeloModel->delete($jelo['jelo_id']);
         $data=[
             'success'=>"Uspesno ste izbrisali jelo iz ponude!",
@@ -215,7 +215,7 @@ class Menadzer extends Ulogovani
     /** Autor: Jovana Jankovic 0586/17 - omogucava sakrivanje jela iz ponude. */
     public function sakrijJelo(){
         $jelo = $this->receiveAJAX();
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $jeloModel->update($jelo['jelo_id'],
                 ['jelo_datsakriv'=> date('Y-m-d H:i:s')]);
         $data=[
@@ -228,7 +228,7 @@ class Menadzer extends Ulogovani
     /** Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. */
     public function otkrijJelo() {
         $jelo = $this->receiveAJAX();
-        $jeloModel = new JeloModel();
+        $jeloModel = new Jelo();
         $jeloModel->update($jelo['jelo_id'],[
                 'jelo_datsakriv'=>null                    
         ]);
@@ -243,7 +243,7 @@ class Menadzer extends Ulogovani
    public function dodajPorudzbinu(){
        $porudzbina=new Por();
        $povod=new Povod();
-       $korisnik=new KorisnikModel();
+       $korisnik=new Kor();
        $por_povod_id = $povod->povodId("ostalo");
        $kor_id=$korisnik->dohvatiIdNaOsnovuImena("menadzer");
        $por['por_id']=$porudzbina->insert([
@@ -260,7 +260,7 @@ class Menadzer extends Ulogovani
    /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje stavki u bazu */
    public function dodajStavku(){
        $porudzbinaModel=new Por();
-       $jeloModel=new JeloModel();
+       $jeloModel=new Jelo();
        $stavkaModel=new Stavka();
        $porudzbine=$porudzbinaModel->dohvatiSvePorudzbine();
        $jela=$jeloModel->dohvSve();  
@@ -280,9 +280,9 @@ class Menadzer extends Ulogovani
    public function dohvatiPorudzbine(){
          $porudzbina=new Por();
          $por=$porudzbina->dohvatiSvePorudzbine();
-         $korisnikModel=new KorisnikModel();
+         $korisnikModel=new Kor();
          $stavkaModel=new Stavka();
-         $jeloModel=new JeloModel();
+         $jeloModel=new Jelo();
          
           for ($i = 0; $i < count($por); $i++) {
            $ime=$korisnikModel->dohvatiImeNaOsnovuId($por[$i]->por_kor_id);

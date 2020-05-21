@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 //Autor: Jovana Jankovic 0586/17, verzija 0.2
 
-class FavoritiModel extends Model
+class Fav extends Model
 {
     protected $table      = 'fav';
     protected $primaryKey = 'fav_id';

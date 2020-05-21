@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 //Autor: Jovana Jankovic 0586/17, verzija 0.2
 
-class KorisnikModel extends Model
+class Kor extends Model
 {
     //tabela korisnik
     protected $table      = 'kor';

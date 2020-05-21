@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 /** Autor: Filip Lučić 2017/0188 */
 
-class JeloModel extends Model
+class Jelo extends Model
 {       
         protected $table      = 'jelo';
         protected $primaryKey = 'jelo_id';

@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 //Autor: Jovana Jankovic 0586/17, verzija 0.2
 
-class TipKorisnikModel extends Model
+class Tipkor extends Model
 {
     protected $table      = 'tipkor';
     protected $primaryKey = 'tipkor_id';

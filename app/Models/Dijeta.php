@@ -4,7 +4,7 @@
 
 use CodeIgniter\Model;
 
-class DijetaModel extends Model {
+class Dijeta extends Model {
     protected $table      = 'dijeta';
     protected $primaryKey = 'dijeta_id';
     protected $returnType = 'object';

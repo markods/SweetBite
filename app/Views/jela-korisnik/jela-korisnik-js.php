@@ -17,7 +17,7 @@ $(document).ready(function(){
             activateDiscount();
         else
             deactivateDiscount();
-        debugger;
+            
         for(let i=0; i<meals.jelo_id.length; i++){
             let food = {
                 'id':       meals.jelo_id[i],

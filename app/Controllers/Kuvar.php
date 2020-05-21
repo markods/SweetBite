@@ -5,7 +5,7 @@
 use App\Models\Por;
 use App\Models\Povod;
 use App\Models\Stavka;
-use App\Models\JeloModel;
+use App\Models\Jelo;
 
 class Kuvar extends Ulogovani
 {
@@ -35,7 +35,7 @@ class Kuvar extends Ulogovani
         $por = new Por();
         $stavka = new Stavka();
         $povod = new Povod();
-        $jelo = new JeloModel();
+        $jelo = new Jelo();
         
         $svePor = $por->zaPravljenje();
         
