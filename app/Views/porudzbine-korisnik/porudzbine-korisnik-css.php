@@ -41,6 +41,7 @@
   .order_details {
     background-color: var(--secondary-color);
     padding-top: 8px;
+    padding-right: 7px;
   }
   
     table {
