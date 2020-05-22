@@ -57,26 +57,32 @@ if( !function_exists('initdb'))
 
         // create taste types
         $ukus = new \App\Models\Ukus();
-        $ukus->insert(['ukus_naziv' => 'slatko']);
-        $ukus->insert(['ukus_naziv' => 'slano' ]);
-        $ukus->insert(['ukus_naziv' => 'ljuto' ]);
+        $ukus->insert(['ukus_naziv' => 'Slatko' ]);
+        $ukus->insert(['ukus_naziv' => 'Slano'  ]);
+        $ukus->insert(['ukus_naziv' => 'Ljuto'  ]);
+        $ukus->insert(['ukus_naziv' => 'Gorko'  ]);
+        $ukus->insert(['ukus_naziv' => 'Kiselo' ]);
 
         // create diet types
         $dijeta = new \App\Models\Dijeta();
-        $dijeta->insert(['dijeta_naziv' => 'posno'         ]);
-        $dijeta->insert(['dijeta_naziv' => 'vegetarijansko']);
-        $dijeta->insert(['dijeta_naziv' => 'bez glutena'   ]);
+        $dijeta->insert(['dijeta_naziv' => 'Nije dijetalno' ]);
+        $dijeta->insert(['dijeta_naziv' => 'Mrsno'          ]);
+        $dijeta->insert(['dijeta_naziv' => 'Posno'          ]);
+        $dijeta->insert(['dijeta_naziv' => 'Vegetarijansko' ]);
+        $dijeta->insert(['dijeta_naziv' => 'Vegansko'       ]);
+        $dijeta->insert(['dijeta_naziv' => 'Bez glutena'    ]);
+        $dijeta->insert(['dijeta_naziv' => 'Bez laktoze'    ]);
 
         // create festivity types
         $povod = new \App\Models\Povod();
-        $povod->insert(['povod_opis' => 'žurka'   ]);
-        $povod->insert(['povod_opis' => 'proslava']);
-        $povod->insert(['povod_opis' => 'rođendan']);
-        $povod->insert(['povod_opis' => 'slava'   ]);
-        $povod->insert(['povod_opis' => 'venčanje']);
-        $povod->insert(['povod_opis' => 'krštenje']);
-        $povod->insert(['povod_opis' => 'ostalo'  ]);
-        $povod->insert(['povod_opis' => 'radije ne bih naveo/la']);
+        $povod->insert(['povod_opis' => 'Žurka'   ]);
+        $povod->insert(['povod_opis' => 'Proslava']);
+        $povod->insert(['povod_opis' => 'Rođendan']);
+        $povod->insert(['povod_opis' => 'Slava'   ]);
+        $povod->insert(['povod_opis' => 'Venčanje']);
+        $povod->insert(['povod_opis' => 'Krštenje']);
+        $povod->insert(['povod_opis' => 'Ostalo'  ]);
+        $povod->insert(['povod_opis' => 'Radije ne bih naveo/la']);
 
     }
 }
