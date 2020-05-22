@@ -9,7 +9,6 @@
 */
 
 $(document).ready(function(){   
-    debugger;
     $.post("<?php echo base_url('Kuvar/loadNotFinishedOrders')?>")
     .done(function(orders){
         for(let i=0; i<orders.por_id.length; i++){
