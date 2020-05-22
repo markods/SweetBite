@@ -99,7 +99,7 @@ function showUser(object){
             <td class=priv>' + showPrivileges(id, priv) + '</td>\
             <td class=remove>\
                 <img src="<?php echo base_url("assets/icons/square-minus.svg");?>"\
-                    alt="-" onclick="removeUser(' + id + ')"/>\
+                    alt="-" onclick=removeUser("' + id + '") />\
             </td>\
         </tr>'
         ;

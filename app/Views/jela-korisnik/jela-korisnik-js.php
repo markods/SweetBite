@@ -25,7 +25,7 @@ $(document).ready(function(){
         $.post("<?php echo base_url('Korisnik/hasBasket')?>")
         .done(function(has){
             if(has){
-                if (arr!=null){
+                if (arr != null){
                     arr = JSON.parse(arr);
                     if(confirm("Da li zelite da zadrzite trenutnu korpu?\n\
                                 Ako zelite pritisnite 'ok'\n\
@@ -50,13 +50,15 @@ $(document).ready(function(){
             }
             else {
                 //sacuva trenutnu korpu
-                for(let i=0; i<arr.jelo_id.length; i++){
-                    if (arr.kol[i]>0){
-                        $.post("<?php echo base_url('Korisnik/changeAmount');?>",
-                            JSON.stringify({jelo_id: arr.jelo_id[i], kol: arr.kol[i]}), 'json');
+                if(arr != null){
+                    for(let i=0; i<arr.jelo_id.length; i++){
+                        if (arr.kol[i]>0){
+                            $.post("<?php echo base_url('Korisnik/changeAmount');?>",
+                                JSON.stringify({jelo_id: arr.jelo_id[i], kol: arr.kol[i]}), 'json');
+                        }
                     }
+                    localStorage.removeItem("korpa");
                 }
-                localStorage.removeItem("korpa");
             }
         });
     }   

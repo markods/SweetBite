@@ -10,7 +10,9 @@ class Kor extends Model
     protected $table      = 'kor';
     protected $primaryKey = 'kor_id';
     protected $returnType = 'object';
-
+    
+    protected $useSoftDeletes = true;
+    
     protected $allowedFields = ['kor_id','kor_naziv', 
         'kor_email','kor_tel','kor_tipkor_id','kor_pwdhash'];
   

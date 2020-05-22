@@ -36,24 +36,24 @@ tr.adm {
 }
 
 td.name {
-    width: 100px;
+    width: 130px;
     padding-left: 10px;
     text-align: left;
 }
 td.mail {
-    width: 220px;
+    width: 250px;
     text-align: left;
 }
 td.date {
-    width: 150px;
+    width: 155px;
 }
 td.priv {
-    padding-left: 10px;
+    text-align: center;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 td.remove {
-    width: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 2px;
 }
 
 </style>
