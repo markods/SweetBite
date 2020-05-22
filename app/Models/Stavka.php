@@ -10,8 +10,6 @@ use CodeIgniter\Model;
 
 class Stavka extends Model
 {
-    //kolone u tabeli: stavka_id, stavka_por_id, stavka_jelo_id, stavka_kol
-    //                  stavka_cenakom, stavka_datkre, stavka_datizrade
     protected $table      = 'stavka';
     protected $primaryKey = 'stavka_id';
     
@@ -49,17 +47,15 @@ class Stavka extends Model
     //-----------------------------------------------------------------------
     
     /*
-    //override osnovnih metoda tako da prikazuju greske
-    //dobro za razvojnu fazu
-    //metoda save ne mora da se overrid-uje jer ona samo poziva
-    //insert i update u zavisnosti od parametara
-    //preporucljivo koristiti insert i update jer insert vraca id
+    // Metoda save ne mora da se overrid-uje jer ona samo poziva
+    //  insert i update u zavisnosti od parametara
+    // Preporucljivo koristiti insert i update jer insert vraca id
     */
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    //ako je neuspesno vraca false
-    //ako je uspesno vraca id
+    // Ako je neuspesno vraca false
+    // Ako je uspesno vraca id
     */
     
     public function insert($data=NULL, $returnID=true) 
@@ -73,11 +69,6 @@ class Stavka extends Model
             $data['stavka_jelo_id'] = \UUID::codeId($data['stavka_jelo_id']);
         }
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -85,7 +76,7 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function update($id=NULL,$data=NULL):bool{...}
-    //ako je uspesno vraca true, ako nije vraca false
+    // Ako je uspesno vraca true, ako nije vraca false
     */
     
     public function update($id=NULL, $data=NULL):bool 
@@ -100,11 +91,6 @@ class Stavka extends Model
             $data['stavka_jelo_id'] = \UUID::codeId($data['stavka_jelo_id']);
         }
         if(parent::update($id, $data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return true;
@@ -112,8 +98,8 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function delete($id=NULL,$purge=false){...} 
-    //dozvoljeno je brisanje, ali je potrebno prebaciti 
-    //kljuc u odgovarajuci format
+    // Dozvoljeno je brisanje, ali je potrebno prebaciti 
+    //  kljuc u odgovarajuci format
     */
     
     public function delete($id=NULL, $purge=false) 
@@ -126,8 +112,8 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function napravljenaStavka($stavka_id){...}
-    //Stavki sa datim id-em se postavlja 
-    //datum izrade na trenutni datum i vreme
+    // Stavki sa datim id-em se postavlja 
+    //  datum izrade na trenutni datum i vreme
     */
     
     public function napravljenaStavka($stavka_id)
@@ -149,7 +135,7 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function dohvati($stavka_id){...}
-    //Dohvata stavku sa datim id-em
+    // Dohvata stavku sa datim id-em
     */
     
     public function dohvati($stavka_id)
@@ -162,7 +148,7 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function stavkaJelaIzPor($id_jela,$idPor){...}
-    //Dohvata stavku datog jela iz date porudzbine
+    // Dohvata stavku datog jela iz date porudzbine
     */
     
     public function stavkaJelaIzPor($id_jela, $id_por)
@@ -205,7 +191,7 @@ class Stavka extends Model
     
     //------------------------------------------------
     /** public function sveIzPor($por_id){...}
-    //dohvata sve stavke iz odredjene porudzbine
+    // Dohvata sve stavke iz odredjene porudzbine
     */
     
     public function sveIzPor($por_id)
@@ -217,7 +203,7 @@ class Stavka extends Model
      
     //------------------------------------------------
     /** public function decodeRecord($row)
-    //Dekodovanje jednog rekorda
+    // Dekodovanje jednog rekorda
     */
     
     public function decodeRecord($row)
@@ -231,7 +217,7 @@ class Stavka extends Model
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    //Dekodovanje nizova podataka
+    // Dekodovanje nizova podataka
     */
     
     public function decodeArray($finds)

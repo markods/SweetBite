@@ -33,17 +33,15 @@ class Povod extends Model
     //----------------------------------------------------------------------
     
     /*
-    //override osnovnih metoda tako da prikazuju greske
-    //dobro za razvojnu fazu
-    //metoda save ne mora da se overrid-uje jer ona samo poziva
-    //insert i update u zavisnosti od parametara
-    //preporucljivo koristiti insert i update jer insert vraca id
+    // Metoda save ne mora da se overrid-uje jer ona samo poziva
+    //  insert i update u zavisnosti od parametara
+    // Preporucljivo koristiti insert i update jer insert vraca id
     */
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    //ako je neuspesno vraca false
-    //ako je uspesno vraca id
+    // Ako je neuspesno vraca false
+    // Ako je uspesno vraca id
     */
     
     public function insert($data=NULL, $returnID=true) 
@@ -51,11 +49,6 @@ class Povod extends Model
         $id = \UUID::generateId();
         $data['povod_id'] = $id;
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -63,7 +56,7 @@ class Povod extends Model
     
     //-----------------------------------------------
     /** public function update($id=NULL,$data=NULL):bool{...}
-    //ako je uspesno vraca true, ako nije vraca false
+    // Ako je uspesno vraca true, ako nije vraca false
     */
     
     public function update($id=NULL, $data=NULL):bool
@@ -72,11 +65,6 @@ class Povod extends Model
             $id = \UUID::codeId($id);
         }
         if(parent::update($id, $data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return true;
@@ -84,8 +72,8 @@ class Povod extends Model
     
     //-----------------------------------------------
     /** public function delete($id=NULL,$purge=false){...}
-    //ako je zabranjeno brisanje iz tabele    
-    //u svakom slucaju baca gresku
+    // Ako je zabranjeno brisanje iz tabele    
+    //  u svakom slucaju baca gresku
     */
     
     public function delete($id=NULL, $purge=false) 
@@ -95,10 +83,10 @@ class Povod extends Model
 
     //-----------------------------------------------
     /** public function povodId($povod_opis){...}
-    //dohvata id povoda na osnovu opisa    
-    //ako se taj string nalazi u vise elemenata
-    //vraca tacno onaj koji je trazen
-    //ako ne postoji red sa tim opisom vraca null
+    // Dohvata id povoda na osnovu opisa    
+    //  ako se taj string nalazi u vise elemenata
+    //  vraca tacno onaj koji je trazen
+    // Ako ne postoji red sa tim opisom vraca null
     */
     
     public function povodId($povod_opis)
@@ -115,8 +103,8 @@ class Povod extends Model
     
     //-----------------------------------------------
     /** public function povodOpis($povod_id){...}
-    //dohvata opis povoda na osnovu id-a 
-    //ako ne postoji red sa tim id-em vraca null
+    // Dohvata opis povoda na osnovu id-a 
+    // Ako ne postoji red sa tim id-em vraca null
     */
     
     public function povodOpis($povod_id)
@@ -129,7 +117,7 @@ class Povod extends Model
     
     //------------------------------------------------
     /** public function dohvati($povod_id){...} 
-    //Dohvata povod sa datim id-em
+    // Dohvata povod sa datim id-em
     */
     
     public function dohvati($povod_id)    
@@ -178,4 +166,5 @@ class Povod extends Model
         }
         return $finds;  
     }   
+
 }

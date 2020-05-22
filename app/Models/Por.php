@@ -11,14 +11,8 @@ use CodeIgniter\Model;
 class Por extends Model
 {
     /*
-    //Tu se upisuje korpa za ulogovanog korisnika, 
-    //a datum porucivanja se naknadno popuni
     //por_datkre - datum kada je korpa kreirana
     //por_datpor - datum kada je kliknuto dugme poruci
-    //kolone u tabeli: por_id, por_kor_id, por_naziv, por_povod_id,
-    //                  por_br_osoba, por_za_dat, por_popust_proc,
-    //                  por_datkre, por_datporuc, por_datodluke,
-    //                  por_odluka, por_datizrade, por_datpreuz
     */
     protected $table      = 'por';
     protected $primaryKey = 'por_id';
@@ -57,17 +51,15 @@ class Por extends Model
     //-----------------------------------------------------------------------
     
     /*
-    //override osnovnih metoda tako da prikazuju greske
-    //metoda save ne mora da se overrid-uje jer ona samo poziva
-    //insert i update u zavisnosti od parametara
-    //preporucljivo koristiti insert i update jer insert vraca id
-    //dobro za razvojnu fazu
+    // Metoda save ne mora da se overrid-uje jer ona samo poziva
+    //  insert i update u zavisnosti od parametara
+    // Preporucljivo koristiti insert i update jer insert vraca id
     */
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    //ako je neuspesno vraca false
-    //ako je uspesno vraca id
+    // Ako je neuspesno vraca false
+    // Ako je uspesno vraca id
     */
     
     public function insert($data=NULL, $returnID=true) 
@@ -81,11 +73,6 @@ class Por extends Model
             $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
         }
         if(parent::insert($data, $returnID) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return \UUID::decodeId($id);
@@ -93,7 +80,7 @@ class Por extends Model
     
     //-----------------------------------------------
     /**public function update($id=NULL,$data=NULL):bool{...}
-    //ako je uspesno vraca true, ako nije vraca false
+    // Ako je uspesno vraca true, ako nije vraca false
     */
     
     public function update($id=NULL, $data=NULL):bool
@@ -108,11 +95,6 @@ class Por extends Model
             $data['por_povod_id'] = \UUID::codeId($data['por_povod_id']);
         }
         if(parent::update($id, $data) === false){
-            echo '<h3>Greske u formi upisa:</h3>';
-            $errors = $this->errors();
-            foreach ($errors as $error) {
-                echo "<p>->$error</p>";   
-            }
             return false;
         }
         return true;
@@ -120,8 +102,8 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function delete($id=NULL,$purge=false){...} 
-    //dozvoljeno je brisanje, ali je potrebno prebaciti 
-    //kljuc u odgovarajuci format
+    // Dozvoljeno je brisanje, ali je potrebno prebaciti 
+    //  kljuc u odgovarajuci format
     */
     
     public function delete($id=NULL, $purge=false) 
@@ -134,8 +116,8 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function porudzbineKorisnika($kor_id){..}
-    //Dohvata sve porudzbine korisnika sa zadatim id-em
-    //Potrebnoo za prikaz porudzbina korisnika
+    // Dohvata sve porudzbine korisnika sa zadatim id-em
+    // Potrebnoo za prikaz porudzbina korisnika
     */
     
     public function porudzbineKorisnika($kor_id)
@@ -148,9 +130,9 @@ class Por extends Model
         
     //-----------------------------------------------
     /** public function korpaKorisnika($kor_id){...}
-    //Dohvata porudzbinu korisnika sa zadatim id-em
-    //Koja nije jos porucena
-    //Potrebno za prikaz korpe korisnika
+    // Dohvata porudzbinu korisnika sa zadatim id-em
+    //  koja nije jos porucena
+    // Potrebno za prikaz korpe korisnika
     // Ako korpa postoji vraca njen id,
     // Ako korpa ne postoji vraca null
     */
@@ -173,10 +155,10 @@ class Por extends Model
 
     //-----------------------------------------------
     /** public function filtriranePorudzbineKorisnika($kor_id,$status){...}
-    //Dohvata neke porudzbine korisnika sa zadatim id-em
-    //Potrebno za prikaz filtriranih porudzbina korisnika 
-    //status: 0-na cekanju, 1-prihvacene, 2-odbijena, 
-    //3-gotova, 4-pokupljena    
+    // Dohvata neke porudzbine korisnika sa zadatim id-em
+    // Potrebno za prikaz filtriranih porudzbina korisnika 
+    // status: 0-na cekanju, 1-prihvacene, 2-odbijena, 
+    //  3-gotova, 4-pokupljena    
     */
     
     public function filtriranePorudzbineKorisnika($kor_id, $status)
@@ -214,9 +196,8 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function donetaOdluka($por_id,$odluka){...}
-    //Upisuje datum odluke i donesenu odluku
-    //u porudzbinu sa datim id-em
-    //odluka: 0-prihvacena, 1-odbijena
+    // Upisuje datum odluke i donesenu odluku
+    //  u porudzbinu sa datim id-em
     */
     
     public function donetaOdluka($por_id, $odluka)
@@ -229,7 +210,7 @@ class Por extends Model
     
     //------------------------------------------------
     /** public function dohvati($por_id){...}
-    //Dohvata porudzbinu sa datim id-em
+    // Dohvata porudzbinu sa datim id-em
     */
     
     public function dohvati($por_id)    
@@ -286,7 +267,7 @@ class Por extends Model
     
     //------------------------------------------------
     /**public function decodeRecord($row){...}
-    //Dekodovanje jednog rekorda
+    // Dekodovanje jednog rekorda
     */
     
     public function decodeRecord($row)
@@ -300,7 +281,7 @@ class Por extends Model
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    //Dekodovanje nizova podataka
+    // Dekodovanje nizova podataka
     */
     
     public function decodeArray($finds)
@@ -311,7 +292,5 @@ class Por extends Model
         }
         return $finds;  
     }
-    
-   
-         
+        
 }
