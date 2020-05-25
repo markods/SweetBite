@@ -283,6 +283,7 @@ class Menadzer extends Ulogovani
          $korisnikModel=new Kor();
          $stavkaModel=new Stavka();
          $jeloModel=new Jelo();
+         $povodModel=new Povod();
          
           for ($i = 0; $i < count($por); $i++) {
            $ime=$korisnikModel->dohvatiImeNaOsnovuId($por[$i]->por_kor_id);
@@ -310,11 +311,9 @@ class Menadzer extends Ulogovani
               $por[$i]->popust=false;
             }
             
-            if($por[$i]->por_naziv==null){
-                $povodModel=new Povod();
-                $opis=$povodModel->povodOpis($por[$i]->por_povod_id);
-                $por[$i]->por_naziv=$opis;
-            }
+            $opis=$povodModel->povodOpis($por[$i]->por_povod_id);
+            $por[$i]->por_naziv=$opis;
+           
             
             if($por[$i]->por_datodluke==null)
                 $por[$i]->status = 0;
