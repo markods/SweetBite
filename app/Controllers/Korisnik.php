@@ -390,7 +390,7 @@ class Korisnik extends Ulogovani
         // $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
          $kor_id=$this->session->get('kor_id');
          $porudzbina=new Por();
-         $por=$porudzbina->porudzbineKorisnika($kor_id);
+         $por=$porudzbina->poslatePorudzbineKorisnika($kor_id);
         
          $stavkaModel=new Stavka();
          $jeloModel=new Jelo();

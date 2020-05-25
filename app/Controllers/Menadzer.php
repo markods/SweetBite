@@ -279,7 +279,7 @@ class Menadzer extends Ulogovani
    /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
    public function dohvatiPorudzbine(){
          $porudzbina=new Por();
-         $por=$porudzbina->dohvatiSvePorudzbine();
+         $por=$porudzbina->svePoslatePorudzbine();
          $korisnikModel=new Kor();
          $stavkaModel=new Stavka();
          $jeloModel=new Jelo();

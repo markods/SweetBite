@@ -127,6 +127,23 @@ class Por extends Model
            
         return $this->decodeArray($finds);
     }
+    
+    //------------------------------------------------
+    /** Autor: Filip Lucic 0188/17 - funkcija dohvata porudzbine korisnika koje su porucene (nisu korpa)*/
+    public function poslatePorudzbineKorisnika ($kor_id) {
+        $kor_id = \UUID::codeID($kor_id);
+        $finds = $this->where('por_kor_id', $kor_id)->where('por_datporuc!=',null)->findAll();        
+        return $this->decodeArray($finds);       
+    }
+    
+    //------------------------------------------------
+    /** Autor: Filip Lucic 0188/17 - funkcija dohvata sve porudzbine koje nisu korpa*/
+    public function svePoslatePorudzbine () {
+        $porudzbine=$this->where('por_datporuc!=', null)->findAll();
+        $porudzbine=$this->decodeArray($porudzbine);
+        return $porudzbine;
+    }
+    
         
     //-----------------------------------------------
     /** public function korpaKorisnika($kor_id){...}
