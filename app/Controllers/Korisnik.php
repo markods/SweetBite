@@ -412,6 +412,12 @@ class Korisnik extends Ulogovani
             $por[$i]->kol_jela=$kol_jela;
             $por[$i]->cena_jela=$cena_jela;
             
+            if($por[$i]->por_popust_proc!=0){
+                $por[$i]->popust=true;
+             }else{
+              $por[$i]->popust=false;
+            }
+            
             if($por[$i]->por_naziv==null){
                 $povodModel=new Povod();
                 $opis=$povodModel->povodOpis($por[$i]->por_povod_id);

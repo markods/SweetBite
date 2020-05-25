@@ -64,7 +64,8 @@ function showClientOrder(object) {
             orderedPrice[i]=object['cena_jela'][i];
       }
 
-    let discount = true;
+  //  let discount = true;
+    let discount=object['popust'];
     let stat = object['status'];
     //parsirati objekat u potrebne elemente
 
