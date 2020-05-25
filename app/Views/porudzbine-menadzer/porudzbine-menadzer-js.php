@@ -95,7 +95,7 @@ function showOrder(object) {
             orderedPrice[i]=object['cena_jela'][i];
       }
       
-      let discount = true;
+      let discount = object['popust'];
       let stat = object['status'];
       let clientName = object['ime_korisnika'];
       let clientNumber = object['telefon_korisnika'];

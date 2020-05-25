@@ -303,6 +303,19 @@ class Menadzer extends Ulogovani
             $por[$i]->masa_jela=$masa_jela;
             $por[$i]->kol_jela=$kol_jela;
             $por[$i]->cena_jela=$cena_jela;
+            
+            if($por[$i]->por_popust_proc!=0){
+                $por[$i]->popust=true;
+            }else{
+              $por[$i]->popust=false;
+            }
+            
+            if($por[$i]->por_naziv==null){
+                $povodModel=new Povod();
+                $opis=$povodModel->povodOpis($por[$i]->por_povod_id);
+                $por[$i]->por_naziv=$opis;
+            }
+            
             if($por[$i]->por_datodluke==null)
                 $por[$i]->status = 0;
             if($por[$i]->por_odluka==='prihvacena')
