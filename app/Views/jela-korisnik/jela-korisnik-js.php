@@ -246,7 +246,7 @@ function povecaj(id_jela){
                     jelo_masa:  food.jelo_masa,
                     kol:        kol
                 };
-                takeAmount(jelo, kol);            
+                takeAmount(jelo);            
             });        
         });  
     }
@@ -301,12 +301,13 @@ function smanji(id_jela){
         //ulogovani korisnik
         $.post("<?php echo base_url('Korisnik/changeAmount');?>",
                 JSON.stringify({jelo_id: id_jela, kol:'-1'}), 'json')
-        .done(function(kol){
+        .done(function(resp){
             //izmeniti vednost u inputu
+            let kol = resp.kol;
             let am = '';
             if (kol > 0) am += kol;
             $("#broj_" + id_jela + "").val(am);
-
+            if (kol < 0) return;
             $.post("<?php echo base_url('Korisnik/getFood');?>",
                     JSON.stringify({jelo_id: id_jela}))
             .done(function(food) {
@@ -314,7 +315,8 @@ function smanji(id_jela){
                     jelo_id:    food.jelo_id,
                     jelo_naziv: food.jelo_naziv,
                     jelo_cena:  food.jelo_cena,
-                    jelo_masa:  food.jelo_masa
+                    jelo_masa:  food.jelo_masa,
+                    kol:        kol
                 };
                 takeAmount(jelo, kol);            
             });
@@ -332,7 +334,9 @@ function smanji(id_jela){
         let am = '';
         if (kol > 0) am += kol;
         $("#broj_" + id_jela + "").val(am);
-            
+          
+        if (kol<0) return;
+        
         //dohvata info o jelu
         $.post("<?php echo base_url('Gost/getFood');?>",
                     JSON.stringify({jelo_id: id_jela}))
@@ -378,8 +382,9 @@ function tacnaKolicina(id_jela, input){
         else {
             $.post("<?php echo base_url('Korisnik/changeAmount');?>",
                     JSON.stringify({jelo_id: id_jela, kol: exactAmount}), 'json')
-            .done(function(kol){
+            .done(function(resp){
                 //izmeniti vednost u inputu
+                let kol = resp.kol;
                 let am = '';
                 if (kol > 0) am += kol;
                 $("#broj_" + id_jela + "").val(am);
@@ -391,9 +396,10 @@ function tacnaKolicina(id_jela, input){
                         jelo_id:    food.jelo_id,
                         jelo_naziv: food.jelo_naziv,
                         jelo_cena:  food.jelo_cena,
-                        jelo_masa:  food.jelo_masa
+                        jelo_masa:  food.jelo_masa,
+                        kol:        kol
                     };
-                    takeAmount(jelo, kol);            
+                    takeAmount(jelo);            
                 });
             });
         };

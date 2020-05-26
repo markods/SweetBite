@@ -245,6 +245,7 @@ class Korisnik extends Ulogovani
             else{
                 $amo = $kol;
             }
+            if ($amo < 0) $amo = 0;
             $stavkaModel->update($stavka_id, ['stavka_kol' => $amo]);
         } 
         
