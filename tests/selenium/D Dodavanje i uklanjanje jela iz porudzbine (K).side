@@ -1,0 +1,17 @@
+{
+  "id": "af6b46aa-72e3-45a7-b1f6-414b579a2158",
+  "version": "2.0",
+  "name": "D Dodavanje i uklanjanje jela iz porudzbine (K)",
+  "url": "http://127.0.0.1/nightbird/public/Gost/jela",
+  "tests": [],
+  "suites": [{
+    "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1/", "http://127.0.0.1/nightbird/public/Gost/jela"],
+  "plugins": []
+}
