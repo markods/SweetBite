@@ -41,6 +41,27 @@ class Jelo extends Model
                ];
         protected $skipValidation = false;
         
+        public function dohvatiSveBezSlike()
+        {
+            $jela = $this->findAll();
+            $jela = $this->decodeArray($jela);
+            $niz = [];
+            for ($i=0; $i<count($jela); $i++){
+                $elem = (object)[
+                    'jelo_id' => $jela[$i]->jelo_id,
+                    'jelo_naziv' => $jela[$i]->jelo_naziv,
+                    'jelo_opis' => $jela[$i]->jelo_opis,
+                    'jelo_cena' => $jela[$i]->jelo_cena,
+                    'jelo_masa' => $jela[$i]->jelo_masa,
+                    'jelo_tipjela_id' => $jela[$i]->jelo_tipjela_id,
+                    'jelo_ukus_id' => $jela[$i]->jelo_ukus_id,
+                    'jelo_dijeta_id' => $jela[$i]->jelo_dijeta_id
+                ];
+                $niz[$i] = $elem;
+            }
+            return $niz;
+        }
+        
         
         /** Dohvata sve podatke iz tabele Jelo */
         public function dohvSve() {

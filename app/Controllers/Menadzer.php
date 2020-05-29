@@ -197,7 +197,7 @@ class Menadzer extends Ulogovani
      /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da dohvati sva jela, i ispise ih putem Ajaxa pri ucitavanju stranice */
     public function dohvatiSvaJela() {
         $jeloModel = new Jelo();
-        $jela = $jeloModel->dohvSve();
+        $jela = $jeloModel->dohvatiSveBezSlike();
         $this->sendAJAX($jela);       
     }
     

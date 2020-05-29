@@ -62,7 +62,6 @@ function potvrdi_unos() {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function() {
-        alert(reader.result);
         let object = {
             'jelo_naziv' : document.getElementById("naziv_jela_temp").value,
             'jelo_tipjela' : document.getElementById("vrsta_jela_temp").value,
@@ -187,7 +186,7 @@ $(document).ready(function() {
             }  
     })
     .fail(function() {
-        alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        alert("Nije moguce uspostaviti vezu sa serveron, pokusajte kasnije!");
     });  
 });
 
