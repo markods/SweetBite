@@ -22,7 +22,7 @@ class Jelo extends Model
         protected $validationRules    = [
                         'jelo_naziv' => 'trim|required',
                         'jelo_opis' => 'trim|required',
-                        //'jelo_slika'   => 'required',
+                        'jelo_slika'   => 'required',
                         'jelo_cena' => 'required',
                         'jelo_masa' => 'required',
                         'jelo_tipjela_id' => 'required',
@@ -154,4 +154,14 @@ class Jelo extends Model
             
         }
 
+    /** public function dohvatiSliku($id){...}
+    // Dohvata sliku za odgovarajuci id
+    */
+    public function dohvatiSliku($id) 
+    {
+        $id = \UUID::codeId($id);
+        $jelo = $this->find($id);
+        if ($jelo == null) return null;
+        return $jelo->jelo_slika;
+    }
 }

@@ -117,6 +117,7 @@ class Menadzer extends Ulogovani
             'jelo_opis'=>$jelo['jelo_opis'],
             'jelo_cena'=>$jelo['jelo_cena'],
             'jelo_masa'=>$jelo['jelo_masa'],
+            'jelo_slika'=>$jelo['jelo_slika'],
             'jelo_tipjela_id'=>$tip_id,
             'jelo_ukus_id'=>$ukus_id,
             'jelo_dijeta_id'=>$dijeta_id 
@@ -362,4 +363,29 @@ class Menadzer extends Ulogovani
        $arh['status']=4;
        $this->sendAJAX($arh);  
    }
+   
+    /**public function dohvatiSliku(){...}
+    // Dohvata sliku za jelo ciji id dobije AJAX-om
+    */
+   
+    public function dohvatiSliku() 
+    {
+        $jelo = new Jelo();
+        $data = $this->receiveAJAX();
+        
+        $slika = $jelo->dohvatiSliku($data['jelo_id']);
+        
+        $data = [
+            "jelo_slika" => $slika
+        ];
+        $this->sendAJAX($data);
+    }
+    
+    public function updateSlika()
+    {
+        $jeloModel = new Jelo();
+        $jelo = $this->receiveAJAX();
+        $jeloModel->update($jelo['jelo_id'], ['jelo_slika' => $jelo['jelo_slika']]);
+        
+    }
 }

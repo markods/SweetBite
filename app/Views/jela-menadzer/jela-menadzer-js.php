@@ -1,135 +1,162 @@
 <script>         
 /**Autori: Filip Lucic 0188/17, Jovana Jankovic 0586/17 */
 
-var id=0;   // TODO: ukloniti
-
 $('#openImgUpload').click(function() {
-$('#upload_img').trigger('click');
- });
+    $('#upload_img').trigger('click');
+});
 
 /** Autor : Jovana Jankovic 0586/17 - funkcija koja poziva kontroler Menadzer radi sakrivanja jela iz ponude*/
 function sakrijJelo(input) {
-     let niz= input.id.split("_");
-     let jelo_id=niz[1];
-     let object = {
-       'jelo_id': jelo_id 
-      };
+    let niz= input.id.split("_");
+    let jelo_id=niz[1];
+    let object = {
+        'jelo_id': jelo_id 
+    };
     $.post("<?php echo base_url('Menadzer/sakrijJelo'); ?>", 
             JSON.stringify(object), "json")
     .done(function(data) {
-           $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-closed.svg");?>").attr('onclick','otkrijJelo(this)');
-            alert("Uspesno ste sakrili jelo iz ponude!");
+        $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-closed.svg");?>").attr('onclick','otkrijJelo(this)');
+        alert("Uspesno ste sakrili jelo iz ponude!");
     })
     .fail(function() {
-            alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
     });  
 }
+
 /** Autor: Filip Lucic 0188/17 - funkcija za vracanje jela u ponudu */
 function otkrijJelo(input) {
 
-     let niz= input.id.split("_");
-     let jelo_id=niz[1];
-     let object = {
-       'jelo_id': jelo_id 
-      };
-     $.post("<?php echo base_url('Menadzer/otkrijJelo'); ?>", 
+    let niz= input.id.split("_");
+    let jelo_id=niz[1];
+    let object = {
+        'jelo_id': jelo_id 
+    };
+    $.post("<?php echo base_url('Menadzer/otkrijJelo'); ?>", 
             JSON.stringify(object), "json")
-     .done(function(data) {
-         $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-open.svg");?>").attr('onclick','sakrijJelo(this)'); 
-         alert("Uspesno ste vratili jelo iz ponudu!");
-     })
-     .fail(function() {
-            alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
-     });  
+    .done(function(data) {
+        $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-open.svg");?>").attr('onclick','sakrijJelo(this)'); 
+        alert("Uspesno ste vratili jelo iz ponudu!");
+    })
+    .fail(function() {
+        alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+    });  
 
 }
 
 /** Autor: Jovana Jankovic 17/0586 - pomocna fja za dodavanje tipova jela*/
 function insertuj(){   
     alert("usao u insertuj");
-     $.post("<?php echo base_url('Menadzer/unesiTipove'); ?>")
+    $.post("<?php echo base_url('Menadzer/unesiTipove'); ?>")
     .done(function(data) {
-       alert(data['success']);
+        alert(data['success']);
     })
     .fail(function() {
-            alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
     });  
 }
 
 /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da doda novo jelo u bazu podataka */
 function potvrdi_unos() {
-   let object = {
-       'jelo_naziv':document.getElementById("naziv_jela_temp").value,
-       'jelo_tipjela':document.getElementById("vrsta_jela_temp").value,
-       'jelo_ukus':document.getElementById("ukus_temp").value,
-       'jelo_dijeta':document.getElementById("dijeta_temp").value,
-       'jelo_opis':document.getElementById("opis_jela_temp").value,
-       'jelo_cena':parseFloat(document.getElementById("cena_temp").value),
-       'jelo_masa':parseInt(document.getElementById("gramaza_temp").value)
-   };
-    $.post("<?php echo base_url('Menadzer/dodajJelo'); ?>", 
-            JSON.stringify(object), "json")
-    .done(function(data) {
-           menjanje(data);
-           $('#div'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
-           $('#vrsta_jela'+data['jelo_id']).val(data['jelo_tipjela']);
-           $('#dijeta'+data['jelo_id']).val(data['jelo_dijeta']);
-           $('#ukus'+data['jelo_id']).val(data['jelo_ukus']);
-           alert("Uspesno ste uneli novo jelo!");
-    })
-    .fail(function() {
-            alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
-    });  
+    let file=$("#upload_img");    
+    file = file[0].files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+        alert(reader.result);
+        let object = {
+            'jelo_naziv' : document.getElementById("naziv_jela_temp").value,
+            'jelo_tipjela' : document.getElementById("vrsta_jela_temp").value,
+            'jelo_ukus' : document.getElementById("ukus_temp").value,
+            'jelo_dijeta' : document.getElementById("dijeta_temp").value,
+            'jelo_opis' : document.getElementById("opis_jela_temp").value,
+            'jelo_cena' : parseFloat(document.getElementById("cena_temp").value),
+            'jelo_masa' : parseInt(document.getElementById("gramaza_temp").value),
+            'jelo_slika' : reader.result
+        };
+
+        $.post("<?php echo base_url('Menadzer/dodajJelo'); ?>", 
+                JSON.stringify(object), "json")
+        .done(function(data) {
+            menjanje(data);
+            $('#div'+data["jelo_id"]).css("background-image","url(" + data['jelo_slika'] + ")");
+            $('#vrsta_jela'+data['jelo_id']).val(data['jelo_tipjela']);
+            $('#dijeta'+data['jelo_id']).val(data['jelo_dijeta']);
+            $('#ukus'+data['jelo_id']).val(data['jelo_ukus']);
+            alert("Uspesno ste uneli novo jelo!");
+        })
+        .fail(function() {
+                alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        });
+    }
 }
 
 /** Autor: Jovana Jankovic 0586/17 - fja za update jela za menadzera*/
 function potvrdi_promenu(input){
-       let jelo_id= input.id;
-       let jelo_naziv = document.getElementById("naziv_jela"+input.id).value;
-       let jelo_tipjela = document.getElementById("vrsta_jela"+input.id).value;
-       let jelo_ukus = document.getElementById("ukus"+input.id).value;
-       let jelo_dijeta = document.getElementById("dijeta"+input.id).value;
-       let jelo_opis = document.getElementById("opis_jela"+input.id).value;
-       let jelo_cena = parseFloat(document.getElementById("cena"+input.id).value);
-       let jelo_masa = parseInt(document.getElementById("gramaza"+input.id).value);
-       
-       if(jelo_naziv=="")
-           jelo_naziv = document.getElementById("naziv_jela"+input.id).getAttribute("placeholder");
-       if(jelo_tipjela=="")
-           jelo_tipjela = document.getElementById("vrsta_jela"+input.id).getAttribute("placeholder");
-       if(jelo_ukus=="")
-           jelo_ukus = document.getElementById("ukus"+input.id).getAttribute("placeholder");
-       if(jelo_dijeta=="")
-           jelo_dijeta = document.getElementById("dijeta"+input.id).getAttribute("placeholder");
-       if(jelo_opis=="")
-           jelo_opis = document.getElementById("opis_jela"+input.id).getAttribute("placeholder");
-       if(isNaN(jelo_cena))
-           jelo_cena = parseFloat(document.getElementById("cena"+input.id).getAttribute("placeholder"));    
-        if(isNaN(jelo_masa))
-           jelo_masa = parseFloat(document.getElementById("gramaza"+input.id).getAttribute("placeholder"));
-       
-     let object = {
-       'jelo_id': input.id, 
-       'jelo_naziv':jelo_naziv,
-       'jelo_tipjela':jelo_tipjela,
-       'jelo_ukus':jelo_ukus,
-       'jelo_dijeta':jelo_dijeta,
-       'jelo_opis':jelo_opis,
-       'jelo_cena':jelo_cena,
-       'jelo_masa':jelo_masa
-   };
+    let jelo_id= input.id;
+    let jelo_naziv = document.getElementById("naziv_jela"+input.id).value;
+    let jelo_tipjela = document.getElementById("vrsta_jela"+input.id).value;
+    let jelo_ukus = document.getElementById("ukus"+input.id).value;
+    let jelo_dijeta = document.getElementById("dijeta"+input.id).value;
+    let jelo_opis = document.getElementById("opis_jela"+input.id).value;
+    let jelo_cena = parseFloat(document.getElementById("cena"+input.id).value);
+    let jelo_masa = parseInt(document.getElementById("gramaza"+input.id).value);
+    
+    //provera za sliku
+    let file = $('input[type=file],select', $("#div" + jelo_id));
+    if (file[3].files.length>0){
+        //slika je promenjenalet 
+        file = file[3].files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+            slika = reader.result;
+            let object = {
+                'jelo_id': jelo_id, 
+                'jelo_slika':slika
+            }
+            $.post("<?php echo base_url('Menadzer/updateSlika'); ?>", 
+                    JSON.stringify(object), "json")
+            .done(function() {
+                $('#div'+jelo_id).css("background-image","url(" + slika + ")");
+            });
+        }
+    }
+
+    if(jelo_naziv=="")
+        jelo_naziv = document.getElementById("naziv_jela"+input.id).getAttribute("placeholder");
+    if(jelo_tipjela=="")
+        jelo_tipjela = document.getElementById("vrsta_jela"+input.id).getAttribute("placeholder");
+    if(jelo_ukus=="")
+        jelo_ukus = document.getElementById("ukus"+input.id).getAttribute("placeholder");
+    if(jelo_dijeta=="")
+        jelo_dijeta = document.getElementById("dijeta"+input.id).getAttribute("placeholder");
+    if(jelo_opis=="")
+        jelo_opis = document.getElementById("opis_jela"+input.id).getAttribute("placeholder");
+    if(isNaN(jelo_cena))
+        jelo_cena = parseFloat(document.getElementById("cena"+input.id).getAttribute("placeholder"));    
+    if(isNaN(jelo_masa))
+        jelo_masa = parseFloat(document.getElementById("gramaza"+input.id).getAttribute("placeholder"));
+
+    let object = {
+        'jelo_id': input.id, 
+        'jelo_naziv':jelo_naziv,
+        'jelo_tipjela':jelo_tipjela,
+        'jelo_ukus':jelo_ukus,
+        'jelo_dijeta':jelo_dijeta,
+        'jelo_opis':jelo_opis,
+        'jelo_cena':jelo_cena,
+        'jelo_masa':jelo_masa
+    };
     $.post("<?php echo base_url('Menadzer/updateJelo'); ?>", 
             JSON.stringify(object), "json")
     .done(function(data) {
-           alert('Uspesno ste promenili osobine jela!');
-           update_polja(data);
-//           $('#div'+data["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+        alert('Uspesno ste promenili osobine jela!');
+        update_polja(data);
     })
     .fail(function() {
-            alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        alert("Promena jela nije uspela, molimo Vas, pokusajte ponovo!");
     });  
 }
-
 
 /** Autor: Filip Lucic 17/0188 funkcija koja dinamicki menja tacno ono jelo koje smo promenili, bez menjanja ostatka stranice*/
 function update_polja(obj) {
@@ -141,49 +168,51 @@ function update_polja(obj) {
     $('#cena'+obj['jelo_id']).val("");
     $('#gramaza'+obj['jelo_id']).attr("placeholder", obj['jelo_masa']);
     $('#gramaza'+obj['jelo_id']).val("");
-    $('#div'+obj["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
+    $('#div'+obj["jelo_id"]).css("background-image", "url(" + obj['jelo_slika'] + ")");
 }
 
 /** Autor: Jovana Jankovic 17/0586 - Funkcija za ucitavanje svih jela na menadzerovu stranicu*/
 $(document).ready(function() {
-   menjanje();
-   //izbirsan JSON jer ne prosledjujem nista
-   $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  
-   .done(function(data) {
-           for(let i = 0; i<data.length; i++) {            
-           menjanje(data[i]);
-           $('#div'+data[i]["jelo_id"]).css("background-image","url(<?php echo base_url("assets/icons/cevapi.jpg");?>)");
-           }  
-   })
+    menjanje();
+    //izbirsan JSON jer ne prosledjujem nista
+    $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  
+    .done(function(data) {
+            for(let i = 0; i<data.length; i++) {            
+                menjanje(data[i]);
+                $.post("<?php echo base_url('Menadzer/dohvatiSliku'); ?>", 
+                    JSON.stringify({"jelo_id": data[i]["jelo_id"]}), "json")
+                .done(function(data2){
+                    $('#div'+data[i]["jelo_id"]).css("background-image","url(" + data2['jelo_slika'] + ")");
+                });
+            }  
+    })
     .fail(function() {
-            alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
-   });  
+        alert("Dodavanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+    });  
 });
 
 /** Autor: Jovana Jankovic 0586/17 - fja za soft delete jela iz ponude */
 function obrisiJelo(input){ 
-     let niz= input.id.split("_");
-     let jelo_id=niz[1];
-       let object = {
-       'jelo_id': jelo_id, 
-   };
+    let niz= input.id.split("_");
+    let jelo_id=niz[1];
+        let object = {
+        'jelo_id': jelo_id, 
+    };
     $.post("<?php echo base_url('Menadzer/obrisiJelo'); ?>", 
             JSON.stringify(object), "json")
     .done(function(data) {
-           alert("Uspesno ste obrisali jelo iz ponude");
-           let content=document.getElementById("content");
-           content.removeChild(document.getElementById('div'+data["jelo_id"]));
+        alert("Uspesno ste obrisali jelo iz ponude");
+        let content=document.getElementById("content");
+        content.removeChild(document.getElementById('div'+data["jelo_id"]));
     })
     .fail(function() {
-            alert("Brisanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
+        alert("Brisanje jela nije uspelo, molimo Vas, pokusajte ponovo!");
     });  
 }
 
  /** Autor: Filip Lucic 17/0188 - omogucava ispis sablona za dodavanje novog jela, kao i ispis svih jela */
 function menjanje(obj) { 
-    //TODO implement image upload amd background image
-    //TODO see dish availability through database and hiding date, where does date get converted to string, here or somewhere else
-
+    
     if(obj == null)  {
         let str =""; 
         str+='<div class="dish_wrapper">'
@@ -251,11 +280,11 @@ function menjanje(obj) {
         str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; " name="opis_jela_temp" id="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8" cols="32" ></textarea>';
         str+='</div>';
         str+='</div>' ;
+        // dodavanje slike
+        str+='<input type = "file" id = "upload_img" />';
+        
         str+='<div class = "row cena_i_masa">';
         str+='<div class = "col-sm-12 text-right" style = "margin-bottom:4px">';
-        // dodavanje slike
-        // str+='<input type = "file" id = "upload_img" style="display:none"/>';
-        // str+='<button style = "text-align:left" id = "openImgUpload">Okacite sliku jela</button>';
         str+='<input type="text" name="gramaza_temp" id="gramaza_temp" placeholder="Gramaza">';
         str+='<input type="text" name="cena_temp" id="cena_temp" placeholder="Cena">';
         str+='</div>';
@@ -338,6 +367,8 @@ function menjanje(obj) {
     str+='<textarea draggable="false" id="opis_jela'+obj["jelo_id"]+'" style = "margin-bottom:4px; resize: none; " name="opis_jela" form="menjanje_jela" placeholder = "'+obj["jelo_opis"]+'" rows = "8" cols="32" ></textarea>';
     str+='</div>';
     str+='</div>' ;
+    // dodavanje slike
+    str+='<input type = "file" class = "upload_img" />';
     str+='<div class = "row cena_i_masa">';
     str+='<div class = "col-sm-12 text-right" style = "margin-bottom:4px">';
     str+='<input class = "text-right" type="text" name="gramaza" id="gramaza'+obj["jelo_id"]+'" placeholder="'+obj["jelo_masa"]+'">';
@@ -432,5 +463,6 @@ function menjanje_temp() {
     id++;   // TODO: ukloniti
 
 }
+
 </script>
 
