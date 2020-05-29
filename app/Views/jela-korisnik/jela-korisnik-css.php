@@ -2,7 +2,8 @@
 /* Jovana Jankovic 0586/17 -Funkcija za prikaz jela kod korisnika */
 
 .box:hover {
-  filter: blur(4px);
+  /*filter: blur(8px);*/
+  opacity: 0.2;
   pointer-events: none;
   color:black;
   background-position: center;

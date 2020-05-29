@@ -364,7 +364,8 @@ class Menadzer extends Ulogovani
        $this->sendAJAX($arh);  
    }
    
-    /**public function dohvatiSliku(){...}
+    //-----------------------------------------------
+    /** public function dohvatiSliku(){...}
     // Dohvata sliku za jelo ciji id dobije AJAX-om
     */
    
@@ -381,11 +382,15 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);
     }
     
+    //-----------------------------------------------
+    /** public function updateSlika(){...}
+    // Cuva sliku dobijenu AJAX-om za jelo ciji id isto dobije     
+    */
+    
     public function updateSlika()
     {
         $jeloModel = new Jelo();
         $jelo = $this->receiveAJAX();
         $jeloModel->update($jelo['jelo_id'], ['jelo_slika' => $jelo['jelo_slika']]);
-        
     }
 }

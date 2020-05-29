@@ -118,47 +118,56 @@ function prikaziJelo(object) {
     let kol_ispi   = '';
     if (kol != null) kol_ispi=kol;
     
-    let str = 
-       '<div class="ar-image" style="background: url("data:' + slika + ';base64");" id="' + id + '">\
-            <div class="article-image">\
-                <div class="row base">\
-                    <div class="col-md-10 about1">\
-                        <h3 class="text-left">' + naziv_jela + '</h3>\
-                        <p>#' + tagovi[0] + ' #' + tagovi[1] + ' #' + tagovi[2] + '</p>\
-                        <p class="opis">' + opis_jela + '</p>\
-                    </div>\
-                <div class="col-md-2 amount">\
-                    <div class="change">\
-                        <img src="<?php echo base_url("assets/icons/plain-plus.svg");?>" \
-                            onclick=povecaj("' + id + '") />\
-                        <input type="text" id="broj_' + id + '" \
-                            onchange=tacnaKolicina("' + id + '",this) value="' + kol_ispi +'" />\
-                        <img src="<?php echo base_url("assets/icons/plain-minus.svg");?>" \
-                            onclick=smanji("' + id + '") />\
-                    </div>\
-                    <div id="srce_' + id + '">\
-                        ' + prikazFavorita(id, favor) + '\
+    $.post("<?php if(array_key_exists('kor_id', $_SESSION)){
+                    echo base_url('Korisnik/dohvatiSliku');
+                  }else{
+                    echo base_url('Gost/dohvatiSliku');  
+                  }
+            ?>", JSON.stringify({"jelo_id": id}), "json")
+    .done(function(data){
+        let str = 
+           '<div class="ar-image" id="' + id + '">\
+                <div class="article-image">\
+                    <div class="row base">\
+                        <div class="col-md-10 about1">\
+                            <h3 class="text-left">' + naziv_jela + '</h3>\
+                            <p>#' + tagovi[0] + ' #' + tagovi[1] + ' #' + tagovi[2] + '</p>\
+                            <p class="opis">' + opis_jela + '</p>\
+                        </div>\
+                    <div class="col-md-2 amount">\
+                        <div class="change">\
+                            <img src="<?php echo base_url("assets/icons/plain-plus.svg");?>" \
+                                onclick=povecaj("' + id + '") />\
+                            <input type="text" id="broj_' + id + '" \
+                                onchange=tacnaKolicina("' + id + '",this) value="' + kol_ispi +'" />\
+                            <img src="<?php echo base_url("assets/icons/plain-minus.svg");?>" \
+                                onclick=smanji("' + id + '") />\
+                        </div>\
+                        <div id="srce_' + id + '">\
+                            ' + prikazFavorita(id, favor) + '\
+                        </div>\
                     </div>\
                 </div>\
-            </div>\
-             <div class="row price">\
-                <div class="col-sm-8 text-right">' + gramaza + ' g</div>\
-                    <div class="col-sm-4 text-right">' + cena + '.00 din</div>\
+                 <div class="row price">\
+                    <div class="col-sm-8 text-right">' + gramaza + ' g</div>\
+                        <div class="col-sm-4 text-right">' + cena + '.00 din</div>\
+                    </div>\
                 </div>\
-            </div>\
-        </div>';
-    
-    $("#content").append(str);
-    if (kol>0){
-        jelo = {
-            jelo_id:    id,
-            jelo_naziv: naziv_jela,
-            jelo_cena:  cena,
-            jelo_masa:  gramaza,
-            kol:        kol
-        };
-        takeAmount(jelo);
-    }
+            </div>';
+
+        $("#content").append(str);
+        if (kol>0){
+            jelo = {
+                jelo_id:    id,
+                jelo_naziv: naziv_jela,
+                jelo_cena:  cena,
+                jelo_masa:  gramaza,
+                kol:        kol
+            };
+            takeAmount(jelo);
+        }
+        $(".article-image", $('#' + id)[0]).css("background-image","url(" + data['jelo_slika'] + ")");
+    });
 }
 
 //-----------------------------------------------

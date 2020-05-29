@@ -387,16 +387,16 @@ class Korisnik extends Ulogovani
     /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 
     /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
     public function dohvatiPorudzbineKorisnik(){ 
-         $korisnikModel=new Kor();
+        $korisnikModel=new Kor();
         // $kor_id=$korisnikModel->dohvatiIdNaOsnovuImena("korisnik");
-         $kor_id=$this->session->get('kor_id');
-         $porudzbina=new Por();
-         $por=$porudzbina->poslatePorudzbineKorisnika($kor_id);
+        $kor_id=$this->session->get('kor_id');
+        $porudzbina=new Por();
+        $por=$porudzbina->poslatePorudzbineKorisnika($kor_id);
         
-         $stavkaModel=new Stavka();
-         $jeloModel=new Jelo();
+        $stavkaModel=new Stavka();
+        $jeloModel=new Jelo();
          
-          for ($i = 0; $i < count($por); $i++) {
+        for ($i = 0; $i < count($por); $i++) {
            $stavke=$stavkaModel->dohvatiStavke($por[$i]->por_id);
             
            
@@ -415,7 +415,7 @@ class Korisnik extends Ulogovani
             
             if($por[$i]->por_popust_proc!=0){
                 $por[$i]->popust=true;
-             }else{
+            }else{
               $por[$i]->popust=false;
             }
             
@@ -435,10 +435,30 @@ class Korisnik extends Ulogovani
                 $por[$i]->status = 3;
             if($por[$i]->por_datpreuz!=null)
                 $por[$i]->status = 4;
-          }  
+        }  
       
-         $this->sendAJAX($por); 
+        $this->sendAJAX($por); 
     }
+    
+    //-----------------------------------------------
+    /** public function dohvatiSliku(){...}
+    // Dohvata sliku za jelo ciji id dobije AJAX-om
+    */
+   
+    public function dohvatiSliku() 
+    {
+        $jelo = new Jelo();
+        $rec = $this->receiveAJAX();
+        
+        $slika = $jelo->dohvatiSliku($rec['jelo_id']);
+        
+        $data = [
+            "jelo_slika" => $slika
+        ];
+        $this->sendAJAX($data);
+    }
+    
+    //-----------------------------------------------
     
 }
 

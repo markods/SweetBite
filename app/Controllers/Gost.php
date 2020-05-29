@@ -292,4 +292,24 @@ class Gost extends BaseController
         $this->sendAJAX($povodii);
     }
 
+    //-----------------------------------------------
+    /** public function dohvatiSliku(){...}
+    // Dohvata sliku za jelo ciji id dobije AJAX-om
+    */
+   
+    public function dohvatiSliku() 
+    {
+        $jelo = new Jelo();
+        $rec = $this->receiveAJAX();
+        
+        $slika = $jelo->dohvatiSliku($rec['jelo_id']);
+        
+        $data = [
+            "jelo_slika" => $slika
+        ];
+        $this->sendAJAX($data);
+    }
+    
+    //-----------------------------------------------
+    
 }
