@@ -68,14 +68,8 @@ TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TODO...TOD
 
 
 ====== GENERALNO ======
-+ modele imenovati isto kao u bazi, samo sa velikim pocetnim slovom
-   + primeri: Tipjela, Por, ...
-
 + ukloniti stvari koje su pod komentarom a sigurno ne rade (ili nisu radile)
-
-+ modeli ne treba da ispisuju html kod u sebi!
-   + ne treba raditi echo u modelu!
-   + model treba da vrati null ako ne uspe akcija
++ model treba da vrati null ako ne uspe akcija
 
 
 
