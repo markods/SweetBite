@@ -10,6 +10,7 @@ $(document).ready(function(){
     // mora u #mCSB_1_container da bi se prikazalo, ne moze samo #sidebar
     $("#mCSB_1_container").append('<table id="basket"></table>\n\
                           <div class="poruci"></div>');
+    $("#content").append("<div class='row' id='content1'></div>");
     
     let uslov = "<?php 
             if(!array_key_exists('kor_id', $_SESSION)){
@@ -126,36 +127,36 @@ function prikaziJelo(object) {
             ?>", JSON.stringify({"jelo_id": id}), "json")
     .done(function(data){
         let str = 
-           '<div class="ar-image" id="' + id + '">\
+           '<div class="ar-image col-md-6 col-sm-12" id="' + id + '">\
                 <div class="article-image">\
                     <div class="row base">\
                         <div class="col-md-10 about1">\
                             <h3 class="text-left">' + naziv_jela + '</h3>\
-                            <p>#' + tagovi[0] + ' #' + tagovi[1] + ' #' + tagovi[2] + '</p>\
+                            <p class="levo-poravnanje">#' + tagovi[0] + ' #' + tagovi[1] + ' #' + tagovi[2] + '</p>\
                             <p class="opis">' + opis_jela + '</p>\
                         </div>\
-                    <div class="col-md-2 amount">\
-                        <div class="change">\
-                            <img src="<?php echo base_url("assets/icons/plain-plus.svg");?>" \
-                                onclick=povecaj("' + id + '") />\
-                            <input type="text" id="broj_' + id + '" \
-                                onchange=tacnaKolicina("' + id + '",this) value="' + kol_ispi +'" />\
-                            <img src="<?php echo base_url("assets/icons/plain-minus.svg");?>" \
-                                onclick=smanji("' + id + '") />\
-                        </div>\
-                        <div id="srce_' + id + '">\
-                            ' + prikazFavorita(id, favor) + '\
+                        <div class="col-md-2 amount">\
+                            <div class="change">\
+                                <img src="<?php echo base_url("assets/icons/plain-plus.svg");?>" \
+                                    onclick=povecaj("' + id + '") />\
+                                <input type="text" id="broj_' + id + '" \
+                                    onchange=tacnaKolicina("' + id + '",this) value="' + kol_ispi +'" />\
+                                <img src="<?php echo base_url("assets/icons/plain-minus.svg");?>" \
+                                    onclick=smanji("' + id + '") />\
+                            </div>\
+                            <div id="srce_' + id + '">\
+                                ' + prikazFavorita(id, favor) + '\
+                            </div>\
                         </div>\
                     </div>\
-                </div>\
-                 <div class="row price">\
-                    <div class="col-sm-8 text-right">' + gramaza + ' g</div>\
-                        <div class="col-sm-4 text-right">' + cena + '.00 din</div>\
+                    <div class="row price">\
+                        <div class="col-sm-9 col-md-7 col-lg-7 text-right">' + gramaza + ' g</div>\
+                        <div class="col-sm-3 col-md-5 col-lg-5 text-right no-left-padding">' + cena + '.00 din</div>\
                     </div>\
                 </div>\
             </div>';
 
-        $("#content").append(str);
+        $("#content1").append(str);
         if (kol>0){
             jelo = {
                 jelo_id:    id,

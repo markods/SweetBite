@@ -20,15 +20,17 @@
 }
 .ar-image {
   position: relative;
-  height: 300px;
-  width: 340px;
+  /*height: 300px;
+  width: 340px;*/
 }
   .article-image {
-    height: 300px;
-    width: 340px;
+    /*height: 300px;
+    width: 340px;*/
     color: black !important;
     font-size: 15px !important;
     font-weight: bold;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
  .article-image p {
@@ -68,7 +70,7 @@
           display: flex;
           padding: 10px;
           margin: 0px;
-          height: 260px;
+          height: 290px;
         }
           /*About je prvih 10 kolona*/
           .about1 {
@@ -142,6 +144,14 @@
 
 .elem:hover {
   opacity: 1;
+}
+
+.levo-poravnanje {
+    text-align: left;
+}
+
+.no-left-padding {
+    padding-left: 0px;
 }
 
 </style>
