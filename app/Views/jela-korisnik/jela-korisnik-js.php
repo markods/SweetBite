@@ -52,6 +52,7 @@ $(document).ready(function(){
             else {
                 //sacuva trenutnu korpu
                 if(arr != null){
+                    arr = JSON.parse(arr);
                     for(let i=0; i<arr.jelo_id.length; i++){
                         if (arr.kol[i]>0){
                             $.post("<?php echo base_url('Korisnik/changeAmount');?>",
@@ -130,12 +131,12 @@ function prikaziJelo(object) {
            '<div class="ar-image col-md-6 col-sm-12" id="' + id + '">\
                 <div class="article-image">\
                     <div class="row base">\
-                        <div class="col-md-10 about1">\
+                        <div class="col-sm-11 col-md-10 about1">\
                             <h3 class="text-left">' + naziv_jela + '</h3>\
                             <p class="levo-poravnanje">#' + tagovi[0] + ' #' + tagovi[1] + ' #' + tagovi[2] + '</p>\
                             <p class="opis">' + opis_jela + '</p>\
                         </div>\
-                        <div class="col-md-2 amount">\
+                        <div class="col-sm-1 col-md-2 amount">\
                             <div class="change">\
                                 <img src="<?php echo base_url("assets/icons/plain-plus.svg");?>" \
                                     onclick=povecaj("' + id + '") />\
