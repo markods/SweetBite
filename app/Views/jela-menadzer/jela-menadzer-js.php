@@ -172,6 +172,9 @@ function update_polja(obj) {
 
 /** Autor: Jovana Jankovic 17/0586 - Funkcija za ucitavanje svih jela na menadzerovu stranicu*/
 $(document).ready(function() {
+    
+    $("#content").append("<div class='row' id='content1'></div>");
+    
     menjanje();
     //izbirsan JSON jer ne prosledjujem nista
     $.post("<?php echo base_url('Menadzer/dohvatiSvaJela'); ?>")  
@@ -214,7 +217,7 @@ function menjanje(obj) {
     
     if(obj == null)  {
         let str =""; 
-        str+='<div class="dish_wrapper">'
+        str+='<div class="dish_wrapper col-md-6 col-sm-12">'
         str+='<form name = "menjanje_jela_temp" method = "POST" >';
         str+='<div class = "row" >';
         str+='<div class = "col-sm-10 text-left">';
@@ -276,7 +279,7 @@ function menjanje(obj) {
         //prazan red end
         str+='<div class = "row">';
         str+='<div class = "col-sm-12 text-left" style="overflow: hidden;">';
-        str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; " name="opis_jela_temp" id="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8" cols="32" ></textarea>';
+        str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; width:inherit;" name="opis_jela_temp" id="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8"></textarea>';
         str+='</div>';
         str+='</div>' ;
         // dodavanje slike
@@ -292,7 +295,7 @@ function menjanje(obj) {
         str+= '</form>';
         str+='</div>';
 
-        $('#content').append(str);
+        $('#content1').append(str);
         
         
         $('#vrsta_jela_temp').val("");
@@ -302,7 +305,7 @@ function menjanje(obj) {
     else {
     let str ="";
     
-    str+='<div id="div'+obj["jelo_id"]+'" class="dish_wrapper" >';
+    str+='<div id="div'+obj["jelo_id"]+'" class="dish_wrapper col-md-6 col-sm-12" >';
     str+='<div class="elem"';
     str+='<form name = "menjanje_jela" method = "POST" >';
     str+='<div class = "row">';
@@ -363,7 +366,7 @@ function menjanje(obj) {
     str+='</div>' ;
     str+='<div class = "row">';
     str+='<div class = "col-sm-12 text-left" style="overflow: hidden;">';
-    str+='<textarea draggable="false" id="opis_jela'+obj["jelo_id"]+'" style = "margin-bottom:4px; resize: none; " name="opis_jela" form="menjanje_jela" placeholder = "'+obj["jelo_opis"]+'" rows = "8" cols="32" ></textarea>';
+    str+='<textarea draggable="false" id="opis_jela'+obj["jelo_id"]+'" style = "margin-bottom:4px; resize: none; width:inherit;" name="opis_jela" form="menjanje_jela" placeholder = "'+obj["jelo_opis"]+'" rows = "8"></textarea>';
     str+='</div>';
     str+='</div>' ;
     // dodavanje slike
@@ -378,7 +381,7 @@ function menjanje(obj) {
     str+= '</form>';
     str+='</div>';
     str+='</div>';
-    $('#content').append(str);
+    $('#content1').append(str);
     }
 }
 
@@ -438,7 +441,7 @@ function menjanje_temp() {
     str+='</div>' ;
     str+='<div class = "row" style = "background-color:lightblue;" >';
     str+='<div class = "col-sm-12 text-left" style="overflow: hidden;">';
-    str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; " name="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8" cols="40" ></textarea>';
+    str+='<textarea  draggable="false" style = "margin-bottom:4px; resize: none; " name="opis_jela_temp" form="menjanje_jela_temp" placeholder = "Unesite opis novog jela" rows = "8"></textarea>';
     str+='</div>';
     str+='</div>' ;
     str+='<div class = "row" style = "background-color:lightblue;">';

@@ -39,10 +39,12 @@
 
 .dish_wrapper {
     padding-left:5px;
-    width:45%;
+    max-width:47%;
     text-align:center;
     display:inline-block;
-    margin-right:35px;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    /*margin-right:35px;*/
     margin-bottom: 7px;
 /*    background-image: url(<?php echo base_url("assets/icons/cevapi.jpg");?>);*/
     background-size: cover;
