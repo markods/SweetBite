@@ -31,6 +31,8 @@
     font-weight: bold;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    margin-bottom: 7px;
   }
 
  .article-image p {

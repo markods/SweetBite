@@ -37,10 +37,12 @@ function dodajStavku(){
 /** Autor: Jovana Jankovic 0586/17 - Funkcija koja komunicira sa kontrolerom Menadzer i poziva njegovu funkciju dohvatiPorudzbine()  */
 /** Nakon toga, dohvacene podatke prosledjuje funkciji showOrder(data) */
 $(document).ready(function() { 
-   $.post("<?php echo base_url('Menadzer/dohvatiPorudzbine'); ?>")
+    $("#content").append("<div class='row' id='content1'></div>");
+    
+    $.post("<?php echo base_url('Menadzer/dohvatiPorudzbine'); ?>")
     .done(function(data) {
-        $('#content').append("<div class='dummy'></div>");
-   for(let i=0;i<data.length;i++){
+        $('#content1').append("<div class='dummy'></div>");
+    for(let i=0;i<data.length;i++){
         showOrder(data[i]);
         }
     })
@@ -121,7 +123,7 @@ function showOrder(object) {
     let dummy = $(".dummy");
     dummy.html(inner);
     dummy[0].id = id;
-    dummy.removeClass("dummy").addClass("order");
+    dummy.removeClass("dummy").addClass("order col-md-6 col-sm-12");
 
     //dodavanje detalja porudzbine
     let order_details = $(".order_amount", $("#"+id));
@@ -161,7 +163,7 @@ function showOrder(object) {
         </tr>\
         <tr>\
             <td colspan=2></td>\
-            <td>" + people + " osoba</td>\
+            <td class=osob>" + people + " osoba</td>\
             <td>" + weight + "g</td>\
             <td>" + price + "din</td>\
         </tr>\
@@ -169,7 +171,7 @@ function showOrder(object) {
     order_details.append(inner3);
 
     //dodavanje dummy elementa
-    $("#content").append("<div class='dummy'></div>");
+    $("#content1").append("<div class='dummy'></div>");
     
 }
 

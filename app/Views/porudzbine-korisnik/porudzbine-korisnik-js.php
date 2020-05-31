@@ -11,10 +11,13 @@
 
 /** Autor: Jovana Jankovic 0586/17 - Funkcija koja komunicira sa kontrolerom Korisnik i poziva njegovu funkciju dohvatiPorudzbineKorisnik()  */
 /** Nakon toga, dohvacene podatke prosledjuje funkciji showClientOrder(data) */
-  $(document).ready(function(){ 
-   $.post("<?php echo base_url('Korisnik/dohvatiPorudzbineKorisnik'); ?>")
+$(document).ready(function(){ 
+    
+    $("#content").append("<div class='row' id='content1'></div>");
+    
+    $.post("<?php echo base_url('Korisnik/dohvatiPorudzbineKorisnik'); ?>")
     .done(function(data) {
-        $('#content').append("<div class='dummy'></div>");
+        $('#content1').append("<div class='dummy'></div>");
         for(let i=0;i<data.length;i++){
            showClientOrder(data[i]);
         }
@@ -87,7 +90,7 @@ function showClientOrder(object) {
     let dummy = $(".dummy");
     dummy.html(inner);
     dummy[0].id = id;
-    dummy.removeClass("dummy").addClass("order");
+    dummy.removeClass("dummy").addClass("order col-md-6 col-sm-12");
 
     //dodavanje detalja porudzbine
     let order_details = $(".order_amount", $("#"+id));
@@ -127,7 +130,7 @@ function showClientOrder(object) {
         </tr>\
         <tr>\
             <td colspan=2></td>\
-            <td>" + people + " osoba</td>\
+            <td class=osob>" + people + " osoba</td>\
             <td>" + weight + "g</td>\
             <td>" + price + "din</td>\
         </tr>\
@@ -135,7 +138,7 @@ function showClientOrder(object) {
     order_details.append(inner3);
 
     //dodavanje dummy elementa
-    $("#content").append("<div class='dummy'></div>");
+    $("#content1").append("<div class='dummy'></div>");
    
 }
 

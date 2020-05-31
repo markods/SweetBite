@@ -9,6 +9,8 @@
 */
 
 $(document).ready(function(){   
+    $("#content").append("<div class='row' id='content1'></div>");
+    
     $.post("<?php echo base_url('Kuvar/loadNotFinishedOrders')?>")
     .done(function(orders){
         for(let i=0; i<orders.por_id.length; i++){
@@ -46,7 +48,7 @@ function showOrder(object) {
     let orderedStatus = object.orderedStatus;
 
     let inner = 
-       '<div class="order" id="' + id + '">\
+       '<div class="order col-md-6 col-sm-12" id="' + id + '">\
             <div class=about_order>\
                 <text class=name>' + name + '</text>\
                 <text class=stat>\
@@ -61,7 +63,7 @@ function showOrder(object) {
             </div>\
         </div>';
                 
-    $("#content").append(inner);
+    $("#content1").append(inner);
 
     //dodavanje detalja porudzbine
     let order_details = $(".order_amount", $("#"+id));
