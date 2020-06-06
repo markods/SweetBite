@@ -3,7 +3,134 @@
   "version": "2.0",
   "name": "K Dodavanje i uklanjanje privilegija korisnickom nalogu (A)",
   "url": "http://127.0.0.1/nightbird/public/Gost/jela",
-  "tests": [],
+  "tests": [{
+    "id": "a3280621-3237-4610-93be-92455b42ea86",
+    "name": "Dodavanje i uklanjanje privilegija",
+    "commands": [{
+      "id": "c83f33d6-30e4-4178-a5ed-2a3a1d5b9adf",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Admin/nalozi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "858e3ab9-dfb8-45fa-a625-246b25f9eac7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ef57df08-1c6f-4f59-b9b1-299584ece21a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)", "css:finder"],
+        ["xpath=//img[@alt='k']", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",3)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img[3]", "xpath:idRelative"],
+        ["xpath=//div[6]/table/tr/td[4]/img[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee87881f-56f4-4348-9c3a-0e2e557f9e97",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(2)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(2)", "css:finder"],
+        ["xpath=(//img[@alt='o'])[12]", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",1)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img[2]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/img[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a50564fc-36ff-4d16-818c-c21b38d3f760",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 > .priv > img:nth-child(1)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 > .priv > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[@alt='o'])[5]", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",0)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "69488472-9c82-48f0-9fbe-74224e407bd8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)", "css:finder"],
+        ["xpath=(//img[@alt='o'])[4]", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",2)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img[3]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/img[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e051e463-3cdc-4190-8f34-b69d40ad8b35",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)", "css:finder"],
+        ["xpath=(//img[@alt='k'])[2]", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",3)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img[3]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/img[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f5ee7b6-09f2-4b36-9498-76cb53e311e9",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 img:nth-child(3)", "css:finder"],
+        ["xpath=(//img[@alt='o'])[13]", "xpath:img"],
+        ["xpath=//img[@onclick='changePrivileges(\"549891e578ed4d1996099720a539c414\",2)']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[4]/img[3]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/img[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ed26597f-3153-4efb-a8e3-d9d7535d8da0",
+    "name": "Uklanjanje naloga",
+    "commands": [{
+      "id": "b815ebd8-6304-4d42-aa91-2391258aed9f",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Admin/nalozi",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3193dda9-4e4a-4db4-a772-a27aa18d92ab",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a617e59-7321-4829-8daf-53194464a999",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 49891e578ed4d1996099720a539c414 > .remove > img",
+      "targets": [
+        ["css=#\\35 49891e578ed4d1996099720a539c414 > .remove > img", "css:finder"],
+        ["xpath=(//img[@alt='-'])[3]", "xpath:img"],
+        ["xpath=//img[@onclick='removeUser(\"549891e578ed4d1996099720a539c414\")']", "xpath:attributes"],
+        ["xpath=//tr[@id='549891e578ed4d1996099720a539c414']/td[5]/img", "xpath:idRelative"],
+        ["xpath=//div[6]/table/tr/td[5]/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
   "suites": [{
     "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
     "name": "Default Suite",
