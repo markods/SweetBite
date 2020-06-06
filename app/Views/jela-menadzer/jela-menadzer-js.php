@@ -81,6 +81,14 @@ function potvrdi_unos() {
             $('#vrsta_jela'+data['jelo_id']).val(data['jelo_tipjela']);
             $('#dijeta'+data['jelo_id']).val(data['jelo_dijeta']);
             $('#ukus'+data['jelo_id']).val(data['jelo_ukus']);
+            $("#naziv_jela_temp").val("");
+            $("#vrsta_jela_temp").val("");
+            $("#ukus_temp").val("");
+            $("#dijeta_temp").val("");
+            $("#opis_jela_temp").val("");
+            $("#gramaza_temp").val("");
+            $("#cena_temp").val("");
+            $("#upload_img").val("");
             alert("Uspesno ste uneli novo jelo!");
         })
         .fail(function() {
@@ -225,7 +233,7 @@ function menjanje(obj) {
         str+= '</div>';
                 
         str+='<div class = "col-sm-2 text-right" >';
-        str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" onclick="potvrdi_unos()" style="margin-top: 10px; margin-right: 5px;">';   
+        str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" onclick="potvrdi_unos()" style="margin-top: 10px; margin-right: 5px; cursor:pointer">';   
         str+='</div>';
         str+='</div>';
         str+='<div class = "row">';
@@ -313,7 +321,7 @@ function menjanje(obj) {
     str+='<input  type = "text" id="naziv_jela'+obj["jelo_id"]+'" name = "naziv_jela" placeholder ="'+obj["jelo_naziv"]+'"style = margin-top:4px; margin-bottom:4px; height: 25px;">';
     str+= '</div>';              
     str+='<div class = "col-sm-2 text-right">';
-    str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" id="'+ obj["jelo_id"]+'" onclick="potvrdi_promenu(this)" style="margin-top: 10px; margin-right: 5px;">';   
+    str+='<img src = "<?php echo base_url("assets/icons/plain-check.svg");?>" width = "20px" height = "20px" id="'+ obj["jelo_id"]+'" onclick="potvrdi_promenu(this)" style="margin-top: 10px; margin-right: 5px; cursor:pointer">';   
     str+='</div>';
     str+='</div>';
     str+='<div class = "row">';
@@ -352,16 +360,16 @@ function menjanje(obj) {
     str+='</div>';
     str+='<div class= "col-sm-2 text-right">';
     if(obj['jelo_datsakriv']==null)
-        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" id="eye_'+obj['jelo_id']+'" width = "20px" height = "20px" style="margin-right:5px;" onclick = "sakrijJelo(this)">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-open.svg");?>" id="eye_'+obj['jelo_id']+'" width = "20px" height = "20px" style="margin-right:5px; cursor:pointer" onclick = "sakrijJelo(this)">';
     else
-        str+='<img src = "<?php echo base_url("assets/icons/eye-closed.svg");?>" id="eye_'+obj['jelo_id']+'" width = "20px" height = "20px" style="margin-right:5px;" onclick = "otkrijJelo(this)">';
+        str+='<img src = "<?php echo base_url("assets/icons/eye-closed.svg");?>" id="eye_'+obj['jelo_id']+'" width = "20px" height = "20px" style="margin-right:5px; cursor:pointer" onclick = "otkrijJelo(this)">';
     str+='</div>';                     
     str+='</div>';
     str+='<div class = "row">';
     str+='<div class = "col-sm-10">';
     str+='</div>';
     str+='<div class = "col-sm-2 text-right">';
-    str+='<img src = "<?php echo base_url("assets/icons/trash.svg");?>" id="del_'+obj["jelo_id"]+'"onclick="obrisiJelo(this)" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px;">';
+    str+='<img src = "<?php echo base_url("assets/icons/trash.svg");?>" id="del_'+obj["jelo_id"]+'"onclick="obrisiJelo(this)" width = "20px" height = "20px" style="margin-top: 3px; margin-right: 5px; cursor:pointer">';
     str+='</div>';
     str+='</div>' ;
     str+='<div class = "row">';
