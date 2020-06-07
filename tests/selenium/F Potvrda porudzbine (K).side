@@ -3,7 +3,768 @@
   "version": "2.0",
   "name": "F Potvrda porudzbine (K)",
   "url": "http://127.0.0.1/nightbird/public/Gost/jela",
-  "tests": [],
+  "tests": [{
+    "id": "4cc1ffca-1fd6-4f9a-b7d9-aab12a99fada",
+    "name": "Test 00 - Successful order",
+    "commands": [{
+      "id": "0cdd3043-0559-4ac0-a477-404a883f14cf",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57f49e31-e6af-433f-8e1f-ec81d9ece686",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1054x808",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ab939ba7-e26f-4791-9217-9d8355d5322b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pr-0 > .btn",
+      "targets": [
+        ["css=.pr-0 > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prijava')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5023da7f-6333-42a4-8a8b-b99a49593b76",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c62d8c78-a033-409f-9380-c7dc042bcfec",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": "korisnik@nightbird.com"
+    }, {
+      "id": "0542a1a0-0bcd-4c34-ba6a-b9ef7b1973b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30e23216-e444-4b2d-928c-03cd00d890bb",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "korisnik"
+    }, {
+      "id": "996cce59-d18c-4e9e-8081-a7e043b6377c",
+      "comment": "",
+      "command": "click",
+      "target": "id=login",
+      "targets": [
+        ["id=login", "id"],
+        ["css=#login", "css:finder"],
+        ["xpath=//div[@id='login']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[3]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "00a17aec-2956-4e35-89b5-b2d85b7b0df2",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')]", "xpath:img"],
+        ["xpath=//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")']", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ae36f2c-bce8-4cce-988f-ebb876e80ecd",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bbaa454f-9a5b-4242-a857-bef5d29e2772",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a28f85d-7732-45fc-ace6-d9de8b5f343c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5687eee-61f1-4799-a6db-5c848ac98715",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[2]", "xpath:img"],
+        ["xpath=//img[@onclick='povecaj(\"63b51bc3c5ef4ea5b0e1927dd3e04d4a\")']", "xpath:attributes"],
+        ["xpath=//div[@id='63b51bc3c5ef4ea5b0e1927dd3e04d4a']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34c4507d-16dc-4576-9701-651ead0002c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03c34c27-156c-4cf7-9da5-94c9b18102a4",
+      "comment": "",
+      "command": "click",
+      "target": "id=imePor",
+      "targets": [
+        ["id=imePor", "id"],
+        ["name=naziv_porudzbine", "name"],
+        ["css=#imePor", "css:finder"],
+        ["xpath=//input[@id='imePor']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr/td/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7f8fc3d-2891-4403-ad9c-6ff437d98421",
+      "comment": "",
+      "command": "type",
+      "target": "id=imePor",
+      "targets": [
+        ["id=imePor", "id"],
+        ["name=naziv_porudzbine", "name"],
+        ["css=#imePor", "css:finder"],
+        ["xpath=//input[@id='imePor']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr/td/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Uspesna porudzbina"
+    }, {
+      "id": "9a48ba1a-c242-4c85-a3ef-d6e3ea4fdf0a",
+      "comment": "",
+      "command": "click",
+      "target": "id=kolikoOsoba",
+      "targets": [
+        ["id=kolikoOsoba", "id"],
+        ["name=brOsoba", "name"],
+        ["css=#kolikoOsoba", "css:finder"],
+        ["xpath=//input[@id='kolikoOsoba']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e553bd75-8c89-44cb-8941-f4287ef54d4c",
+      "comment": "",
+      "command": "type",
+      "target": "id=kolikoOsoba",
+      "targets": [
+        ["id=kolikoOsoba", "id"],
+        ["name=brOsoba", "name"],
+        ["css=#kolikoOsoba", "css:finder"],
+        ["xpath=//input[@id='kolikoOsoba']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/div/input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "526ac4ba-ef0e-48c3-8f7e-107effd80f8c",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b16d11c2-a466-48e6-81d6-8cc2da1c18b0",
+      "comment": "",
+      "command": "select",
+      "target": "id=kojiPovod",
+      "targets": [],
+      "value": "label=Radije ne bih naveo/la"
+    }, {
+      "id": "ae9d43c2-21ea-43c0-909d-e81e6713f7f5",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e4bf6b5-6806-4a9c-a2a0-a3beabfb1e86",
+      "comment": "",
+      "command": "click",
+      "target": "id=doKada",
+      "targets": [
+        ["id=doKada", "id"],
+        ["name=doKada", "name"],
+        ["css=#doKada", "css:finder"],
+        ["xpath=//input[@id='doKada']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[3]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a8ca952-9589-4528-ba0b-5c2cfec37dc8",
+      "comment": "",
+      "command": "type",
+      "target": "id=doKada",
+      "targets": [
+        ["id=doKada", "id"],
+        ["name=doKada", "name"],
+        ["css=#doKada", "css:finder"],
+        ["xpath=//input[@id='doKada']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[3]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td/div/input", "xpath:position"]
+      ],
+      "value": "2020-06-27T22:24"
+    }, {
+      "id": "555ba1a2-b002-40c1-b525-d2c729753b08",
+      "comment": "",
+      "command": "click",
+      "target": "name=potvrdi",
+      "targets": [
+        ["name=potvrdi", "name"],
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@name='potvrdi']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td/button", "xpath:idRelative"],
+        ["xpath=//td/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1c92d2f-8bd1-4926-bf88-d5277f12dc99",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(4)",
+      "targets": [
+        ["css=.btn:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[4]", "xpath:idRelative"],
+        ["xpath=//div[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f39b042e-fdf6-4af0-92a4-845fb06af363",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Porudžbine",
+      "targets": [
+        ["linkText=Porudžbine", "linkText"],
+        ["css=.btn:nth-child(4) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Porudžbine')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/div[4]/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://127.0.0.1/nightbird/public/Korisnik/porudzbine']", "xpath:href"],
+        ["xpath=//div[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Porudžbine')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b2bbedb2-1714-4d8a-b412-feec0f811f23",
+    "name": "Test 01 - Unsuccessful order",
+    "commands": [{
+      "id": "a2fc5464-d6fa-44a9-8f2b-ceb97d8842e4",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bd3cf787-10c3-4218-87d6-36bd85a87fd7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1054x808",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a1175d23-25e5-46ab-b578-2e912125074e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pr-0 > .btn",
+      "targets": [
+        ["css=.pr-0 > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prijava')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1caae4be-c1c3-44cb-ab91-c9a53394265a",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d67d5bda-cea4-459b-b770-4149c5b239ad",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": "korisnik@nightbird.com"
+    }, {
+      "id": "12aa91e7-374d-4b7a-b61e-4eeac11714df",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0fdb917f-53e0-462a-afde-998bf0cc7105",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "korisnik"
+    }, {
+      "id": "795fd7e5-6db6-43e3-8403-5d2a258166a5",
+      "comment": "",
+      "command": "click",
+      "target": "id=login",
+      "targets": [
+        ["id=login", "id"],
+        ["css=#login", "css:finder"],
+        ["xpath=//div[@id='login']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[3]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4894594-ba17-4348-ab95-7bf945cc5238",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7043d863-35c3-4fe8-8b89-4298c4a604d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3efdcd8-0d75-45ac-a401-f3d67b18a1f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[4]", "xpath:img"],
+        ["xpath=//img[@onclick='povecaj(\"63b51bc3c5ef4ea5b0e1927dd3e04d4a\")']", "xpath:attributes"],
+        ["xpath=//div[@id='63b51bc3c5ef4ea5b0e1927dd3e04d4a']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d39fbaf9-62d1-420f-affd-5e08161344fe",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[4]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"63b51bc3c5ef4ea5b0e1927dd3e04d4a\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='63b51bc3c5ef4ea5b0e1927dd3e04d4a']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "adea795e-820f-49cf-b0cf-8b85bd10fac9",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[4]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"63b51bc3c5ef4ea5b0e1927dd3e04d4a\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='63b51bc3c5ef4ea5b0e1927dd3e04d4a']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3218cde8-90d0-4d15-806c-2f8a3901ab32",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\36 3b51bc3c5ef4ea5b0e1927dd3e04d4a .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[4]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"63b51bc3c5ef4ea5b0e1927dd3e04d4a\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='63b51bc3c5ef4ea5b0e1927dd3e04d4a']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8096a1cd-470c-4aaa-9fe3-3cd7971de9c6",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[3]", "xpath:img"],
+        ["xpath=//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")']", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb56f849-0ac2-4161-950c-212793bee0a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)",
+      "targets": [
+        ["css=#\\30 aab253163ac40ef8bab8f0befdcb2a3 .change > img:nth-child(1)", "css:finder"],
+        ["xpath=(//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/plain-plus.svg')])[3]", "xpath:img"],
+        ["xpath=(//img[@onclick='povecaj(\"0aab253163ac40ef8bab8f0befdcb2a3\")'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='0aab253163ac40ef8bab8f0befdcb2a3']/div/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4bcf644e-2cbe-429e-bb5f-4fd7a1c567fb",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "928b4b01-cb28-4a7b-89e1-f5f1de41c6cd",
+      "comment": "",
+      "command": "click",
+      "target": "name=potvrdi",
+      "targets": [
+        ["name=potvrdi", "name"],
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@name='potvrdi']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td/button", "xpath:idRelative"],
+        ["xpath=//td/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b584f06-bb51-46b5-8dbe-9e509aa3ea46",
+      "comment": "",
+      "command": "click",
+      "target": "id=kolikoOsoba",
+      "targets": [
+        ["id=kolikoOsoba", "id"],
+        ["name=brOsoba", "name"],
+        ["css=#kolikoOsoba", "css:finder"],
+        ["xpath=//input[@id='kolikoOsoba']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd237986-556d-4ad3-9aa3-4d1e5d1e4077",
+      "comment": "",
+      "command": "type",
+      "target": "id=kolikoOsoba",
+      "targets": [
+        ["id=kolikoOsoba", "id"],
+        ["name=brOsoba", "name"],
+        ["css=#kolikoOsoba", "css:finder"],
+        ["xpath=//input[@id='kolikoOsoba']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/div/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "1cd9ac9c-9f82-4a4b-badb-47433dbf88c8",
+      "comment": "",
+      "command": "click",
+      "target": "name=potvrdi",
+      "targets": [
+        ["name=potvrdi", "name"],
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@name='potvrdi']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td/button", "xpath:idRelative"],
+        ["xpath=//td/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "624661be-b3df-4505-8b9a-1bc448ddd8a8",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c0a4ae6-5980-4d28-b7cb-a88fde380e0f",
+      "comment": "",
+      "command": "select",
+      "target": "id=kojiPovod",
+      "targets": [],
+      "value": "label=Ostalo"
+    }, {
+      "id": "b3be5fd6-1b51-4809-9f9f-435a16bf6876",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e230dfea-77cb-4e97-9c3c-fe7a17bde0ab",
+      "comment": "",
+      "command": "click",
+      "target": "name=potvrdi",
+      "targets": [
+        ["name=potvrdi", "name"],
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@name='potvrdi']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td/button", "xpath:idRelative"],
+        ["xpath=//td/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6991597c-d570-4f56-aedf-a2a23ac055e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=doKada",
+      "targets": [
+        ["id=doKada", "id"],
+        ["name=doKada", "name"],
+        ["css=#doKada", "css:finder"],
+        ["xpath=//input[@id='doKada']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[3]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4dfbd4a-9bb2-4c55-a41d-01978b2752ac",
+      "comment": "",
+      "command": "click",
+      "target": "id=doKada",
+      "targets": [
+        ["id=doKada", "id"],
+        ["name=doKada", "name"],
+        ["css=#doKada", "css:finder"],
+        ["xpath=//input[@id='doKada']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[3]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "20acf455-5db8-4ef9-ae60-d8125211e9c3",
+      "comment": "",
+      "command": "type",
+      "target": "id=doKada",
+      "targets": [
+        ["id=doKada", "id"],
+        ["name=doKada", "name"],
+        ["css=#doKada", "css:finder"],
+        ["xpath=//input[@id='doKada']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[3]/td/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td/div/input", "xpath:position"]
+      ],
+      "value": "2020-06-18T22:28"
+    }, {
+      "id": "d10224c5-03d9-4a0d-ba58-0cc45b840b2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr > .text-center",
+      "targets": [
+        ["css=tr > .text-center", "css:finder"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td", "xpath:idRelative"],
+        ["xpath=//tbody/tr[4]/td", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "15fe046d-5ad4-4090-a0e8-4ef7c61896c3",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2330027-098e-4849-ad3b-ce5336d6385c",
+      "comment": "",
+      "command": "select",
+      "target": "id=kojiPovod",
+      "targets": [],
+      "value": "label=Povod:"
+    }, {
+      "id": "ef585a3c-edfb-4271-9ee8-c7e37b02ab3d",
+      "comment": "",
+      "command": "click",
+      "target": "id=kojiPovod",
+      "targets": [
+        ["id=kojiPovod", "id"],
+        ["name=povod", "name"],
+        ["css=#kojiPovod", "css:finder"],
+        ["xpath=//select[@id='kojiPovod']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[2]/td[2]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8902563-ad51-4d8a-8310-c2b4c006d508",
+      "comment": "",
+      "command": "click",
+      "target": "name=potvrdi",
+      "targets": [
+        ["name=potvrdi", "name"],
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//button[@name='potvrdi']", "xpath:attributes"],
+        ["xpath=//form[@id='forma_poruci']/table/tbody/tr[4]/td/button", "xpath:idRelative"],
+        ["xpath=//td/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Potvrdi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e655c7f0-3bab-4c9b-9c83-dbcb5cc78e66",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//button[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Izloguj me')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
   "suites": [{
     "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
     "name": "Default Suite",
