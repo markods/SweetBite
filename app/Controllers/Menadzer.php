@@ -286,6 +286,11 @@ class Menadzer extends Ulogovani
          $jeloModel=new Jelo();
          $povodModel=new Povod();
          
+        $naziv_jela;
+        $masa_jela;
+        $kol_jela;
+        $cena_jela;
+         
           for ($i = 0; $i < count($por); $i++) {
            $ime=$korisnikModel->dohvatiImeNaOsnovuId($por[$i]->por_kor_id);
            $telefon=$korisnikModel->dohvatiBrojTelefona($por[$i]->por_kor_id); 
@@ -326,6 +331,11 @@ class Menadzer extends Ulogovani
                 $por[$i]->status = 3;
             if($por[$i]->por_datpreuz!=null)
                 $por[$i]->status = 4;
+            
+            $naziv_jela = null;
+            $masa_jela = null;
+            $kol_jela = null;
+            $cena_jela = null;
           }  
          $this->sendAJAX($por); 
    }
