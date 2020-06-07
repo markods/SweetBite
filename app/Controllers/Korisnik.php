@@ -440,6 +440,14 @@ class Korisnik extends Ulogovani
                 $por[$i]->status = 3;
             if($por[$i]->por_datpreuz!=null)
                 $por[$i]->status = 4;
+            
+            
+            /**Popravljen bag kod prikaza*/
+            
+            $naziv_jela = null;
+            $masa_jela = null;
+            $kol_jela = null;
+            $cena_jela = null;
         }  
       
         $this->sendAJAX($por); 
