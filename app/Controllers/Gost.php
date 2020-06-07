@@ -16,8 +16,11 @@ use App\Models\Stavka;
 use App\Models\Povod;
 
 /**
- * this is the default controller for the web application
- * it handles requests from users that aren't logged in
+ * Gost - klasa kontrolera, sva interakcija
+ *        korisnika bez naloga, sa bazom 
+ *        se realizuje pomocu ove klase  
+ * 
+ * @version 0.3
  */
 class Gost extends BaseController
 {
@@ -180,9 +183,9 @@ class Gost extends BaseController
     
     //-----------------------------------------------
     /** public function loadAllFood(){...}
-    // Dohvata iz baze sva jela i salje ih nazad
-    */
-    
+     * Dohvata iz baze sva jela i salje ih AJAX zahtevom
+     * u vidu niza objekata
+     */
     public function loadAllFood()
     {
         $tipJelaModel = new Tipjela();
@@ -249,9 +252,10 @@ class Gost extends BaseController
      
     //-----------------------------------------------
     /** public function getFood(){...}
-    // Dohvata opis jela ciji id je stigao AJAX-om
-    */
-    
+     * Dohvata opis jela ciji id je stigao AJAX-om
+     *  i salje ga nazad novim AJAX-om u vidu niza 
+     *  objekata
+     */
     public function getFood()
     {
         $jelo = $this->receiveAJAX();
@@ -272,9 +276,9 @@ class Gost extends BaseController
     
     //-----------------------------------------------
     /** public function sviPovodi(){...}
-    // Salje AJAX-om sve povode iz baze
-    */
-    
+     * Salje AJAX-om sve povode iz baze u vidu niza 
+     *  objekata
+     */
     public function sviPovodi()
     {
         $povod = new Povod();
@@ -294,9 +298,9 @@ class Gost extends BaseController
 
     //-----------------------------------------------
     /** public function dohvatiSliku(){...}
-    // Dohvata sliku za jelo ciji id dobije AJAX-om
-    */
-   
+     * Dohvata sliku za jelo ciji id dobije AJAX-om
+     *  i salje je nazad novim AJAX-om
+     */
     public function dohvatiSliku() 
     {
         $jelo = new Jelo();

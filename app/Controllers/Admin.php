@@ -5,6 +5,13 @@
 use App\Models\Kor;
 use App\Models\Tipkor;
 
+/**
+ * Admin - klasa kontrolera, sva interakcija
+ *         korisnika sa privilegijom admina sa bazom 
+ *         se realizuje pomocu ove klase  
+ * 
+ * @version 0.3
+ */
 class Admin extends Ulogovani
 {
     // data used for displaying the controller index page
@@ -27,9 +34,9 @@ class Admin extends Ulogovani
     
     //-----------------------------------------------
     /** public function loadAllUsers(){...}
-    // Dohvata sve korisnike iz baze i salje ih AJAX-om
-    */
-    
+     * Dohvata sve korisnike iz baze i salje ih AJAX-om
+     *  u vidu niza objekata
+     */
     public function loadAllUsers()
     {        
         $korModel = new Kor();
@@ -68,9 +75,8 @@ class Admin extends Ulogovani
     
     //-----------------------------------------------
     /** public function removeUser(){...}
-    // Uklanja nalog iz baze na zahtev AJAX-a
-    */
-    
+     * Uklanja iz baze nalog ciji id dobije AJAX-om
+     */
     public function removeUser() 
     {
         $korModel = new Kor();
@@ -80,10 +86,9 @@ class Admin extends Ulogovani
     
     //-----------------------------------------------
     /** public function changePrivileges(){...}
-    // Menja privilegiju korisnika u bazi  
-    //  na onu koju je poslao AJAX
-    */
-    
+     * Menja privilegiju korisnika u bazi  
+     *   na onu koju je dobio AJAX zahtevom
+     */
     public function changePrivileges() 
     {
         $tipMod = new Tipkor();
@@ -108,10 +113,9 @@ class Admin extends Ulogovani
     
     //-----------------------------------------------
     /** public function loadUser(){...}
-    // Dohvata korisnika iz baze po id-u koji dobije iz AJAX-a
-    // Vraca js-u informacije preko AJAX-a
-    */
-    
+     * Dohvata korisnika iz baze po id-u koji dobije AJAX-om
+     * Salje informacije o korisniku putem AJAX-a
+     */
     public function loadUser() 
     {
         $korModel = new Kor();

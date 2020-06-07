@@ -13,6 +13,13 @@ use App\Models\Stavka;
 use App\Models\Kor;
 use App\Models\Povod;
 
+/**
+ * Korisnik - klasa kontrolera, sva interakcija
+ *            korisnika bez privilegija sa bazom 
+ *            se realizuje pomocu ove klase  
+ * 
+ * @version 0.5
+ */
 class Korisnik extends Ulogovani
 {
     // data used for displaying the controller pages
@@ -45,11 +52,10 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function loadAllFood(){...}
-    // Dohvata iz baze sva jela i salje ih nazad
-    // Ako korisnik ima sacuvanu korpu prikazace i nju
-    // Ucitava korisnikove favorite
-    */
-    
+     * Dohvata iz baze sva jela i salje ih nazad
+     * Ako korisnik ima sacuvanu korpu prikazace i nju
+     * Ucitava korisnikove favorite 
+     */
     public function loadAllFood()
     {
         $tipJelaModel = new Tipjela();
@@ -131,10 +137,9 @@ class Korisnik extends Ulogovani
  
     //-----------------------------------------------
     /** public function addFavorit(){...}
-    // Jelo ciji id dobije AJAX-om stavlja u favorite 
-    //  za prijavljenog korisnika
-    */
-    
+     * Jelo ciji id dobije AJAX-om stavlja u favorite 
+     *  za prijavljenog korisnika
+     */
     public function addFavorit()
     {
         $jelo = $this->receiveAJAX();
@@ -149,10 +154,9 @@ class Korisnik extends Ulogovani
 
     //-----------------------------------------------
     /** public function removeFavorit(){...}
-    // Jelo ciji id dobije AJAX-om uklanja iz favorita
-    //  prijavljenog korisnika
-    */
-    
+     * Jelo ciji id dobije AJAX-om uklanja iz favorita
+     *  prijavljenog korisnika
+     */
     public function removeFavorit()
     {
         $jelo = $this->receiveAJAX();
@@ -165,13 +169,12 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function changeAmount(){...}
-    // Manje kolicinu u jela dobijenog AJAX-om
-    // Ako prijavljeni korisnik nema svoju korpu pravi je
-    // Ako u korpi nema tu stavku pravi se stavka
-    //  a ako ima stavku onda joj se promeni kolicina
-    // AJAX-om vraca trenutnu kolicinu tog jela u korpi
-    */
-    
+     * Manja kolicinu jela ciji id je dobijen AJAX-om
+     * Ako prijavljeni korisnik nema svoju korpu pravi novu
+     * Ako u korpi nema tu stavku pravi se stavka
+     *  a ako ima stavku onda joj se promeni kolicina
+     * AJAX-om vraca trenutnu kolicinu tog jela u korpi
+     */
     public function changeAmount()
     {
         $json = $this->receiveAJAX();
@@ -258,9 +261,9 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function getFood(){...}
-    // Dohvata opis jela ciji id je stigao AJAX-om
-    */
-    
+     * Dohvata informacije o jelu ciji id je stigao 
+     *  AJAX-om i salje ih nazad u novom AJAX zahtevu
+     */
     public function getFood()
     {
         $jelo = $this->receiveAJAX();
@@ -281,10 +284,9 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function removeFromOrder(){...}
-    // Uklanja iz baze stavku ulogovanog korisnika
-    //  za jelo ciji id je stigao AJAX zahtevom
-    */
-    
+     * Uklanja iz baze stavku ulogovanog korisnika
+     *  za jelo ciji id je stigao AJAX zahtevom
+     */
     public function removeFromOrder()
     {
         $jelo = $this->receiveAJAX();
@@ -302,9 +304,8 @@ class Korisnik extends Ulogovani
 
     //-----------------------------------------------
     /** public function sviPovodi(){...}
-    // Salje AJAX-om sve povode iz baze
-    */
-    
+     * Salje AJAX-om sve povode iz baze
+     */
     public function sviPovodi()
     {
         $povod = new Povod();
@@ -324,11 +325,9 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function poruci(){...}
-    // Validira zahtev za porucivanjem
-    // Ako je neuspesno vraca greske
-    // Ako je uspesno cuva u bazi
-    */
-    
+     * Validira zahtev za porucivanjem
+     * Ako je uspesno cuva u bazi
+     */
     public function poruci()
     {
         $pod = $this->receiveAJAX();
@@ -348,9 +347,9 @@ class Korisnik extends Ulogovani
         
     //-----------------------------------------------
     /** public function hasBasket(){...}
-    // Proverava da li korisnik ima popunjenu korpu
-    */
-    
+     * Proverava da li korisnik ima popunjenu korpu
+     *  i vraca bool vrednost AJAX-om 
+     */
     public function hasBasket()
     {
         $por = new Por();
@@ -366,9 +365,8 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function emptyBasket(){...}
-    // Brise sve stavke iz korisnikove korpe
-    */
-    
+     * Brise sve stavke iz korisnikove korpe
+     */
     public function emptyBasket()
     {
         $por = new Por();
@@ -455,9 +453,8 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
     /** public function dohvatiSliku(){...}
-    // Dohvata sliku za jelo ciji id dobije AJAX-om
-    */
-   
+     * Dohvata sliku za jelo ciji id dobije AJAX-om
+     */
     public function dohvatiSliku() 
     {
         $jelo = new Jelo();

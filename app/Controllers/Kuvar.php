@@ -8,6 +8,13 @@ use App\Models\Povod;
 use App\Models\Jelo;
 use App\Models\Por;
 
+/**
+ * Kuvar - klasa kontrolera, sva interakcija
+ *         korisnika sa privilegijom kuvara sa bazom 
+ *         se realizuje pomocu ove klase  
+ * 
+ * @version 0.3
+ */
 class Kuvar extends Ulogovani
 {
     protected $viewdata = [
@@ -29,9 +36,8 @@ class Kuvar extends Ulogovani
     
     //-----------------------------------------------
     /** public function loadNotFinishedOrders(){...}
-    //ucitava sve porudzbine koje nisu napravljene
-    */
-    
+     * Ucitava sve porudzbine koje nisu napravljene
+     */
     public function loadNotFinishedOrders(){
         $stavka = new Stavka();
         $povod  = new Povod();
@@ -92,9 +98,8 @@ class Kuvar extends Ulogovani
     
     //-----------------------------------------------
     /** public function dishDone(){...}
-    // Postavlja datum izrade primljene stavke
-    */
-    
+     * Postavlja datum izrade primljene stavke
+     */
     public function dishDone()
     {
         $stavka = new Stavka();
@@ -104,9 +109,8 @@ class Kuvar extends Ulogovani
     
     //-----------------------------------------------
     /** public function dishNotDone(){...}
-    // Uklanja datum izrade primljene stavke
-    */
-    
+     * Uklanja datum izrade primljene stavke
+     */
     public function dishNotDone()
     {
         $stavka = new Stavka();
@@ -116,9 +120,8 @@ class Kuvar extends Ulogovani
     
     //-----------------------------------------------
     /** public function orderDone(){...}
-    // Postavlja datum izrade primljene porudzbine
-    */
-    
+     * Postavlja datum izrade primljene porudzbine
+     */
     public function orderDone()
     {
         $por = new Por();

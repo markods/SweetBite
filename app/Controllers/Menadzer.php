@@ -376,9 +376,8 @@ class Menadzer extends Ulogovani
    
     //-----------------------------------------------
     /** public function dohvatiSliku(){...}
-    // Dohvata sliku za jelo ciji id dobije AJAX-om
-    */
-   
+     * Dohvata sliku za jelo ciji id dobije AJAX-om
+     */
     public function dohvatiSliku() 
     {
         $jelo = new Jelo();
@@ -394,9 +393,8 @@ class Menadzer extends Ulogovani
     
     //-----------------------------------------------
     /** public function updateSlika(){...}
-    // Cuva sliku dobijenu AJAX-om za jelo ciji id isto dobije     
-    */
-    
+     * Cuva sliku dobijenu AJAX-om za jelo ciji id isto dobije     
+     */
     public function updateSlika()
     {
         $jeloModel = new Jelo();
