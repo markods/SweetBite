@@ -2,15 +2,526 @@
   "id": "af6b46aa-72e3-45a7-b1f6-414b579a2158",
   "version": "2.0",
   "name": "B Registracija korisnika (K, V, M, A)",
-  "url": "http://127.0.0.1/nightbird/public/Gost/jela",
+  "url": "http://127.0.0.1/nightbird/public/Gost/jela ",
   "tests": [{
-    "id": "a03a206b-1fda-45d9-93fb-99567ddf3315",
-    "name": "T01 - registration",
-    "commands": []
+    "id": "3c3ed32d-4cf9-46aa-9878-1b8dc60c8c5b",
+    "name": "Registracija korisnika- uspesno",
+    "commands": [{
+      "id": "97d0bd4e-47be-49e1-acca-16e6c4cc2408",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e6c7396b-7763-4d4e-9b86-421605617722",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "660b65e2-547d-403a-8eb1-2f688d77c2c0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.dropdown:nth-child(5) > .btn",
+      "targets": [
+        ["css=.dropdown:nth-child(5) > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registracija')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "41e197c5-ed68-4d2a-90cd-2a744acaf634",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a1c8e15-f079-4882-ac0e-eefa385d1df3",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Pera Peric"
+    }, {
+      "id": "8ef09426-5208-468e-9051-092d3b699b76",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5aa5f972-45cb-48e5-bf36-8598d3cecd6b",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "peric@etf.rs"
+    }, {
+      "id": "5996d268-77bc-41ac-9138-dd2701c2f729",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "08094fee-9eb1-4b75-8577-3ed8c91d035d",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "+78945612"
+    }, {
+      "id": "43247595-c141-45f4-ae6a-d278b6f73ea0",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7c1e9e2a-89e7-4f22-ad9f-4694875316bd",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "pericaperica"
+    }, {
+      "id": "2a945461-c34a-4992-abe6-3044b7329fbc",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "089f5854-b72f-4768-9fe4-3e61f1d9f1ad",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "pericaperica"
+    }, {
+      "id": "a94b3324-6d5a-4850-ab20-2038da50e212",
+      "comment": "",
+      "command": "click",
+      "target": "id=register",
+      "targets": [
+        ["id=register", "id"],
+        ["css=#register", "css:finder"],
+        ["xpath=//div[@id='register']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[6]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }, {
-    "id": "b931d3f4-0d62-4862-803b-f72fbdaeee1e",
-    "name": "T00 - registration failed",
-    "commands": []
+    "id": "0a8e2e58-d641-41ef-b97f-63181decd8a2",
+    "name": "Registracija korisnika - neuspesno (korisnik postoji)",
+    "commands": [{
+      "id": "ab9d8c93-c4d2-4448-b586-ef0d8379a167",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f22c1006-67ca-4f2a-9ef7-f02b8d0f79b7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f968766a-4f52-4b86-b42d-f45cb9250f3b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.dropdown:nth-child(5) > .btn",
+      "targets": [
+        ["css=.dropdown:nth-child(5) > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registracija')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b7ef988-1dd4-4684-9099-d4c8022316b3",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fef5e92c-c11a-4407-8d3c-420a2af08a34",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Korisnik Korisnik"
+    }, {
+      "id": "3df89283-0d69-4f8a-be44-eb90b0520874",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b479b656-145f-4071-bb45-83686bf34c73",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "korisnik@nightbird.com"
+    }, {
+      "id": "73059c36-5c27-4ee0-8a6d-3c22416748e6",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "789e839c-db6d-4fb0-8af0-f009c71004b6",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "+381111111"
+    }, {
+      "id": "99c3c1d6-f9fc-4af9-a438-7c23c3ef59ed",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e334e03-19b2-41d9-b334-1c9ec512c8e4",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "korisnik"
+    }, {
+      "id": "caf1b898-534b-45f0-acbd-c46ffd6b6587",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e63e54e4-9eb4-47c6-8604-97ffe312ca0e",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "korisnik"
+    }, {
+      "id": "44b10dfd-e412-496f-9e9d-fe661aad4256",
+      "comment": "",
+      "command": "click",
+      "target": "id=register",
+      "targets": [
+        ["id=register", "id"],
+        ["css=#register", "css:finder"],
+        ["xpath=//div[@id='register']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[6]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "06eaf8f2-5163-4d6c-b1a1-3dca293655a0",
+    "name": "Registracija korisnika - neuspesno (korisnik nije uneo korektne lozinke)",
+    "commands": [{
+      "id": "8bb43002-562d-4b92-8987-de1f865ac578",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "15a29707-2c37-4c49-b907-d65a1b224248",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "80977797-2e12-4946-86b5-c4d18e2f0907",
+      "comment": "",
+      "command": "click",
+      "target": "css=.dropdown:nth-child(5) > .btn",
+      "targets": [
+        ["css=.dropdown:nth-child(5) > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registracija')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f181d429-ae48-4479-8913-c6c7f3d0c824",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dea9c7a4-3b06-4771-9240-4a8dfba81366",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-full-name",
+      "targets": [
+        ["id=register-full-name", "id"],
+        ["css=#register-full-name", "css:finder"],
+        ["xpath=//input[@id='register-full-name']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Pera Peric"
+    }, {
+      "id": "4bfd1c26-ebcd-410c-98f5-3bbb7c9af1de",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "44a31d3d-a27f-4560-bc29-f70c1f9a3d68",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-email",
+      "targets": [
+        ["id=register-email", "id"],
+        ["css=#register-email", "css:finder"],
+        ["xpath=//input[@id='register-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "pera@etf.rs"
+    }, {
+      "id": "c710e54f-bc76-4c91-9dd8-923441edd974",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "57ea9da4-8b36-412d-8a95-a542d05a463a",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-phone-num",
+      "targets": [
+        ["id=register-phone-num", "id"],
+        ["css=#register-phone-num", "css:finder"],
+        ["xpath=//input[@id='register-phone-num']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "+789541268"
+    }, {
+      "id": "b42c2c12-de9c-4a8c-8953-1450750d68dc",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff058699-2cb8-4ef5-b809-9649a6095270",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-1",
+      "targets": [
+        ["id=register-password-1", "id"],
+        ["css=#register-password-1", "css:finder"],
+        ["xpath=//input[@id='register-password-1']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[4]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "123456789"
+    }, {
+      "id": "71650cb6-21fe-4bee-8350-d9016a6d6595",
+      "comment": "",
+      "command": "click",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "675b10a9-5870-4382-95c9-cceb71169a75",
+      "comment": "",
+      "command": "type",
+      "target": "id=register-password-2",
+      "targets": [
+        ["id=register-password-2", "id"],
+        ["css=#register-password-2", "css:finder"],
+        ["xpath=//input[@id='register-password-2']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[5]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "b3d0b7c1-88d8-4632-9d84-08e01ff602be",
+      "comment": "",
+      "command": "click",
+      "target": "id=register",
+      "targets": [
+        ["id=register", "id"],
+        ["css=#register", "css:finder"],
+        ["xpath=//div[@id='register']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/form/div[6]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
