@@ -1,28 +1,62 @@
 <?php
 // 2020-05-14 v0.2 Jovana Pavic 2017
 
+/**
+ * UUID - klasa koja sluzi za generisanje jedinstvenog
+ *        kljuca, za njegovo kodiranje u binarnu vrednost 
+ *        i dekodovanje u heksa vrednost  
+ * 
+ * @version 0.2
+ */
 class UUID {
     
-    //poziva generisanje id-a, vraca bin vrednost
+    /**
+     * public static function genereteId(){...}
+     *  Poziva generisanje kljuca, vraca hexa vrednost
+     * 
+     * @return string Hexa vrednost novog kljuca
+     */
     public static function generateId()
     {
         $id = hex2bin(\UUID::v4());
         return $id;
     }
     
-    //id pretvara u hex vrednust koja je citljivija
+    /**
+     * public static function decodeId(){...}
+     *  Pretvara dobijeni kljuc iz binarne vrednosti 
+     *   u hexa vrednost 
+     * 
+     * @param string $id Binarna vrednost kljuca
+     * 
+     * @return string Hexa vrednost kljuca
+     */
     public static function decodeId($id)
     {
         return bin2hex($id);
     }
     
-    //vraca id u oblik u kome je u bazi
+    /**
+     * public static function codeId(){...}
+     *  Pretvara dobijeni kljuc iz hexa vrednosti 
+     *   u binarnu vrednost 
+     * 
+     * @param string $id Hexa vrednost kljuca
+     * 
+     * @return string Binarna vrednost kljuca
+     */
     public static function codeId($id)
     {
         return hex2bin($id);
     }
     
-    //stvara id, vraca  hex vrednost velicine 16B
+    /**
+     * public static function v4(){...}
+     *  Generisanje kljuc velicine 16B, 
+     *   vraca njegovu binarnu vrednost
+     * 
+     * @return string Binarna vrednost novog kljuca
+     */
     protected static function v4() 
     {
         return sprintf('%04x%04x%04x%04x%04x%04x%04x%04x',
