@@ -395,7 +395,12 @@ class Korisnik extends Ulogovani
         
         $stavkaModel=new Stavka();
         $jeloModel=new Jelo();
-         
+        
+        $naziv_jela;
+        $masa_jela;
+        $kol_jela;
+        $cena_jela;
+        
         for ($i = 0; $i < count($por); $i++) {
            $stavke=$stavkaModel->dohvatiStavke($por[$i]->por_id);
             
