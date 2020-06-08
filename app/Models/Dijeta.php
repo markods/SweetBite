@@ -1,6 +1,17 @@
 <?php namespace App\Models;
 // 2020-05-15 v0.1 Filip Lucic 0188/2017
 
+/**
+    
+ * Dijeta predstavlja tip dijete koji se nalazi u bazi podataka.
+ * 
+ * @version v1.0
+ * 
+
+ * 
+ *  */
+
+
 
 use CodeIgniter\Model;
 
@@ -13,8 +24,18 @@ class Dijeta extends Model {
                     'dijeta_naziv' => 'trim|required|is_unique[dijeta.dijeta_naziv]'];
     protected $validationMessages = ['dijeta_naziv' => ['required' => 'Naziv dijete je obavezan!']];
     protected $skipValidation = false;
-
-   //dohvata se tip, pa se u kontroleru dohvata naziv;
+    
+    /**
+     * Funkcija dohvata konkretnu dijetu na osnovu prosledjenog identifikatora
+     * 
+     * 
+     * @param string $id Identifikator dijete koja se dohvata
+     * 
+     * @return object Zeljena dijeta se dohvata iz baze podataka
+     * 
+     * 
+     *      */
+    
     public function dohvDijetu($id) {
         $id = \UUID::codeId($id);
         $row = $this->find($id);

@@ -2,10 +2,20 @@
 
 use CodeIgniter\Model;
 
-/** Autor: Filip Lučić 2017/0188 */
+/** Autor: Filip Lučić 2017/0188
+ * 
+ * Jelo Model - veza sa bazom podataka, simulira objekte jela
+ * 
+ * @version 1.0
+ * 
+ * 
+ * 
+ *  */
 
 class Jelo extends Model
 {       
+    
+        
         protected $table      = 'jelo';
         protected $primaryKey = 'jelo_id';
         protected $returnType = 'object';
@@ -41,6 +51,19 @@ class Jelo extends Model
                ];
         protected $skipValidation = false;
         
+        
+        /**
+         * Test funkcija koja dohvata jela bez slike.
+         * 
+         * @return Array niz objekata jela (bez slike)
+         * 
+         * 
+         *     
+         *
+         *          */
+        
+        
+        
         public function dohvatiSveBezSlike()
         {
             $jela = $this->findAll();
@@ -63,12 +86,25 @@ class Jelo extends Model
         }
         
         
-        /** Dohvata sve podatke iz tabele Jelo */
+        /** 
+         * Funkcija dohvata sva jela iz baze podataka.
+         * 
+         * @return Array Niz objekata jela
+         * 
+         * */
         public function dohvSve() {
             $jela = $this->findAll();
             $jela = $this->decodeArray($jela);
             return $jela;
         }
+        
+        /** 
+         * Funkcija dohvata sva jela iz baze podataka, ukljucujuci i ona obrisana (soft).
+         * 
+         * @return Array Niz objekata jela
+         * 
+         * */
+        
         
         public function dohvSveWithDel() {
             $jela = $this->withDeleted()->findAll();
@@ -76,18 +112,45 @@ class Jelo extends Model
             return $jela;
         }
 
-        /** Dohvata sve podatke na osnovu id iz tabele Jelo */
+        /** 
+         * Dohvata konkretno jelo na osnovu prosledjenog identifikatora iz tabele Jelo.
+         * 
+         * @param string $id Identifikator jela na osnovu kog se pretrazuje baza podataka.
+         * 
+         * @return object Jelo sa prosledjenim id-jem
+         * 
+         * 
+         *  */
         public function dohvPoId($id) {
             $id = \UUID::codeId($id);
             return $this->decodeRecord($this->find($id));
         }
 
-        /** Dohvata jelo na osnovu njegovog naziva */
+        /** 
+         * Dohvata jelo na osnovu njegovog naziva.
+         * 
+         * @param string $naziv_jela Naziv jela na osnovu kog se vrsi pretraga.
+         * 
+         * @return Array Niz jela koja se zovu kao prosledjen parametar.
+         * 
+         *  */
         public function dohvPoImenu($naziv_jela) {
             $jela = $this->where('jelo_naziv', $naziv_jela)->findAll();
             $jela = $this->decodeArray($jela);
             return $jela;
         }
+        
+        /**
+
+         * Funkcija za dodavanje novog jela u bazu podataka
+         * 
+         * @param Array $data Indeksiran niz cija polja predstavljaju elemente objekta koji se ubacuje u bazu
+         * 
+         * @param bool $returnID Neophodan argument iz potpisa roditeljske f-je
+         * 
+         * @return string Identifikator ubacenog jela
+         * 
+         *    */
 
         public function insert($data=NULL, $returnID=true) {
         $id = \UUID::generateID();        
@@ -106,6 +169,21 @@ class Jelo extends Model
         }
         return \UUID::decodeId($id);
         }
+        
+        /**
+            
+         * Funkcija menja konkretno jelo u bazi podataka.
+         * 
+         * @param string $id Identifikator jela koje zelimo da promenimo.
+         * 
+         * 
+         * @param Array $data Konkretna promena
+         * 
+         * 
+         * @return bool Obavestenje o uspehu operacije.
+         * 
+         *          */
+        
        
         public function update($id=NULL, $data=NULL):bool {
             if ($id != null) {
@@ -126,13 +204,31 @@ class Jelo extends Model
             return true;
         }
         
-        /** Dohvata id jela na osnovu naziva jela */
+        /** Dohvata id jela na osnovu naziva jela 
+
+         * 
+         * @param string $naziv Naziv jela koje zelimo da dohvatimo
+         * 
+         * 
+         * @return object Dohvata se jedno od jela sa tim nazivom.
+         * 
+         * 
+         * 
+         * 
+         *          */
         public function dohvatiId($naziv){
             $jelo=$this->where('jelo_naziv',$naziv)->findAll();
             $jelo=$this->decodeArray($jelo);
             return $jelo[0]->jelo_id;
         }
-        
+        /**
+            
+         * Uklanja se jelo iz baze podataka, tako sto se datum uklanjanja jela upisuje u bazu podataka - soft delete.
+         * 
+         * @param string $id Identifikator jela koje zelimo da permanentno uklonimo iz ponude.
+         * @param bool $purge Argument iz potpisa roditeljske funkcije.
+         * 
+         *          */
         public function delete($id=NULL, $purge=false) {
             if ($id != null) {
                 $id = \UUID::codeId($id);
@@ -140,6 +236,7 @@ class Jelo extends Model
             return parent::delete($id, $purge);
         }
         
+
         //------------------------------------------------
         /** public function decodeArray($finds){...}
          * Dekodovanje nizova podataka
@@ -148,6 +245,7 @@ class Jelo extends Model
          * 
          * @return array Primljeni niz sa dekodovanim kljucevima
          */
+
         public function decodeArray($found) {
             for ($i = 0; $i < count($found); $i++) {
                 $found[$i] = $this->decodeRecord($found[$i]);
@@ -155,6 +253,7 @@ class Jelo extends Model
             return $found;  
         }
         
+
         //------------------------------------------------
         /** public function decodeRecord($row){...}
          * Dekodovanje sve kljuceve unutar jednog rekorda
@@ -171,12 +270,17 @@ class Jelo extends Model
             return $row;  
         }
         
-        /**
-         * Dohvata naziv jela na osnovu njegovo id
+
+
+
+        /** Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela 
+
+         * @param string $id Identifikator jela ciji se naziv dohvata.
          * 
-         * @param string $id id jela
-         * @return string naziv konkretnog jela
-         */
+         * @return string Naziv jela.
+         * 
+         *          */
+
         public function dohvatiNazivJela($id){
             $id=\UUID::codeId($id);
            $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();
@@ -184,12 +288,18 @@ class Jelo extends Model
            return $jelo[0]->jelo_naziv;
         }
         
-        /**
-         * Dohvata masu konkretnog jela na osnovu njegovog id
+
+
+
+        /** Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela 
+
+         * @param string $id Identifikator jela ciji se naziv dohvata.
          * 
-         * @param string $id id jela
-         * @return int masa jela
-         */
+         * 
+         * @return int Masa jela
+         * 
+         *          */
+
         public function dohvatiMasu($id){
             $id=\UUID::codeId($id);
             $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();
@@ -201,7 +311,7 @@ class Jelo extends Model
             
         }
 
-        //------------------------------------------------
+
         /** public function dohvatiSliku($id){...}
          * Dohvata sliku za odgovarajuci id
          * 
@@ -216,4 +326,5 @@ class Jelo extends Model
             if ($jelo == null) return null;
             return $jelo->jelo_slika;
         }
+
 }
