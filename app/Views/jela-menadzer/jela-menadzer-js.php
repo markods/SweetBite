@@ -197,7 +197,7 @@ $(document).ready(function() {
             }  
     })
     .fail(function() {
-        alert("Nije moguce uspostaviti vezu sa serveron, pokusajte kasnije!");
+        alert("Nije moguce uspostaviti vezu sa serverom, pokusajte kasnije!");
     });  
 });
 
@@ -211,7 +211,7 @@ function obrisiJelo(input){
     $.post("<?php echo base_url('Menadzer/obrisiJelo'); ?>", 
             JSON.stringify(object), "json")
     .done(function(data) {
-        alert("Uspesno ste obrisali jelo iz ponude");
+        alert("Uspesno ste obrisali jelo iz ponude!");
         let content=document.getElementById("content");
         content.removeChild(document.getElementById('div'+data["jelo_id"]));
     })

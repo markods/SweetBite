@@ -74,7 +74,8 @@ class Jelo extends Model
                     'jelo_masa' => $jela[$i]->jelo_masa,
                     'jelo_tipjela_id' => $jela[$i]->jelo_tipjela_id,
                     'jelo_ukus_id' => $jela[$i]->jelo_ukus_id,
-                    'jelo_dijeta_id' => $jela[$i]->jelo_dijeta_id
+                    'jelo_dijeta_id' => $jela[$i]->jelo_dijeta_id,
+                    'jelo_datsakriv' => $jela[$i]->jelo_datsakriv
                 ];
                 $niz[$i] = $elem;
             }
