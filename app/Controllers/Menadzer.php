@@ -8,10 +8,10 @@ use App\Models\Povod;
 use App\Models\Kor;
 use App\Models\Stavka;
 
-/** Jovana Jankovic - 0586/17   */
+/** Jovana Jankovic - 0586/17 */
 /** Filip Lucic - 0188/17   */
-/** Funkcionalnosti za menadzera - dodavanje novih jela u bazu - v.0.1   */
-/** Funkcionalnosti za menadzera - prikaz porudzbina koje vidi menadzer - v.0.1 */
+/** Funkcionalnosti za menadzera - dodavanje novih jela u bazu - v.0.2   */
+/** Funkcionalnosti za menadzera - prikaz porudzbina koje vidi menadzer - v.0.2 */
 // 2020-05-19 v0.2 Marko Stanojevic 2017/0081
 
 class Menadzer extends Ulogovani
@@ -44,7 +44,11 @@ class Menadzer extends Ulogovani
     }
 
     
-    /** Autor:Jovana Jankovic 0586/17 - pomocna fja za testiranje tabele Jela */
+    /**Autor - Jovana Jankovic 0586/17
+     * public function unesiTipove(){...}
+     * 
+     * pomocna Funkcija koriscena za testiranje tabele Jela
+     */
     public function unesiTipove(){   
         $this->receiveAJAX();
 
@@ -125,7 +129,14 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($jelo); 
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - Fja koja radi update Jela koja menadzer promeni */
+    /**Autor: Jovana Jankovic 0586/17 
+     * public function updateJelo(){...}
+     * 
+     * Funkcija vrsi update konkretnog jela koje je  menadzer promenio
+     * Funkcija koristi AJAX kojim prima nove podatke o jelu koje 
+     * treba ubaciti u bazu podataka. Nakon toga ce to kontkretno jelo
+     * biti azurirano .
+     *  */
     public function updateJelo(){
         
         $jelo = $this->receiveAJAX();
@@ -201,7 +212,11 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($jela);       
     }
     
-    /** Autor: Jovana Jankovic 17/0586 - omogucava brisanje (soft delete) jela iz ponude ketering servisa */
+    /**Autor: Jovana Jankovic 17/0586 -
+     * public function obrisiJelo(){...} 
+     * 
+     * Funkcija pomocu AJAX-a prima jelo koje je menadzer obelezio za brisanje
+     * Ova funkcija omogucava brisanje (soft delete) jela iz ponude ketering servisa */
     public function obrisiJelo(){
         $jelo = $this->receiveAJAX();
         $jeloModel = new Jelo();
@@ -213,7 +228,13 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);       
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - omogucava sakrivanje jela iz ponude. */
+    /**Autor: Jovana Jankovic 0586/17 - 
+     *  public function sakrijJelo(){...}
+     * 
+     *  Omogucava sakrivanje jela iz ponude ukoliko menadzer
+     *  pritisne odredjeno dugme na svom interfejsu. 
+     *  Na taj nacin, to jelo vise nece biti prikazano musetiji 
+     *  kad bude pregledao sajt. */
     public function sakrijJelo(){
         $jelo = $this->receiveAJAX();
         $jeloModel = new Jelo();
@@ -240,7 +261,12 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);   
     }
     
-    /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje porudzbine u bazu */
+    /**Autor: Jovana Jankovic 0586/17 -
+     * public function dodajPorudzbinu(){...}
+     * 
+     * Pomocna funkcija za dodavanje porudzbine u bazu.
+     * Koriscena je dok jos uvek nije postojala korpa musterije
+     * radi testiranje funkcionalnosti za pregled porudzbine.   */
    public function dodajPorudzbinu(){
        $porudzbina=new Por();
        $povod=new Povod();
@@ -258,7 +284,12 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($por); 
    }
    
-   /** Autor: Jovana Jankovic 0586/17 - pomocna funkcija za dodavanje stavki u bazu */
+   /**Autor: Jovana Jankovic 0586/17
+    * public function dodajStavku(){...}
+    
+    * Pomocna funkcija za dodavanje stavki u bazu.
+    * Koriscena je dok jos uvek nije postojala korpa musterije 
+    * radi testiranja funkcionalnosti za pregled porudzbine. */
    public function dodajStavku(){
        $porudzbinaModel=new Por();
        $jeloModel=new Jelo();
@@ -276,7 +307,17 @@ class Menadzer extends Ulogovani
     $this->sendAJAX($jela); 
    }
    
-   /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu */
+   /**Autor: Jovana Jankovic 0586/17, Filip Lucic 0188/17 
+     * public function dohvatiPorudzbineKorisnik(){...} 
+     * 
+     * Dohvatanje svih porudzbina za ulogovanog korisnika.
+     * Na osnovu id porudzbine dohvatamo stavke te konkretne porudzbine.
+     * Iz svake stavke, koriscenjem modela Jela, dohvatamo neophodne 
+     * informacije o samom jelu iz konkretne porudzbine
+     * i na taj nacin vracamo potrebne podatke kako bi se 
+     * porudzbine prikazale korisniku na adekvatan nacin. 
+     * Ova metoda vraca niz porudzbina koriscenjem Ajax-a. */
+   
    /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
    public function dohvatiPorudzbine(){
          $porudzbina=new Por();

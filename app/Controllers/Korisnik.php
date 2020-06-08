@@ -382,7 +382,20 @@ class Korisnik extends Ulogovani
     
     //-----------------------------------------------
 
-    /** Autor: Jovana Jankovic 0586/17 - funkcija za dohvatanje svih porudzbina i neophodnih podataka za porudzbinu musterije */ 
+    /** Autor: Jovana Jankovic 0586/17, Filip Lucic 0188/17 
+     *  public function dohvatiPorudzbineKorisnik(){...} 
+     * 
+     *  Dohvatanje svih porudzbina za ulogovanog korisnika.
+     *  Na osnovu id porudzbine dohvatamo stavke te konkretne porudzbine.
+     *  Iz svake stavke, koriscenjem modela Jela, dohvatamo neophodne 
+     *  informacije o samom jelu iz konkretne porudzbine
+     *  i na taj nacin vracamo potrebne podatke kako bi se 
+     *  porudzbine prikazale korisniku na adekvatan nacin. 
+     *  Ova metoda vraca niz porudzbina koriscenjem Ajax-a. 
+     *   
+     * @return Array niz porudzbina
+     *      */ 
+    
     /** Filip Lucic 0188/17 - dopuna statusa za porudzbine u skladu sa bazom*/
     public function dohvatiPorudzbineKorisnik(){ 
         $korisnikModel=new Kor();
