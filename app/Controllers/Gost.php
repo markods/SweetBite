@@ -16,15 +16,14 @@ use App\Models\Stavka;
 use App\Models\Povod;
 
 /**
- * Gost - klasa kontrolera, sva interakcija
- *        korisnika bez naloga, sa bazom 
- *        se realizuje pomocu ove klase  
+ * Gost - klasa kontrolera, sva interakcija korisnika bez naloga sa bazom se realizuje pomocu ove klase
  * 
  * @version 0.3
  */
 class Gost extends BaseController
 {
-    // data used for displaying the controller pages
+    /** @var viewdata -- contains the user type and the views required to display all the possible tabs to the user
+     */
     protected $viewdata = [
         'tipkor' => 'Gost',
         'tabs'   => [
@@ -44,8 +43,6 @@ class Gost extends BaseController
     
     /**
      * log the client into the system
-     * 
-     * @return none
      */
     public function login()
     {
@@ -89,8 +86,6 @@ class Gost extends BaseController
     
     /**
      * create an account for the client
-     * 
-     * @return none
      */
     public function register()
     {

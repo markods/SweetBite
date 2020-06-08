@@ -4,13 +4,13 @@
 
 /**
  * this is the base class for controllers that handle requests from logged-in users
+ * 
+ * @version 0.1
  */
 class Ulogovani extends BaseController
 {
     /**
      * log the client out of the system
-     * 
-     * @return none
      */
     public function logout()
     {

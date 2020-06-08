@@ -1,15 +1,16 @@
 <?php namespace App\Models;
 
 use CodeIgniter\Model;
+// 2020-06-08 v0.1 Jovana Jankovic 2017/0586
+// 2020-05-18 v0.2 Marko Stanojevic 2017/0081
+// 2020-05-20 v0.3 Jovana Pavić 2017/0099
+// 2020-06-08 v0.4 Jovana Jankovic 2017/0586
 
-/**
- * 
- * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
- * Korisnik Model sadrzi sve neophodne informacije za korisnika
+/** Korisnik Model sadrzi sve neophodne informacije za korisnika
  * To je njegov primarni kljuc, ime i prezime, email adresa, kontakt telefon, password i tip korisnika kojem pripada
  * 
+ * @version 0.4
  */
-
 class Kor extends Model
 {
     //tabela korisnik

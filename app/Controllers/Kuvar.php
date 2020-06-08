@@ -9,14 +9,14 @@ use App\Models\Jelo;
 use App\Models\Por;
 
 /**
- * Kuvar - klasa kontrolera, sva interakcija
- *         korisnika sa privilegijom kuvara sa bazom 
- *         se realizuje pomocu ove klase  
+ * Kuvar - klasa kontrolera, sva interakcija korisnika sa privilegijom kuvara sa bazom se realizuje pomocu ove klase
  * 
  * @version 0.3
  */
 class Kuvar extends Ulogovani
 {
+    /** @var viewdata -- contains the user type and the views required to display all the possible tabs to the user
+     */
     protected $viewdata = [
         'tipkor' => 'Kuvar',
         'tabs'   => [

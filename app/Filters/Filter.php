@@ -5,14 +5,14 @@ use CodeIgniter\Filters\FilterInterface;
 // 2020-05-18 v0.1 Marko Stanojevic 2017/0081
 
 /**
- * Filter for all client requests that checks if the client is calling their respective controller
+ * filter for all client requests, checks if the client is calling their respective controller
+ * 
+ * @version 0.1
  */
 class Filter implements FilterInterface
 {
     /**
      * pre-filter that gets called on the request before the controller receives it
-     * 
-     * @return none
      */
     public function before(RequestInterface $request)
     {
@@ -44,8 +44,6 @@ class Filter implements FilterInterface
 
     /**
      * post-filter that gets called on the request and response after the controller creates a response
-     * 
-     * @return none
      */
     public function after(RequestInterface $request, ResponseInterface $response)
     {}

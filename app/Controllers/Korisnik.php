@@ -14,15 +14,14 @@ use App\Models\Kor;
 use App\Models\Povod;
 
 /**
- * Korisnik - klasa kontrolera, sva interakcija
- *            korisnika bez privilegija sa bazom 
- *            se realizuje pomocu ove klase  
+ * Korisnik - klasa kontrolera, sva interakcija korisnika bez privilegija sa bazomse realizuje pomocu ove klase
  * 
  * @version 0.5
  */
 class Korisnik extends Ulogovani
 {
-    // data used for displaying the controller pages
+    /** @var viewdata -- contains the user type and the views required to display all the possible tabs to the user
+     */
     protected $viewdata = [
         'tipkor' => 'Korisnik',
         'tabs'   => [

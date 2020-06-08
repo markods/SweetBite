@@ -15,6 +15,7 @@ use CodeIgniter\Controller;
  * For security be sure to declare any new methods as protected or private.
  *
  * @package CodeIgniter
+ * @version 0.1
  */
 class BaseController extends Controller
 {
@@ -89,7 +90,7 @@ class BaseController extends Controller
          * encode the given data as a JSON object and send an AJAX response to the client
          * this method doesn't check if the $data is convertible to JSON
          * 
-         * @param data that will be sent as the response
+         * @param data -- data that will be sent as the response
          * @return none
          */
         protected function sendAJAX($data)

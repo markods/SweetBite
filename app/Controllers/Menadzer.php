@@ -16,7 +16,8 @@ use App\Models\Stavka;
 
 class Menadzer extends Ulogovani
 {    
-    // data used for displaying the controller index page
+    /** @var viewdata -- contains the user type and the views required to display all the possible tabs to the user
+     */
     protected $viewdata = [
         'tipkor'  => 'Menadzer',
         'tabs'   => [

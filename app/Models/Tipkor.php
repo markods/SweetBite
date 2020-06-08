@@ -1,14 +1,16 @@
 <?php namespace App\Models;
 
 use CodeIgniter\Model;
+// 2020-05-13 v0.1 Jovana Jankovic 2017/0586
+// 2020-05-18 v0.2 Marko Stanojevic 2017/0081
+// 2020-06-08 v0.3 Jovana Jankovic 2017/0586
 
-/**
- * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
- * Tipkor Model sadrzi informacije o tipovima korisnika koji postoje u sistemu
+
+/** Tipkor model sadrzi informacije o tipovima korisnika koji postoje u sistemu
  * Tipovi mogu biti: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
  * 
- *  */
-
+ * @version 0.3
+ */
 class Tipkor extends Model
 {
     protected $table      = 'tipkor';
@@ -30,13 +32,12 @@ class Tipkor extends Model
     protected $updatedField='';
    
 
-         /** public function insert($data=NULL, $returnID=true) {...}
-         * Kreiranje nove instance Tipa korisnika
-         * 
-         * @param Array $data
-         * @param bool $returnID
-         * @return String vraca dekodovanu vrednost novo-insertovanog id tipa korisnika
-         */
+    /** Kreiranje nove instance Tipa korisnika
+    * 
+    * @param Array $data
+    * @param bool $returnID
+    * @return String vraca dekodovanu vrednost novo-insertovanog id tipa korisnika
+    */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
