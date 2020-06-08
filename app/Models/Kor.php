@@ -2,7 +2,13 @@
 
 use CodeIgniter\Model;
 
-//Autor: Jovana Jankovic 0586/17, verzija 0.2
+/**
+ * 
+ * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
+ * Korisnik Model sadrzi sve neophodne informacije za korisnika
+ * To je njegov primarni kljuc, ime i prezime, email adresa, kontakt telefon, password i tip korisnika kojem pripada
+ * 
+ */
 
 class Kor extends Model
 {
@@ -39,7 +45,13 @@ class Kor extends Model
     protected $skipValidation     = false;
     protected $updatedField='';
    
-    //fja za insertovanje novog korisnika
+    /**
+     * Kreiranje nove instance Korisnika 
+     * 
+     * @param Array $data
+     * @param bool $returnID
+     * @return String vraca dekodovanu vrednost novo-insertovanog id korisnika
+     */
      public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
@@ -53,7 +65,13 @@ class Kor extends Model
         return \UUID::decodeId($id);
     }
     
-    //fja za update postojeceg korisnika
+    /**
+     * Update postojeceg korisnika
+     * 
+     * @param string $id id konkretnog korisnika za kojeg zelimo da uradimo azuriranje u bazi 
+     * @param Array $data niz informacija za korisnika
+     * @return bool
+     */
     public function update($id=NULL, $data=NULL):bool 
     {
         if ($id != null) {
@@ -69,7 +87,13 @@ class Kor extends Model
     }
     
     
-    //fja za brisanje korisnika iz baze
+    /**
+     * Brisanje korisnika iz baze
+     * 
+     * @param string $id id korisnika kojeg zelimo da obrisemo iz baze
+     * @param bool $purge
+     * @return void
+     */
      public function delete($id=NULL, $purge=false) 
     {
         if ($id != null) {
@@ -79,7 +103,14 @@ class Kor extends Model
     }
     
     
-   //fja za dohvatanje korisnika na osnovu primarnog kljuca, podrazumevano prima dekodovanu vrednost
+   /**
+    * 
+    * Dohvatanje korisnika na osnovu njegovog primarnog kljuca, podrazumevano funkcija prima dekodovanu vrednost
+    * koja se pri ulasku u funkciju koduje, a zatim se sa kodovanom vrednoscu pretrazuje baza podataka.
+    * 
+    * @param string $id dohvata korisnika na osnovu njegovog primarnog kljuca u bazi
+    * @return object dohvacen korisnik na osnovu id
+    *     */
     public function dohvatiKorisnika($id){
        $korisnik = $this->find(\UUID::codeId($id));
        if($korisnik == null) return null;
@@ -95,7 +126,12 @@ class Kor extends Model
         */
     }
    
-   // proverava da li korisnik vec postoji, ako postoji vraca ga
+   /**
+    * Dohvatanje objekta korisnika na osnovu njegove email adrese
+    * 
+    * @param string $email email adresa korisnika
+    * @return object dohvacen korisnik 
+    */
    public function dohvatiKorisnikaPrekoEmaila($email){
        $korisnik = $this->where('kor_email', $email)->find();
        if( count($korisnik) == 0 ) return null;
@@ -103,28 +139,48 @@ class Kor extends Model
        return $this->decodeRecord($korisnik[0]);
    }
    
-   //pomocna fja 
+   /**
+    * Dohvatanje id korisnika na osnovu njegovog imena
+    * 
+    * @param string $ime ime korisnika
+    * @return string id korisnika
+    */ 
    public function dohvatiIdNaOsnovuImena($ime){
        $korisnik=$this->where('kor_naziv',$ime)->find();
        $korisnik=$this->decodeArray($korisnik);
        return $korisnik[0]->kor_id;
    }
    
-   //fja za dohvatanje imena korisnika na osnovu id, sluzi kod funkcionalnosti za prikaz porudzbine
+   /**
+    * Dohvatanje imena korisnika na osnovu id, sluzi kod funkcionalnosti za prikaz porudzbine
+    * 
+    * @param string $id dekodovana vrednost id za konkretnog korisnika
+    * @return string ime korisnika
+    */
    public function dohvatiImeNaOsnovuId($id){
        $id=\UUID::codeId($id);
        $korisnik=$this->find($id);
        return $korisnik->kor_naziv;
    }
   
-   /** Dohvatanje broja telefona na osnovu id korisnika */
+   /**
+    * Dohvatanje broja telefona na osnovu id korisnika
+    * 
+    * @param string $id id korisnika
+    * @return string broj telefona korisnika
+    */
    public function dohvatiBrojTelefona($id){
         $id=\UUID::codeId($id);
        $korisnik=$this->find($id);
        return $korisnik->kor_tel;
    }
    
-   //ova fja moze da koristi administratoru za dohvatanje odredjenog tipa korisnika RADI
+   /**
+    * Koristi administratoru za dohvatanje odredjenog tipa korisnika
+    * 
+    * @param string $tipkor_id id tipa korisnika
+    * @return Array niz svih korisnika koji su odredjenog tipa
+    */
    public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){
         $tipkor_id = \UUID::codeId($tipkor_id);
         $korisnici = $this->where('kor_tipkor_id',$tipkor_id)->findAll();
@@ -132,7 +188,12 @@ class Kor extends Model
         return $korisnici;
    }
      
-   //neophodno je da fja vrati null kako bi se korisnik uspesno registrovao RADI
+   /**
+    * Provera da li korisnik sa tim emailom postoji u bazi podataka
+    * 
+    * @param string $email
+    * @return bool vraca true ukoliko nema korisnika sa prosledjenim emailom
+    */
    public function daLiPostojiEmail($email){
        $korisnik = $this->where('kor_email', $email)->find();
        return ( count($korisnik) != 0 );
@@ -147,7 +208,13 @@ class Kor extends Model
        return $this->decodeArray($finds);
     }
    
-   //sluzi za dekodovanje, jer imamo strane kljuceve
+   /**
+    * Dekoduje vrednosti kljuceva iz jednog reda posto se u tom redu tabele nalaze kodovane vrednosti
+    * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
+    * 
+    * @param Array $row jedan red iz tabele sa kodovanim vrednostima id
+    * @return Array dekodovan jedan red iz tabele
+    */
       public function decodeRecord($row)
     {
         if( !isset($row) ) return null;
@@ -158,7 +225,13 @@ class Kor extends Model
         return $row;  
     }
     
-    //dekodovanje celog niza objekata
+   /**
+    * Dekoduje vrednosti kljuceva iz niza posto se u tom nizu nalaze kodovane vrednosti
+    * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
+    * 
+    * @param Array $row niz sa kodovanim vrednostima id
+    * @return Array dekodovan niz
+    */
       public function decodeArray($finds)
     {
         if( !isset($finds) ) return null;

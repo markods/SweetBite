@@ -2,7 +2,13 @@
 
 use CodeIgniter\Model;
 
-//Autor: Jovana Jankovic 0586/17, verzija 0.2
+/**
+ * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
+ * 
+ * Favoriti Model sadrzi neophodne podatke o korisnikovim favoritima jela
+ * Za svaki primarni kljuc je vezan id korisnika i id jela koje je korisnik obelezio kao omiljeno
+ *
+ *  */
 
 class Fav extends Model
 {
@@ -23,7 +29,13 @@ class Fav extends Model
     protected $skipValidation = false;
     protected $updatedField='';
        
-    //proveri koja je povratna vrednost za insert
+    /**
+     * Kreiranje nove instance Favorita za korisnika 
+     * 
+     * @param Array $data
+     * @param bool $returnID
+     * @return String vraca dekodovanu vrednost novo-insertovanog id favorita
+     */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
@@ -40,8 +52,13 @@ class Fav extends Model
         return \UUID::decodeId($id);
     }
     
-    //update favorita modela
-    //OVO NISAM JOS ISTESTIRALA
+     /**
+     * Update postojeceg favorita
+     * 
+     * @param string $id id konkretnog favorita korisnika za koji zelimo da uradimo azuriranje u bazi 
+     * @param Array $data niz informacija za odredjeni favorit
+     * @return bool
+     */
     public function update($id=NULL, $data=NULL):bool 
     {
         if ($id != null) {
@@ -59,7 +76,13 @@ class Fav extends Model
         return true;
     }
     
-    //brisanje iz tabela favoriti
+      /**
+     * Brisanje favorita iz baze
+     * 
+     * @param string $id id favorita koji zelimo da obrisemo iz baze
+     * @param bool $purge
+     * @return void
+     */
      public function delete($id=NULL, $purge=false) 
     {
         if ($id != null) {
@@ -68,14 +91,24 @@ class Fav extends Model
         return parent::delete($id, $purge);
     }
     
-    //dohvata ceo red tabele na osnovu primarnog kljuca, za sad nema neku primenu
+    /**
+     * Dohvata se ceo red tabele na osnovu primarnog kljuca
+     * 
+     * @param string $id primarni kljuc iz tabele Fav
+     * @return object jedan red iz tabele favoriti
+     */
     public function dohvatiFavorit($id){
         $id = \UUID::codeId($id);
         $row = $this->find($id);
         return $this->decodeRecord($row);
     }
     
-    //dohvata sve favorite odredjenog korisnika na osnovu njegovog id
+    /**
+     * Dohvata sve favorite odredjenog korisnika na osnovu njegovog id
+     * 
+     * @param String $fav_kor_id id korisnika
+     * @return Array niz favorita odredjenog korisnika
+     */
       public function dohvatiFavoriteZaKorisnika($fav_kor_id){
           $kor_id=\UUID::codeId($fav_kor_id);
           $favorit= $this->where('fav_kor_id',$kor_id)->findAll();
@@ -84,7 +117,13 @@ class Fav extends Model
          return $favorit;
     }
     
-    //sluzi za dekodovanje, jer imamo strane kljuceve
+     /**
+    * Dekoduje vrednosti kljuceva iz jednog reda posto se u tom redu tabele nalaze kodovane vrednosti
+    * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
+    * 
+    * @param Array $row jedan red iz tabele sa kodovanim vrednostima id
+    * @return Array dekodovan jedan red iz tabele
+    */
       public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
@@ -94,7 +133,13 @@ class Fav extends Model
         return $row;  
     }
     
-    //dekodovanje celog niza objekata
+   /**
+    * Dekoduje vrednosti kljuceva iz niza posto se u tom nizu nalaze kodovane vrednosti
+    * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
+    * 
+    * @param Array $row niz sa kodovanim vrednostima id
+    * @return Array dekodovan niz
+    */
       public function decodeArray($finds)
     {
         //dekodujemo sve kljuceve

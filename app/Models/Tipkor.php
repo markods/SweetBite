@@ -2,7 +2,11 @@
 
 use CodeIgniter\Model;
 
-//Autor: Jovana Jankovic 0586/17, verzija 0.2
+/**
+ * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
+ * Tipkor Model sadrzi informacije o tipovima korisnika koji postoje u sistemu
+ * 
+ *  */
 
 class Tipkor extends Model
 {
@@ -23,7 +27,15 @@ class Tipkor extends Model
     
     protected $skipValidation     = false;
     protected $updatedField='';
-   //proveri koja je povratna vrednost za insert
+   
+
+    /**
+         * Kreiranje nove instance Tipa korisnika
+         * 
+         * @param Array $data
+         * @param bool $returnID
+         * @return String vraca dekodovanu vrednost novo-insertovanog id tipa korisnika
+         */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
@@ -35,8 +47,13 @@ class Tipkor extends Model
     }
     
     
-    //fja za update tipa korisnika
-    //Ova fja mi za sada ne znaci nista, jer mi ne mozemo da menjamo naziv tipa korisnika ukoliko on ostane unique
+   /**
+     * Update postojeceg korisnika
+     * 
+     * @param string $id id konkretnog tipa korisnika za koji zelimo da uradimo azuriranje u bazi 
+     * @param Array $data niz informacija o tipu korisnika koji ce nam sluziti za update
+     * @return bool
+     */
     public function update($id=NULL, $data=NULL):bool 
     {
         if ($id != null) {
@@ -48,7 +65,13 @@ class Tipkor extends Model
         return true;
     }
     
-    //brisanje reda iz tabele tipKorisnik
+    /**
+     * Brisanje tipa korisnika iz baze
+     * 
+     * @param string $id id tipa korisnika kojeg zelimo da obrisemo iz baze
+     * @param bool $purge
+     * @return void
+     */
      public function delete($id=NULL, $purge=false) 
     {
         if ($id != null) {
@@ -57,15 +80,26 @@ class Tipkor extends Model
         return parent::delete($id, $purge);
     }
     
-    //dohvata naziv tipa korisnika po ID
+    /**
+     * Dohvata se naziv tipa korisnika na osnovu id tipa korisnika
+     * Nazivi su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
+     *  
+     * @param string $id id tipa korisnika
+     * @return string naziv tipa korisnika 
+     */
     public function dohvatiNazivTipaKorisnika($id){
        $tipKorisnika=$this->find(\UUID::codeId($id));
        if( !isset($tipKorisnika) ) return null;
        return $tipKorisnika->tipkor_naziv;
     }
     
-    //dohvata id tipa korisnika po njegovom nazivu
-    //Nazivi su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
+    /**
+     * Dohvata se id tipa korisnika na osnovu naziva tipa korisnika
+     * Nazivi koji mogu biti prosledjeni su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
+     * 
+     * @param string $naziv naziv tipa korisnika
+     * @return string id tipa korisnika 
+     */
     public function dohvatiIDTipaKorisnika($naziv){
         $korisnik=$this->where('tipkor_naziv', $naziv)->find();
         if( count($korisnik) == 0 ) return null;
