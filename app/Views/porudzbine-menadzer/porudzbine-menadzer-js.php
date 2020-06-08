@@ -181,8 +181,8 @@ function statusOptions(stat, id) {
     //status porudzbine (0-nije potvr/odb, 1-potvrdjena, 2-odbijena, 3-nap, 4-pokupljena)
     let str="";
     switch (stat) {
-        case 0: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-' onclick=declineOrder(" + "this" + ")>\
-                       <img id='"+id+"' src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+' onclick=acceptOrder(this)>\
+        case 0: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-cross.svg");?>' style='cursor:pointer' alt='-' onclick=declineOrder(" + "this" + ")>\
+                       <img id='"+id+"' src='<?php echo base_url("assets/icons/plain-check.svg");?>' style='cursor:pointer' alt='+' onclick=acceptOrder(this)>\
                     "; 
                 break;
         case 1: str = "<img src='<?php echo base_url("assets/icons/plain-cross.svg");?>' alt='-'/>\
@@ -193,7 +193,7 @@ function statusOptions(stat, id) {
                        <img src='<?php echo base_url("assets/icons/plain-check.svg");?>' alt='+'/>\
                     "; 
                 break;
-        case 3: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-double-check.svg");?>' alt='!' onclick=archive(this)>"; break;
+        case 3: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-double-check.svg");?>' style='cursor:pointer' alt='!' onclick=archive(this)>"; break;
         case 4: str = "<img id='"+id+"' src='<?php echo base_url("assets/icons/plain-archive.svg");?>' alt='.'/>"
     }
     return str;
