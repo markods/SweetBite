@@ -118,7 +118,7 @@ function prikaziJelo(object) {
     let favor      = object.fav;
     let kol        = object.kol;
     let kol_ispi   = '';
-    if (kol != null) kol_ispi=kol;
+    if (kol != null && kol > 0) kol_ispi=kol;
     
     $.post("<?php if(array_key_exists('kor_id', $_SESSION)){
                     echo base_url('Korisnik/dohvatiSliku');
@@ -158,7 +158,7 @@ function prikaziJelo(object) {
             </div>';
 
         $("#content1").append(str);
-        if (kol>0){
+        if (kol > 0){
             jelo = {
                 jelo_id:    id,
                 jelo_naziv: naziv_jela,

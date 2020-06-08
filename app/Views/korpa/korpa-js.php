@@ -319,6 +319,13 @@ function deactivateDiscount() {
 function sendOrder() {
     let error = false;
     
+    let kol = $(".b_amount");
+    kol = kol[kol.length-1].innerHTML
+    if (kol == "0g"){
+        $(".poruci").append('<p style="color:red; text-align:center;">Korpa je prazna</p>');
+        return;
+    }
+    
     //provera broja osoba
     let naziv = $("#imePor")[0].value;
     let br_osoba = $("#kolikoOsoba");
@@ -390,7 +397,7 @@ function sendOrder() {
             //u opisu jela uklanja narucenu kolicinu
             let stavke = $(".par");
             for(let i=0; i<stavke.length; i++){
-                let id = stavke[0].id;
+                let id = stavke[i].id;
                 id = id.substring(2);
                 $("#broj_" + id + "").val('');
             }
