@@ -171,7 +171,12 @@ class Jelo extends Model
             return $row;  
         }
         
-        /** Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela */
+        /**
+         * Dohvata naziv jela na osnovu njegovo id
+         * 
+         * @param string $id id jela
+         * @return string naziv konkretnog jela
+         */
         public function dohvatiNazivJela($id){
             $id=\UUID::codeId($id);
            $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();
@@ -179,7 +184,12 @@ class Jelo extends Model
            return $jelo[0]->jelo_naziv;
         }
         
-        /** Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela */
+        /**
+         * Dohvata masu konkretnog jela na osnovu njegovog id
+         * 
+         * @param string $id id jela
+         * @return int masa jela
+         */
         public function dohvatiMasu($id){
             $id=\UUID::codeId($id);
             $jelo=$this->where('jelo_id',$id)->withDeleted()->findAll();

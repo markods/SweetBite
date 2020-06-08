@@ -201,7 +201,15 @@ class Stavka extends Model
     }
     
     //-----------------------------------------------
-    /** Autor: Jovana Jankovic 0586/17 - Dohvata sve stavke koje su vezane za konkretnu porudzbinu */
+    /**
+     * public function dohvatiStavke($id_por){...}
+     * Dohvata sve stavke koje su vezane za konkretnu porudzbinu 
+     * na osnovu id porudzbine, sluzi nam da prikazemo sve stavke 
+     * jedne porudzbine
+     * 
+     * @param string $id_por
+     * @return Array
+     */
     public function dohvatiStavke($id_por){
         $id_por=\UUID::codeId($id_por);
         $stavke=$this->where('stavka_por_id',$id_por)->findAll();

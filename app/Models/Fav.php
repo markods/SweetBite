@@ -29,7 +29,7 @@ class Fav extends Model
     protected $skipValidation = false;
     protected $updatedField='';
        
-    /**
+    /** public function insert($data=NULL, $returnID=true) {...}
      * Kreiranje nove instance Favorita za korisnika 
      * 
      * @param Array $data
@@ -52,7 +52,7 @@ class Fav extends Model
         return \UUID::decodeId($id);
     }
     
-     /**
+     /** public function update($id=NULL, $data=NULL):bool {...}
      * Update postojeceg favorita
      * 
      * @param string $id id konkretnog favorita korisnika za koji zelimo da uradimo azuriranje u bazi 
@@ -76,7 +76,7 @@ class Fav extends Model
         return true;
     }
     
-      /**
+    /**public function delete($id=NULL, $purge=false) {...}
      * Brisanje favorita iz baze
      * 
      * @param string $id id favorita koji zelimo da obrisemo iz baze
@@ -91,7 +91,7 @@ class Fav extends Model
         return parent::delete($id, $purge);
     }
     
-    /**
+    /**public function dohvatiFavorit($id){...}
      * Dohvata se ceo red tabele na osnovu primarnog kljuca
      * 
      * @param string $id primarni kljuc iz tabele Fav
@@ -103,7 +103,7 @@ class Fav extends Model
         return $this->decodeRecord($row);
     }
     
-    /**
+    /**  public function dohvatiFavoriteZaKorisnika($fav_kor_id){...}
      * Dohvata sve favorite odredjenog korisnika na osnovu njegovog id
      * 
      * @param String $fav_kor_id id korisnika
@@ -117,7 +117,7 @@ class Fav extends Model
          return $favorit;
     }
     
-     /**
+  /**   public function decodeRecord($row){...}
     * Dekoduje vrednosti kljuceva iz jednog reda posto se u tom redu tabele nalaze kodovane vrednosti
     * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
     * 
@@ -133,7 +133,7 @@ class Fav extends Model
         return $row;  
     }
     
-   /**
+   /** public function decodeArray($finds){...}
     * Dekoduje vrednosti kljuceva iz niza posto se u tom nizu nalaze kodovane vrednosti
     * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
     * 

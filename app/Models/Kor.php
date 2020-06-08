@@ -45,7 +45,7 @@ class Kor extends Model
     protected $skipValidation     = false;
     protected $updatedField='';
    
-    /**
+    /**public function insert($data=NULL, $returnID=true) {...}
      * Kreiranje nove instance Korisnika 
      * 
      * @param Array $data
@@ -65,7 +65,7 @@ class Kor extends Model
         return \UUID::decodeId($id);
     }
     
-    /**
+    /**public function update($id=NULL, $data=NULL):bool {...}
      * Update postojeceg korisnika
      * 
      * @param string $id id konkretnog korisnika za kojeg zelimo da uradimo azuriranje u bazi 
@@ -87,7 +87,7 @@ class Kor extends Model
     }
     
     
-    /**
+    /**public function delete($id=NULL, $purge=false) {...}
      * Brisanje korisnika iz baze
      * 
      * @param string $id id korisnika kojeg zelimo da obrisemo iz baze
@@ -103,8 +103,7 @@ class Kor extends Model
     }
     
     
-   /**
-    * 
+   /** public function dohvatiKorisnika($id){...}
     * Dohvatanje korisnika na osnovu njegovog primarnog kljuca, podrazumevano funkcija prima dekodovanu vrednost
     * koja se pri ulasku u funkciju koduje, a zatim se sa kodovanom vrednoscu pretrazuje baza podataka.
     * 
@@ -126,7 +125,7 @@ class Kor extends Model
         */
     }
    
-   /**
+   /**public function dohvatiKorisnikaPrekoEmaila($email){...}
     * Dohvatanje objekta korisnika na osnovu njegove email adrese
     * 
     * @param string $email email adresa korisnika
@@ -139,7 +138,7 @@ class Kor extends Model
        return $this->decodeRecord($korisnik[0]);
    }
    
-   /**
+   /**public function dohvatiIdNaOsnovuImena($ime){...}
     * Dohvatanje id korisnika na osnovu njegovog imena
     * 
     * @param string $ime ime korisnika
@@ -151,7 +150,7 @@ class Kor extends Model
        return $korisnik[0]->kor_id;
    }
    
-   /**
+   /**public function dohvatiImeNaOsnovuId($id){...}
     * Dohvatanje imena korisnika na osnovu id, sluzi kod funkcionalnosti za prikaz porudzbine
     * 
     * @param string $id dekodovana vrednost id za konkretnog korisnika
@@ -163,7 +162,7 @@ class Kor extends Model
        return $korisnik->kor_naziv;
    }
   
-   /**
+   /**public function dohvatiBrojTelefona($id){...}
     * Dohvatanje broja telefona na osnovu id korisnika
     * 
     * @param string $id id korisnika
@@ -175,7 +174,7 @@ class Kor extends Model
        return $korisnik->kor_tel;
    }
    
-   /**
+   /**public function dohvatiSveKorisnikePoTipuKorisnika($tipkor_id){...}
     * Koristi administratoru za dohvatanje odredjenog tipa korisnika
     * 
     * @param string $tipkor_id id tipa korisnika
@@ -188,7 +187,7 @@ class Kor extends Model
         return $korisnici;
    }
      
-   /**
+   /**public function daLiPostojiEmail($email){...}
     * Provera da li korisnik sa tim emailom postoji u bazi podataka
     * 
     * @param string $email
@@ -212,7 +211,7 @@ class Kor extends Model
        return $this->decodeArray($finds);
     }
    
-   /**
+   /**public function decodeRecord($row){...}
     * Dekoduje vrednosti kljuceva iz jednog reda posto se u tom redu tabele nalaze kodovane vrednosti
     * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
     * 
@@ -229,7 +228,7 @@ class Kor extends Model
         return $row;  
     }
     
-   /**
+   /** public function decodeArray($finds){...}
     * Dekoduje vrednosti kljuceva iz niza posto se u tom nizu nalaze kodovane vrednosti
     * U zadatku uvek radimo sa dekodovanim vrednostima, pa nam je ova funkcija zbog toga neophodna
     * 

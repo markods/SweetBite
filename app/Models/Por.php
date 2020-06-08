@@ -293,7 +293,11 @@ class Por extends Model
     }
     
     //--------------------------------------------------
-    /** Autor: Jovana Jankovic 0586/17 - dohvatanje svih porudzbina */
+    /**public function dohvatiSvePorudzbine(){..}
+     * Dohvatanje svih porudzbina koje postoje u bazi podataka
+     * 
+     * @return Array niz svih porudzbina
+     */
     public function dohvatiSvePorudzbine(){
         $porudzbine=$this->findAll();
         $porudzbine=$this->decodeArray($porudzbine);

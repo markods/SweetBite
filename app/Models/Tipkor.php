@@ -5,6 +5,7 @@ use CodeIgniter\Model;
 /**
  * 2020-06-08 - Autor: Jovana Jankovic 0586/17, verzija 0.3
  * Tipkor Model sadrzi informacije o tipovima korisnika koji postoje u sistemu
+ * Tipovi mogu biti: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
  * 
  *  */
 
@@ -29,7 +30,7 @@ class Tipkor extends Model
     protected $updatedField='';
    
 
-    /**
+         /** public function insert($data=NULL, $returnID=true) {...}
          * Kreiranje nove instance Tipa korisnika
          * 
          * @param Array $data
@@ -47,7 +48,7 @@ class Tipkor extends Model
     }
     
     
-   /**
+   /** public function update($id=NULL, $data=NULL):bool {...}
      * Update postojeceg korisnika
      * 
      * @param string $id id konkretnog tipa korisnika za koji zelimo da uradimo azuriranje u bazi 
@@ -65,7 +66,7 @@ class Tipkor extends Model
         return true;
     }
     
-    /**
+    /**public function delete($id=NULL, $purge=false) {...}
      * Brisanje tipa korisnika iz baze
      * 
      * @param string $id id tipa korisnika kojeg zelimo da obrisemo iz baze
@@ -80,7 +81,7 @@ class Tipkor extends Model
         return parent::delete($id, $purge);
     }
     
-    /**
+    /**public function dohvatiNazivTipaKorisnika($id){...}
      * Dohvata se naziv tipa korisnika na osnovu id tipa korisnika
      * Nazivi su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
      *  
@@ -93,7 +94,7 @@ class Tipkor extends Model
        return $tipKorisnika->tipkor_naziv;
     }
     
-    /**
+    /** public function dohvatiIDTipaKorisnika($naziv){...}
      * Dohvata se id tipa korisnika na osnovu naziva tipa korisnika
      * Nazivi koji mogu biti prosledjeni su: 'Menadzer', 'Kuvar', 'Admin', 'Korisnik'
      * 
