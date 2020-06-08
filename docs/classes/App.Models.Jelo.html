@@ -133,26 +133,26 @@
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_delete" title="delete :: ">
-            <span class="description"></span><pre>delete</pre>
+        <a href="#method_delete" title="delete :: public function delete($id=NULL,$purge=false){.">
+            <span class="description">public function delete($id=NULL,$purge=false){.</span><pre>delete</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvatiId" title="dohvatiId :: Dohvata id jela na osnovu naziva jela">
-            <span class="description">Dohvata id jela na osnovu naziva jela</span><pre>dohvatiId</pre>
+        <a href="#method_dohvatiId" title="dohvatiId :: public function dohvatiId($naziv){.">
+            <span class="description">public function dohvatiId($naziv){.</span><pre>dohvatiId</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvatiMasu" title="dohvatiMasu :: Dohvata masu konkretnog jela na osnovu njegovog id">
-            <span class="description">Dohvata masu konkretnog jela na osnovu njegovog id</span><pre>dohvatiMasu</pre>
+        <a href="#method_dohvatiMasu" title="dohvatiMasu :: public function dohvatiMasu($id){.">
+            <span class="description">public function dohvatiMasu($id){.</span><pre>dohvatiMasu</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvatiNazivJela" title="dohvatiNazivJela :: Dohvata naziv jela na osnovu njegovo id">
-            <span class="description">Dohvata naziv jela na osnovu njegovo id</span><pre>dohvatiNazivJela</pre>
+        <a href="#method_dohvatiNazivJela" title="dohvatiNazivJela :: public function dohvatiNazivJela($id){.">
+            <span class="description">public function dohvatiNazivJela($id){.</span><pre>dohvatiNazivJela</pre>
         </a>
     </li>
 
@@ -163,38 +163,38 @@
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvatiSveBezSlike" title="dohvatiSveBezSlike :: ">
-            <span class="description"></span><pre>dohvatiSveBezSlike</pre>
+        <a href="#method_dohvatiSveBezSlike" title="dohvatiSveBezSlike :: Test funkcija koja dohvata jela bez slike.">
+            <span class="description">Test funkcija koja dohvata jela bez slike.</span><pre>dohvatiSveBezSlike</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvPoId" title="dohvPoId :: Dohvata sve podatke na osnovu id iz tabele Jelo">
-            <span class="description">Dohvata sve podatke na osnovu id iz tabele Jelo</span><pre>dohvPoId</pre>
+        <a href="#method_dohvPoId" title="dohvPoId :: public function dohvPoId($id) {.">
+            <span class="description">public function dohvPoId($id) {.</span><pre>dohvPoId</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvPoImenu" title="dohvPoImenu :: Dohvata jelo na osnovu njegovog naziva">
-            <span class="description">Dohvata jelo na osnovu njegovog naziva</span><pre>dohvPoImenu</pre>
+        <a href="#method_dohvPoImenu" title="dohvPoImenu :: public function dohvPoImenu($naziv_jela) {.">
+            <span class="description">public function dohvPoImenu($naziv_jela) {.</span><pre>dohvPoImenu</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvSve" title="dohvSve :: Dohvata sve podatke iz tabele Jelo">
-            <span class="description">Dohvata sve podatke iz tabele Jelo</span><pre>dohvSve</pre>
+        <a href="#method_dohvSve" title="dohvSve :: public function dohvSve(){.">
+            <span class="description">public function dohvSve(){.</span><pre>dohvSve</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_dohvSveWithDel" title="dohvSveWithDel :: ">
-            <span class="description"></span><pre>dohvSveWithDel</pre>
+        <a href="#method_dohvSveWithDel" title="dohvSveWithDel :: public function dohvSveWithDel() {.">
+            <span class="description">public function dohvSveWithDel() {.</span><pre>dohvSveWithDel</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_insert" title="insert :: ">
-            <span class="description"></span><pre>insert</pre>
+        <a href="#method_insert" title="insert :: public function insert($data=NULL,$returnID=true){.">
+            <span class="description">public function insert($data=NULL,$returnID=true){.</span><pre>insert</pre>
         </a>
     </li>
 
@@ -239,10 +239,19 @@
                 <p class="short_description">Autor: Filip Lučić 2017/0188</p>
                 <div class="details">
                     <div class="long_description">
-                        
+                        <p>Jelo Model - veza sa bazom podataka, simulira objekte jela</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
+                                    <th>
+                                        version
+                                                                            </th>
+                                    <td>
+                                                                                    0.3
+                                                                                
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
                                     <th>
                                         package
                                                                             </th>
@@ -312,89 +321,78 @@ Dekodovanje sve kljuceve unutar jednog rekorda</p></div>
                         </div>
                                             <a id="method_delete"></a>
                         <div class="element clickable method public  method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
-                            <h2>delete</h2>
-                            <pre>delete( $id = NULL,  $purge = false) </pre>
+                            <h2>public function delete($id=NULL,$purge=false){.</h2>
+                            <pre>delete(integer|string|array|null $id = NULL, boolean $purge = false) : mixed</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Omotac funkcije Model::delete
+Dozvoljeno je brisanje, ali je potrebno prebaciti
+kljuc u odgovarajuci format</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
+                                                                                                                            <tr>
+                                                <th>Throws</th>
                                                 <td>
-                                                                                                    </td>
+                                                    <dl>
+                                                                                                            <dt>\CodeIgniter\Database\Exceptions\DatabaseException</dt>
+                                                        <dd></dd>
+                                                                                                                                                            </dl>
+                                                </td>
                                             </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
-                                                                                                                    </table>
+                                                                            </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$id</h4>
-                                                <code></code><p></p>
+                                                <code>integer|string|array|null</code><p><p>The rows primary key(s)</p></p>
                                             </div>
                                                                                     <div class="subelement argument">
                                                 <h4>$purge</h4>
-                                                <code></code><p></p>
+                                                <code>boolean</code><p><p>Allows overriding the soft deletes setting.</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>mixed</code><p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvatiId"></a>
                         <div class="element clickable method public  method_dohvatiId" data-toggle="collapse" data-target=".method_dohvatiId .collapse">
-                            <h2>Dohvata id jela na osnovu naziva jela</h2>
-                            <pre>dohvatiId( $naziv) </pre>
+                            <h2>public function dohvatiId($naziv){.</h2>
+                            <pre>dohvatiId(string $naziv) : object</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}</p>
+<p>Dohvata id jela na osnovu naziva jela.</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                                                     </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$naziv</h4>
-                                                <code></code><p></p>
+                                                <code>string</code><p><p>Naziv jela koje zelimo da dohvatimo</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>object</code><p><p>Dohvata se jedno od jela sa tim nazivom.</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvatiMasu"></a>
                         <div class="element clickable method public  method_dohvatiMasu" data-toggle="collapse" data-target=".method_dohvatiMasu .collapse">
-                            <h2>Dohvata masu konkretnog jela na osnovu njegovog id</h2>
+                            <h2>public function dohvatiMasu($id){.</h2>
                             <pre>dohvatiMasu(string $id) : integer</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
@@ -402,7 +400,8 @@ Dekodovanje sve kljuceve unutar jednog rekorda</p></div>
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela</p></div>
 
                                     <table class="table">
                                                                                                                     </table>
@@ -410,18 +409,18 @@ Dekodovanje sve kljuceve unutar jednog rekorda</p></div>
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$id</h4>
-                                                <code>string</code><p><p>id jela</p></p>
+                                                <code>string</code><p><p>Identifikator jela ciji se naziv dohvata.</p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>integer</code><p><p>masa jela</p></p>
+                                        <code>integer</code><p><p>Masa jela</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvatiNazivJela"></a>
                         <div class="element clickable method public  method_dohvatiNazivJela" data-toggle="collapse" data-target=".method_dohvatiNazivJela .collapse">
-                            <h2>Dohvata naziv jela na osnovu njegovo id</h2>
+                            <h2>public function dohvatiNazivJela($id){.</h2>
                             <pre>dohvatiNazivJela(string $id) : string</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
@@ -429,7 +428,8 @@ Dekodovanje sve kljuceve unutar jednog rekorda</p></div>
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}</p>
+<p>Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela</p></div>
 
                                     <table class="table">
                                                                                                                     </table>
@@ -437,11 +437,11 @@ Dekodovanje sve kljuceve unutar jednog rekorda</p></div>
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$id</h4>
-                                                <code>string</code><p><p>id jela</p></p>
+                                                <code>string</code><p><p>Identifikator jela ciji se naziv dohvata.</p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>string</code><p><p>naziv konkretnog jela</p></p>
+                                        <code>string</code><p><p>Naziv jela.</p></p>
                                                                     </div>
                             </div>
 
@@ -476,8 +476,8 @@ Dohvata sliku za odgovarajuci id</p></div>
                         </div>
                                             <a id="method_dohvatiSveBezSlike"></a>
                         <div class="element clickable method public  method_dohvatiSveBezSlike" data-toggle="collapse" data-target=".method_dohvatiSveBezSlike .collapse">
-                            <h2>dohvatiSveBezSlike</h2>
-                            <pre>dohvatiSveBezSlike() </pre>
+                            <h2>Test funkcija koja dohvata jela bez slike.</h2>
+                            <pre>dohvatiSveBezSlike() : Array</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -494,118 +494,85 @@ Dohvata sliku za odgovarajuci id</p></div>
                                                 <td>
                                                                                                     </td>
                                             </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                                                     </table>
 
                                     
+                                                                            <h3>Response</h3>
+                                        <code>Array</code><p><p>niz objekata jela (bez slike)</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvPoId"></a>
                         <div class="element clickable method public  method_dohvPoId" data-toggle="collapse" data-target=".method_dohvPoId .collapse">
-                            <h2>Dohvata sve podatke na osnovu id iz tabele Jelo</h2>
-                            <pre>dohvPoId( $id) </pre>
+                            <h2>public function dohvPoId($id) {.</h2>
+                            <pre>dohvPoId(string $id) : object</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Dohvata konkretno jelo na osnovu prosledjenog identifikatora iz tabele Jelo.</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                                                     </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$id</h4>
-                                                <code></code><p></p>
+                                                <code>string</code><p><p>Identifikator jela na osnovu kog se pretrazuje baza podataka.</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>object</code><p><p>Jelo sa prosledjenim id-jem</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvPoImenu"></a>
                         <div class="element clickable method public  method_dohvPoImenu" data-toggle="collapse" data-target=".method_dohvPoImenu .collapse">
-                            <h2>Dohvata jelo na osnovu njegovog naziva</h2>
-                            <pre>dohvPoImenu( $naziv_jela) </pre>
+                            <h2>public function dohvPoImenu($naziv_jela) {.</h2>
+                            <pre>dohvPoImenu(string $naziv_jela) : Array</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Dohvata jelo na osnovu njegovog naziva.</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                                                     </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$naziv_jela</h4>
-                                                <code></code><p></p>
+                                                <code>string</code><p><p>Naziv jela na osnovu kog se vrsi pretraga.</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>Array</code><p><p>Niz jela koja se zovu kao prosledjen parametar.</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvSve"></a>
                         <div class="element clickable method public  method_dohvSve" data-toggle="collapse" data-target=".method_dohvSve .collapse">
-                            <h2>Dohvata sve podatke iz tabele Jelo</h2>
-                            <pre>dohvSve() </pre>
+                            <h2>public function dohvSve(){.</h2>
+                            <pre>dohvSve() : Array</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Funkcija dohvata sva jela iz baze podataka.</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                     <tr>
                                                 <th>
                                                     
@@ -616,30 +583,26 @@ Dohvata sliku za odgovarajuci id</p></div>
                                                                                                                     </table>
 
                                     
+                                                                            <h3>Response</h3>
+                                        <code>Array</code><p><p>Niz objekata jela</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_dohvSveWithDel"></a>
                         <div class="element clickable method public  method_dohvSveWithDel" data-toggle="collapse" data-target=".method_dohvSveWithDel .collapse">
-                            <h2>dohvSveWithDel</h2>
-                            <pre>dohvSveWithDel() </pre>
+                            <h2>public function dohvSveWithDel() {.</h2>
+                            <pre>dohvSveWithDel() : Array</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Funkcija dohvata sva jela iz baze podataka, ukljucujuci i ona obrisana (soft).</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                                     <tr>
                                                 <th>
                                                     
@@ -650,49 +613,51 @@ Dohvata sliku za odgovarajuci id</p></div>
                                                                                                                     </table>
 
                                     
+                                                                            <h3>Response</h3>
+                                        <code>Array</code><p><p>Niz objekata jela</p></p>
                                                                     </div>
                             </div>
 
                         </div>
                                             <a id="method_insert"></a>
                         <div class="element clickable method public  method_insert" data-toggle="collapse" data-target=".method_insert .collapse">
-                            <h2>insert</h2>
-                            <pre>insert( $data = NULL,  $returnID = true) </pre>
+                            <h2>public function insert($data=NULL,$returnID=true){.</h2>
+                            <pre>insert(array|object $data = NULL, boolean $returnID = true) : integer|string|boolean</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>..}
+Omotac funkcjie Model::insert
+Ako je neuspesno vraca false
+Ako je uspesno vraca id</p></div>
 
                                     <table class="table">
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
+                                                                                                                            <tr>
+                                                <th>Throws</th>
                                                 <td>
-                                                                                                    </td>
+                                                    <dl>
+                                                                                                            <dt>\ReflectionException</dt>
+                                                        <dd></dd>
+                                                                                                                                                            </dl>
+                                                </td>
                                             </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
-                                                                                                                    </table>
+                                                                            </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$data</h4>
-                                                <code></code><p></p>
+                                                <code>array|object</code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
                                                 <h4>$returnID</h4>
-                                                <code></code><p></p>
+                                                <code>boolean</code><p><p>Da li insert ID treba da se vrati ili ne</p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>integer|string|boolean</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1122,7 +1087,7 @@ Dohvata sliku za odgovarajuci id</p></div>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Mon, 08 Jun 2020 13:53:15 +0000.<br/>
+            generated on Mon, 08 Jun 2020 19:28:02 +0000.<br/>
     </footer>
     </body>
 </html>

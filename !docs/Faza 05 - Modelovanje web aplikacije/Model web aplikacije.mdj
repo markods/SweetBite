@@ -49559,7 +49559,7 @@
 																	"top": 60,
 																	"width": 87.33984375,
 																	"height": 13,
-																	"text": "Lifeline1"
+																	"text": "Gost"
 																},
 																{
 																	"_type": "LabelView",
@@ -50357,7 +50357,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFyCgh4AVU7Z80="
 											},
-											"name": "Lifeline1",
+											"name": "Gost",
 											"stereotype": "client page",
 											"represent": {
 												"$ref": "AAAAAAFyPfmm+sjP7aI="
@@ -54139,9 +54139,9 @@
 																"$ref": "AAAAAAFyPhtsTdkZZS4="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 5,
-															"width": 110.8271484375,
+															"width": 102.44189453125,
 															"height": 13,
 															"text": "C3 Pregled jela (K)"
 														},
@@ -54154,7 +54154,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -54547,7 +54547,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -54561,7 +54561,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -54792,7 +54792,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 285,
 															"width": 1,
 															"height": 13
@@ -54806,7 +54806,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 285,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -55947,9 +55947,9 @@
 																"$ref": "AAAAAAFyQSqoUV2MT20="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 10,
-															"width": 277.7705078125,
+															"width": 257.6611328125,
 															"height": 13,
 															"text": "C4 Dodavanje i uklanjanje jela iz porudzbine (K)"
 														},
@@ -55962,7 +55962,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 10,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -56350,7 +56350,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 157,
 															"width": 1,
 															"height": 13
@@ -56364,7 +56364,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 157,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -56483,7 +56483,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 285,
 															"width": 1,
 															"height": 13
@@ -56497,7 +56497,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 285,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -57842,7 +57842,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 72.72998046875,
+															"left": 71.99365234375,
 															"top": 453,
 															"width": 1,
 															"height": 13
@@ -57856,7 +57856,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 453,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -58450,7 +58450,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 88.72998046875,
+															"left": 87.99365234375,
 															"top": 621,
 															"width": 1,
 															"height": 13
@@ -58464,7 +58464,7 @@
 															"font": "Arial;13;1",
 															"left": 69,
 															"top": 621,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -59081,9 +59081,9 @@
 																"$ref": "AAAAAAFyQUw5lmVgLSs="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 10,
-															"width": 222.8505859375,
+															"width": 202.3984375,
 															"height": 13,
 															"text": "C5 Izracunavanje cene porudzbine (K)"
 														},
@@ -59096,7 +59096,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 10,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -59366,7 +59366,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -59380,7 +59380,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -59958,9 +59958,9 @@
 																"$ref": "AAAAAAFyQVcSRmpE8bM="
 															},
 															"font": "Arial;13;0",
-															"left": 86.97900390625,
+															"left": 82.58642578125,
 															"top": 101,
-															"width": 277.7705078125,
+															"width": 257.6611328125,
 															"height": 13,
 															"text": "C4 Dodavanje i uklanjanje jela iz porudzbine (K)"
 														},
@@ -59973,7 +59973,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 101,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -60256,9 +60256,9 @@
 																"$ref": "AAAAAAFyQV0w0Wx6AUI="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 10,
-															"width": 154.91162109375,
+															"width": 142.88916015625,
 															"height": 13,
 															"text": "C6 Potvrda porudzbine (K)"
 														},
@@ -60271,7 +60271,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 10,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -60665,7 +60665,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 277,
 															"width": 1,
 															"height": 13
@@ -60679,7 +60679,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 277,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -60830,7 +60830,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 72.72998046875,
+															"left": 71.99365234375,
 															"top": 477,
 															"width": 1,
 															"height": 13
@@ -60844,7 +60844,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 477,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -61857,7 +61857,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 88.72998046875,
+															"left": 87.99365234375,
 															"top": 645,
 															"width": 1,
 															"height": 13
@@ -61871,7 +61871,7 @@
 															"font": "Arial;13;1",
 															"left": 69,
 															"top": 645,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -62437,7 +62437,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 149,
 															"width": 1,
 															"height": 13
@@ -62451,7 +62451,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 149,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -63161,9 +63161,9 @@
 																"$ref": "AAAAAAFyQWzR5XLMGPw="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 13,
-															"width": 157.06982421875,
+															"width": 145.06005859375,
 															"height": 13,
 															"text": "C7 Potvrda porudzbine (M)"
 														},
@@ -63176,7 +63176,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 13,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -63570,7 +63570,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -63584,7 +63584,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -63703,7 +63703,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 309,
 															"width": 1,
 															"height": 13
@@ -63717,7 +63717,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 309,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -64315,7 +64315,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 72.72998046875,
+															"left": 71.99365234375,
 															"top": 533,
 															"width": 1,
 															"height": 13
@@ -64329,7 +64329,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 533,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -65654,9 +65654,9 @@
 																"$ref": "AAAAAAFyPjxUQeCNja8="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 5,
-															"width": 172.970703125,
+															"width": 160.21826171875,
 															"height": 13,
 															"text": "C8 Pregled porudzbina (K, M)"
 														},
@@ -65669,7 +65669,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -66062,7 +66062,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -66076,7 +66076,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -66866,7 +66866,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 285,
 															"width": 1,
 															"height": 13
@@ -66880,7 +66880,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 285,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -67453,9 +67453,9 @@
 																"$ref": "AAAAAAFyQXnjXnexTgw="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 13,
-															"width": 288.60595703125,
+															"width": 264.91015625,
 															"height": 13,
 															"text": "C9 Postavljanje stanja proizvodnje porudzbine (V)"
 														},
@@ -67468,7 +67468,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 13,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -67862,7 +67862,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -67876,7 +67876,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -67995,7 +67995,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 72.72998046875,
+															"left": 71.99365234375,
 															"top": 309,
 															"width": 1,
 															"height": 13
@@ -68009,7 +68009,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 309,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -69189,7 +69189,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 749,
 															"width": 1,
 															"height": 13
@@ -69203,7 +69203,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 749,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -69545,7 +69545,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 877,
 															"width": 1,
 															"height": 13
@@ -69559,7 +69559,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 877,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -70632,9 +70632,9 @@
 																"$ref": "AAAAAAFyQMjP7VNFdhY="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 10,
-															"width": 325.44775390625,
+															"width": 298.8193359375,
 															"height": 13,
 															"text": "C10 Dodavanje, menjanje i uklanjanje jela sa menija (M)"
 														},
@@ -70647,7 +70647,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 10,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -71035,7 +71035,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 157,
 															"width": 1,
 															"height": 13
@@ -71049,7 +71049,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 157,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -71279,7 +71279,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 277,
 															"width": 1,
 															"height": 13
@@ -71293,7 +71293,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 277,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -71898,7 +71898,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 88.72998046875,
+															"left": 87.99365234375,
 															"top": 661,
 															"width": 1,
 															"height": 13
@@ -71912,7 +71912,7 @@
 															"font": "Arial;13;1",
 															"left": 69,
 															"top": 661,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -73382,7 +73382,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 72.72998046875,
+															"left": 71.99365234375,
 															"top": 549,
 															"width": 1,
 															"height": 13
@@ -73396,7 +73396,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 549,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -73776,7 +73776,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 1109,
 															"width": 1,
 															"height": 13
@@ -73790,7 +73790,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 1109,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -74579,7 +74579,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 1253,
 															"width": 1,
 															"height": 13
@@ -74593,7 +74593,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 1253,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -75404,9 +75404,9 @@
 																"$ref": "AAAAAAFyPrwgE+7vGWI="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 5,
-															"width": 135.89404296875,
+															"width": 124.34765625,
 															"height": 13,
 															"text": "C11 Pregled naloga (A)"
 														},
@@ -75419,7 +75419,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -75812,7 +75812,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -75826,7 +75826,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -76616,7 +76616,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 285,
 															"width": 1,
 															"height": 13
@@ -76630,7 +76630,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 285,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -77203,9 +77203,9 @@
 																"$ref": "AAAAAAFyPsMbXfaa+1Y="
 															},
 															"font": "Arial;13;0",
-															"left": 70.97900390625,
+															"left": 66.58642578125,
 															"top": 5,
-															"width": 331.96044921875,
+															"width": 310.0419921875,
 															"height": 13,
 															"text": "C12 Dodavanje i uklanjanje privilegija korisnickom nalogu"
 														},
@@ -77218,7 +77218,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 5,
-															"width": 60.97900390625,
+															"width": 56.58642578125,
 															"height": 13,
 															"text": "interaction"
 														}
@@ -77611,7 +77611,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 39.99365234375,
 															"top": 173,
 															"width": 1,
 															"height": 13
@@ -77625,7 +77625,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 173,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
@@ -78415,7 +78415,7 @@
 															},
 															"visible": false,
 															"font": "Arial;13;0",
-															"left": 56.72998046875,
+															"left": 55.99365234375,
 															"top": 285,
 															"width": 1,
 															"height": 13
@@ -78429,7 +78429,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 285,
-															"width": 14.72998046875,
+															"width": 13.99365234375,
 															"height": 13,
 															"text": "alt"
 														},
