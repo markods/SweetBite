@@ -8,6 +8,12 @@
  
 use CodeIgniter\Model;
 
+/**
+ * Stavka - klasa model, koja sluzi za komunikaciju sa bazom
+ *          dohvatanje, izmena i uklanjanje iz tabele Por
+ * 
+ * @version 0.4
+ */
 class Stavka extends Model
 {
     protected $table      = 'stavka';
@@ -54,10 +60,16 @@ class Stavka extends Model
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    // Ako je neuspesno vraca false
-    // Ako je uspesno vraca id
-    */
-    
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
@@ -75,10 +87,16 @@ class Stavka extends Model
     }
     
     //-----------------------------------------------
-    /** public function update($id=NULL,$data=NULL):bool{...}
-    // Ako je uspesno vraca true, ako nije vraca false
-    */
-    
+    /**public function update($id=NULL,$data=NULL):bool{...}
+     * Omotac funkcije Model::update
+     * Ako je uspesno vraca true, ako nije vraca false
+     * 
+     * @param integer|array|string $id
+     * @param array|object         $data
+     *
+     * @return boolean
+     * @throws \ReflectionException
+     */
     public function update($id=NULL, $data=NULL):bool 
     {
         if ($id != null) {
@@ -98,10 +116,16 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function delete($id=NULL,$purge=false){...} 
-    // Dozvoljeno je brisanje, ali je potrebno prebaciti 
-    //  kljuc u odgovarajuci format
-    */
-    
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
     public function delete($id=NULL, $purge=false) 
     {
         if ($id != null) {
@@ -112,10 +136,11 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function napravljenaStavka($stavka_id){...}
-    // Stavki sa datim id-em se postavlja 
-    //  datum izrade na trenutni datum i vreme
-    */
-    
+     * Stavki sa datim id-em se postavlja 
+     *  datum izrade na trenutni datum i vreme
+     * 
+     * @param string $stavka_id
+     */
     public function napravljenaStavka($stavka_id)
     {
         //ne radi se codeId jer ga radi update
@@ -124,9 +149,10 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function nijeNapravljenaStavka($stavka_id){...}
-    // Stavki sa datim id-em se uklanja datum izrade 
-    */
-    
+     * Stavki sa datim id-em se uklanja datum izrade 
+     * 
+     * @param string $stavka_id
+     */
     public function nijeNapravljenaStavka($stavka_id)
     {
         //ne radi se codeId jer ga radi update
@@ -135,9 +161,12 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function dohvati($stavka_id){...}
-    // Dohvata stavku sa datim id-em
-    */
-    
+     * Dohvata stavku sa datim id-em
+     * 
+     * @param string $stavka_id
+     * 
+     * @return object
+     */
     public function dohvati($stavka_id)
     {
         $stavka_id = \UUID::codeId($stavka_id);
@@ -148,9 +177,13 @@ class Stavka extends Model
     
     //-----------------------------------------------
     /** public function stavkaJelaIzPor($id_jela,$idPor){...}
-    // Dohvata stavku datog jela iz date porudzbine
-    */
-    
+     * Dohvata stavku datog jela iz date porudzbine
+     * 
+     * @param string $id_jela 
+     * @param string $id_por 
+     * 
+     * @return string|null
+     */
     public function stavkaJelaIzPor($id_jela, $id_por)
     {
         $id_jela = \UUID::codeId($id_jela);
@@ -178,9 +211,11 @@ class Stavka extends Model
     
     //------------------------------------------------
     /** public function kolicinaJela($stavka_id){...}
-    // Dohvata kolicinu jela iz date stavke
+     * Dohvata kolicinu jela iz date stavke
+     * 
+     * @param string $stavka_id
+     * @return int 
     */
-    
     public function kolicinaJela($stavka_id)
     {
         $stavka_id =\UUID::codeId($stavka_id); 
@@ -191,9 +226,12 @@ class Stavka extends Model
     
     //------------------------------------------------
     /** public function sveIzPor($por_id){...}
-    // Dohvata sve stavke iz odredjene porudzbine
-    */
-    
+     * Dohvata sve stavke iz odredjene porudzbine
+     * 
+     * @param string $por_id
+     * 
+     * @return array 
+     */
     public function sveIzPor($por_id)
     {
         $por_id = \UUID::codeId($por_id);
@@ -202,10 +240,13 @@ class Stavka extends Model
     }
      
     //------------------------------------------------
-    /** public function decodeRecord($row)
-    // Dekodovanje jednog rekorda
-    */
-    
+    /** public function decodeRecord($row){...}
+     * Dekodovanje sve kljuceve unutar jednog rekorda
+     * 
+     * @param object $row Objekat koji je vratila baza
+     * 
+     * @return object Primljeni objekat sa dekodovanim kljucevima
+     */
     public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
@@ -217,9 +258,12 @@ class Stavka extends Model
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    // Dekodovanje nizova podataka
-    */
-    
+     * Dekodovanje nizova podataka
+     * 
+     * @param array $finds Niz objekata koji je vratila baza
+     * 
+     * @return array Primljeni niz sa dekodovanim kljucevima
+     */
     public function decodeArray($finds)
     {
         //dekodujemo sve kljuceve

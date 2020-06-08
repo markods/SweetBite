@@ -150,8 +150,14 @@ class Fav extends Model
     }
 
     //-----------------------------------------------------------------------
-    
-    //proverava da li je favorit tog korisnika
+    /** public function jeFavorit($id_jela, $id_kor){...}
+     * Proverava da li je dato jelo favorit datog korisnika 
+     * 
+     * @param string $id_jela
+     * @param string $id_kor
+     * 
+     * @return bool
+     */
     public function jeFavorit($id_jela, $id_kor)
     {
         $jelo_id = \UUID::codeId($id_jela);
@@ -166,13 +172,21 @@ class Fav extends Model
         }
     }
     
-    //dohvata id odredjenog favorite
+    //-----------------------------------------------------------------------
+    /** public function idFavorita($id_jela, $id_kor){...}
+     * dohvata id odredjenog favorita, ako on postoji
+     * 
+     * @param string $id_jela
+     * @param string $id_kor
+     * 
+     * @return null|string
+     */
     public function idFavorita($id_jela, $id_kor)
     {
         $jelo_id = \UUID::codeId($id_jela);
         $kor_id = \UUID::codeId($id_kor);
         $ima = $this->where('fav_jelo_id', $jelo_id)->where('fav_kor_id', $kor_id)->findAll();
-        
+        if (count($ima)==0) return null;
         return \UUID::decodeId($ima[0]->fav_id);
     }
 }

@@ -8,6 +8,12 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Por - klasa model, koja sluzi za komunikaciju sa bazom
+ *       dohvatanje, izmena i uklanjanje iz tabele Por
+ * 
+ * @version 0.3
+ */
 class Por extends Model
 {
     /*
@@ -58,10 +64,16 @@ class Por extends Model
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    // Ako je neuspesno vraca false
-    // Ako je uspesno vraca id
-    */
-    
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();        
@@ -80,9 +92,15 @@ class Por extends Model
     
     //-----------------------------------------------
     /**public function update($id=NULL,$data=NULL):bool{...}
-    // Ako je uspesno vraca true, ako nije vraca false
-    */
-    
+     * Omotac funkcije Model::update
+     * Ako je uspesno vraca true, ako nije vraca false
+     * 
+     * @param integer|array|string $id
+     * @param array|object         $data
+     *
+     * @return boolean
+     * @throws \ReflectionException
+     */
     public function update($id=NULL, $data=NULL):bool
     {
         if ($id != null) {
@@ -102,10 +120,16 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function delete($id=NULL,$purge=false){...} 
-    // Dozvoljeno je brisanje, ali je potrebno prebaciti 
-    //  kljuc u odgovarajuci format
-    */
-    
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
     public function delete($id=NULL, $purge=false) 
     {
         if ($id != null) {
@@ -116,10 +140,12 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function porudzbineKorisnika($kor_id){..}
-    // Dohvata sve porudzbine korisnika sa zadatim id-em
-    // Potrebnoo za prikaz porudzbina korisnika
-    */
-    
+     * Dohvata sve porudzbine korisnika sa zadatim id-em
+     * 
+     * @param string $kor_id
+     * 
+     * @return array
+     */
     public function porudzbineKorisnika($kor_id)
     {
         $kor_id = \UUID::codeID($kor_id);
@@ -147,13 +173,15 @@ class Por extends Model
         
     //-----------------------------------------------
     /** public function korpaKorisnika($kor_id){...}
-    // Dohvata porudzbinu korisnika sa zadatim id-em
-    //  koja nije jos porucena
-    // Potrebno za prikaz korpe korisnika
-    // Ako korpa postoji vraca njen id,
-    // Ako korpa ne postoji vraca null
-    */
-    
+     * Dohvata porudzbinu korisnika sa zadatim id-em
+     *  koja nije jos porucena
+     * Ako korpa postoji vraca njen id,
+     * Ako korpa ne postoji vraca null
+     * 
+     * @param string $kor_id
+     * 
+     * @return string
+     */
     public function korpaKorisnika($kor_id)
     {
         $kor_id = \UUID::codeId($kor_id);
@@ -172,12 +200,16 @@ class Por extends Model
 
     //-----------------------------------------------
     /** public function filtriranePorudzbineKorisnika($kor_id,$status){...}
-    // Dohvata neke porudzbine korisnika sa zadatim id-em
-    // Potrebno za prikaz filtriranih porudzbina korisnika 
-    // status: 0-na cekanju, 1-prihvacene, 2-odbijena, 
-    //  3-gotova, 4-pokupljena    
-    */
-    
+     * Dohvata neke porudzbine korisnika sa zadatim id-em
+     * Potrebno za prikaz filtriranih porudzbina korisnika 
+     * status: 0-na cekanju, 1-prihvacene, 2-odbijena, 
+     *  3-gotova, 4-pokupljena    
+     * 
+     * @param string $kor_id
+     * @param int $status
+     * 
+     * @return array
+     */
     public function filtriranePorudzbineKorisnika($kor_id, $status)
     {
         $kor_id = \UUID::codeId($kor_id);
@@ -213,10 +245,12 @@ class Por extends Model
     
     //-----------------------------------------------
     /** public function donetaOdluka($por_id,$odluka){...}
-    // Upisuje datum odluke i donesenu odluku
-    //  u porudzbinu sa datim id-em
-    */
-    
+     * Upisuje datum odluke i donesenu odluku
+     *  u porudzbinu sa datim id-em
+     * 
+     * @param string $por_id
+     * @param string $odluka
+     */
     public function donetaOdluka($por_id, $odluka)
     {
         //ne radi se codeId jer ga radi update
@@ -227,9 +261,12 @@ class Por extends Model
     
     //------------------------------------------------
     /** public function dohvati($por_id){...}
-    // Dohvata porudzbinu sa datim id-em
-    */
-    
+     * Dohvata porudzbinu sa datim id-em
+     * 
+     * @param string $por_id
+     * 
+     * @return object
+     */
     public function dohvati($por_id)    
     {
         $por_id = \UUID::codeId($por_id);
@@ -240,9 +277,12 @@ class Por extends Model
     
     //------------------------------------------------
     /** public function imaPopust($por_id){...}
-    // Proverava da li data porudzbina ima popust
+     * Proverava da li data porudzbina ima popust
+     *
+     * @param string $por_id 
+     * 
+     * @return bool
     */
-    
     public function imaPopust($por_id)
     {
         $por = $this->find(\UUID::codeId($por_id));
@@ -262,9 +302,10 @@ class Por extends Model
 
     //------------------------------------------------
     /**public function zaPravljenje(){...}
-    // Dohvata sve porudzbine koje nisu napravljene
-    */
-    
+     * Dohvata sve porudzbine koje nisu napravljene
+     * 
+     * @return array
+     */
     public function zaPravljenje()
     {
         $svePor = $this->where('por_odluka', 'prihvacena')->where('por_datizrade', null)->
@@ -274,19 +315,23 @@ class Por extends Model
     
     //------------------------------------------------
     /**public function napravljena(){...}
-    // Prosledjenoj poruzbini stavlja trenutni datum kao datum izrade
-    */
-    
+     * Prosledjenoj poruzbini stavlja trenutni datum kao datum izrade
+     * 
+     * @param string $por_id
+     */
     public function napravljena($por_id)
     {
         $this->update($por_id, ['por_datizrade' => date('Y-m-d H:i:s')]);
     }    
     
     //------------------------------------------------
-    /**public function decodeRecord($row){...}
-    // Dekodovanje jednog rekorda
-    */
-    
+    /** public function decodeRecord($row){...}
+     * Dekodovanje sve kljuceve unutar jednog rekorda
+     * 
+     * @param object $row Objekat koji je vratila baza
+     * 
+     * @return object Primljeni objekat sa dekodovanim kljucevima
+     */
     public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
@@ -298,9 +343,12 @@ class Por extends Model
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    // Dekodovanje nizova podataka
-    */
-    
+     * Dekodovanje nizova podataka
+     * 
+     * @param array $finds Niz objekata koji je vratila baza
+     * 
+     * @return array Primljeni niz sa dekodovanim kljucevima
+     */
     public function decodeArray($finds)
     {
         //dekodujemo sve kljuceve

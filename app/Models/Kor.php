@@ -199,7 +199,11 @@ class Kor extends Model
        return ( count($korisnik) != 0 );
    }
 
-    /** Autor: Jovana Pavic 0099/17 - dohvata sve korisnike */
+    /** public function sviKorisnici(){...}
+     * Dohvata sve korisnike iz baze 
+     * 
+     * @return array Niz objekata
+     */
     public function sviKorisnici()
     {
        $finds = $this->findAll();

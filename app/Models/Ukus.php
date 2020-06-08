@@ -48,10 +48,13 @@ class Ukus extends Model {
     }
 
     //------------------------------------------------
-    /**public function decodeRecord($row){...}
-    // Dekodovanje jednog rekorda
-    */
-    
+    /** public function decodeRecord($row){...}
+     * Dekodovanje sve kljuceve unutar jednog rekorda
+     * 
+     * @param object $row Objekat koji je vratila baza
+     * 
+     * @return object Primljeni objekat sa dekodovanim kljucevima
+     */
     public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
@@ -61,9 +64,12 @@ class Ukus extends Model {
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    // Dekodovanje nizova podataka
-    */
-    
+     * Dekodovanje nizova podataka
+     * 
+     * @param array $finds Niz objekata koji je vratila baza
+     * 
+     * @return array Primljeni niz sa dekodovanim kljucevima
+     */
     public function decodeArray($finds)
     {
         //dekodujemo sve kljuceve

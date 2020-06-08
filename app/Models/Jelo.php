@@ -140,6 +140,14 @@ class Jelo extends Model
             return parent::delete($id, $purge);
         }
         
+        //------------------------------------------------
+        /** public function decodeArray($finds){...}
+         * Dekodovanje nizova podataka
+         * 
+         * @param array $finds Niz objekata koji je vratila baza
+         * 
+         * @return array Primljeni niz sa dekodovanim kljucevima
+         */
         public function decodeArray($found) {
             for ($i = 0; $i < count($found); $i++) {
                 $found[$i] = $this->decodeRecord($found[$i]);
@@ -147,7 +155,15 @@ class Jelo extends Model
             return $found;  
         }
         
-         public function decodeRecord($row) {
+        //------------------------------------------------
+        /** public function decodeRecord($row){...}
+         * Dekodovanje sve kljuceve unutar jednog rekorda
+         * 
+         * @param object $row Objekat koji je vratila baza
+         * 
+         * @return object Primljeni objekat sa dekodovanim kljucevima
+         */
+        public function decodeRecord($row) {
             $row->jelo_id = \UUID::decodeId($row->jelo_id);
             $row->jelo_tipjela_id = \UUID::decodeId($row->jelo_tipjela_id);
             $row->jelo_ukus_id = \UUID::decodeId($row->jelo_ukus_id);
@@ -175,14 +191,19 @@ class Jelo extends Model
             
         }
 
-    /** public function dohvatiSliku($id){...}
-    // Dohvata sliku za odgovarajuci id
-    */
-    public function dohvatiSliku($id) 
-    {
-        $id = \UUID::codeId($id);
-        $jelo = $this->find($id);
-        if ($jelo == null) return null;
-        return $jelo->jelo_slika;
-    }
+        //------------------------------------------------
+        /** public function dohvatiSliku($id){...}
+         * Dohvata sliku za odgovarajuci id
+         * 
+         * @param string $id
+         * 
+         * @return string URL slike
+         */
+        public function dohvatiSliku($id) 
+        {
+            $id = \UUID::codeId($id);
+            $jelo = $this->find($id);
+            if ($jelo == null) return null;
+            return $jelo->jelo_slika;
+        }
 }

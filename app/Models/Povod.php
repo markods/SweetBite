@@ -8,6 +8,12 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Povod - klasa model, koja sluzi za komunikaciju sa bazom
+ *         dohvatanje, izmena i uklanjanje iz tabele Por
+ * 
+ * @version 0.4
+ */
 class Povod extends Model
 {
     //kolone u tabeli: 'povod_id', 'povod'
@@ -40,10 +46,16 @@ class Povod extends Model
     
     //-----------------------------------------------    
     /** public function insert($data=NULL,$returnID=true){...}
-    // Ako je neuspesno vraca false
-    // Ako je uspesno vraca id
-    */
-    
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
     public function insert($data=NULL, $returnID=true) 
     {
         $id = \UUID::generateId();
@@ -55,10 +67,16 @@ class Povod extends Model
     }
     
     //-----------------------------------------------
-    /** public function update($id=NULL,$data=NULL):bool{...}
-    // Ako je uspesno vraca true, ako nije vraca false
-    */
-    
+    /**public function update($id=NULL,$data=NULL):bool{...}
+     * Omotac funkcije Model::update
+     * Ako je uspesno vraca true, ako nije vraca false
+     * 
+     * @param integer|array|string $id
+     * @param array|object         $data
+     *
+     * @return boolean
+     * @throws \ReflectionException
+     */
     public function update($id=NULL, $data=NULL):bool
     {
         if ($id != null) {
@@ -71,11 +89,17 @@ class Povod extends Model
     }
     
     //-----------------------------------------------
-    /** public function delete($id=NULL,$purge=false){...}
-    // Ako je zabranjeno brisanje iz tabele    
-    //  u svakom slucaju baca gresku
-    */
-    
+    /** public function delete($id=NULL,$purge=false){...} 
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
     public function delete($id=NULL, $purge=false) 
     {
        throw new Exception('Not implemented');
@@ -83,12 +107,15 @@ class Povod extends Model
 
     //-----------------------------------------------
     /** public function povodId($povod_opis){...}
-    // Dohvata id povoda na osnovu opisa    
-    //  ako se taj string nalazi u vise elemenata
-    //  vraca tacno onaj koji je trazen
-    // Ako ne postoji red sa tim opisom vraca null
-    */
-    
+     * Dohvata id povoda na osnovu opisa    
+     *  ako se taj string nalazi u vise elemenata
+     *  vraca tacno onaj koji je trazen
+     * Ako ne postoji red sa tim opisom vraca null
+     * 
+     * @param string $povod_opis
+     * 
+     * @return string|null
+     */
     public function povodId($povod_opis)
     {
         $finds = $this->like('povod_opis', $povod_opis)->findAll();
@@ -103,10 +130,13 @@ class Povod extends Model
     
     //-----------------------------------------------
     /** public function povodOpis($povod_id){...}
-    // Dohvata opis povoda na osnovu id-a 
-    // Ako ne postoji red sa tim id-em vraca null
-    */
-    
+     * Dohvata opis povoda na osnovu id-a 
+     * Ako ne postoji red sa tim id-em vraca null
+     * 
+     * @param string $povod_id 
+     * 
+     * @return string|null
+     */
     public function povodOpis($povod_id)
     {
         $povod_id = \UUID::codeId($povod_id);
@@ -117,9 +147,12 @@ class Povod extends Model
     
     //------------------------------------------------
     /** public function dohvati($povod_id){...} 
-    // Dohvata povod sa datim id-em
-    */
-    
+     * Dohvata povod sa datim id-em
+     * 
+     * @param string $povod_id 
+     * 
+     * @return object
+     */
     public function dohvati($povod_id)    
     {
         $povod_id = \UUID::codeId($povod_id);
@@ -130,9 +163,12 @@ class Povod extends Model
     
     //------------------------------------------------
     /** public function dohvati($povod_id){...} 
-    // Dohvata povod sa datim id-em
-    */
-    
+     * Dohvata povod sa datim id-em
+     * 
+     * @param string $povod_id 
+     * 
+     * @return array|null
+     */
     public function sviPovodi()
     {
         $povodi = $this->findAll();
@@ -142,10 +178,13 @@ class Povod extends Model
     }
         
     //------------------------------------------------
-    /**public function decodeRecord($row){...}
-    // Dekodovanje jednog rekorda
-    */
-    
+    /** public function decodeRecord($row){...}
+     * Dekodovanje sve kljuceve unutar jednog rekorda
+     * 
+     * @param object $row Objekat koji je vratila baza
+     * 
+     * @return object Primljeni objekat sa dekodovanim kljucevima
+     */
     public function decodeRecord($row)
     {
         //dekodujemo sve kljuceve
@@ -155,9 +194,12 @@ class Povod extends Model
     
     //------------------------------------------------
     /** public function decodeArray($finds){...}
-    // Dekodovanje nizova podataka
-    */
-    
+     * Dekodovanje nizova podataka
+     * 
+     * @param array $finds Niz objekata koji je vratila baza
+     * 
+     * @return array Primljeni niz sa dekodovanim kljucevima
+     */
     public function decodeArray($finds)
     {
         //dekodujemo sve kljuceve
