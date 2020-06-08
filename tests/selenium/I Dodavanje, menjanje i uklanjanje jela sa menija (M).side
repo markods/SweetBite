@@ -410,7 +410,7 @@
     }]
   }, {
     "id": "e88b5265-a823-47cd-814e-8ac707d76b62",
-    "name": "Test 02 - Dodavanje novog jela - neuspesno",
+    "name": "Test 02 - Neuspesno dodavanje novog jela",
     "commands": [{
       "id": "43ab3392-b8a7-4be1-b075-8434b9b355d2",
       "comment": "",

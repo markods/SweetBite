@@ -5,7 +5,7 @@
   "url": "http://127.0.0.1/nightbird/public/Gost/jela ",
   "tests": [{
     "id": "3c3ed32d-4cf9-46aa-9878-1b8dc60c8c5b",
-    "name": "Registracija korisnika- uspesno",
+    "name": "T03 – uspesna registracija",
     "commands": [{
       "id": "97d0bd4e-47be-49e1-acca-16e6c4cc2408",
       "comment": "",
@@ -178,7 +178,7 @@
     }]
   }, {
     "id": "0a8e2e58-d641-41ef-b97f-63181decd8a2",
-    "name": "Registracija korisnika - neuspesno (korisnik postoji)",
+    "name": "T02 – email postoji",
     "commands": [{
       "id": "ab9d8c93-c4d2-4448-b586-ef0d8379a167",
       "comment": "",
@@ -351,7 +351,7 @@
     }]
   }, {
     "id": "06eaf8f2-5163-4d6c-b1a1-3dca293655a0",
-    "name": "Registracija korisnika - neuspesno (korisnik nije uneo korektne lozinke)",
+    "name": "T01 – lozinke se ne poklapaju",
     "commands": [{
       "id": "8bb43002-562d-4b92-8987-de1f865ac578",
       "comment": "",

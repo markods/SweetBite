@@ -3,7 +3,182 @@
   "version": "2.0",
   "name": "J Pregled naloga (A)",
   "url": "http://127.0.0.1/nightbird/public/Gost/jela",
-  "tests": [],
+  "tests": [{
+    "id": "d306a3dd-4c61-4afe-8dc9-ca42f8418263",
+    "name": "T01 - pregled naloga",
+    "commands": [{
+      "id": "bec48a52-5c37-44b7-be80-969cb2abd293",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "387a7afa-5068-4f92-a482-9be0f3f3b68d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1278x1395",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e367823b-d43b-4acb-ad36-37a2ad4226ac",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pr-0 > .btn",
+      "targets": [
+        ["css=.pr-0 > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prijava')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7f6ef59-bca3-4c27-b14b-987969f8015e",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d76cc56-5fa0-49b8-984e-be04ea20895e",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": "admin@nightbird.com"
+    }, {
+      "id": "3fd72880-c238-40ad-bed7-10ea1c4d1104",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "28203e32-62aa-4ba2-abe6-cc64e3bf5815",
+      "comment": "",
+      "command": "click",
+      "target": "id=login",
+      "targets": [
+        ["id=login", "id"],
+        ["css=#login", "css:finder"],
+        ["xpath=//div[@id='login']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[3]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5f13bb7-278e-4382-bb16-e784129d531a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df9016fe-0d89-442c-907e-9b07155ec3fc",
+      "comment": "",
+      "command": "click",
+      "target": "css=#sidebar-toggle > img",
+      "targets": [
+        ["css=#sidebar-toggle > img", "css:finder"],
+        ["xpath=//img[@alt='sidebar']", "xpath:img"],
+        ["xpath=//button[@id='sidebar-toggle']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7ab8fc1-24ca-4563-a53d-e1d8ebe0044f",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-text",
+      "targets": [
+        ["id=search-text", "id"],
+        ["css=#search-text", "css:finder"],
+        ["xpath=//input[@id='search-text']", "xpath:attributes"],
+        ["xpath=//div[@id='searchbar']/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f74faa72-e62c-42c0-a3da-cf413688a357",
+      "comment": "",
+      "command": "click",
+      "target": "id=content-container",
+      "targets": [
+        ["id=content-container", "id"],
+        ["css=#content-container", "css:finder"],
+        ["xpath=//div[@id='content-container']", "xpath:attributes"],
+        ["xpath=//div[@id='dynamic-page-content']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ade2920-bca8-4ce6-bd9a-7583fcd1c203",
+      "comment": "",
+      "command": "click",
+      "target": "css=#\\35 c3cc08a3fa34e9dadeb034698c39e41 > .mail",
+      "targets": [
+        ["css=#\\35 c3cc08a3fa34e9dadeb034698c39e41 > .mail", "css:finder"],
+        ["xpath=//tr[@id='5c3cc08a3fa34e9dadeb034698c39e41']/td[2]", "xpath:idRelative"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'admin@nightbird.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8dc22b0b-9084-4678-9912-2cabf8eddb50",
+      "comment": "",
+      "command": "click",
+      "target": "css=.d-flex",
+      "targets": [
+        ["css=.d-flex", "css:finder"],
+        ["xpath=//body", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "59db377d-1cbb-49a4-b581-92e60bf36565",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//button[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Izloguj me')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d118c329-7586-4da7-963b-f8da58a124e4",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
   "suites": [{
     "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
     "name": "Default Suite",

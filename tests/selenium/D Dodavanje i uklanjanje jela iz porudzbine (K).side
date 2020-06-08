@@ -5,7 +5,7 @@
   "url": "http://127.0.0.1/nightbird/public/Gost/jela",
   "tests": [{
     "id": "814a2b42-b037-402e-8f58-fff2aec0bdae",
-    "name": "Dodavanje i uklanjanje",
+    "name": "T01 - dodavanje i uklanjanje jela",
     "commands": [{
       "id": "d5d64152-ca84-4248-ab76-4b57460ee698",
       "comment": "",

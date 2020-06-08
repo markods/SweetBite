@@ -5,7 +5,7 @@
   "url": "http://127.0.0.1/nightbird/public/Gost/jela",
   "tests": [{
     "id": "f97f6db5-9544-440d-8496-ffa2df13e8e8",
-    "name": "T01 - menjanje porudzbine + logovanje",
+    "name": "T01 - menjanje porudzbine",
     "commands": [{
       "id": "1c621e58-bf05-499e-878e-3ad54e975a24",
       "comment": "",
