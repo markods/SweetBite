@@ -247,7 +247,7 @@ class Menadzer extends Ulogovani
         $jeloModel->update($jelo['jelo_id'],
                 ['jelo_datsakriv'=> date('Y-m-d H:i:s')]);
         $data=[
-            'success'=>"Uspesno ste izbrisali jelo iz ponude!",
+            'success'=>"Uspesno ste sakrili jelo iz ponude!",
             'jelo_id'=> $jelo['jelo_id']
         ];
         $this->sendAJAX($data);   
@@ -265,7 +265,7 @@ class Menadzer extends Ulogovani
                 'jelo_datsakriv'=>null                    
         ]);
         $data=[
-            'success'=>"Uspesno ste izbrisali jelo iz ponude!",
+            'success'=>"Uspesno ste otkrili jelo iz ponude!",
             'jelo_id'=> $jelo['jelo_id']
         ];
         $this->sendAJAX($data);   

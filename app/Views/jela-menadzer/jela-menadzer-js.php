@@ -35,7 +35,7 @@ function otkrijJelo(input) {
             JSON.stringify(object), "json")
     .done(function(data) {
         $("#eye_"+data['jelo_id']).attr('src',"<?php echo base_url("assets/icons/eye-open.svg");?>").attr('onclick','sakrijJelo(this)'); 
-        alert("Uspesno ste vratili jelo iz ponudu!");
+        alert("Uspesno ste vratili jelo u ponudu!");
     })
     .fail(function() {
         alert("Sakrivanje jela nije uspelo, molimo Vas, pokusajte ponovo!");

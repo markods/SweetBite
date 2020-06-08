@@ -927,6 +927,293 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "947e05f0-5350-4bb5-9abc-793fb0134f10",
+    "name": "Test 05 - Sakrivanje jela",
+    "commands": [{
+      "id": "2ea3dd17-7fbc-46ea-b0a3-ee62a9343085",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e17ca76d-cfdf-43c5-afee-13823b6ae00e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x728",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a3e93a6-42a2-4549-a021-5e86c528a2a7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pr-0 > .btn",
+      "targets": [
+        ["css=.pr-0 > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prijava')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c8ae71d-1253-42f5-a875-cd8c2273fd2b",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6249c580-2ecd-4285-ab14-190b53966b84",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": "menadzer@nightbird.com"
+    }, {
+      "id": "567966f7-7732-4844-ac5c-193f66021185",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "46bc5fd0-8d18-4eee-80f0-4b1984288936",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "menadzer"
+    }, {
+      "id": "f9deea4e-6389-46b1-839f-d35f911698ee",
+      "comment": "",
+      "command": "click",
+      "target": "id=login",
+      "targets": [
+        ["id=login", "id"],
+        ["css=#login", "css:finder"],
+        ["xpath=//div[@id='login']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[3]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5bab072-c2e0-47cc-832b-e8a908b0de73",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(3)",
+      "targets": [
+        ["css=.btn:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8418f158-3786-49d6-a3e3-60d59ad31591",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Jela",
+      "targets": [
+        ["linkText=Jela", "linkText"],
+        ["css=.btn:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Jela')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://127.0.0.1/nightbird/public/Menadzer/jela']", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Jela')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f083ed5d-08f6-4d49-9cae-3b66f8ae7da3",
+      "comment": "",
+      "command": "click",
+      "target": "id=eye_0aab253163ac40ef8bab8f0befdcb2a3",
+      "targets": [
+        ["id=eye_0aab253163ac40ef8bab8f0befdcb2a3", "id"],
+        ["css=#eye_0aab253163ac40ef8bab8f0befdcb2a3", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/eye-open.svg')]", "xpath:img"],
+        ["xpath=//img[@id='eye_0aab253163ac40ef8bab8f0befdcb2a3']", "xpath:attributes"],
+        ["xpath=//div[@id='div0aab253163ac40ef8bab8f0befdcb2a3']/div/div[2]/div[2]/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "18ae38de-1157-47a2-9a75-cdc5370807af",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//button[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Izloguj me')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "86ca3684-cc4b-411b-b703-eb61333e5784",
+    "name": "Test 06 - Otkrivanje jela",
+    "commands": [{
+      "id": "d52baecf-90c7-46ba-9ab1-2ccf77498cf2",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1/nightbird/public/Gost/jela",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43903759-0a70-4493-9673-417383f74ee9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x728",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "86bfb838-b3a5-4335-a065-8c66eb38628f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pr-0 > .btn",
+      "targets": [
+        ["css=.pr-0 > .btn", "css:finder"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Prijava')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7171654-5ca1-4e71-aafc-37a35dd32cc7",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9cb11762-88ef-4cf5-a94f-a4fe32287f71",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-email",
+      "targets": [
+        ["id=login-email", "id"],
+        ["css=#login-email", "css:finder"],
+        ["xpath=//input[@id='login-email']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div/input", "xpath:position"]
+      ],
+      "value": "menadzer@nightbird.com"
+    }, {
+      "id": "df83e6c1-dea5-4692-8bcf-6180ddacfae0",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "19c5b1ff-5905-4948-b848-c6a653b9e2be",
+      "comment": "",
+      "command": "type",
+      "target": "id=login-password",
+      "targets": [
+        ["id=login-password", "id"],
+        ["css=#login-password", "css:finder"],
+        ["xpath=//input[@id='login-password']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "menadzer"
+    }, {
+      "id": "c8f3d188-bf55-4647-a171-af656111788d",
+      "comment": "",
+      "command": "click",
+      "target": "id=login",
+      "targets": [
+        ["id=login", "id"],
+        ["css=#login", "css:finder"],
+        ["xpath=//div[@id='login']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/form/div[3]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a7d51d0-ac97-458e-a1c6-246ac189a273",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Jela",
+      "targets": [
+        ["linkText=Jela", "linkText"],
+        ["css=.btn:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Jela')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://127.0.0.1/nightbird/public/Menadzer/jela']", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Jela')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4735d24c-f2ff-4c98-aa5d-9e5b257e1849",
+      "comment": "",
+      "command": "click",
+      "target": "id=eye_0aab253163ac40ef8bab8f0befdcb2a3",
+      "targets": [
+        ["id=eye_0aab253163ac40ef8bab8f0befdcb2a3", "id"],
+        ["css=#eye_0aab253163ac40ef8bab8f0befdcb2a3", "css:finder"],
+        ["xpath=//img[contains(@src,'http://127.0.0.1/nightbird/public/assets/icons/eye-closed.svg')]", "xpath:img"],
+        ["xpath=//img[@id='eye_0aab253163ac40ef8bab8f0befdcb2a3']", "xpath:attributes"],
+        ["xpath=//div[@id='div0aab253163ac40ef8bab8f0befdcb2a3']/div/div[2]/div[2]/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "04c91903-9460-4821-948a-e2970e3fa121",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//button[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[@id='navbar']/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Izloguj me')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "000d88a1-3dc4-412f-9338-8377ca8e4d9b",
