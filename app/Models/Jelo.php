@@ -6,7 +6,7 @@ use CodeIgniter\Model;
  * 
  * Jelo Model - veza sa bazom podataka, simulira objekte jela
  * 
- * @version 1.0
+ * @version 0.3
  * 
  * 
  * 
@@ -55,13 +55,9 @@ class Jelo extends Model
         /**
          * Test funkcija koja dohvata jela bez slike.
          * 
-         * @return Array niz objekata jela (bez slike)
-         * 
-         * 
-         *     
+         * @return Array niz objekata jela (bez slike)    
          *
          *          */
-        
         
         
         public function dohvatiSveBezSlike()
@@ -86,7 +82,7 @@ class Jelo extends Model
         }
         
         
-        /** 
+        /** public function dohvSve(){...}
          * Funkcija dohvata sva jela iz baze podataka.
          * 
          * @return Array Niz objekata jela
@@ -98,7 +94,7 @@ class Jelo extends Model
             return $jela;
         }
         
-        /** 
+        /**  public function dohvSveWithDel() {...}
          * Funkcija dohvata sva jela iz baze podataka, ukljucujuci i ona obrisana (soft).
          * 
          * @return Array Niz objekata jela
@@ -112,7 +108,7 @@ class Jelo extends Model
             return $jela;
         }
 
-        /** 
+        /** public function dohvPoId($id) {...}
          * Dohvata konkretno jelo na osnovu prosledjenog identifikatora iz tabele Jelo.
          * 
          * @param string $id Identifikator jela na osnovu kog se pretrazuje baza podataka.
@@ -126,7 +122,7 @@ class Jelo extends Model
             return $this->decodeRecord($this->find($id));
         }
 
-        /** 
+        /** public function dohvPoImenu($naziv_jela) {...}
          * Dohvata jelo na osnovu njegovog naziva.
          * 
          * @param string $naziv_jela Naziv jela na osnovu kog se vrsi pretraga.
@@ -140,17 +136,17 @@ class Jelo extends Model
             return $jela;
         }
         
-        /**
-
-         * Funkcija za dodavanje novog jela u bazu podataka
-         * 
-         * @param Array $data Indeksiran niz cija polja predstavljaju elemente objekta koji se ubacuje u bazu
-         * 
-         * @param bool $returnID Neophodan argument iz potpisa roditeljske f-je
-         * 
-         * @return string Identifikator ubacenog jela
-         * 
-         *    */
+       /** public function insert($data=NULL,$returnID=true){...}
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
 
         public function insert($data=NULL, $returnID=true) {
         $id = \UUID::generateID();        
@@ -170,19 +166,16 @@ class Jelo extends Model
         return \UUID::decodeId($id);
         }
         
-        /**
-            
-         * Funkcija menja konkretno jelo u bazi podataka.
-         * 
-         * @param string $id Identifikator jela koje zelimo da promenimo.
-         * 
-         * 
-         * @param Array $data Konkretna promena
-         * 
-         * 
-         * @return bool Obavestenje o uspehu operacije.
-         * 
-         *          */
+          /**public function update($id=NULL,$data=NULL):bool{...}
+     * Omotac funkcije Model::update
+     * Ako je uspesno vraca true, ako nije vraca false
+     * 
+     * @param integer|array|string $id
+     * @param array|object         $data
+     *
+     * @return boolean
+     * @throws \ReflectionException
+     */
         
        
         public function update($id=NULL, $data=NULL):bool {
@@ -204,31 +197,28 @@ class Jelo extends Model
             return true;
         }
         
-        /** Dohvata id jela na osnovu naziva jela 
-
+        /** public function dohvatiId($naziv){...} 
          * 
+         * Dohvata id jela na osnovu naziva jela. 
          * @param string $naziv Naziv jela koje zelimo da dohvatimo
-         * 
-         * 
          * @return object Dohvata se jedno od jela sa tim nazivom.
-         * 
-         * 
-         * 
-         * 
          *          */
         public function dohvatiId($naziv){
             $jelo=$this->where('jelo_naziv',$naziv)->findAll();
             $jelo=$this->decodeArray($jelo);
             return $jelo[0]->jelo_id;
         }
-        /**
-            
-         * Uklanja se jelo iz baze podataka, tako sto se datum uklanjanja jela upisuje u bazu podataka - soft delete.
-         * 
-         * @param string $id Identifikator jela koje zelimo da permanentno uklonimo iz ponude.
-         * @param bool $purge Argument iz potpisa roditeljske funkcije.
-         * 
-         *          */
+           /** public function delete($id=NULL,$purge=false){...} 
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
         public function delete($id=NULL, $purge=false) {
             if ($id != null) {
                 $id = \UUID::codeId($id);
@@ -273,7 +263,9 @@ class Jelo extends Model
 
 
 
-        /** Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela 
+        /** public function dohvatiNazivJela($id){...}
+         * 
+         * Autor: Jovana Jankovic 0586/17 - Dohvata naziv jela na osnovu id jela 
 
          * @param string $id Identifikator jela ciji se naziv dohvata.
          * 
@@ -291,7 +283,8 @@ class Jelo extends Model
 
 
 
-        /** Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela 
+        /**    public function dohvatiMasu($id){...}
+         * Autor: Jovana Jankovic 0586/17 - Dohvata masu jela na osnovu id jela 
 
          * @param string $id Identifikator jela ciji se naziv dohvata.
          * 

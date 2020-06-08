@@ -103,7 +103,10 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);
     }
     
-    /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da doda novo jelo u bazu podataka */
+    /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da doda novo jelo u bazu podataka.
+     * Funkcija dodaje novo jelo u bazu, u skladu sa parametrima koje je menadzer uneo, 
+     * a koji se prenose putem AJAX tehnologije. Uspesno dodato jelo se vraca nazad putem AJAX-a,
+     * i za njegov ispis je odgovoran javascript */
     public function dodajJelo () {     
         $jelo = $this->receiveAJAX();
       
@@ -205,7 +208,9 @@ class Menadzer extends Ulogovani
             $this->sendAJAX($jelo); 
         }    
     }
-     /** Autor: Filip Lucic 17/0188 - omogucava menadzeru da dohvati sva jela, i ispise ih putem Ajaxa pri ucitavanju stranice */
+     /**  public function dohvatiSvaJela() {...}
+      * Autor: Filip Lucic 17/0188 - omogucava menadzeru da dohvati sva jela, prosledi ih putem AJAX-a javascriptu. Poziva se
+      *  pri ucitavanju stranice. */
     public function dohvatiSvaJela() {
         $jeloModel = new Jelo();
         $jela = $jeloModel->dohvatiSveBezSlike();
@@ -247,7 +252,11 @@ class Menadzer extends Ulogovani
         $this->sendAJAX($data);   
     }
     
-    /** Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. */
+    /**  public function otkrijJelo() {...}
+     * Autor: Filip Lucic 0188/17 - otkriva jelo tako da se ono opet prikazuje u ponudi musterijama. 
+     * Prethodno sakriveno jelo koje nije u ponudi postaje ponovo dostupno nakon poziva ove funkcije.
+     * Ono opet postaje vidljivo u pregledu jela obicnog korisnika.
+     *      */
     public function otkrijJelo() {
         $jelo = $this->receiveAJAX();
         $jeloModel = new Jelo();
@@ -380,7 +389,13 @@ class Menadzer extends Ulogovani
           }  
          $this->sendAJAX($por); 
    }
-   /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za prihvatanje porudzbine*/
+   /**  public function prihvatiPorudzbinu() {...}
+    * Autor:Filip Lucic 0188/17 v0.1 - funkcija za prihvatanje porudzbine 
+    * Funkcija postavlja datum odluke i pozitivnu odluku u bazu podataka.
+    * Menadzer i korisnik mogu videti rezultat ove funkcije u prikazu porudzbina
+    * na svojim stranicama.
+    * 
+    *     */
    public function prihvatiPorudzbinu() {
        $prihv = $this->receiveAJAX();
        $por = new Por();
@@ -391,7 +406,12 @@ class Menadzer extends Ulogovani
        $prihv['status']=1;
        $this->sendAJAX($prihv);    
    }
-    /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za odbijanje porudzbine*/
+    /** public function odbijPorudzbinu() {...} 
+     * Autor:Filip Lucic 0188/17 v0.1 - funkcija za odbijanje porudzbine
+    * Funkcija postavlja datum odluke i negativnu odluku u bazu podataka.
+    * Menadzer i korisnik mogu videti rezultat ove funkcije u prikazu porudzbina
+    * na svojim stranicama.
+    *      */
    public function odbijPorudzbinu() {
        $odb = $this->receiveAJAX();
        $por = new Por();
@@ -403,7 +423,10 @@ class Menadzer extends Ulogovani
        $this->sendAJAX($odb);  
    }
    
-    /** Autor:Filip Lucic 0188/17 v0.1 - funkcija za arhiviranje porudzbine*/
+    /** public function arhivirajPorudzbinu() {...}
+     * Autor:Filip Lucic 0188/17 v0.1 - funkcija za arhiviranje porudzbine
+     * Funkcija arhivira konkretnu porudzbinu, promena je vidljiva kod menadzerovog prikaza.
+     *      */
    public function arhivirajPorudzbinu() {
        $arh = $this->receiveAJAX();
        $por = new Por();

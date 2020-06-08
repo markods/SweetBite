@@ -4,6 +4,14 @@
 
 use CodeIgniter\Model;
 
+/** Model koji komunicira sa bazom podataka kako bi se
+ * dobijali podaci o tipovima jela.
+    
+ * @version 0.3
+
+ * 
+ *  */
+
 class Tipjela extends Model {
     protected $table      = 'tipjela';
     protected $primaryKey = 'tipjela_id';
@@ -16,23 +24,57 @@ class Tipjela extends Model {
     protected $validationMessages = ['tipjela_naziv' => ['required' => 'Naziv tipa jela je obavezan!']];
     protected $skipValidation = false;
 
-   //dohvata se tip, pa se u kontroleru dohvata naziv;
+   /**  public function dohvTip($id) {...}
+    * Funkcija dohvata tip jela na osnovu prosledjenog identifikatora
+    * 
+    * @param string $id Jedinstveni identifikator tipa jela koji treba dohvatiti.
+    * 
+    * @return object Objekat tipa jela
+    * 
+    *     */
     public function dohvTip($id) {
         $id = \UUID::codeId($id);
         $row = $this->find($id);
         if (row == null) return null;
         return $this->decodeRecord($row);
     }
-    //direktno dohvata naziv
+    /** public function dohvNazivTipa($id) {...}
+    * Funkcija dohvata naziv tipa jela sa prosledjenim identifikatorom.
+    * 
+    * @param string $id Identifikator tipa jela ciji naziv treba dohvatiti.
+    * 
+    * @return string Naziv tipa jela.
+    * 
+    *     */
     public function dohvNazivTipa($id) {
         $id = \UUID::codeId($id);
         $naziv = $this->find($id);
         return $naziv->tipjela_naziv;
     }
+    
+    /**   public function dohvIdPoNazivu($naziv) {...}
+     * Funkcija dohvata identifikator tipa jela ciji je naziv prosledjen.
+     * 
+     * @param string $naziv Naziv tipa jela ciji identifikator treba dohvatiti.
+     * 
+     * @return string Identifikator tipa jela.
+     * 
+     *      */
     public function dohvIdPoNazivu($naziv) {
         $tip_jela = $this->where('tipjela_naziv', $naziv)->findAll();
         return \UUID::decodeId($tip_jela[0]->tipjela_id);
     }
+     /** public function insert($data=NULL,$returnID=true){...}
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
     public function insert($data=NULL, $returnID=true) {
         $id = \UUID::generateId();        
         $data['tipjela_id'] = $id;
@@ -41,7 +83,17 @@ class Tipjela extends Model {
          }
         return \UUID::decodeId($id);
      }
-
+         /** public function delete($id=NULL,$purge=false){...} 
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
 
     public function delete($id=NULL, $purge=false) {
         if ($id != null) {

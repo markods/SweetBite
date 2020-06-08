@@ -3,6 +3,14 @@
 
 use CodeIgniter\Model;
 
+/** Model koji komunicira sa bazom podataka kako bi se
+ * dobijali podaci o razlicitim ukusima.
+    
+ * @version 0.3
+
+ * 
+ *  */
+
 class Ukus extends Model {
         
     protected $table      = 'ukus';
@@ -16,19 +24,46 @@ class Ukus extends Model {
     protected $validationMessages = ['ukus_naziv' => ['required' => 'Naziv ukusa je obavezan!']];
     protected $skipValidation = false;
 
-    //dohvata se tip, pa se u kontroleru dohvata naziv;
+    /**   public function dohvUkus($id) {...}
+     * Funkcija dohvata ukus na osnovu prosledjenog identifikatora.
+     * 
+     * @param string $id Identifikator ukusa
+     * 
+     * @return object Objekat ukusa, dohvacen iz baze podataka.
+     *      */
+    
     public function dohvUkus($id) {
         $id = \UUID::codeId($id);
         $row = $this->find($id);
         if ($row == null) return null;
         return $this->decodeRecord($row);
     }
-    //dohvata id po nazivu
+    /**  public function dohvIdPoNazivu($naziv) {...}
+     * Funkcija dohvata identifikator ukusa sa prosledjenim nazivom
+     * 
+     * @param string $naziv Naziv ukusa
+     * 
+     * @return object Objekat ukusa, dohvacen iz baze podataka.
+     * 
+     *      */
     public function dohvIdPoNazivu($naziv) {
         $ukus = $this->where('ukus_naziv', $naziv)->findAll();
         if (count($ukus) == 0) return null;
         return \UUID::decodeId($ukus[0]->ukus_id);
     }
+    
+    
+     /** public function insert($data=NULL,$returnID=true){...}
+     * Omotac funkcjie Model::insert
+     * Ako je neuspesno vraca false
+     * Ako je uspesno vraca id
+     * 
+     * @param array|object $data
+     * @param boolean      $returnID Da li insert ID treba da se vrati ili ne
+     *
+     * @return integer|string|boolean
+     * @throws \ReflectionException
+     */
 
     public function insert($data=NULL, $returnID=true) {
         $id = \UUID::generateId();        
@@ -38,7 +73,19 @@ class Ukus extends Model {
         }
         return \UUID::decodeId($id);
     }
-
+    
+    
+      /** public function delete($id=NULL,$purge=false){...} 
+     * Omotac funkcije Model::delete
+     * Dozvoljeno je brisanje, ali je potrebno prebaciti 
+     *  kljuc u odgovarajuci format
+     * 
+     * @param integer|string|array|null $id    The rows primary key(s)
+     * @param boolean                   $purge Allows overriding the soft deletes setting.
+     *
+     * @return mixed
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
 
     public function delete($id=NULL, $purge=false) {
         if ($id != null) {
