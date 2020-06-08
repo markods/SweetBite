@@ -194,7 +194,7 @@ class Gost extends BaseController
         $disc = false;
         
         $jeloModel = new Jelo();
-        $jela = $jeloModel->dohvSve();
+        $jela = $jeloModel->dohvSveOtkriveno();
         
         $jelo_id = [];
         $jelo_naziv = [];

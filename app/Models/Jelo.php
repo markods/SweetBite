@@ -81,6 +81,18 @@ class Jelo extends Model
             return $niz;
         }
         
+        /** public function dohvSveOtkriveno(){...}
+         * Funkcija dohvata sva jela iz baze podataka koja nisu sakrivena.
+         * 
+         * @return Array Niz objekata jela
+         * 
+         * */
+        public function dohvSveOtkriveno() {
+            $jela = $this->where('jelo_datsakriv', null)->findAll();
+            $jela = $this->decodeArray($jela);
+            return $jela;
+        }
+        
         
         /** public function dohvSve(){...}
          * Funkcija dohvata sva jela iz baze podataka.
