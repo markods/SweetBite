@@ -5,8 +5,9 @@
 # temporary Microsoft Office files
 ~$*
 
-# PDF files,
+# PDF files, 7zip files
 *.pdf
+*.7z
 
 # except for the prototype
 !*Prototip*.pdf
